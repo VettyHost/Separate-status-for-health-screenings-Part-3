@@ -1,0 +1,1351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vetty - Premium Client Dashboard</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for precise SVG-equivalent icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Custom scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+        /* Drawer animation transitions */
+        .drawer-transition {
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-[#f3f4f6] text-[#1e293b] min-h-screen flex overflow-hidden">
+
+    <aside class="w-[260px] bg-[#222235] text-slate-300 flex flex-col flex-shrink-0 z-20 shadow-xl border-r border-slate-800">
+        <!-- Brand / Toggle Header -->
+        <div class="h-16 flex items-center justify-between px-6 border-b border-slate-800">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center font-bold text-white shadow-md">V</div>
+                <span class="font-bold text-lg text-white tracking-wide">Vetty</span>
+            </div>
+            <button class="w-8 h-8 rounded border border-slate-700 flex items-center justify-center text-slate-400 hover:text-white hover:bg-slate-800 transition-colors">
+                <i class="fa-solid fa-bars text-sm"></i>
+            </button>
+        </div>
+
+        <!-- Create New Candidate CTA -->
+        <div class="p-4">
+            <button onclick="openFormModal('new-candidate')" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg flex items-center justify-center gap-2.5 transition-colors shadow-lg active:scale-95">
+                <i class="fa-solid fa-plus text-sm"></i> New Candidate
+            </button>
+        </div>
+
+        <!-- Navigation Links exactly matching image_f3ca89.png -->
+        <nav class="flex-1 px-3 space-y-1 overflow-y-auto">
+            <a href="#" id="nav-candidates" onclick="showScreen('home-screen', 'nav-candidates')" class="flex items-center gap-3.5 px-4 py-3 rounded-lg bg-slate-800 text-white font-semibold transition-all">
+                <i class="fa-solid fa-users text-blue-500 w-5 text-center text-base"></i>
+                <span class="text-sm">Candidates</span>
+            </a>
+            <a href="#" id="nav-packages" onclick="showPlaceholderScreen('Packages Configuration Panel', 'nav-packages')" class="flex items-center gap-3.5 px-4 py-3 rounded-lg hover:bg-slate-800 hover:text-white transition-all text-slate-400 font-medium">
+                <i class="fa-solid fa-box text-center w-5 text-base"></i>
+                <span class="text-sm">Packages</span>
+            </a>
+            <a href="#" id="nav-comply" onclick="showPlaceholderScreen('Vetty Comply Compliance Center', 'nav-comply')" class="flex items-center gap-3.5 px-4 py-3 rounded-lg hover:bg-slate-800 hover:text-white transition-all text-slate-400 font-medium">
+                <i class="fa-solid fa-shield-halved text-center w-5 text-base"></i>
+                <span class="text-sm">Vetty Comply</span>
+            </a>
+            <a href="#" id="nav-customizations" onclick="showPlaceholderScreen('Customizations Settings Profile', 'nav-customizations')" class="flex items-center gap-3.5 px-4 py-3 rounded-lg hover:bg-slate-800 hover:text-white transition-all text-slate-400 font-medium">
+                <i class="fa-solid fa-sliders text-center w-5 text-base"></i>
+                <span class="text-sm">Customizations</span>
+            </a>
+            <a href="#" id="nav-settings" onclick="showPlaceholderScreen('Global Client Settings Configurations', 'nav-settings')" class="flex items-center gap-3.5 px-4 py-3 rounded-lg hover:bg-slate-800 hover:text-white transition-all text-slate-400 font-medium">
+                <i class="fa-solid fa-gear text-center w-5 text-base"></i>
+                <span class="text-sm">Settings</span>
+            </a>
+            <a href="#" id="nav-formi9" onclick="showPlaceholderScreen('Form I-9 Integrated Dashboard', 'nav-formi9')" class="flex items-center gap-3.5 px-4 py-3 rounded-lg hover:bg-slate-800 hover:text-white transition-all text-slate-400 font-medium">
+                <i class="fa-solid fa-fingerprint text-center w-5 text-base"></i>
+                <span class="text-sm">Form I-9 Dashboard</span>
+            </a>
+            <a href="#" id="nav-reports" onclick="showPlaceholderScreen('Analytics & Auditing Reports Generation', 'nav-reports')" class="flex items-center gap-3.5 px-4 py-3 rounded-lg hover:bg-slate-800 hover:text-white transition-all text-slate-400 font-medium">
+                <i class="fa-solid fa-chart-pie text-center w-5 text-base"></i>
+                <span class="text-sm">Reports</span>
+            </a>
+            <a href="#" id="nav-bulk" onclick="showPlaceholderScreen('CSV / XLSX Bulk Candidate Upload Tool', 'nav-bulk')" class="flex items-center gap-3.5 px-4 py-3 rounded-lg hover:bg-slate-800 hover:text-white transition-all text-slate-400 font-medium">
+                <i class="fa-solid fa-cloud-arrow-up text-center w-5 text-base"></i>
+                <span class="text-sm">Bulk Upload</span>
+            </a>
+            <a href="#" id="nav-supplies" onclick="showPlaceholderScreen('Supplies & Shipping Physical Order Dispatch', 'nav-supplies')" class="flex items-center gap-3.5 px-4 py-3 rounded-lg hover:bg-slate-800 hover:text-white transition-all text-slate-400 font-medium">
+                <i class="fa-solid fa-cart-shopping text-center w-5 text-base"></i>
+                <span class="text-sm">Supplies & Shipping</span>
+            </a>
+            <a href="#" id="nav-advanced" onclick="showScreen('home-screen', 'nav-advanced')" class="flex items-center gap-3.5 px-4 py-3 rounded-lg hover:bg-slate-800 hover:text-white transition-all text-slate-400 font-medium">
+                <i class="fa-solid fa-chart-line text-center w-5 text-base"></i>
+                <span class="text-sm">Advanced Candidates</span>
+            </a>
+        </nav>
+
+        <div class="p-4 border-t border-slate-800 flex items-center justify-between bg-[#1b1b2a]">
+            <div class="flex items-center gap-3">
+                <!-- Green Chat Circle Indicator -->
+                <button onclick="openChatSupport()" class="w-11 h-11 rounded-full bg-emerald-500 hover:bg-emerald-600 flex items-center justify-center text-white shadow-lg shadow-emerald-950/40 relative group transition-transform hover:scale-105">
+                    <i class="fa-regular fa-comments text-lg"></i>
+                    <span class="absolute top-0 right-0 w-3 h-3 bg-red-500 rounded-full border-2 border-emerald-500 animate-pulse"></span>
+                </button>
+                <div class="overflow-hidden">
+                    <p class="text-xs font-bold text-slate-200 truncate">Debendu Roy</p>
+                    <p class="text-[10px] text-slate-400 truncate">Client Admin</p>
+                </div>
+            </div>
+            <div class="flex gap-1 text-slate-600">
+                <span class="w-1.5 h-1.5 bg-slate-500 rounded-full"></span>
+                <span class="w-1.5 h-1.5 bg-slate-500 rounded-full"></span>
+                <span class="w-1.5 h-1.5 bg-slate-500 rounded-full"></span>
+            </div>
+        </div>
+    </aside>
+
+    <main class="flex-1 flex flex-col overflow-hidden relative">
+
+        <!-- Global Navigation / Profile Bar -->
+        <header class="h-16 bg-white border-b border-slate-200 flex items-center justify-between px-8 z-10 flex-shrink-0">
+            <div class="flex items-center gap-2">
+                <h1 id="page-title" class="text-lg font-bold text-slate-800">Candidates Directory</h1>
+            </div>
+            <div class="flex items-center gap-4">
+                <button class="p-2 text-slate-400 hover:text-slate-600 relative">
+                    <span class="absolute top-1 right-1 w-2.5 h-2.5 bg-red-500 rounded-full ring-2 ring-white"></span>
+                    <i class="fa-regular fa-bell text-lg"></i>
+                </button>
+                <div class="h-8 w-px bg-slate-200"></div>
+                <div class="flex items-center gap-2.5">
+                    <span class="text-sm font-semibold text-slate-600">Debendu Roy</span>
+                    <span class="bg-blue-100 text-blue-700 text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase">Client Admin</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="flex-1 overflow-y-auto relative">
+
+            <!-- Directory Table Screen (Main View) -->
+            <section id="home-screen" class="p-8 space-y-6">
+                
+                <!-- Filters Panel exactly as modeled in image_f42881.png -->
+                <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-4">
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                        <div>
+                            <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Package Filter</label>
+                            <select id="home-filter-package" onchange="applyHomeFilters()" class="w-full bg-[#f8fafc] border border-slate-200 text-xs rounded-lg px-3 py-2.5 outline-none focus:border-blue-500 text-slate-700 font-semibold">
+                                <option value="all">All Packages</option>
+                                <option value="AutoPAA and Market...">AutoPAA and Market...</option>
+                                <option value="stg1-ssn, mvr stg2-n...">stg1-ssn, mvr stg2-n...</option>
+                                <option value="stg1-ssn, mvr stg2-c...">stg1-ssn, mvr stg2-c...</option>
+                                <option value="federal crim">federal crim</option>
+                                <option value="County crim, state crl...">County crim, state crl...</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Assignee / User</label>
+                            <select id="home-filter-user" onchange="applyHomeFilters()" class="w-full bg-[#f8fafc] border border-slate-200 text-xs rounded-lg px-3 py-2.5 outline-none focus:border-blue-500 text-slate-700 font-semibold">
+                                <option value="all">All Users</option>
+                                <option value="mrunali Stage...">mrunali Stage...</option>
+                                <option value="debendu Roy">debendu Roy</option>
+                                <option value="testing Covid">testing Covid</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Department</label>
+                            <input type="text" placeholder="Search Department name" class="w-full bg-[#f8fafc] border border-slate-200 text-xs rounded-lg px-3 py-2.5 outline-none focus:border-blue-500 text-slate-700 font-medium">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Location</label>
+                            <select class="w-full bg-[#f8fafc] border border-slate-200 text-xs rounded-lg px-3 py-2.5 outline-none focus:border-blue-500 text-slate-700 font-semibold">
+                                <option>Select Location</option>
+                                <option>New York</option>
+                                <option>California</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                        <input id="home-search-candidate" onkeyup="applyHomeFilters()" type="text" placeholder="Search Candidates" class="w-full bg-[#f8fafc] border border-slate-200 text-xs rounded-lg px-3 py-2.5 outline-none focus:border-blue-500 text-slate-700 font-medium">
+                        <input type="text" placeholder="Search Order ID" class="w-full bg-[#f8fafc] border border-slate-200 text-xs rounded-lg px-3 py-2.5 outline-none focus:border-blue-500 text-slate-700 font-medium">
+                        <input type="text" placeholder="Search Email" class="w-full bg-[#f8fafc] border border-slate-200 text-xs rounded-lg px-3 py-2.5 outline-none focus:border-blue-500 text-slate-700 font-medium">
+                        <select class="w-full bg-[#f8fafc] border border-slate-200 text-xs rounded-lg px-3 py-2.5 outline-none focus:border-blue-500 text-slate-700 font-semibold">
+                            <option>Covid 19 Vaccination Status</option>
+                            <option>Fully Vaccinated</option>
+                            <option>Exempted</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-1 overflow-x-auto border-b border-slate-200 pb-0.5">
+                    <button onclick="filterStatusTab('all')" id="tab-all" class="px-4 py-2.5 text-xs font-bold border-b-2 border-blue-600 text-blue-600 whitespace-nowrap tab-btn">All Candidates</button>
+                    <button onclick="filterStatusTab('Pending Candidate')" id="tab-pending" class="px-4 py-2.5 text-xs font-semibold text-slate-500 hover:text-slate-800 border-b-2 border-transparent hover:border-slate-300 whitespace-nowrap tab-btn">Pending Candidate (8)</button>
+                    <button onclick="filterStatusTab('In Progress')" id="tab-progress" class="px-4 py-2.5 text-xs font-semibold text-slate-500 hover:text-slate-800 border-b-2 border-transparent hover:border-slate-300 whitespace-nowrap tab-btn">Check In Progress (29)</button>
+                    <button onclick="filterStatusTab('Review Needed')" id="tab-review" class="px-4 py-2.5 text-xs font-semibold text-amber-500 hover:text-amber-700 border-b-2 border-transparent hover:border-amber-200 whitespace-nowrap tab-btn">Review Needed (2)</button>
+                    <button onclick="filterStatusTab('Ready For Onboarding')" id="tab-onboarding" class="px-4 py-2.5 text-xs font-semibold text-emerald-600 hover:text-emerald-800 border-b-2 border-transparent hover:border-emerald-200 whitespace-nowrap tab-btn">Ready For Onboarding (1)</button>
+                    <button onclick="filterStatusTab('COI Expired')" id="tab-alerts" class="px-4 py-2.5 text-xs font-semibold text-red-500 hover:text-red-700 border-b-2 border-transparent hover:border-red-200 whitespace-nowrap tab-btn">Alerts (20)</button>
+                </div>
+
+                <!-- Main Data Table Grid mapping image_f42881.png -->
+                <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-slate-50 text-slate-500 text-[10px] uppercase tracking-wider font-bold border-b border-slate-200">
+                                    <th class="p-4 w-10"><input type="checkbox" class="rounded border-slate-300 text-blue-600"></th>
+                                    <th class="p-4">Candidate</th>
+                                    <th class="p-4">Order ID</th>
+                                    <th class="p-4">Last Run</th>
+                                    <th class="p-4">Date Added</th>
+                                    <th class="p-4">Expected End Date</th>
+                                    <th class="p-4">Created By</th>
+                                    <th class="p-4">Package</th>
+                                    <th class="p-4 text-center">Status</th>
+                                    <th class="p-4 text-center text-blue-600 bg-blue-50/50 border-x border-blue-100 font-extrabold shadow-sm">Health Screening</th>
+                                    <th class="p-4 text-center">Staged Check</th>
+                                    <th class="p-4">Alerts</th>
+                                </tr>
+                            </thead>
+                            <tbody id="candidate-table-body" class="divide-y divide-slate-100 text-xs text-slate-700">
+                                <!-- Populated dynamically by generateCandidateTable() -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <section id="details-screen" class="hidden p-8 space-y-6">
+                <!-- Back Header Navigation -->
+                <div class="flex items-center justify-between border-b border-slate-200 pb-5 flex-wrap gap-4">
+                    <div class="flex items-center gap-4">
+                        <button onclick="showScreen('home-screen')" class="flex items-center gap-2 text-slate-500 hover:text-slate-800 text-xs font-bold bg-white px-3.5 py-2 border border-slate-200 rounded-lg shadow-sm transition-all active:scale-95">
+                            <i class="fa-solid fa-arrow-left"></i> Back to Directory
+                        </button>
+                        <div>
+                            <h2 id="cand-detail-name" class="text-xl font-bold text-slate-800">Candidate Detail Profile</h2>
+                            <p class="text-[11px] text-slate-500 font-semibold mt-0.5">Order ID: <span id="cand-detail-id" class="font-mono text-slate-700">-</span> | Package: <span id="cand-detail-pkg" class="text-slate-700">-</span></p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <button onclick="openFormModal('modify-order')" class="bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 px-4 py-2 rounded-lg text-xs font-bold transition-all active:scale-95">
+                            Modify Order
+                        </button>
+                        <button onclick="openFormModal('change-location')" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-xs font-bold shadow-sm transition-all active:scale-95">
+                            Change Location for All
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Two Column Layout matching image_f4b3e4.png view -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                    
+                    <!-- Left Side: Interactive Bullet Timeline Log of System Notes -->
+                    <div class="lg:col-span-4 bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-6">
+                        <h3 class="text-[11px] font-bold text-slate-400 uppercase tracking-wider pb-3 border-b border-slate-100 flex justify-between items-center">
+                            <span>Live Case Tracking Activity</span>
+                            <i class="fa-solid fa-list-check text-slate-400"></i>
+                        </h3>
+                        <!-- Scrolling support inside log updates -->
+                        <div class="max-h-[500px] overflow-y-auto pr-2 relative pl-6 border-l-2 border-slate-200 space-y-6 text-[11px]">
+                            <div class="relative">
+                                <span class="absolute -left-[33px] top-1 w-4 h-4 rounded-full bg-white border-2 border-blue-600 ring-4 ring-blue-100 flex items-center justify-center"></span>
+                                <div class="flex justify-between items-start">
+                                    <span class="font-bold text-slate-800">Note From Client User</span>
+                                    <span class="text-[9px] text-slate-400 font-mono">04/15/2026</span>
+                                </div>
+                                <p class="text-slate-500 text-[10px] mt-1 bg-slate-50 p-2 rounded border border-slate-100 italic">"send from client dash"</p>
+                            </div>
+                            <div class="relative">
+                                <span class="absolute -left-[33px] top-1 w-4 h-4 rounded-full bg-white border-2 border-blue-600 ring-4 ring-blue-100"></span>
+                                <div class="flex justify-between items-start">
+                                    <span class="font-bold text-slate-800">Note from Vetty (Researcher)</span>
+                                    <span class="text-[9px] text-slate-400 font-mono">04/15/2026</span>
+                                </div>
+                                <p class="text-slate-500 text-[10px] mt-1 bg-slate-50 p-2 rounded border border-slate-100 italic">"test kromfox notes"</p>
+                            </div>
+                            <div class="relative">
+                                <span class="absolute -left-[31px] top-1 w-3 h-3 rounded-full bg-slate-400 border border-white"></span>
+                                <div class="flex justify-between items-start">
+                                    <span class="text-slate-600 font-semibold">Assigned order to Mrunali, Kajal and Nikhil.</span>
+                                    <span class="text-[9px] text-slate-400 font-mono">04/15/2026</span>
+                                </div>
+                            </div>
+                            <div class="relative">
+                                <span class="absolute -left-[31px] top-1 w-3 h-3 rounded-full bg-slate-400 border border-white"></span>
+                                <div class="flex justify-between items-start">
+                                    <span class="text-slate-600 font-semibold">Donor Pass Created for 10 Panel Drug + Nicotine</span>
+                                    <span class="text-[9px] text-slate-400 font-mono">04/15/2026</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Side: Health Screening Expandable Checks Modules with scrolling support -->
+                    <div class="lg:col-span-8 space-y-6">
+                        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                            <div class="flex items-center justify-between pb-4 border-b border-slate-100 mb-6">
+                                <h3 class="text-base font-bold text-slate-800">Health Screening Checks</h3>
+                                <div class="flex items-center gap-3">
+                                    <span class="text-xs font-bold text-slate-500">Expand All</span>
+                                    <!-- Expand All Switch Toggle -->
+                                    <button id="expandAllToggle" onclick="toggleExpandAll()" class="w-11 h-6 bg-slate-200 rounded-full relative transition-colors focus:outline-none">
+                                        <span class="dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform shadow-sm"></span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Accordions Target Container with dedicated scrolling boundary -->
+                            <div id="accordion-checks-container" class="space-y-6 max-h-[550px] overflow-y-auto pr-2">
+                                <!-- Populated dynamically based on candidate clicks -->
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <section id="placeholder-screen" class="hidden p-8 space-y-6">
+                <div class="bg-white p-10 rounded-xl border border-slate-200 shadow-sm text-center max-w-xl mx-auto my-12 space-y-4">
+                    <div class="w-16 h-16 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center text-2xl mx-auto">
+                        <i id="placeholder-icon" class="fa-solid fa-cube"></i>
+                    </div>
+                    <h3 id="placeholder-title" class="text-lg font-bold text-slate-800">Module Panel</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                        You have successfully loaded this menu module. In this fully integrated environment, all secondary layouts adapt directly according to your configured candidate settings.
+                    </p>
+                    <button onclick="showScreen('home-screen', 'nav-candidates')" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg text-xs font-bold active:scale-95 transition-all">
+                        Return to Candidates Directory
+                    </button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <div id="drawer-backdrop" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 z-40" onclick="closeDrawer()"></div>
+    
+    <div id="quick-drawer" class="fixed right-0 top-0 bottom-0 w-[640px] bg-white shadow-2xl z-50 transform translate-x-full drawer-transition flex flex-col">
+        <!-- Drawer Header -->
+        <div class="p-6 border-b border-slate-200 flex justify-between items-center bg-slate-50">
+            <div>
+                <h3 id="drawer-candidate" class="text-lg font-bold text-slate-800">-</h3>
+                <p class="text-[11px] text-slate-500 mt-0.5">Order ID: <span id="drawer-orderid" class="font-mono text-slate-700">-</span></p>
+            </div>
+            <button onclick="closeDrawer()" class="text-slate-400 hover:text-slate-600 text-2xl font-bold p-1 transition-colors">&times;</button>
+        </div>
+
+        <!-- Dynamic Filter inputs from image_f49d7b.png -->
+        <div class="p-6 border-b border-slate-100 bg-slate-50/50 grid grid-cols-3 gap-3">
+            <div>
+                <label class="block text-[9px] font-extrabold text-slate-500 uppercase tracking-wider mb-1">Search Screening</label>
+                <div class="relative">
+                    <input id="drawer-search-screening" onkeyup="filterDrawerScreenings()" type="text" placeholder="e.g. 5 Panel, Hep B..." class="w-full text-xs border border-slate-200 rounded pl-7 pr-2 py-2 outline-none focus:border-blue-500">
+                    <i class="fa-solid fa-magnifying-glass text-slate-400 text-[10px] absolute left-2.5 top-3"></i>
+                </div>
+            </div>
+            <div>
+                <label class="block text-[9px] font-extrabold text-slate-500 uppercase tracking-wider mb-1">Order Status</label>
+                <select id="drawer-filter-order-status" onchange="filterDrawerScreenings()" class="w-full text-xs border border-slate-200 rounded p-2 outline-none focus:border-blue-500 text-slate-600 bg-white font-semibold">
+                    <option value="all">All Order Statuses</option>
+                    <option value="InProgress">InProgress</option>
+                    <option value="Clear">Clear</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-[9px] font-extrabold text-slate-500 uppercase tracking-wider mb-1">Suborder Status</label>
+                <select id="drawer-filter-suborder-status" onchange="filterDrawerScreenings()" class="w-full text-xs border border-slate-200 rounded p-2 outline-none focus:border-blue-500 text-slate-600 bg-white font-semibold">
+                    <option value="all">All Suborder Statuses</option>
+                    <option value="Review Needed">Review Needed</option>
+                    <option value="Canceled">Canceled</option>
+                    <option value="Unreported">Unreported</option>
+                    <option value="Unable to Verify">Unable to Verify</option>
+                    <option value="Clear">Clear</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Drawer Body list container with explicit scrolling layout supporting image_f3c3a3.png -->
+        <div id="drawer-body-list" class="flex-1 overflow-y-auto p-6 space-y-6 max-h-[calc(100vh-210px)]">
+            <!-- Populated Dynamically via renderDrawerListContent() -->
+        </div>
+
+        <!-- Drawer Footer -->
+        <div class="p-4 border-t border-slate-200 bg-slate-50 flex justify-end">
+            <button onclick="closeDrawer()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold py-2.5 px-6 rounded-lg text-xs transition-all shadow-sm active:scale-95">
+                Close Details
+            </button>
+        </div>
+    </div>
+
+    <div id="form-modal-overlay" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl shadow-2xl border border-slate-200 w-full max-w-md overflow-hidden transform scale-95 transition-all">
+            <div class="p-5 border-b border-slate-100 flex justify-between items-center bg-slate-50">
+                <h3 id="modal-form-title" class="text-sm font-bold text-slate-800">Action Panel</h3>
+                <button onclick="closeFormModal()" class="text-slate-400 hover:text-slate-600 text-xl font-bold">&times;</button>
+            </div>
+            <div class="p-6 space-y-4">
+                <div id="modal-form-fields" class="space-y-3">
+                    <!-- Loaded dynamically via js -->
+                </div>
+                <div class="flex justify-end gap-2.5 pt-4 border-t border-slate-100">
+                    <button onclick="closeFormModal()" class="bg-slate-100 hover:bg-slate-200 text-slate-600 px-4 py-2 rounded-lg text-xs font-bold">Cancel</button>
+                    <button onclick="submitFormAction()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-xs font-bold shadow-sm">Confirm Action</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // High fidelity database matching image_f42881.png & image_f3c3a3.png checks and mapping image_f49941.png statuses.
+        const candidateDb = [
+            {
+                name: "Autopaatest Done",
+                orderId: "K1MOC",
+                lastRun: "02/23/2026",
+                dateAdded: "02/13/2026",
+                expectedEndDate: "—",
+                createdBy: "mrunali Stage...",
+                package: "AutoPAA and Market...",
+                status: "COI Expired",
+                stagedCheck: "—",
+                alerts: "Insurance document expired",
+                screenings: [
+                    {
+                        category: "DRUGS",
+                        name: "5 Panel Drug",
+                        orderStatus: "Clear",
+                        suborderStatus: "Clear",
+                        history: [
+                            { status: "Order Created", date: "02/13/2026 09:12 AM" },
+                            { status: "Donor Pass Creation Pending", date: "02/13/2026 11:00 AM" },
+                            { status: "Donor Pass Created", date: "02/13/2026 01:25 PM" },
+                            { status: "Scheduled", date: "02/14/2026 10:00 AM" },
+                            { status: "Collection/Testing Pending", date: "02/15/2026 08:30 AM" },
+                            { status: "Collection Completed", date: "02/16/2026 04:45 PM" },
+                            { status: "Received at Lab", date: "02/17/2026 11:15 AM" },
+                            { status: "Pending MRO Review", date: "02/18/2026 02:00 PM" },
+                            { status: "MRO Review - In Progress", date: "02/18/2026 03:30 PM" },
+                            { status: "Clear", date: "02/19/2026 09:00 AM" }
+                        ]
+                    },
+                    {
+                        category: "DRUGS",
+                        name: "7 Panel Drug",
+                        orderStatus: "InProgress",
+                        suborderStatus: "Review Needed",
+                        history: [
+                            { status: "Order Created", date: "02/13/2026 09:15 AM" },
+                            { status: "Donor Pass Creation Pending", date: "02/13/2026 11:10 AM" },
+                            { status: "Donor Pass Created", date: "02/13/2026 01:30 PM" },
+                            { status: "Scheduled", date: "02/15/2026 09:00 AM" },
+                            { status: "Collection/Testing Pending", date: "02/16/2026 02:00 PM" },
+                            { status: "Collection Completed", date: "02/18/2026 03:00 PM" },
+                            { status: "Received at Lab", date: "02/20/2026 10:30 AM" },
+                            { status: "Pending MRO Review", date: "02/22/2026 04:00 PM" },
+                            { status: "MRO Review - In Progress", date: "02/23/2026 09:00 AM" },
+                            { status: "Review Needed", date: "02/23/2026 11:00 AM" }
+                        ]
+                    },
+                    {
+                        category: "DRUGS",
+                        name: "10 Panel Drug",
+                        orderStatus: "InProgress",
+                        suborderStatus: "Canceled",
+                        history: [
+                            { status: "Order Created", date: "02/13/2026 09:20 AM" },
+                            { status: "Donor Pass Creation Pending", date: "02/13/2026 11:30 AM" },
+                            { status: "Donor Pass Created", date: "02/13/2026 02:00 PM" },
+                            { status: "Scheduled", date: "02/14/2026 10:15 AM" },
+                            { status: "Canceled", date: "02/15/2026 12:40 PM" }
+                        ]
+                    },
+                    {
+                        category: "DRUGS",
+                        name: "Drug 20sep",
+                        orderStatus: "InProgress",
+                        suborderStatus: "Unable to Verify",
+                        history: [
+                            { status: "Order Created", date: "02/13/2026 09:25 AM" },
+                            { status: "Donor Pass Creation Pending", date: "02/13/2026 11:45 AM" },
+                            { status: "Unable to Verify", date: "02/14/2026 04:10 PM" }
+                        ]
+                    },
+                    {
+                        category: "TITERS",
+                        name: "Hep B Surface Antibody (HBsAb)",
+                        orderStatus: "Clear",
+                        suborderStatus: "Clear",
+                        history: [
+                            { status: "Order Created", date: "02/13/2026 09:30 AM" },
+                            { status: "Donor Pass Creation Pending", date: "02/13/2026 11:55 AM" },
+                            { status: "Donor Pass Created", date: "02/13/2026 02:15 PM" },
+                            { status: "Scheduled", date: "02/15/2026 11:00 AM" },
+                            { status: "Collection/Testing Pending", date: "02/17/2026 03:00 PM" },
+                            { status: "Collection Completed", date: "02/20/2026 02:30 PM" },
+                            { status: "Received at Lab", date: "02/22/2026 09:15 AM" },
+                            { status: "Clear", date: "02/23/2026 11:15 AM" }
+                        ]
+                    },
+                    {
+                        category: "TITERS",
+                        name: "Hep B Surface Antigen (HBsAG)",
+                        orderStatus: "InProgress",
+                        suborderStatus: "Review Needed",
+                        history: [
+                            { status: "Order Created", date: "02/13/2026 09:35 AM" },
+                            { status: "Donor Pass Creation Pending", date: "02/13/2026 12:05 PM" },
+                            { status: "Donor Pass Created", date: "02/13/2026 02:30 PM" },
+                            { status: "Scheduled", date: "02/15/2026 01:00 PM" },
+                            { status: "Collection/Testing Pending", date: "02/17/2026 04:00 PM" },
+                            { status: "Collection Completed", date: "02/20/2026 04:30 PM" },
+                            { status: "Received at Lab", date: "02/22/2026 11:00 AM" },
+                            { status: "Pending MRO Review", date: "02/23/2026 10:00 AM" },
+                            { status: "Review Needed", date: "02/23/2026 02:00 PM" }
+                        ]
+                    },
+                    {
+                        category: "TITERS",
+                        name: "MMR Titer",
+                        orderStatus: "InProgress",
+                        suborderStatus: "Unable to Verify",
+                        history: [
+                            { status: "Order Created", date: "02/13/2026 09:40 AM" },
+                            { status: "Donor Pass Creation Pending", date: "02/13/2026 12:15 PM" },
+                            { status: "Donor Pass Created", date: "02/13/2026 02:45 PM" },
+                            { status: "Scheduled", date: "02/16/2026 10:15 AM" },
+                            { status: "Collection/Testing Pending", date: "02/18/2026 01:00 PM" },
+                            { status: "Unable to Verify", date: "02/23/2026 05:00 PM" }
+                        ]
+                    },
+                    {
+                        category: "TITERS",
+                        name: "TB Blood Test",
+                        orderStatus: "Clear",
+                        suborderStatus: "Clear",
+                        history: [
+                            { status: "Order Created", date: "02/13/2026 09:45 AM" },
+                            { status: "Donor Pass Creation Pending", date: "02/13/2026 12:30 PM" },
+                            { status: "Donor Pass Created", date: "02/13/2026 03:00 PM" },
+                            { status: "Scheduled", date: "02/17/2026 11:00 AM" },
+                            { status: "Collection/Testing Pending", date: "02/19/2026 04:00 PM" },
+                            { status: "Collection Completed", date: "02/21/2026 02:30 PM" },
+                            { status: "Received at Lab", date: "02/22/2026 10:00 AM" },
+                            { status: "Clear", date: "02/23/2026 11:15 AM" }
+                        ]
+                    },
+                    {
+                        category: "VACCINES",
+                        name: "Flu Vaccine",
+                        orderStatus: "Clear",
+                        suborderStatus: "Clear",
+                        history: [
+                            { status: "Order Created", date: "02/13/2026 09:50 AM" },
+                            { status: "Scheduled", date: "02/16/2026 03:00 PM" },
+                            { status: "Collection Completed", date: "02/19/2026 11:00 AM" },
+                            { status: "Clear", date: "02/23/2026 10:00 AM" }
+                        ]
+                    },
+                    {
+                        category: "VACCINES",
+                        name: "MMR Vaccine",
+                        orderStatus: "InProgress",
+                        suborderStatus: "Canceled",
+                        history: [
+                            { status: "Order Created", date: "02/13/2026 09:55 AM" },
+                            { status: "Donor Pass Creation Pending", date: "02/13/2026 12:45 PM" },
+                            { status: "Canceled", date: "02/23/2026 01:20 PM" }
+                        ]
+                    },
+                    {
+                        category: "VACCINES",
+                        name: "Varicella Vaccine",
+                        orderStatus: "InProgress",
+                        suborderStatus: "Review Needed",
+                        history: [
+                            { status: "Order Created", date: "02/13/2026 10:00 AM" },
+                            { status: "Scheduled", date: "02/15/2026 11:00 AM" },
+                            { status: "Collection Completed", date: "02/21/2026 02:00 PM" },
+                            { status: "Review Needed", date: "02/23/2026 04:15 PM" }
+                        ]
+                    }
+                ]
+            },
+            {
+                name: "Depdedentflow Test",
+                orderId: "AYWT4",
+                lastRun: "02/23/2026",
+                dateAdded: "02/12/2026",
+                expectedEndDate: "—",
+                createdBy: "mrunali Stage...",
+                package: "stg1-ssn, mvr stg2-n...",
+                status: "In Progress",
+                stagedCheck: "Stage1",
+                alerts: "Donor Pass Expired",
+                screenings: [
+                    {
+                        category: "DRUGS",
+                        name: "5 Panel Drug",
+                        orderStatus: "InProgress",
+                        suborderStatus: "Review Needed",
+                        history: [
+                            { status: "Order Created", date: "02/12/2026 10:00 AM" },
+                            { status: "Donor Pass Creation Pending", date: "02/12/2026 11:30 AM" },
+                            { status: "Donor Pass Created", date: "02/12/2026 03:00 PM" },
+                            { status: "Scheduled", date: "02/14/2026 09:00 AM" },
+                            { status: "Collection/Testing Pending", date: "02/15/2026 01:00 PM" },
+                            { status: "Collection Completed", date: "02/18/2026 04:30 PM" },
+                            { status: "Received at Lab", date: "02/20/2026 11:00 AM" },
+                            { status: "Pending MRO Review", date: "02/22/2026 02:00 PM" },
+                            { status: "Review Needed", date: "02/23/2026 03:45 PM" }
+                        ]
+                    },
+                    {
+                        category: "VACCINES",
+                        name: "Varicella Vaccine",
+                        orderStatus: "InProgress",
+                        suborderStatus: "Review Needed",
+                        history: [
+                            { status: "Order Created", date: "02/12/2026 10:15 AM" },
+                            { status: "Scheduled", date: "02/15/2026 11:00 AM" },
+                            { status: "Collection Completed", date: "02/21/2026 02:00 PM" },
+                            { status: "Review Needed", date: "02/23/2026 04:15 PM" }
+                        ]
+                    }
+                ]
+            },
+            {
+                name: "Stagecheck Test",
+                orderId: "JM755",
+                lastRun: "02/23/2026",
+                dateAdded: "02/12/2026",
+                expectedEndDate: "03/31/2026",
+                createdBy: "mrunali Stage...",
+                package: "stg1-ssn, mvr stg2-c...",
+                status: "In Progress",
+                stagedCheck: "Stage1",
+                alerts: "Donor Pass Expired",
+                screenings: [
+                    {
+                        category: "TITERS",
+                        name: "Hep B Surface Antigen (HBsAG)",
+                        orderStatus: "InProgress",
+                        suborderStatus: "Review Needed",
+                        history: [
+                            { status: "Order Created", date: "02/12/2026 01:00 PM" },
+                            { status: "Donor Pass Creation Pending", date: "02/12/2026 03:00 PM" },
+                            { status: "Scheduled", date: "02/15/2026 10:00 AM" },
+                            { status: "Review Needed", date: "02/23/2026 02:00 PM" }
+                        ]
+                    }
+                ]
+            },
+            {
+                name: "Rodrigo Joseph",
+                orderId: "UTMUZ",
+                lastRun: "02/19/2026",
+                dateAdded: "02/18/2026",
+                expectedEndDate: "02/28/2026",
+                createdBy: "debendu Roy",
+                package: "federal crim",
+                status: "In Progress",
+                stagedCheck: "—",
+                alerts: "—",
+                screenings: [
+                    {
+                        category: "DRUGS",
+                        name: "10 Panel Drug",
+                        orderStatus: "InProgress",
+                        suborderStatus: "Canceled",
+                        history: [
+                            { status: "Order Created", date: "02/18/2026 09:00 AM" },
+                            { status: "Canceled", date: "02/19/2026 04:30 PM" }
+                        ]
+                    }
+                ]
+            },
+            {
+                name: "Anup3 Kumar",
+                orderId: "ZVZO9",
+                lastRun: "02/18/2026",
+                dateAdded: "02/18/2026",
+                expectedEndDate: "—",
+                createdBy: "testing Covid",
+                package: "federal crim",
+                status: "In Progress",
+                stagedCheck: "—",
+                alerts: "—",
+                screenings: [
+                    {
+                        category: "DRUGS",
+                        name: "Drug 20sep",
+                        orderStatus: "InProgress",
+                        suborderStatus: "Unable to Verify",
+                        history: [
+                            { status: "Order Created", date: "02/18/2026 10:00 AM" },
+                            { status: "Unable to Verify", date: "02/18/2026 06:00 PM" }
+                        ]
+                    }
+                ]
+            },
+            {
+                name: "Criminalhistory Test",
+                orderId: "JS1FP",
+                lastRun: "02/13/2026",
+                dateAdded: "02/13/2026",
+                expectedEndDate: "—",
+                createdBy: "mrunali Stage...",
+                package: "County crim, state crl...",
+                status: "Reviewed",
+                stagedCheck: "—",
+                alerts: "—",
+                screenings: [
+                    {
+                        category: "DRUGS",
+                        name: "10 Panel Drug",
+                        orderStatus: "Clear",
+                        suborderStatus: "Clear",
+                        history: [
+                            { status: "Order Created", date: "02/13/2026 08:00 AM" },
+                            { status: "Donor Pass Creation Pending", date: "02/13/2026 09:00 AM" },
+                            { status: "Donor Pass Created", date: "02/13/2026 10:30 AM" },
+                            { status: "Scheduled", date: "02/13/2026 11:30 AM" },
+                            { status: "Collection Completed", date: "02/13/2026 03:00 PM" },
+                            { status: "Received at Lab", date: "02/13/2026 05:00 PM" },
+                            { status: "Clear", date: "02/13/2026 06:30 PM" }
+                        ]
+                    }
+                ]
+            }
+        ];
+
+        // Active State Variables
+        let currentSelectedCandidate = candidateDb[0];
+        let homeActiveTabStatus = "all";
+        let activeSidebarId = "nav-candidates";
+
+        function showScreen(screenId, sidebarId) {
+            // Manage Sidebar Highlighting
+            if (activeSidebarId) {
+                const prevLink = document.getElementById(activeSidebarId);
+                if (prevLink) {
+                    prevLink.className = "flex items-center gap-3.5 px-4 py-3 rounded-lg hover:bg-slate-800 hover:text-white transition-all text-slate-400 font-medium";
+                    // Reset icon color
+                    const prevIcon = prevLink.querySelector('i');
+                    if (prevIcon) prevIcon.className = prevIcon.className.replace('text-blue-500', '');
+                }
+            }
+
+            const currLink = document.getElementById(sidebarId);
+            if (currLink) {
+                currLink.className = "flex items-center gap-3.5 px-4 py-3 rounded-lg bg-slate-800 text-white font-semibold transition-all";
+                const currIcon = currLink.querySelector('i');
+                if (currIcon && !currIcon.className.includes('text-blue-500')) {
+                    currIcon.className += " text-blue-500";
+                }
+            }
+            activeSidebarId = sidebarId;
+
+            // Manage visible screen divisions
+            document.getElementById('home-screen').classList.add('hidden');
+            document.getElementById('details-screen').classList.add('hidden');
+            document.getElementById('placeholder-screen').classList.add('hidden');
+            document.getElementById(screenId).classList.remove('hidden');
+
+            const pageTitle = document.getElementById('page-title');
+            if (screenId === 'home-screen') {
+                pageTitle.innerText = sidebarId === 'nav-advanced' ? "Advanced Candidates Directory" : "Candidates Directory";
+            } else if (screenId === 'details-screen') {
+                pageTitle.innerText = "Candidate Deep Dive Profile";
+            }
+        }
+
+        function showPlaceholderScreen(title, sidebarId) {
+            showScreen('placeholder-screen', sidebarId);
+            document.getElementById('placeholder-title').innerText = title;
+            
+            // Map corresponding visual icon helper
+            const iconMap = {
+                'nav-packages': 'fa-box',
+                'nav-comply': 'fa-shield-halved',
+                'nav-customizations': 'fa-sliders',
+                'nav-settings': 'fa-gear',
+                'nav-formi9': 'fa-fingerprint',
+                'nav-reports': 'fa-chart-pie',
+                'nav-bulk': 'fa-cloud-arrow-up',
+                'nav-supplies': 'fa-cart-shopping'
+            };
+            const iconClass = iconMap[sidebarId] || 'fa-cube';
+            document.getElementById('placeholder-icon').className = `fa-solid ${iconClass}`;
+        }
+
+        function generateCandidateTable(dataList) {
+            const tbody = document.getElementById("candidate-table-body");
+            tbody.innerHTML = "";
+
+            dataList.forEach(cand => {
+                const tr = document.createElement("tr");
+                tr.className = "hover:bg-slate-50/80 transition-colors border-b border-slate-100";
+
+                // Map state badge indicators
+                let badgeStyle = "bg-blue-600 text-white";
+                if (cand.status === "COI Expired" || cand.status === "Adverse Action") {
+                    badgeStyle = "bg-red-500 text-white";
+                } else if (cand.status === "Reviewed" || cand.status === "Ready For Onboarding") {
+                    badgeStyle = "bg-emerald-500 text-white";
+                } else if (cand.status === "Review Needed") {
+                    // Exact yellow color mapping requested
+                    badgeStyle = "bg-yellow-500 text-slate-950 font-extrabold";
+                }
+
+                tr.innerHTML = `
+                    <td class="p-4"><input type="checkbox" class="rounded border-slate-300 text-blue-600"></td>
+                    <td class="p-4">
+                        <button onclick="goToCandidateDetails('${cand.name}')" class="font-bold text-blue-600 hover:underline text-left">
+                            ${cand.name}
+                        </button>
+                    </td>
+                    <td class="p-4 font-mono text-[11px] text-slate-500">${cand.orderId}</td>
+                    <td class="p-4">${cand.lastRun}</td>
+                    <td class="p-4">${cand.dateAdded}</td>
+                    <td class="p-4 text-slate-400">${cand.expectedEndDate}</td>
+                    <td class="p-4 text-slate-500 font-medium">${cand.createdBy}</td>
+                    <td class="p-4 text-slate-500 max-w-[150px] truncate font-semibold">${cand.package}</td>
+                    <td class="p-4 text-center">
+                        <span class="inline-block px-2.5 py-1 text-[10px] font-bold rounded ${badgeStyle} uppercase tracking-wider">${cand.status}</span>
+                    </td>
+                    <td class="p-4 text-center bg-blue-50/30 border-x border-blue-100/50">
+                        <button onclick="openDrawer('${cand.name}')" class="inline-flex items-center justify-center w-7 h-7 rounded-full border border-blue-400 text-blue-600 hover:bg-blue-100/70 transition-all text-xs font-bold shadow-sm" title="Open Health Screening Panel">
+                            i
+                        </button>
+                    </td>
+                    <td class="p-4 text-center text-slate-500 font-semibold">${cand.stagedCheck}</td>
+                    <td class="p-4 text-[11px] font-medium ${cand.alerts !== '—' ? 'text-red-500 font-bold' : 'text-slate-400'}">${cand.alerts}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function applyHomeFilters() {
+            const candidateSearchQuery = document.getElementById("home-search-candidate").value.toLowerCase();
+            const selectedPackage = document.getElementById("home-filter-package").value;
+            const selectedUser = document.getElementById("home-filter-user").value;
+
+            let filteredList = candidateDb.filter(cand => {
+                if (homeActiveTabStatus !== "all") {
+                    if (homeActiveTabStatus === "COI Expired" && cand.status !== "COI Expired") return false;
+                    if (homeActiveTabStatus === "In Progress" && cand.status !== "In Progress") return false;
+                    if (homeActiveTabStatus === "Review Needed" && cand.status !== "Review Needed") return false;
+                    if (homeActiveTabStatus === "Ready For Onboarding" && cand.status !== "Ready For Onboarding") return false;
+                    if (homeActiveTabStatus === "Pending Candidate" && cand.status !== "Pending Candidate") return false;
+                }
+
+                if (candidateSearchQuery && !cand.name.toLowerCase().includes(candidateSearchQuery)) return false;
+                if (selectedPackage !== "all" && cand.package !== selectedPackage) return false;
+                if (selectedUser !== "all" && cand.createdBy !== selectedUser) return false;
+
+                return true;
+            });
+
+            generateCandidateTable(filteredList);
+        }
+
+        function filterStatusTab(statusKey) {
+            homeActiveTabStatus = statusKey;
+            
+            document.querySelectorAll(".tab-btn").forEach(btn => {
+                btn.className = "px-4 py-2.5 text-xs font-semibold text-slate-500 hover:text-slate-800 border-b-2 border-transparent hover:border-slate-300 whitespace-nowrap tab-btn";
+            });
+
+            const matchingTabs = {
+                "all": "tab-all",
+                "Pending Candidate": "tab-pending",
+                "In Progress": "tab-progress",
+                "Review Needed": "tab-review",
+                "Ready For Onboarding": "tab-onboarding",
+                "COI Expired": "tab-alerts"
+            };
+
+            const activeBtn = document.getElementById(matchingTabs[statusKey]);
+            if (activeBtn) {
+                if (statusKey === 'Review Needed') {
+                    activeBtn.className = "px-4 py-2.5 text-xs font-bold border-b-2 border-yellow-500 text-yellow-600 whitespace-nowrap tab-btn";
+                } else {
+                    activeBtn.className = "px-4 py-2.5 text-xs font-bold border-b-2 border-blue-600 text-blue-600 whitespace-nowrap tab-btn";
+                }
+            }
+
+            applyHomeFilters();
+        }
+
+        function goToCandidateDetails(name) {
+            const targetCandidate = candidateDb.find(c => c.name === name);
+            if (!targetCandidate) return;
+
+            currentSelectedCandidate = targetCandidate;
+            document.getElementById('cand-detail-name').innerText = targetCandidate.name;
+            document.getElementById('cand-detail-id').innerText = targetCandidate.orderId;
+            document.getElementById('cand-detail-pkg').innerText = targetCandidate.package;
+
+            generateDeepDiveAccordionContent(targetCandidate);
+            showScreen('details-screen', activeSidebarId);
+        }
+
+        function generateDeepDiveAccordionContent(candidate) {
+            const container = document.getElementById("accordion-checks-container");
+            container.innerHTML = "";
+
+            if (!candidate.screenings || candidate.screenings.length === 0) {
+                container.innerHTML = `<p class="text-slate-400 text-xs py-4 text-center">No checks assigned to this package.</p>`;
+                return;
+            }
+
+            const categories = ["DRUGS", "TITERS", "VACCINES"];
+            categories.forEach(cat => {
+                const filteredScreens = candidate.screenings.filter(s => s.category === cat);
+                if (filteredScreens.length === 0) return;
+
+                const catHeader = document.createElement("div");
+                catHeader.className = "flex items-center justify-between border-b border-slate-200 pb-2 mt-4 flex-shrink-0";
+                catHeader.innerHTML = `
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-bold text-slate-800 tracking-wide">${cat}</span>
+                        <i class="fa-solid fa-chevron-down text-[10px] text-slate-400"></i>
+                    </div>
+                    <div class="flex flex-col items-end">
+                        <span class="inline-block px-2 py-0.5 text-[9px] font-bold rounded bg-blue-600 text-white uppercase tracking-wider">In Progress</span>
+                    </div>
+                `;
+                container.appendChild(catHeader);
+
+                filteredScreens.forEach((screen, index) => {
+                    // Match visual styling context
+                    const isReviewNeeded = screen.suborderStatus === "Review Needed";
+                    const isClear = screen.suborderStatus === "Clear";
+                    const isCanceled = screen.suborderStatus === "Canceled";
+                    const isVerifyError = screen.suborderStatus === "Unable to Verify";
+
+                    let suborderColor = "bg-blue-600 text-white";
+                    if (isReviewNeeded) suborderColor = "bg-yellow-500 text-slate-950 font-bold";
+                    else if (isClear) suborderColor = "bg-emerald-500 text-white";
+                    else if (isCanceled) suborderColor = "bg-red-500 text-white";
+                    else if (isVerifyError) suborderColor = "bg-purple-500 text-white";
+
+                    const checkBlock = document.createElement("div");
+                    checkBlock.className = "border border-slate-200 rounded-lg overflow-hidden bg-white shadow-sm flex-shrink-0";
+                    checkBlock.id = `deepdive-check-${cat}-${index}`;
+
+                    checkBlock.innerHTML = `
+                        <button class="w-full bg-white hover:bg-slate-50/50 p-4 flex justify-between items-center transition-colors focus:outline-none text-xs" onclick="toggleDeepdiveCheck('${cat}-${index}')">
+                            <div class="flex items-center gap-2">
+                                <span class="font-bold text-slate-700">${screen.name}</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="inline-block px-2.5 py-1 text-[10px] font-bold rounded ${suborderColor} uppercase tracking-wider">${screen.suborderStatus}</span>
+                                <i id="arrow-deepdive-${cat}-${index}" class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
+                            </div>
+                        </button>
+
+                        <div id="deepdive-content-${cat}-${index}" class="hidden p-5 space-y-5 border-t border-slate-100 bg-slate-50/30">
+                            
+                            <!-- Custom thick orange status box representation matching image_f4285d.png -->
+                            <div class="border-2 border-orange-400 bg-orange-50/40 rounded-md p-3 text-center shadow-sm max-w-sm mx-auto">
+                                <span class="font-bold text-slate-800 text-xs">Status: ${screen.suborderStatus}</span>
+                            </div>
+
+                            <!-- Sequential History Progress Tracking with dates -->
+                            <div class="mt-4 bg-white p-4 rounded-lg border border-slate-200 shadow-inner">
+                                <h4 class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-4 border-b border-slate-100 pb-2">Sequential History Status Tracking</h4>
+                                
+                                <!-- Scrollable milestones list -->
+                                <div class="max-h-[220px] overflow-y-auto pr-2 relative pl-6 border-l-2 border-blue-500 space-y-4">
+                                    ${screen.history.map((step, sIdx) => {
+                                        const isLast = sIdx === screen.history.length - 1;
+                                        // Color mapping matching image_f49941.png
+                                        const dotColor = isLast ? (isReviewNeeded ? 'bg-yellow-500 ring-yellow-100' : 'bg-orange-500 ring-orange-100') : 'bg-blue-600 ring-blue-100';
+                                        const fontStyle = isLast ? 'font-bold text-slate-900' : 'font-semibold text-slate-600';
+                                        return `
+                                            <div class="relative text-[11px]">
+                                                <span class="absolute -left-[31px] top-1 w-3.5 h-3.5 rounded-full ${dotColor} border-2 border-white ring-4 shadow-sm"></span>
+                                                <div class="flex justify-between items-center bg-slate-50/80 p-2.5 rounded border border-slate-100 flex-wrap gap-2">
+                                                    <span class="${fontStyle}">${step.status}</span>
+                                                    <span class="text-slate-500 font-mono text-[10px] font-medium">${step.date}</span>
+                                                </div>
+                                            </div>
+                                        `;
+                                    }).join('')}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    container.appendChild(checkBlock);
+                });
+            });
+        }
+
+        let allDeepdiveExpanded = false;
+        function toggleExpandAll() {
+            allDeepdiveExpanded = !allDeepdiveExpanded;
+            const toggleBtn = document.getElementById('expandAllToggle');
+            const dot = toggleBtn.querySelector('.dot');
+
+            if (allDeepdiveExpanded) {
+                toggleBtn.classList.remove('bg-slate-200');
+                toggleBtn.classList.add('bg-blue-600');
+                dot.classList.add('translate-x-5');
+            } else {
+                toggleBtn.classList.add('bg-slate-200');
+                toggleBtn.classList.remove('bg-blue-600');
+                dot.classList.remove('translate-x-5');
+            }
+
+            currentSelectedCandidate.screenings.forEach((screen) => {
+                const categories = ["DRUGS", "TITERS", "VACCINES"];
+                categories.forEach(cat => {
+                    const idx = currentSelectedCandidate.screenings.filter(s => s.category === cat).indexOf(screen);
+                    if (idx === -1) return;
+                    const targetContent = document.getElementById(`deepdive-content-${cat}-${idx}`);
+                    const arrow = document.getElementById(`arrow-deepdive-${cat}-${idx}`);
+                    if (targetContent) {
+                        if (allDeepdiveExpanded) {
+                            targetContent.classList.remove('hidden');
+                            arrow.classList.add('rotate-180');
+                        } else {
+                            targetContent.classList.add('hidden');
+                            arrow.classList.remove('rotate-180');
+                        }
+                    }
+                });
+            });
+        }
+
+        function toggleDeepdiveCheck(identifier) {
+            const targetContent = document.getElementById(`deepdive-content-${identifier}`);
+            const arrow = document.getElementById(`arrow-deepdive-${identifier}`);
+            
+            if (targetContent.classList.contains('hidden')) {
+                targetContent.classList.remove('hidden');
+                arrow.classList.add('rotate-180');
+            } else {
+                targetContent.classList.add('hidden');
+                arrow.classList.remove('rotate-180');
+            }
+        }
+
+        let drawerScreeningsData = [];
+
+        function openDrawer(candidateName) {
+            const candidate = candidateDb.find(c => c.name === candidateName);
+            if (!candidate) return;
+
+            currentSelectedCandidate = candidate;
+            drawerScreeningsData = [...candidate.screenings];
+
+            document.getElementById('drawer-candidate').innerText = candidate.name;
+            document.getElementById('drawer-orderid').innerText = candidate.orderId;
+
+            document.getElementById('drawer-search-screening').value = "";
+            document.getElementById('drawer-filter-order-status').value = "all";
+            document.getElementById('drawer-filter-suborder-status').value = "all";
+
+            renderDrawerListContent();
+
+            const backdrop = document.getElementById('drawer-backdrop');
+            const drawer = document.getElementById('quick-drawer');
+
+            backdrop.classList.remove('pointer-events-none', 'opacity-0');
+            backdrop.classList.add('opacity-100');
+            drawer.classList.remove('translate-x-full');
+        }
+
+        function closeDrawer() {
+            const backdrop = document.getElementById('drawer-backdrop');
+            const drawer = document.getElementById('quick-drawer');
+
+            backdrop.classList.add('pointer-events-none', 'opacity-0');
+            backdrop.classList.remove('opacity-100');
+            drawer.classList.add('translate-x-full');
+        }
+
+        function filterDrawerScreenings() {
+            const query = document.getElementById('drawer-search-screening').value.toLowerCase();
+            const orderStatusFilter = document.getElementById('drawer-filter-order-status').value;
+            const suborderStatusFilter = document.getElementById('drawer-filter-suborder-status').value;
+
+            drawerScreeningsData = currentSelectedCandidate.screenings.filter(screen => {
+                if (query && !screen.name.toLowerCase().includes(query)) return false;
+                if (orderStatusFilter !== "all" && screen.orderStatus !== orderStatusFilter) return false;
+                if (suborderStatusFilter !== "all" && screen.suborderStatus !== suborderStatusFilter) return false;
+                return true;
+            });
+
+            renderDrawerListContent();
+        }
+
+        function renderDrawerListContent() {
+            const container = document.getElementById('drawer-body-list');
+            container.innerHTML = "";
+
+            if (drawerScreeningsData.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center p-8 border border-dashed border-slate-200 rounded-lg">
+                        <p class="text-slate-400 text-xs">No screening matching search constraints.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // High Fidelity grouping structure for table category layouts
+            const categories = ["DRUGS", "TITERS", "VACCINES"];
+            
+            categories.forEach(cat => {
+                const listItems = drawerScreeningsData.filter(s => s.category === cat);
+                if (listItems.length === 0) return;
+
+                // Category Group Title
+                const catHeaderDiv = document.createElement("div");
+                catHeaderDiv.className = "text-xs font-bold text-slate-500 bg-slate-50 px-4 py-2 rounded-t-lg border border-slate-200 border-b-0 uppercase tracking-wider mt-2";
+                catHeaderDiv.innerText = `${cat.charAt(0) + cat.slice(1).toLowerCase()} (${listItems.length})`;
+                container.appendChild(catHeaderDiv);
+
+                // Table Layout wrapper
+                const tableWrapper = document.createElement("div");
+                tableWrapper.className = "border border-slate-200 rounded-b-lg overflow-hidden divide-y divide-slate-200 bg-white shadow-sm mb-4";
+
+                // Sub-header layout
+                const tableHeader = document.createElement("div");
+                tableHeader.className = "grid grid-cols-12 bg-slate-50/50 p-3 text-[10px] uppercase font-bold text-slate-400 border-b border-slate-200";
+                tableHeader.innerHTML = `
+                    <div class="col-span-6">Health Screening</div>
+                    <div class="col-span-3 text-center">Order Status</div>
+                    <div class="col-span-3 text-center">Suborder Status</div>
+                `;
+                tableWrapper.appendChild(tableHeader);
+
+                listItems.forEach((screen, sIdx) => {
+                    const rowId = `drawer-check-${cat}-${sIdx}`;
+                    const rowContainer = document.createElement("div");
+                    rowContainer.className = "bg-white text-xs";
+
+                    // Style badge states
+                    const isClear = screen.suborderStatus === "Clear";
+                    const isReview = screen.suborderStatus === "Review Needed";
+                    const isCanceled = screen.suborderStatus === "Canceled";
+                    const isUnreported = screen.suborderStatus === "Unreported";
+                    const isVerifyError = screen.suborderStatus === "Unable to Verify";
+
+                    let suborderTextStyle = "text-blue-600";
+                    if (isClear) suborderTextStyle = "text-emerald-500 font-bold";
+                    else if (isReview) suborderTextStyle = "text-yellow-600 font-extrabold"; // Highlighted Yellow Review Status
+                    else if (isCanceled) suborderTextStyle = "text-red-500 font-bold";
+                    else if (isUnreported) suborderTextStyle = "text-orange-500 font-bold";
+                    else if (isVerifyError) suborderTextStyle = "text-purple-500 font-bold";
+
+                    rowContainer.innerHTML = `
+                        <button onclick="toggleDrawerInlineTracker('${rowId}')" class="w-full grid grid-cols-12 p-3 items-center hover:bg-slate-50/50 focus:outline-none text-left transition-colors font-medium">
+                            <div class="col-span-6 flex items-center gap-1.5 font-bold text-slate-700 flex-wrap">
+                                <span>${screen.name}</span>
+                                ${isUnreported ? `<span class="bg-orange-100 text-orange-700 text-[8px] px-1 rounded font-bold uppercase">Unreported History</span>` : ''}
+                            </div>
+                            <div class="col-span-3 text-center font-bold text-blue-600">${screen.orderStatus}</div>
+                            <div class="col-span-3 text-center ${suborderTextStyle}">${screen.suborderStatus}</div>
+                        </button>
+                        
+                        <!-- Collapsible inline tracker details inside drawer check matching image_f4285d box design -->
+                        <div id="${rowId}" class="hidden p-4 bg-slate-50/50 border-t border-slate-200/60 space-y-4">
+                            
+                            <!-- Precise orange status box inside drawer panel list -->
+                            <div class="border-2 border-orange-400 bg-white rounded-md p-2.5 text-center shadow-sm max-w-xs mx-auto">
+                                <span class="font-bold text-slate-800 text-xs">Status: ${screen.suborderStatus}</span>
+                            </div>
+
+                            <h5 class="text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-2 flex items-center gap-1">
+                                <i class="fa-solid fa-clock-rotate-left"></i> Check Progress Path Tracking
+                            </h5>
+                            
+                            <!-- Milestone path -->
+                            <div class="max-h-[160px] overflow-y-auto pr-1 relative pl-6 border-l-2 border-blue-500 space-y-4">
+                                ${screen.history.map((step, stepIdx) => {
+                                    const isCurrent = stepIdx === screen.history.length - 1;
+                                    const dotBg = isCurrent ? 'bg-orange-500 ring-orange-100' : 'bg-blue-600 ring-blue-100';
+                                    const txtStyle = isCurrent ? 'font-bold text-slate-900' : 'font-medium text-slate-500';
+                                    return `
+                                        <div class="relative text-[11px]">
+                                            <span class="absolute -left-[31px] top-1 w-3 h-3 rounded-full ${dotBg} border border-white ring-2"></span>
+                                            <div class="flex justify-between items-center bg-white p-2 rounded shadow-sm border border-slate-100 flex-wrap gap-1.5">
+                                                <span class="${txtStyle}">${step.status}</span>
+                                                <span class="text-slate-400 font-mono text-[9px]">${step.date}</span>
+                                            </div>
+                                        </div>
+                                    `;
+                                }).join('')}
+                            </div>
+                        </div>
+                    `;
+                    tableWrapper.appendChild(rowContainer);
+                });
+
+                container.appendChild(tableWrapper);
+            });
+        }
+
+        function toggleDrawerInlineTracker(targetId) {
+            const el = document.getElementById(targetId);
+            if (el.classList.contains('hidden')) {
+                el.classList.remove('hidden');
+            } else {
+                el.classList.add('hidden');
+            }
+        }
+
+        function openFormModal(actionType) {
+            const overlay = document.getElementById('form-modal-overlay');
+            const title = document.getElementById('modal-form-title');
+            const fieldsContainer = document.getElementById('modal-form-fields');
+            
+            overlay.classList.remove('hidden');
+            setTimeout(() => {
+                overlay.firstElementChild.classList.remove('scale-95');
+                overlay.firstElementChild.classList.add('scale-100');
+            }, 50);
+
+            if (actionType === 'new-candidate') {
+                title.innerText = "Register New Candidate";
+                fieldsContainer.innerHTML = `
+                    <div>
+                        <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Full Name</label>
+                        <input type="text" id="form-cand-name" placeholder="John Doe" class="w-full text-xs border border-slate-200 rounded p-2.5 outline-none focus:border-blue-500 font-semibold text-slate-700">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Package</label>
+                        <select id="form-cand-package" class="w-full text-xs border border-slate-200 rounded p-2.5 outline-none focus:border-blue-500 font-semibold text-slate-700">
+                            <option>AutoPAA and Market...</option>
+                            <option>stg1-ssn, mvr stg2-n...</option>
+                            <option>federal crim</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Assignee</label>
+                        <input type="text" id="form-cand-assignee" value="debendu Roy" class="w-full text-xs border border-slate-200 rounded p-2.5 outline-none bg-slate-50 font-semibold text-slate-500" readonly>
+                    </div>
+                `;
+            } else if (actionType === 'modify-order') {
+                title.innerText = "Modify Order Parameters";
+                fieldsContainer.innerHTML = `
+                    <div>
+                        <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Candidate Selected</label>
+                        <input type="text" value="${currentSelectedCandidate.name}" class="w-full text-xs border border-slate-200 rounded p-2.5 outline-none bg-slate-50 font-semibold text-slate-500" readonly>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Change Order Status</label>
+                        <select id="form-order-status" class="w-full text-xs border border-slate-200 rounded p-2.5 outline-none focus:border-blue-500 font-semibold text-slate-700">
+                            <option value="In Progress">In Progress</option>
+                            <option value="Reviewed">Reviewed</option>
+                            <option value="COI Expired">COI Expired</option>
+                        </select>
+                    </div>
+                `;
+            } else if (actionType === 'change-location') {
+                title.innerText = "Change Dispatch Location";
+                fieldsContainer.innerHTML = `
+                    <div>
+                        <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Select Dispatch State</label>
+                        <select id="form-dispatch-loc" class="w-full text-xs border border-slate-200 rounded p-2.5 outline-none focus:border-blue-500 font-semibold text-slate-700">
+                            <option>New York Clinic Hub</option>
+                            <option>California Testing Lab</option>
+                            <option>Texas Diagnostic Lab</option>
+                        </select>
+                    </div>
+                `;
+            }
+        }
+
+        function closeFormModal() {
+            const overlay = document.getElementById('form-modal-overlay');
+            overlay.firstElementChild.classList.remove('scale-100');
+            overlay.firstElementChild.classList.add('scale-95');
+            setTimeout(() => {
+                overlay.classList.add('hidden');
+            }, 150);
+        }
+
+        function submitFormAction() {
+            const nameField = document.getElementById('form-cand-name');
+            const pkgField = document.getElementById('form-cand-package');
+            const statusField = document.getElementById('form-order-status');
+
+            if (nameField && nameField.value.trim() !== "") {
+                // Add demo candidate logically
+                const newCandObj = {
+                    name: nameField.value.trim(),
+                    orderId: Math.random().toString(36).substring(2, 7).toUpperCase(),
+                    lastRun: "06/03/2026",
+                    dateAdded: "06/03/2026",
+                    expectedEndDate: "—",
+                    createdBy: "debendu Roy",
+                    package: pkgField.value,
+                    status: "In Progress",
+                    stagedCheck: "—",
+                    alerts: "—",
+                    screenings: [
+                        {
+                            category: "TITERS",
+                            name: "Hep B Surface Antibody (HBsAb)",
+                            orderStatus: "InProgress",
+                            suborderStatus: "Review Needed",
+                            history: [
+                                { status: "Order Created", date: "06/03/2026 10:00 AM" },
+                                { status: "Review Needed", date: "06/03/2026 02:00 PM" }
+                            ]
+                        }
+                    ]
+                };
+                candidateDb.unshift(newCandObj);
+                generateCandidateTable(candidateDb);
+            } else if (statusField) {
+                // Modify existing candidate state
+                currentSelectedCandidate.status = statusField.value;
+                generateCandidateTable(candidateDb);
+                goToCandidateDetails(currentSelectedCandidate.name);
+            }
+
+            closeFormModal();
+        }
+
+        function openChatSupport() {
+            // Simulated premium chat activation without relying on blocking alert actions
+            const notification = document.createElement("div");
+            notification.className = "fixed bottom-5 right-5 bg-slate-900 text-white rounded-xl shadow-2xl p-5 border border-slate-700 flex flex-col gap-3 z-50 animate-bounce max-w-xs text-xs";
+            notification.innerHTML = `
+                <div class="flex items-center gap-2 justify-between">
+                    <span class="flex items-center gap-1.5 font-bold"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> Vetty Concierge</span>
+                    <button onclick="this.parentElement.parentElement.remove()" class="text-slate-400 hover:text-white font-bold text-sm">&times;</button>
+                </div>
+                <p class="text-slate-300 leading-relaxed">
+                    Hello! We are here to help. Live candidate screenings chat log support has been successfully initialized.
+                </p>
+            `;
+            document.body.appendChild(notification);
+            setTimeout(() => {
+                notification.classList.remove('animate-bounce');
+            }, 2000);
+        }
+
+        window.onload = function () {
+            generateCandidateTable(candidateDb);
+        };
+    </script>
+</body>
+</html>
