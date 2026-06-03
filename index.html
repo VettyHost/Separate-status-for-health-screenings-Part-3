@@ -119,7 +119,6 @@
 
     <main class="flex-1 flex flex-col overflow-hidden relative">
 
-        <!-- Global Navigation / Profile Bar -->
         <header class="h-16 bg-white border-b border-slate-200 flex items-center justify-between px-8 z-10 flex-shrink-0">
             <div class="flex items-center gap-2">
                 <h1 id="page-title" class="text-lg font-bold text-slate-800">Candidates Directory</h1>
@@ -139,7 +138,6 @@
 
         <div class="flex-1 overflow-y-auto relative">
 
-            <!-- Directory Table Screen (Main View) -->
             <section id="home-screen" class="p-8 space-y-6">
                 
                 <!-- Filters Panel exactly as modeled in image_f42881.png -->
@@ -201,7 +199,6 @@
                     <button onclick="filterStatusTab('COI Expired')" id="tab-alerts" class="px-4 py-2.5 text-xs font-semibold text-slate-500 hover:text-slate-800 border-b-2 border-transparent hover:border-slate-300 whitespace-nowrap tab-btn">Alerts (<span id="count-alerts">0</span>)</button>
                 </div>
 
-                <!-- Main Data Table Grid mapping image_f42881.png -->
                 <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
                     <div class="overflow-x-auto">
                         <table class="w-full text-left border-collapse">
@@ -298,7 +295,6 @@
                         </div>
                     </div>
 
-                    <!-- Right Side: Health Screening Expandable Checks Modules with scrolling support -->
                     <div class="lg:col-span-8 space-y-6">
                         <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
                             <div class="flex items-center justify-between pb-4 border-b border-slate-100 mb-6">
@@ -394,6 +390,7 @@
         </div>
     </div>
 
+    <!-- Modals Overlay -->
     <div id="form-modal-overlay" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="bg-white rounded-xl shadow-2xl border border-slate-200 w-full max-w-md overflow-hidden transform scale-95 transition-all">
             <div class="p-5 border-b border-slate-100 flex justify-between items-center bg-slate-50">
@@ -741,7 +738,6 @@
                     }
                 ]
             },
-            /* 8 Pending Candidate entries to yield exact candidate status layout matches */
             {
                 name: "Stacy Peter",
                 orderId: "QJ4WA",
@@ -878,7 +874,6 @@
                 const prevLink = document.getElementById(activeSidebarId);
                 if (prevLink) {
                     prevLink.className = "flex items-center gap-3.5 px-4 py-3 rounded-lg hover:bg-slate-800 hover:text-white transition-all text-slate-400 font-medium";
-                    // Reset icon color
                     const prevIcon = prevLink.querySelector('i');
                     if (prevIcon) prevIcon.className = prevIcon.className.replace('text-blue-500', '');
                 }
@@ -912,7 +907,6 @@
             showScreen('placeholder-screen', sidebarId);
             document.getElementById('placeholder-title').innerText = title;
             
-            // Map corresponding visual icon helper
             const iconMap = {
                 'nav-packages': 'fa-box',
                 'nav-comply': 'fa-shield-halved',
@@ -935,14 +929,12 @@
                 const tr = document.createElement("tr");
                 tr.className = "hover:bg-slate-50/80 transition-colors border-b border-slate-100";
 
-                // Map state badge indicators
                 let badgeStyle = "bg-blue-600 text-white";
                 if (cand.status === "COI Expired" || cand.status === "Adverse Action") {
                     badgeStyle = "bg-red-500 text-white";
                 } else if (cand.status === "Reviewed" || cand.status === "Ready For Onboarding") {
                     badgeStyle = "bg-emerald-500 text-white";
                 } else if (cand.status === "Review Needed") {
-                    // Exact yellow color mapping requested
                     badgeStyle = "bg-yellow-500 text-slate-950 font-extrabold";
                 } else if (cand.status === "Pending Candidate") {
                     badgeStyle = "bg-amber-100 text-amber-800 border border-amber-200 font-bold";
@@ -1070,7 +1062,6 @@
                 container.appendChild(catHeader);
 
                 filteredScreens.forEach((screen, index) => {
-                    // Match visual styling context
                     const isReviewNeeded = screen.suborderStatus === "Review Needed";
                     const isClear = screen.suborderStatus === "Clear";
                     const isCanceled = screen.suborderStatus === "Canceled";
@@ -1085,6 +1076,23 @@
                     const checkBlock = document.createElement("div");
                     checkBlock.className = "border border-slate-200 rounded-lg overflow-hidden bg-white shadow-sm flex-shrink-0";
                     checkBlock.id = `deepdive-check-${cat}-${index}`;
+
+                    // Reverse chronological history sequence (Bottom to Top)
+                    const reversedHistory = [...screen.history].reverse();
+
+                    // Map top status dot matching outside color status
+                    let topDotColorClass = 'bg-blue-600 ring-blue-100';
+                    if (screen.suborderStatus === 'Review Needed') {
+                        topDotColorClass = 'bg-yellow-500 ring-yellow-100';
+                    } else if (screen.suborderStatus === 'Clear') {
+                        topDotColorClass = 'bg-emerald-500 ring-emerald-100';
+                    } else if (screen.suborderStatus === 'Canceled') {
+                        topDotColorClass = 'bg-red-500 ring-red-100';
+                    } else if (screen.suborderStatus === 'Unable to Verify') {
+                        topDotColorClass = 'bg-purple-500 ring-purple-100';
+                    } else if (screen.suborderStatus === 'Unreported') {
+                        topDotColorClass = 'bg-orange-500 ring-orange-100';
+                    }
 
                     checkBlock.innerHTML = `
                         <button class="w-full bg-white hover:bg-slate-50/50 p-4 flex justify-between items-center transition-colors focus:outline-none text-xs" onclick="toggleDeepdiveCheck('${cat}-${index}')">
@@ -1104,28 +1112,29 @@
                                 <span class="font-bold text-slate-800 text-xs">Status: ${screen.suborderStatus}</span>
                             </div>
 
-                            <!-- Sequential History Progress Tracking with dates -->
+                            <!-- Sequential History Progress Tracking with contiguous line setup -->
                             <div class="mt-4 bg-white p-4 rounded-lg border border-slate-200 shadow-inner">
                                 <h4 class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-4 border-b border-slate-100 pb-2">Sequential History Status Tracking</h4>
                                 
-                                <!-- Scrollable milestones list with positive dot positions and inner line path -->
-                                <div class="max-h-[220px] overflow-y-auto pr-2 relative space-y-4">
-                                    <div class="absolute left-[16px] top-2 bottom-2 w-[2px] bg-blue-500 z-0"></div>
-                                    ${screen.history.map((step, sIdx) => {
-                                        const isLast = sIdx === screen.history.length - 1;
-                                        // Color mapping matching image_f49941.png
-                                        const dotColor = isLast ? (isReviewNeeded ? 'bg-yellow-500 ring-yellow-100' : 'bg-orange-500 ring-orange-100') : 'bg-blue-600 ring-blue-100';
-                                        const fontStyle = isLast ? 'font-bold text-slate-900' : 'font-semibold text-slate-600';
-                                        return `
-                                            <div class="relative text-[11px] pl-10">
-                                                <span class="absolute left-[10px] top-1.5 w-3.5 h-3.5 rounded-full ${dotColor} border-2 border-white ring-4 shadow-sm inline-block flex-shrink-0 aspect-square z-10"></span>
-                                                <div class="flex justify-between items-center bg-slate-50/80 p-2.5 rounded border border-slate-100 flex-wrap gap-2">
-                                                    <span class="${fontStyle}">${step.status}</span>
-                                                    <span class="text-slate-500 font-mono text-[10px] font-medium">${step.date}</span>
+                                <!-- Contiguous line wrapping system to fix image_e76e3f broken lines -->
+                                <div class="relative py-2 max-h-[220px] overflow-y-auto pr-2">
+                                    <div class="absolute left-[16px] top-4 bottom-4 w-[2px] bg-blue-500 z-0"></div>
+                                    <div class="space-y-4">
+                                        ${reversedHistory.map((step, sIdx) => {
+                                            const isNewest = sIdx === 0;
+                                            const dotColor = isNewest ? topDotColorClass : 'bg-blue-600 ring-blue-100';
+                                            const fontStyle = isNewest ? 'font-bold text-slate-900' : 'font-semibold text-slate-600';
+                                            return `
+                                                <div class="relative text-[11px] pl-10">
+                                                    <span class="absolute left-[10px] top-1.5 w-3.5 h-3.5 rounded-full ${dotColor} border border-white ring-4 shadow-sm inline-block flex-shrink-0 aspect-square z-10"></span>
+                                                    <div class="flex justify-between items-center bg-slate-50/80 p-2.5 rounded border border-slate-100 flex-wrap gap-2">
+                                                        <span class="${fontStyle}">${step.status}</span>
+                                                        <span class="text-slate-500 font-mono text-[10px] font-medium">${step.date}</span>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        `;
-                                    }).join('')}
+                                            `;
+                                        }).join('')}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1247,24 +1256,20 @@
                 return;
             }
 
-            // High Fidelity grouping structure for table category layouts
             const categories = ["DRUGS", "TITERS", "VACCINES"];
             
             categories.forEach(cat => {
                 const listItems = drawerScreeningsData.filter(s => s.category === cat);
                 if (listItems.length === 0) return;
 
-                // Category Group Title
                 const catHeaderDiv = document.createElement("div");
                 catHeaderDiv.className = "text-xs font-bold text-slate-500 bg-slate-50 px-4 py-2 rounded-t-lg border border-slate-200 border-b-0 uppercase tracking-wider mt-2";
                 catHeaderDiv.innerText = `${cat.charAt(0) + cat.slice(1).toLowerCase()} (${listItems.length})`;
                 container.appendChild(catHeaderDiv);
 
-                // Table Layout wrapper
                 const tableWrapper = document.createElement("div");
                 tableWrapper.className = "border border-slate-200 rounded-b-lg overflow-hidden divide-y divide-slate-200 bg-white shadow-sm mb-4";
 
-                // Sub-header layout
                 const tableHeader = document.createElement("div");
                 tableHeader.className = "grid grid-cols-12 bg-slate-50/50 p-3 text-[10px] uppercase font-bold text-slate-400 border-b border-slate-200";
                 tableHeader.innerHTML = `
@@ -1279,7 +1284,6 @@
                     const rowContainer = document.createElement("div");
                     rowContainer.className = "bg-white text-xs";
 
-                    // Style badge states
                     const isClear = screen.suborderStatus === "Clear";
                     const isReview = screen.suborderStatus === "Review Needed";
                     const isCanceled = screen.suborderStatus === "Canceled";
@@ -1288,10 +1292,27 @@
 
                     let suborderTextStyle = "text-blue-600";
                     if (isClear) suborderTextStyle = "text-emerald-500 font-bold";
-                    else if (isReview) suborderTextStyle = "text-yellow-600 font-extrabold"; // Highlighted Yellow Review Status
+                    else if (isReview) suborderTextStyle = "text-yellow-600 font-extrabold";
                     else if (isCanceled) suborderTextStyle = "text-red-500 font-bold";
                     else if (isUnreported) suborderTextStyle = "text-orange-500 font-bold";
                     else if (isVerifyError) suborderTextStyle = "text-purple-500 font-bold";
+
+                    // Reverse chronological sequence
+                    const reversedHistory = [...screen.history].reverse();
+
+                    // Dot color matching overall status badge
+                    let topDotColorClass = 'bg-blue-600 ring-blue-100';
+                    if (screen.suborderStatus === 'Review Needed') {
+                        topDotColorClass = 'bg-yellow-500 ring-yellow-100';
+                    } else if (screen.suborderStatus === 'Clear') {
+                        topDotColorClass = 'bg-emerald-500 ring-emerald-100';
+                    } else if (screen.suborderStatus === 'Canceled') {
+                        topDotColorClass = 'bg-red-500 ring-red-100';
+                    } else if (screen.suborderStatus === 'Unable to Verify') {
+                        topDotColorClass = 'bg-purple-500 ring-purple-100';
+                    } else if (screen.suborderStatus === 'Unreported') {
+                        topDotColorClass = 'bg-orange-500 ring-orange-100';
+                    }
 
                     rowContainer.innerHTML = `
                         <button onclick="toggleDrawerInlineTracker('${rowId}')" class="w-full grid grid-cols-12 p-3 items-center hover:bg-slate-50/50 focus:outline-none text-left transition-colors font-medium">
@@ -1315,23 +1336,25 @@
                                 <i class="fa-solid fa-clock-rotate-left"></i> Check Progress Path Tracking
                             </h5>
                             
-                            <!-- Milestone path with positive dot layout and interior vertical line alignment -->
-                            <div class="max-h-[160px] overflow-y-auto pr-1 relative space-y-4">
-                                <div class="absolute left-[16px] top-2 bottom-2 w-[2px] bg-blue-500 z-0"></div>
-                                ${screen.history.map((step, stepIdx) => {
-                                    const isCurrent = stepIdx === screen.history.length - 1;
-                                    const dotBg = isCurrent ? 'bg-orange-500 ring-orange-100' : 'bg-blue-600 ring-blue-100';
-                                    const txtStyle = isCurrent ? 'font-bold text-slate-900' : 'font-medium text-slate-500';
-                                    return `
-                                        <div class="relative text-[11px] pl-10">
-                                            <span class="absolute left-[11px] top-1.5 w-3 h-3 rounded-full ${dotBg} border border-white ring-2 inline-block flex-shrink-0 aspect-square z-10"></span>
-                                            <div class="flex justify-between items-center bg-white p-2 rounded shadow-sm border border-slate-100 flex-wrap gap-1.5">
-                                                <span class="${txtStyle}">${step.status}</span>
-                                                <span class="text-slate-400 font-mono text-[9px]">${step.date}</span>
+                            <!-- Milestone path with positive dot layout and unified continuous line vertical coordinate -->
+                            <div class="relative py-2 max-h-[160px] overflow-y-auto pr-1">
+                                <div class="absolute left-[16px] top-4 bottom-4 w-[2px] bg-blue-500 z-0"></div>
+                                <div class="space-y-4">
+                                    ${reversedHistory.map((step, stepIdx) => {
+                                        const isCurrent = stepIdx === 0;
+                                        const dotBg = isCurrent ? topDotColorClass : 'bg-blue-600 ring-blue-100';
+                                        const txtStyle = isCurrent ? 'font-bold text-slate-900' : 'font-medium text-slate-500';
+                                        return `
+                                            <div class="relative text-[11px] pl-10">
+                                                <span class="absolute left-[11px] top-1.5 w-3 h-3 rounded-full ${dotBg} border border-white ring-2 inline-block flex-shrink-0 aspect-square z-10"></span>
+                                                <div class="flex justify-between items-center bg-white p-2 rounded shadow-sm border border-slate-100 flex-wrap gap-1.5">
+                                                    <span class="${txtStyle}">${step.status}</span>
+                                                    <span class="text-slate-400 font-mono text-[9px]">${step.date}</span>
+                                                </div>
                                             </div>
-                                        </div>
-                                    `;
-                                }).join('')}
+                                        `;
+                                    }).join('')}
+                                </div>
                             </div>
                         </div>
                     `;
@@ -1428,7 +1451,6 @@
             const statusField = document.getElementById('form-order-status');
 
             if (nameField && nameField.value.trim() !== "") {
-                // Add demo candidate logically
                 const newCandObj = {
                     name: nameField.value.trim(),
                     orderId: Math.random().toString(36).substring(2, 7).toUpperCase(),
@@ -1456,7 +1478,6 @@
                 candidateDb.unshift(newCandObj);
                 generateCandidateTable(candidateDb);
             } else if (statusField) {
-                // Modify existing candidate state
                 currentSelectedCandidate.status = statusField.value;
                 generateCandidateTable(candidateDb);
                 goToCandidateDetails(currentSelectedCandidate.name);
@@ -1466,7 +1487,6 @@
         }
 
         function openChatSupport() {
-            // Simulated premium chat activation without relying on blocking alert actions
             const notification = document.createElement("div");
             notification.className = "fixed bottom-5 right-5 bg-slate-900 text-white rounded-xl shadow-2xl p-5 border border-slate-700 flex flex-col gap-3 z-50 animate-bounce max-w-xs text-xs";
             notification.innerHTML = `
