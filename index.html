@@ -191,13 +191,14 @@
                     </div>
                 </div>
 
+                <!-- Dynamic Tab Indicators calculated from DB dynamically -->
                 <div class="flex items-center gap-1 overflow-x-auto border-b border-slate-200 pb-0.5">
-                    <button onclick="filterStatusTab('all')" id="tab-all" class="px-4 py-2.5 text-xs font-bold border-b-2 border-blue-600 text-blue-600 whitespace-nowrap tab-btn">All Candidates</button>
-                    <button onclick="filterStatusTab('Pending Candidate')" id="tab-pending" class="px-4 py-2.5 text-xs font-semibold text-slate-500 hover:text-slate-800 border-b-2 border-transparent hover:border-slate-300 whitespace-nowrap tab-btn">Pending Candidate (8)</button>
-                    <button onclick="filterStatusTab('In Progress')" id="tab-progress" class="px-4 py-2.5 text-xs font-semibold text-slate-500 hover:text-slate-800 border-b-2 border-transparent hover:border-slate-300 whitespace-nowrap tab-btn">Check In Progress (29)</button>
-                    <button onclick="filterStatusTab('Review Needed')" id="tab-review" class="px-4 py-2.5 text-xs font-semibold text-amber-500 hover:text-amber-700 border-b-2 border-transparent hover:border-amber-200 whitespace-nowrap tab-btn">Review Needed (2)</button>
-                    <button onclick="filterStatusTab('Ready For Onboarding')" id="tab-onboarding" class="px-4 py-2.5 text-xs font-semibold text-emerald-600 hover:text-emerald-800 border-b-2 border-transparent hover:border-emerald-200 whitespace-nowrap tab-btn">Ready For Onboarding (1)</button>
-                    <button onclick="filterStatusTab('COI Expired')" id="tab-alerts" class="px-4 py-2.5 text-xs font-semibold text-red-500 hover:text-red-700 border-b-2 border-transparent hover:border-red-200 whitespace-nowrap tab-btn">Alerts (20)</button>
+                    <button onclick="filterStatusTab('all')" id="tab-all" class="px-4 py-2.5 text-xs font-bold border-b-2 border-blue-600 text-blue-600 whitespace-nowrap tab-btn">All Candidates (<span id="count-all">0</span>)</button>
+                    <button onclick="filterStatusTab('Pending Candidate')" id="tab-pending" class="px-4 py-2.5 text-xs font-semibold text-slate-500 hover:text-slate-800 border-b-2 border-transparent hover:border-slate-300 whitespace-nowrap tab-btn">Pending Candidate (<span id="count-pending">0</span>)</button>
+                    <button onclick="filterStatusTab('In Progress')" id="tab-progress" class="px-4 py-2.5 text-xs font-semibold text-slate-500 hover:text-slate-800 border-b-2 border-transparent hover:border-slate-300 whitespace-nowrap tab-btn">Check In Progress (<span id="count-progress">0</span>)</button>
+                    <button onclick="filterStatusTab('Review Needed')" id="tab-review" class="px-4 py-2.5 text-xs font-semibold text-slate-500 hover:text-slate-800 border-b-2 border-transparent hover:border-slate-300 whitespace-nowrap tab-btn">Review Needed (<span id="count-review">0</span>)</button>
+                    <button onclick="filterStatusTab('Ready For Onboarding')" id="tab-onboarding" class="px-4 py-2.5 text-xs font-semibold text-slate-500 hover:text-slate-800 border-b-2 border-transparent hover:border-slate-300 whitespace-nowrap tab-btn">Ready For Onboarding (<span id="count-onboarding">0</span>)</button>
+                    <button onclick="filterStatusTab('COI Expired')" id="tab-alerts" class="px-4 py-2.5 text-xs font-semibold text-slate-500 hover:text-slate-800 border-b-2 border-transparent hover:border-slate-300 whitespace-nowrap tab-btn">Alerts (<span id="count-alerts">0</span>)</button>
                 </div>
 
                 <!-- Main Data Table Grid mapping image_f42881.png -->
@@ -259,33 +260,36 @@
                             <span>Live Case Tracking Activity</span>
                             <i class="fa-solid fa-list-check text-slate-400"></i>
                         </h3>
-                        <!-- Scrolling support inside log updates -->
-                        <div class="max-h-[500px] overflow-y-auto pr-2 relative pl-6 border-l-2 border-slate-200 space-y-6 text-[11px]">
-                            <div class="relative">
-                                <span class="absolute -left-[33px] top-1 w-4 h-4 rounded-full bg-white border-2 border-blue-600 ring-4 ring-blue-100 flex items-center justify-center"></span>
+                        <!-- Scrolling support inside log updates with secure padding and inner absolute line alignment -->
+                        <div class="max-h-[500px] overflow-y-auto pr-2 relative space-y-6 text-[11px]">
+                            <!-- Centered line coordinate -->
+                            <div class="absolute left-[16px] top-2 bottom-2 w-[2px] bg-slate-200 z-0"></div>
+
+                            <div class="relative pl-10">
+                                <span class="absolute left-[9px] top-1 w-4 h-4 rounded-full bg-white border-2 border-blue-600 ring-4 ring-blue-100 flex items-center justify-center flex-shrink-0 aspect-square z-10"></span>
                                 <div class="flex justify-between items-start">
                                     <span class="font-bold text-slate-800">Note From Client User</span>
                                     <span class="text-[9px] text-slate-400 font-mono">04/15/2026</span>
                                 </div>
                                 <p class="text-slate-500 text-[10px] mt-1 bg-slate-50 p-2 rounded border border-slate-100 italic">"send from client dash"</p>
                             </div>
-                            <div class="relative">
-                                <span class="absolute -left-[33px] top-1 w-4 h-4 rounded-full bg-white border-2 border-blue-600 ring-4 ring-blue-100"></span>
+                            <div class="relative pl-10">
+                                <span class="absolute left-[9px] top-1 w-4 h-4 rounded-full bg-white border-2 border-blue-600 ring-4 ring-blue-100 flex-shrink-0 aspect-square z-10"></span>
                                 <div class="flex justify-between items-start">
                                     <span class="font-bold text-slate-800">Note from Vetty (Researcher)</span>
                                     <span class="text-[9px] text-slate-400 font-mono">04/15/2026</span>
                                 </div>
                                 <p class="text-slate-500 text-[10px] mt-1 bg-slate-50 p-2 rounded border border-slate-100 italic">"test kromfox notes"</p>
                             </div>
-                            <div class="relative">
-                                <span class="absolute -left-[31px] top-1 w-3 h-3 rounded-full bg-slate-400 border border-white"></span>
+                            <div class="relative pl-10">
+                                <span class="absolute left-[12px] top-1.5 w-2.5 h-2.5 rounded-full bg-slate-400 border border-white flex-shrink-0 aspect-square z-10"></span>
                                 <div class="flex justify-between items-start">
                                     <span class="text-slate-600 font-semibold">Assigned order to Mrunali, Kajal and Nikhil.</span>
                                     <span class="text-[9px] text-slate-400 font-mono">04/15/2026</span>
                                 </div>
                             </div>
-                            <div class="relative">
-                                <span class="absolute -left-[31px] top-1 w-3 h-3 rounded-full bg-slate-400 border border-white"></span>
+                            <div class="relative pl-10">
+                                <span class="absolute left-[12px] top-1.5 w-2.5 h-2.5 rounded-full bg-slate-400 border border-white flex-shrink-0 aspect-square z-10"></span>
                                 <div class="flex justify-between items-start">
                                     <span class="text-slate-600 font-semibold">Donor Pass Created for 10 Panel Drug + Nicotine</span>
                                     <span class="text-[9px] text-slate-400 font-mono">04/15/2026</span>
@@ -409,7 +413,6 @@
     </div>
 
     <script>
-        // High fidelity database matching image_f42881.png & image_f3c3a3.png checks and mapping image_f49941.png statuses.
         const candidateDb = [
             {
                 name: "Autopaatest Done",
@@ -515,71 +518,6 @@
                             { status: "Pending MRO Review", date: "02/23/2026 10:00 AM" },
                             { status: "Review Needed", date: "02/23/2026 02:00 PM" }
                         ]
-                    },
-                    {
-                        category: "TITERS",
-                        name: "MMR Titer",
-                        orderStatus: "InProgress",
-                        suborderStatus: "Unable to Verify",
-                        history: [
-                            { status: "Order Created", date: "02/13/2026 09:40 AM" },
-                            { status: "Donor Pass Creation Pending", date: "02/13/2026 12:15 PM" },
-                            { status: "Donor Pass Created", date: "02/13/2026 02:45 PM" },
-                            { status: "Scheduled", date: "02/16/2026 10:15 AM" },
-                            { status: "Collection/Testing Pending", date: "02/18/2026 01:00 PM" },
-                            { status: "Unable to Verify", date: "02/23/2026 05:00 PM" }
-                        ]
-                    },
-                    {
-                        category: "TITERS",
-                        name: "TB Blood Test",
-                        orderStatus: "Clear",
-                        suborderStatus: "Clear",
-                        history: [
-                            { status: "Order Created", date: "02/13/2026 09:45 AM" },
-                            { status: "Donor Pass Creation Pending", date: "02/13/2026 12:30 PM" },
-                            { status: "Donor Pass Created", date: "02/13/2026 03:00 PM" },
-                            { status: "Scheduled", date: "02/17/2026 11:00 AM" },
-                            { status: "Collection/Testing Pending", date: "02/19/2026 04:00 PM" },
-                            { status: "Collection Completed", date: "02/21/2026 02:30 PM" },
-                            { status: "Received at Lab", date: "02/22/2026 10:00 AM" },
-                            { status: "Clear", date: "02/23/2026 11:15 AM" }
-                        ]
-                    },
-                    {
-                        category: "VACCINES",
-                        name: "Flu Vaccine",
-                        orderStatus: "Clear",
-                        suborderStatus: "Clear",
-                        history: [
-                            { status: "Order Created", date: "02/13/2026 09:50 AM" },
-                            { status: "Scheduled", date: "02/16/2026 03:00 PM" },
-                            { status: "Collection Completed", date: "02/19/2026 11:00 AM" },
-                            { status: "Clear", date: "02/23/2026 10:00 AM" }
-                        ]
-                    },
-                    {
-                        category: "VACCINES",
-                        name: "MMR Vaccine",
-                        orderStatus: "InProgress",
-                        suborderStatus: "Canceled",
-                        history: [
-                            { status: "Order Created", date: "02/13/2026 09:55 AM" },
-                            { status: "Donor Pass Creation Pending", date: "02/13/2026 12:45 PM" },
-                            { status: "Canceled", date: "02/23/2026 01:20 PM" }
-                        ]
-                    },
-                    {
-                        category: "VACCINES",
-                        name: "Varicella Vaccine",
-                        orderStatus: "InProgress",
-                        suborderStatus: "Review Needed",
-                        history: [
-                            { status: "Order Created", date: "02/13/2026 10:00 AM" },
-                            { status: "Scheduled", date: "02/15/2026 11:00 AM" },
-                            { status: "Collection Completed", date: "02/21/2026 02:00 PM" },
-                            { status: "Review Needed", date: "02/23/2026 04:15 PM" }
-                        ]
                     }
                 ]
             },
@@ -605,23 +543,8 @@
                             { status: "Donor Pass Creation Pending", date: "02/12/2026 11:30 AM" },
                             { status: "Donor Pass Created", date: "02/12/2026 03:00 PM" },
                             { status: "Scheduled", date: "02/14/2026 09:00 AM" },
-                            { status: "Collection/Testing Pending", date: "02/15/2026 01:00 PM" },
                             { status: "Collection Completed", date: "02/18/2026 04:30 PM" },
-                            { status: "Received at Lab", date: "02/20/2026 11:00 AM" },
-                            { status: "Pending MRO Review", date: "02/22/2026 02:00 PM" },
                             { status: "Review Needed", date: "02/23/2026 03:45 PM" }
-                        ]
-                    },
-                    {
-                        category: "VACCINES",
-                        name: "Varicella Vaccine",
-                        orderStatus: "InProgress",
-                        suborderStatus: "Review Needed",
-                        history: [
-                            { status: "Order Created", date: "02/12/2026 10:15 AM" },
-                            { status: "Scheduled", date: "02/15/2026 11:00 AM" },
-                            { status: "Collection Completed", date: "02/21/2026 02:00 PM" },
-                            { status: "Review Needed", date: "02/23/2026 04:15 PM" }
                         ]
                     }
                 ]
@@ -645,8 +568,6 @@
                         suborderStatus: "Review Needed",
                         history: [
                             { status: "Order Created", date: "02/12/2026 01:00 PM" },
-                            { status: "Donor Pass Creation Pending", date: "02/12/2026 03:00 PM" },
-                            { status: "Scheduled", date: "02/15/2026 10:00 AM" },
                             { status: "Review Needed", date: "02/23/2026 02:00 PM" }
                         ]
                     }
@@ -708,7 +629,7 @@
                 expectedEndDate: "—",
                 createdBy: "mrunali Stage...",
                 package: "County crim, state crl...",
-                status: "Reviewed",
+                status: "Ready For Onboarding",
                 stagedCheck: "—",
                 alerts: "—",
                 screenings: [
@@ -719,15 +640,221 @@
                         suborderStatus: "Clear",
                         history: [
                             { status: "Order Created", date: "02/13/2026 08:00 AM" },
-                            { status: "Donor Pass Creation Pending", date: "02/13/2026 09:00 AM" },
-                            { status: "Donor Pass Created", date: "02/13/2026 10:30 AM" },
-                            { status: "Scheduled", date: "02/13/2026 11:30 AM" },
-                            { status: "Collection Completed", date: "02/13/2026 03:00 PM" },
-                            { status: "Received at Lab", date: "02/13/2026 05:00 PM" },
                             { status: "Clear", date: "02/13/2026 06:30 PM" }
                         ]
                     }
                 ]
+            },
+            {
+                name: "Samson Inite",
+                orderId: "7KAIP",
+                lastRun: "04/15/2026",
+                dateAdded: "01/07/2026",
+                expectedEndDate: "—",
+                createdBy: "mrunali Stage...",
+                package: "SSN+MVR +C C +Co...",
+                status: "Review Needed",
+                stagedCheck: "—",
+                alerts: "—",
+                screenings: [
+                    {
+                        category: "DRUGS",
+                        name: "7 Panel Drug",
+                        orderStatus: "InProgress",
+                        suborderStatus: "Review Needed",
+                        history: [
+                            { status: "Order Created", date: "01/07/2026 09:00 AM" },
+                            { status: "Review Needed", date: "04/15/2026 11:00 AM" }
+                        ]
+                    }
+                ]
+            },
+            {
+                name: "Autopaano Test",
+                orderId: "OPYRQ",
+                lastRun: "02/13/2026",
+                dateAdded: "02/13/2026",
+                expectedEndDate: "—",
+                createdBy: "mrunali Stage...",
+                package: "Auto PAA with Color...",
+                status: "Review Needed",
+                stagedCheck: "—",
+                alerts: "—",
+                screenings: [
+                    {
+                        category: "VACCINES",
+                        name: "Varicella Vaccine",
+                        orderStatus: "InProgress",
+                        suborderStatus: "Review Needed",
+                        history: [
+                            { status: "Order Created", date: "02/13/2026 10:00 AM" },
+                            { status: "Review Needed", date: "02/13/2026 04:15 PM" }
+                        ]
+                    }
+                ]
+            },
+            {
+                name: "Paaemall Test",
+                orderId: "YUGH4",
+                lastRun: "02/13/2026",
+                dateAdded: "02/13/2026",
+                expectedEndDate: "—",
+                createdBy: "mrunali Stage...",
+                package: "preadvser flow pack...",
+                status: "COI Expired",
+                stagedCheck: "—",
+                alerts: "Dispute was not changed",
+                screenings: [
+                    {
+                        category: "DRUGS",
+                        name: "10 Panel Drug",
+                        orderStatus: "InProgress",
+                        suborderStatus: "Canceled",
+                        history: [
+                            { status: "Order Created", date: "02/13/2026 09:00 AM" },
+                            { status: "Canceled", date: "02/13/2026 02:00 PM" }
+                        ]
+                    }
+                ]
+            },
+            {
+                name: "Fill On Behaf Gmap",
+                orderId: "HRXMK",
+                lastRun: "04/15/2026",
+                dateAdded: "01/07/2026",
+                expectedEndDate: "—",
+                createdBy: "testing Covid",
+                package: "9 panel Instant drug",
+                status: "In Progress",
+                stagedCheck: "—",
+                alerts: "—",
+                screenings: [
+                    {
+                        category: "DRUGS",
+                        name: "5 Panel Drug",
+                        orderStatus: "InProgress",
+                        suborderStatus: "Review Needed",
+                        history: [
+                            { status: "Order Created", date: "01/07/2026 10:00 AM" },
+                            { status: "Review Needed", date: "04/15/2026 03:00 PM" }
+                        ]
+                    }
+                ]
+            },
+            /* 8 Pending Candidate entries to yield exact candidate status layout matches */
+            {
+                name: "Stacy Peter",
+                orderId: "QJ4WA",
+                lastRun: "04/15/2026",
+                dateAdded: "01/07/2026",
+                expectedEndDate: "—",
+                createdBy: "testing Covid",
+                package: "9 panel Instant drug",
+                status: "Pending Candidate",
+                stagedCheck: "—",
+                alerts: "Donor Pass Created",
+                screenings: [
+                    {
+                        category: "DRUGS",
+                        name: "5 Panel Drug",
+                        orderStatus: "InProgress",
+                        suborderStatus: "Review Needed",
+                        history: [
+                            { status: "Order Created", date: "01/07/2026 10:00 AM" }
+                        ]
+                    }
+                ]
+            },
+            {
+                name: "Nhhhh Tests",
+                orderId: "GUIEL",
+                lastRun: "04/15/2026",
+                dateAdded: "01/07/2026",
+                expectedEndDate: "—",
+                createdBy: "testing Covid",
+                package: "county criminal in p...",
+                status: "Pending Candidate",
+                stagedCheck: "—",
+                alerts: "—",
+                screenings: []
+            },
+            {
+                name: "Hollis Davis",
+                orderId: "ZJK4K",
+                lastRun: "04/15/2026",
+                dateAdded: "01/07/2026",
+                expectedEndDate: "11/12/2048",
+                createdBy: "testing Covid",
+                package: "Empty package",
+                status: "Pending Candidate",
+                stagedCheck: "—",
+                alerts: "—",
+                screenings: []
+            },
+            {
+                name: "Stanley House",
+                orderId: "6A6CG",
+                lastRun: "04/15/2026",
+                dateAdded: "01/07/2026",
+                expectedEndDate: "11/12/2048",
+                createdBy: "testing Covid",
+                package: "SSN only",
+                status: "Pending Candidate",
+                stagedCheck: "—",
+                alerts: "—",
+                screenings: []
+            },
+            {
+                name: "Tina Jain",
+                orderId: "5BQTG",
+                lastRun: "04/15/2026",
+                dateAdded: "01/07/2026",
+                expectedEndDate: "—",
+                createdBy: "testing Covid",
+                package: "county criminal in p...",
+                status: "Pending Candidate",
+                stagedCheck: "—",
+                alerts: "—",
+                screenings: []
+            },
+            {
+                name: "Test Prepod",
+                orderId: "HFG72",
+                lastRun: "01/07/2026",
+                dateAdded: "01/07/2026",
+                expectedEndDate: "—",
+                createdBy: "testing Covid",
+                package: "Abuse Registry - Wis...",
+                status: "Pending Candidate",
+                stagedCheck: "—",
+                alerts: "—",
+                screenings: []
+            },
+            {
+                name: "Ttgg Hh",
+                orderId: "LUJCK",
+                lastRun: "01/06/2026",
+                dateAdded: "01/06/2026",
+                expectedEndDate: "—",
+                createdBy: "testing Covid",
+                package: "county criminal in p...",
+                status: "Pending Candidate",
+                stagedCheck: "—",
+                alerts: "—",
+                screenings: []
+            },
+            {
+                name: "Dfssf Sfs",
+                orderId: "S6HM6",
+                lastRun: "01/05/2026",
+                dateAdded: "01/05/2026",
+                expectedEndDate: "—",
+                createdBy: "testing Covid",
+                package: "SSN only",
+                status: "Pending Candidate",
+                stagedCheck: "—",
+                alerts: "—",
+                screenings: []
             }
         ];
 
@@ -735,6 +862,15 @@
         let currentSelectedCandidate = candidateDb[0];
         let homeActiveTabStatus = "all";
         let activeSidebarId = "nav-candidates";
+
+        function updateTabCounters() {
+            document.getElementById("count-all").innerText = candidateDb.length;
+            document.getElementById("count-pending").innerText = candidateDb.filter(c => c.status === "Pending Candidate").length;
+            document.getElementById("count-progress").innerText = candidateDb.filter(c => c.status === "In Progress").length;
+            document.getElementById("count-review").innerText = candidateDb.filter(c => c.status === "Review Needed").length;
+            document.getElementById("count-onboarding").innerText = candidateDb.filter(c => c.status === "Ready For Onboarding").length;
+            document.getElementById("count-alerts").innerText = candidateDb.filter(c => c.status === "COI Expired" || c.status === "Adverse Action").length;
+        }
 
         function showScreen(screenId, sidebarId) {
             // Manage Sidebar Highlighting
@@ -808,6 +944,8 @@
                 } else if (cand.status === "Review Needed") {
                     // Exact yellow color mapping requested
                     badgeStyle = "bg-yellow-500 text-slate-950 font-extrabold";
+                } else if (cand.status === "Pending Candidate") {
+                    badgeStyle = "bg-amber-100 text-amber-800 border border-amber-200 font-bold";
                 }
 
                 tr.innerHTML = `
@@ -836,6 +974,7 @@
                 `;
                 tbody.appendChild(tr);
             });
+            updateTabCounters();
         }
 
         function applyHomeFilters() {
@@ -845,7 +984,7 @@
 
             let filteredList = candidateDb.filter(cand => {
                 if (homeActiveTabStatus !== "all") {
-                    if (homeActiveTabStatus === "COI Expired" && cand.status !== "COI Expired") return false;
+                    if (homeActiveTabStatus === "COI Expired" && cand.status !== "COI Expired" && cand.status !== "Adverse Action") return false;
                     if (homeActiveTabStatus === "In Progress" && cand.status !== "In Progress") return false;
                     if (homeActiveTabStatus === "Review Needed" && cand.status !== "Review Needed") return false;
                     if (homeActiveTabStatus === "Ready For Onboarding" && cand.status !== "Ready For Onboarding") return false;
@@ -969,16 +1108,17 @@
                             <div class="mt-4 bg-white p-4 rounded-lg border border-slate-200 shadow-inner">
                                 <h4 class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-4 border-b border-slate-100 pb-2">Sequential History Status Tracking</h4>
                                 
-                                <!-- Scrollable milestones list -->
-                                <div class="max-h-[220px] overflow-y-auto pr-2 relative pl-6 border-l-2 border-blue-500 space-y-4">
+                                <!-- Scrollable milestones list with positive dot positions and inner line path -->
+                                <div class="max-h-[220px] overflow-y-auto pr-2 relative space-y-4">
+                                    <div class="absolute left-[16px] top-2 bottom-2 w-[2px] bg-blue-500 z-0"></div>
                                     ${screen.history.map((step, sIdx) => {
                                         const isLast = sIdx === screen.history.length - 1;
                                         // Color mapping matching image_f49941.png
                                         const dotColor = isLast ? (isReviewNeeded ? 'bg-yellow-500 ring-yellow-100' : 'bg-orange-500 ring-orange-100') : 'bg-blue-600 ring-blue-100';
                                         const fontStyle = isLast ? 'font-bold text-slate-900' : 'font-semibold text-slate-600';
                                         return `
-                                            <div class="relative text-[11px]">
-                                                <span class="absolute -left-[31px] top-1 w-3.5 h-3.5 rounded-full ${dotColor} border-2 border-white ring-4 shadow-sm"></span>
+                                            <div class="relative text-[11px] pl-10">
+                                                <span class="absolute left-[10px] top-1.5 w-3.5 h-3.5 rounded-full ${dotColor} border-2 border-white ring-4 shadow-sm inline-block flex-shrink-0 aspect-square z-10"></span>
                                                 <div class="flex justify-between items-center bg-slate-50/80 p-2.5 rounded border border-slate-100 flex-wrap gap-2">
                                                     <span class="${fontStyle}">${step.status}</span>
                                                     <span class="text-slate-500 font-mono text-[10px] font-medium">${step.date}</span>
@@ -1175,15 +1315,16 @@
                                 <i class="fa-solid fa-clock-rotate-left"></i> Check Progress Path Tracking
                             </h5>
                             
-                            <!-- Milestone path -->
-                            <div class="max-h-[160px] overflow-y-auto pr-1 relative pl-6 border-l-2 border-blue-500 space-y-4">
+                            <!-- Milestone path with positive dot layout and interior vertical line alignment -->
+                            <div class="max-h-[160px] overflow-y-auto pr-1 relative space-y-4">
+                                <div class="absolute left-[16px] top-2 bottom-2 w-[2px] bg-blue-500 z-0"></div>
                                 ${screen.history.map((step, stepIdx) => {
                                     const isCurrent = stepIdx === screen.history.length - 1;
                                     const dotBg = isCurrent ? 'bg-orange-500 ring-orange-100' : 'bg-blue-600 ring-blue-100';
                                     const txtStyle = isCurrent ? 'font-bold text-slate-900' : 'font-medium text-slate-500';
                                     return `
-                                        <div class="relative text-[11px]">
-                                            <span class="absolute -left-[31px] top-1 w-3 h-3 rounded-full ${dotBg} border border-white ring-2"></span>
+                                        <div class="relative text-[11px] pl-10">
+                                            <span class="absolute left-[11px] top-1.5 w-3 h-3 rounded-full ${dotBg} border border-white ring-2 inline-block flex-shrink-0 aspect-square z-10"></span>
                                             <div class="flex justify-between items-center bg-white p-2 rounded shadow-sm border border-slate-100 flex-wrap gap-1.5">
                                                 <span class="${txtStyle}">${step.status}</span>
                                                 <span class="text-slate-400 font-mono text-[9px]">${step.date}</span>
@@ -1345,6 +1486,7 @@
 
         window.onload = function () {
             generateCandidateTable(candidateDb);
+            updateTabCounters();
         };
     </script>
 </body>
