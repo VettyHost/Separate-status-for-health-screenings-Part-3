@@ -123,6 +123,7 @@
 </head>
 <body class="bg-[#f3f4f6] text-[#1e293b] min-h-screen flex overflow-hidden">
 
+    <!-- Sidebar Panel matching image_f3ca89.png and image_fb8e62.png -->
     <aside class="w-[260px] bg-[#222235] text-slate-300 flex flex-col flex-shrink-0 z-20 shadow-xl border-r border-slate-800">
         <!-- Brand Header -->
         <div class="h-16 flex items-center justify-between px-6 border-b border-slate-800">
@@ -228,8 +229,8 @@
         <!-- Scrollable Page Frame - Handle whole-page scrolls -->
         <div class="flex-1 overflow-y-auto relative bg-[#f8fafc]">
 
-            <!-- HOME DIRECTORY SCREEN -->
-            <section id="home-screen" class="p-8 space-y-6">
+            <!-- HOME DIRECTORY SCREEN (Restricted to a premium max width of 1200px to prevent layout bloat) -->
+            <section id="home-screen" class="p-6 space-y-6 max-w-[1200px] mx-auto w-full">
                 
                 <!-- Filters Panel Configured exactly like image_f42881.png -->
                 <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-4">
@@ -317,29 +318,30 @@
                 </div>
             </section>
 
-            <!-- CANDIDATE PROFILE SCREEN (With visible overall panel vertical scrollbar matching image_3ce564.png) -->
-            <section id="details-screen" class="hidden p-8 space-y-6">
+            <!-- CANDIDATE PROFILE SCREEN (Restricted to a premium max width of 1200px to match image_eb2586.png perfectly) -->
+            <section id="details-screen" class="hidden p-6 space-y-6 max-w-[1200px] mx-auto w-full">
                 <!-- Header Back Action -->
-                <div class="flex items-center justify-between border-b border-slate-200 pb-5 flex-wrap gap-4">
+                <div class="flex items-center justify-between border-b border-slate-200 pb-4 flex-wrap gap-4">
                     <div class="flex items-center gap-4">
                         <button onclick="showScreen('home-screen')" class="flex items-center gap-2 text-slate-500 hover:text-slate-800 text-xs font-bold bg-white px-3.5 py-2 border border-slate-200 rounded-lg shadow-sm transition-all active:scale-95">
                             <i class="fa-solid fa-arrow-left"></i> Back to Directory
                         </button>
                         <div>
-                            <h2 id="cand-detail-name" class="text-xl font-bold text-slate-800">Candidate Profile</h2>
+                            <h2 id="cand-detail-name" class="text-lg font-bold text-slate-800">Candidate Profile</h2>
                             <p class="text-[11px] text-slate-500 font-semibold mt-0.5">Order ID: <span id="cand-detail-id" class="font-mono text-slate-700">-</span> | Package: <span id="cand-detail-pkg" class="text-slate-700">-</span></p>
                         </div>
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                <!-- Multi-column grid optimized for a compact and sharp dashboard look (gap-6 instead of gap-8) -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
                     
-                    <!-- Left Column: Actions and Activity Feed -->
+                    <!-- Left Column: Actions and Activity Feed (Compact and narrow) -->
                     <div class="lg:col-span-4 space-y-6">
                         <!-- Actions Card -->
-                        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-4">
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-4">
                             <div class="flex justify-between items-center pb-2 border-b border-slate-100">
-                                <h3 class="text-sm font-bold text-slate-700">Actions</h3>
+                                <h3 class="text-xs font-bold text-slate-700 uppercase tracking-wider">Actions</h3>
                                 <span class="text-[10px] text-slate-400 font-semibold cursor-pointer hover:underline">More Actions...</span>
                             </div>
                             <div class="border border-emerald-200 bg-emerald-50/50 p-4 rounded-xl space-y-2">
@@ -349,10 +351,10 @@
                             </div>
                         </div>
 
-                        <!-- Activity Feed timeline exactly as in image_4c6cbe.png -->
-                        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-4">
+                        <!-- Activity Feed timeline exactly as in image_eb2586.png -->
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-4">
                             <div class="flex justify-between items-center pb-2 border-b border-slate-100">
-                                <h3 class="text-sm font-bold text-slate-700">Activity Feed</h3>
+                                <h3 class="text-xs font-bold text-slate-700 uppercase tracking-wider">Activity Feed</h3>
                                 <span class="text-[10px] text-blue-500 font-bold hover:underline cursor-pointer"><i class="fa-solid fa-cloud-arrow-down mr-1"></i> Export Activity Feed</span>
                             </div>
                             <div class="pr-2 relative">
@@ -365,9 +367,9 @@
 
                     <!-- Right Column: Screening Checks with Visible Highlighted Scrollbar matching image_3ce564.png -->
                     <div class="lg:col-span-8 space-y-6">
-                        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm relative info-box-custom">
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm relative info-box-custom">
                             
-                            <!-- Header block styled as image_4c6cbe.png -->
+                            <!-- Header block styled as image_eb2586.png -->
                             <div class="flex items-start justify-between pb-4 border-b border-slate-100 mb-6">
                                 <div>
                                     <h3 class="text-base font-bold text-[#1b1b2a]">Health Screening Checks</h3>
@@ -381,7 +383,7 @@
                                             <span class="dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform shadow-sm"></span>
                                         </button>
                                     </div>
-                                    <!-- Action links aligned underneath on the right as image_4c6cbe.png -->
+                                    <!-- Action links aligned underneath on the right as image_eb2586.png -->
                                     <div class="flex flex-col items-end gap-1.5 mt-1">
                                         <button onclick="openFormModal('modify-order')" class="text-blue-600 hover:underline font-bold text-xs font-sans">Modify Order</button>
                                         <button onclick="openFormModal('change-location')" class="text-blue-600 hover:underline font-bold text-xs font-sans">Change Location for All</button>
@@ -1800,3 +1802,4 @@
     </script>
 </body>
 </html>
+```
