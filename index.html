@@ -54,9 +54,30 @@
             border-radius: 9999px;
         }
 
-        /* Overall Health Screening Checks Container - Expanded naturally for Full-Page Scrolling */
+        /* Overall Health Screening Checks Container - FORCED PROMINENT SCROLLER as per image_3ce564.png */
         .overall-screening-scroll {
+            max-height: 540px;
+            overflow-y: scroll !important; /* Force scrollbar visibility by default */
             padding-right: 8px;
+        }
+        
+        /* Custom styling specifically targeting the Forced screening checks scrollbar for maximum prominence */
+        .overall-screening-scroll::-webkit-scrollbar {
+            width: 10px !important;
+            display: block !important;
+        }
+        .overall-screening-scroll::-webkit-scrollbar-track {
+            background: #f8fafc !important;
+            border-radius: 9999px !important;
+            border: 1px solid #e2e8f0 !important;
+        }
+        .overall-screening-scroll::-webkit-scrollbar-thumb {
+            background: #475569 !important; /* Bold Slate-600 color for maximum visibility matching image_3ce564.png */
+            border-radius: 9999px !important;
+            border: 2px solid #f8fafc !important;
+        }
+        .overall-screening-scroll::-webkit-scrollbar-thumb:hover {
+            background: #1e293b !important; /* Dark Slate-800 on hover */
         }
     </style>
 </head>
@@ -256,7 +277,7 @@
                 </div>
             </section>
 
-            <!-- CANDIDATE PROFILE SCREEN (Full Page Scrolling Enabled, pb-32 applied to prevent layout traps) -->
+            <!-- CANDIDATE PROFILE SCREEN (With visible overall panel vertical scrollbar matching image_3ce564.png) -->
             <section id="details-screen" class="hidden p-8 space-y-6">
                 <!-- Header Back Action -->
                 <div class="flex items-center justify-between border-b border-slate-200 pb-5 flex-wrap gap-4">
@@ -271,7 +292,7 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start pb-32">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
                     
                     <!-- Left Column: Actions and Activity Feed -->
                     <div class="lg:col-span-4 space-y-6">
@@ -303,7 +324,7 @@
                         </div>
                     </div>
 
-                    <!-- Right Column: Screening Checks -->
+                    <!-- Right Column: Screening Checks with Visible Highlighted Scrollbar matching image_3ce564.png -->
                     <div class="lg:col-span-8 space-y-6">
                         <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm relative">
                             
@@ -399,8 +420,8 @@
             </div>
         </div>
 
-        <!-- Drawer Content listing container -->
-        <div id="drawer-body-list" class="flex-1 overflow-y-auto p-6 space-y-6 max-h-[calc(100vh-210px)] pb-10">
+        <!-- Drawer Content listing container - FORCED PROMINENT SCROLLER -->
+        <div id="drawer-body-list" class="flex-1 overflow-y-auto p-6 space-y-6 max-h-[calc(100vh-210px)] pb-10" style="overflow-y: scroll !important;">
             <!-- Rendered dynamically -->
         </div>
 
