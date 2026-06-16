@@ -12,36 +12,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        :root {
-            --blue: #007bff;
-            --indigo: #6610f2;
-            --purple: #6f42c1;
-            --pink: #e83e8c;
-            --red: #dc3545;
-            --orange: #fd7e14;
-            --yellow: #ffc107;
-            --green: #28a745;
-            --teal: #20c997;
-            --cyan: #17a2b8;
-            --white: #fff;
-            --gray: #6c757d;
-            --gray-dark: #343a40;
-            --primary: #007bff;
-            --secondary: #6c757d;
-            --success: #28a745;
-            --info: #17a2b8;
-            --warning: #ffc107;
-            --danger: #dc3545;
-            --light: #f8f9fa;
-            --dark: #343a40;
-        }
-
         body {
             font-family: 'Inter', -apple-system, sans-serif;
             box-sizing: border-box;
         }
         
-        /* Custom scrollbar styling to ensure high visibility */
+        /* Custom scrollbar styling to ensure high visibility matching image_3ce564.png */
         ::-webkit-scrollbar {
             width: 8px;
             height: 8px;
@@ -106,7 +82,7 @@
             background: #1e293b !important; /* Dark Slate-800 on hover */
         }
 
-        /* Sleek Rectangular Category Card matching image_eab983.png */
+        /* Sleek Rectangular Category Card matching image_eab983.png and image_ea5444.png */
         .category-tile-sleek {
             padding-top: 14px;
             padding-bottom: 14px;
@@ -126,17 +102,20 @@
 </head>
 <body class="bg-[#f3f4f6] text-[#1e293b] min-h-screen flex overflow-hidden">
 
-    <!-- Sidebar Panel matching image_f3ca89.png and image_fb8e62.png -->
-    <aside class="w-[260px] bg-[#222235] text-slate-300 flex flex-col flex-shrink-0 z-20 shadow-xl border-r border-slate-800">
-        <!-- Brand Header -->
-        <div class="h-16 flex items-center justify-between px-6 border-b border-slate-800">
-            <div class="flex items-center gap-3">
-                <div class="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center font-bold text-white shadow-md">V</div>
-                <span class="font-bold text-lg text-white tracking-wide">Vetty</span>
+    <!-- Sidebar Panel matching image_ea5444.png light theme and LaSalle Network identity -->
+    <aside class="w-[260px] bg-white text-slate-500 flex flex-col flex-shrink-0 z-20 shadow-sm border-r border-slate-200">
+        <!-- LaSalle Network Brand Header -->
+        <div class="h-20 flex flex-col justify-center px-6 border-b border-slate-100">
+            <div class="flex items-center gap-2.5">
+                <!-- LaSalle Network Placeholder Logo -->
+                <div class="flex items-center justify-center w-8 h-8 rounded bg-emerald-50 border border-slate-200 text-emerald-600">
+                    <i class="fa-solid fa-network-wired text-sm"></i>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-black text-slate-800 tracking-tight leading-none text-base">LaSalle</span>
+                    <span class="font-medium text-blue-600 tracking-wider text-xs uppercase leading-none">Network</span>
+                </div>
             </div>
-            <button class="w-8 h-8 rounded border border-slate-700 flex items-center justify-center text-slate-400 hover:text-white hover:bg-slate-800 transition-colors">
-                <i class="fa-solid fa-bars text-sm"></i>
-            </button>
         </div>
 
         <!-- Create New Candidate CTA -->
@@ -146,66 +125,66 @@
             </button>
         </div>
 
-        <!-- Navigation Links matching image_f3ca89.png -->
+        <!-- Navigation Links matching image_ea5444.png light theme -->
         <nav class="flex-1 px-3 space-y-1 overflow-y-auto">
-            <a href="#" id="nav-candidates" onclick="showScreen('home-screen', 'nav-candidates')" class="flex items-center gap-3.5 px-4 py-3 rounded-lg bg-slate-800 text-white font-semibold transition-all">
-                <i class="fa-solid fa-users text-blue-500 w-5 text-center text-base"></i>
+            <a href="#" id="nav-candidates" onclick="showScreen('home-screen', 'nav-candidates')" class="flex items-center gap-3.5 px-4 py-3 rounded-lg bg-blue-50/70 text-blue-600 font-semibold transition-all">
+                <i class="fa-solid fa-users text-blue-600 w-5 text-center text-base"></i>
                 <span class="text-sm">Candidates</span>
             </a>
-            <a href="#" id="nav-packages" onclick="showPlaceholderScreen('Packages Configuration Panel', 'nav-packages')" class="flex items-center gap-3.5 px-4 py-3 rounded-lg hover:bg-slate-800 hover:text-white transition-all text-slate-400 font-medium">
+            <a href="#" id="nav-packages" onclick="showPlaceholderScreen('Packages Configuration Panel', 'nav-packages')" class="flex items-center gap-3.5 px-4 py-3 rounded-lg hover:bg-slate-50 hover:text-slate-800 transition-all text-slate-500 font-medium">
                 <i class="fa-solid fa-box text-center w-5 text-base"></i>
                 <span class="text-sm">Packages</span>
             </a>
-            <a href="#" id="nav-comply" onclick="showPlaceholderScreen('Vetty Comply Compliance Center', 'nav-comply')" class="flex items-center gap-3.5 px-4 py-3 rounded-lg hover:bg-slate-800 hover:text-white transition-all text-slate-400 font-medium">
+            <a href="#" id="nav-comply" onclick="showPlaceholderScreen('Vetty Comply Compliance Center', 'nav-comply')" class="flex items-center gap-3.5 px-4 py-3 rounded-lg hover:bg-slate-50 hover:text-slate-800 transition-all text-slate-500 font-medium">
                 <i class="fa-solid fa-shield-halved text-center w-5 text-base"></i>
                 <span class="text-sm">Vetty Comply</span>
             </a>
-            <a href="#" id="nav-customizations" onclick="showPlaceholderScreen('Customizations Settings Profile', 'nav-customizations')" class="flex items-center gap-3.5 px-4 py-3 rounded-lg hover:bg-slate-800 hover:text-white transition-all text-slate-400 font-medium">
+            <a href="#" id="nav-customizations" onclick="showPlaceholderScreen('Customizations Settings Profile', 'nav-customizations')" class="flex items-center gap-3.5 px-4 py-3 rounded-lg hover:bg-slate-50 hover:text-slate-800 transition-all text-slate-500 font-medium">
                 <i class="fa-solid fa-sliders text-center w-5 text-base"></i>
                 <span class="text-sm">Customizations</span>
             </a>
-            <a href="#" id="nav-settings" onclick="showPlaceholderScreen('Global Client Settings Configurations', 'nav-settings')" class="flex items-center gap-3.5 px-4 py-3 rounded-lg hover:bg-slate-800 hover:text-white transition-all text-slate-400 font-medium">
+            <a href="#" id="nav-settings" onclick="showPlaceholderScreen('Global Client Settings Configurations', 'nav-settings')" class="flex items-center gap-3.5 px-4 py-3 rounded-lg hover:bg-slate-50 hover:text-slate-800 transition-all text-slate-500 font-medium">
                 <i class="fa-solid fa-gear text-center w-5 text-base"></i>
                 <span class="text-sm">Settings</span>
             </a>
-            <a href="#" id="nav-formi9" onclick="showPlaceholderScreen('Form I-9 Integrated Dashboard', 'nav-formi9')" class="flex items-center gap-3.5 px-4 py-3 rounded-lg hover:bg-slate-800 hover:text-white transition-all text-slate-400 font-medium">
+            <a href="#" id="nav-formi9" onclick="showPlaceholderScreen('Form I-9 Integrated Dashboard', 'nav-formi9')" class="flex items-center gap-3.5 px-4 py-3 rounded-lg hover:bg-slate-50 hover:text-slate-800 transition-all text-slate-500 font-medium">
                 <i class="fa-solid fa-fingerprint text-center w-5 text-base"></i>
                 <span class="text-sm">Form I-9 Dashboard</span>
             </a>
-            <a href="#" id="nav-reports" onclick="showPlaceholderScreen('Analytics & Auditing Reports Generation', 'nav-reports')" class="flex items-center gap-3.5 px-4 py-3 rounded-lg hover:bg-slate-800 hover:text-white transition-all text-slate-400 font-medium">
+            <a href="#" id="nav-reports" onclick="showPlaceholderScreen('Analytics & Auditing Reports Generation', 'nav-reports')" class="flex items-center gap-3.5 px-4 py-3 rounded-lg hover:bg-slate-50 hover:text-slate-800 transition-all text-slate-500 font-medium">
                 <i class="fa-solid fa-chart-pie text-center w-5 text-base"></i>
                 <span class="text-sm">Reports</span>
             </a>
-            <a href="#" id="nav-bulk" onclick="showPlaceholderScreen('CSV / XLSX Bulk Candidate Upload Tool', 'nav-bulk')" class="flex items-center gap-3.5 px-4 py-3 rounded-lg hover:bg-slate-800 hover:text-white transition-all text-slate-400 font-medium">
+            <a href="#" id="nav-bulk" onclick="showPlaceholderScreen('CSV / XLSX Bulk Candidate Upload Tool', 'nav-bulk')" class="flex items-center gap-3.5 px-4 py-3 rounded-lg hover:bg-slate-50 hover:text-slate-800 transition-all text-slate-500 font-medium">
                 <i class="fa-solid fa-cloud-arrow-up text-center w-5 text-base"></i>
                 <span class="text-sm">Bulk Upload</span>
             </a>
-            <a href="#" id="nav-supplies" onclick="showPlaceholderScreen('Supplies & Shipping Physical Order Dispatch', 'nav-supplies')" class="flex items-center gap-3.5 px-4 py-3 rounded-lg hover:bg-slate-800 hover:text-white transition-all text-slate-400 font-medium">
+            <a href="#" id="nav-supplies" onclick="showPlaceholderScreen('Supplies & Shipping Physical Order Dispatch', 'nav-supplies')" class="flex items-center gap-3.5 px-4 py-3 rounded-lg hover:bg-slate-50 hover:text-slate-800 transition-all text-slate-500 font-medium">
                 <i class="fa-solid fa-cart-shopping text-center w-5 text-base"></i>
                 <span class="text-sm">Supplies & Shipping</span>
             </a>
-            <a href="#" id="nav-advanced" onclick="showScreen('home-screen', 'nav-advanced')" class="flex items-center gap-3.5 px-4 py-3 rounded-lg hover:bg-slate-800 hover:text-white transition-all text-slate-400 font-medium">
+            <a href="#" id="nav-advanced" onclick="showScreen('home-screen', 'nav-advanced')" class="flex items-center gap-3.5 px-4 py-3 rounded-lg hover:bg-slate-50 hover:text-slate-800 transition-all text-slate-500 font-medium">
                 <i class="fa-solid fa-chart-line text-center w-5 text-base"></i>
-                <span class="text-sm">Advanced Candidates</span>
+                <span class="text-sm">Advanced Candidates Dashboard</span>
             </a>
         </nav>
 
-        <!-- Floating Chat Support Badge from image_f3ca89.png -->
-        <div class="p-4 border-t border-slate-800 flex items-center justify-between bg-[#1b1b2a]">
+        <!-- Floating Chat Support Badge from image_ea5444.png -->
+        <div class="p-4 border-t border-slate-100 flex items-center justify-between bg-slate-50/50">
             <div class="flex items-center gap-3">
-                <button onclick="openChatSupport()" class="w-11 h-11 rounded-full bg-emerald-500 hover:bg-emerald-600 flex items-center justify-center text-white shadow-lg shadow-emerald-950/40 relative group transition-transform hover:scale-105">
+                <button onclick="openChatSupport()" class="w-11 h-11 rounded-full bg-emerald-500 hover:bg-emerald-600 flex items-center justify-center text-white shadow-lg relative group transition-transform hover:scale-105">
                     <i class="fa-regular fa-comments text-lg"></i>
                     <span class="absolute top-0 right-0 w-3 h-3 bg-red-500 rounded-full border-2 border-emerald-500 animate-pulse"></span>
                 </button>
                 <div class="overflow-hidden">
-                    <p class="text-xs font-bold text-slate-200 truncate">Debendu Roy</p>
+                    <p class="text-xs font-bold text-slate-700 truncate">Debendu Roy</p>
                     <p class="text-[10px] text-slate-400 truncate">Client Admin</p>
                 </div>
             </div>
-            <div class="flex gap-1 text-slate-600">
-                <span class="w-1.5 h-1.5 bg-slate-50 rounded-full"></span>
-                <span class="w-1.5 h-1.5 bg-slate-50 rounded-full"></span>
-                <span class="w-1.5 h-1.5 bg-slate-50 rounded-full"></span>
+            <div class="flex gap-1 text-slate-300">
+                <span class="w-1.5 h-1.5 bg-slate-400 rounded-full"></span>
+                <span class="w-1.5 h-1.5 bg-slate-400 rounded-full"></span>
+                <span class="w-1.5 h-1.5 bg-slate-400 rounded-full"></span>
             </div>
         </div>
     </aside>
@@ -321,7 +300,7 @@
                 </div>
             </section>
 
-            <!-- CANDIDATE PROFILE SCREEN (Restricted to a premium max width of 1200px to match image_eb2586.png perfectly) -->
+            <!-- CANDIDATE PROFILE SCREEN (Restricted to a premium max width of 1200px to match image_eb2586.png and image_ea5444.png perfectly) -->
             <section id="details-screen" class="hidden p-6 space-y-6 max-w-[1200px] mx-auto w-full">
                 <!-- Header Back Action -->
                 <div class="flex items-center justify-between border-b border-slate-200 pb-4 flex-wrap gap-4">
@@ -330,8 +309,124 @@
                             <i class="fa-solid fa-arrow-left"></i> Back to Directory
                         </button>
                         <div>
-                            <h2 id="cand-detail-name" class="text-lg font-bold text-slate-800">Candidate Profile</h2>
+                            <h2 class="text-lg font-bold text-slate-800">Candidate Profile</h2>
                             <p class="text-[11px] text-slate-500 font-semibold mt-0.5">Order ID: <span id="cand-detail-id" class="font-mono text-slate-700">-</span> | Package: <span id="cand-detail-pkg" class="text-slate-700">-</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Top Comprehensive Header Metadata Card (exactly matching image_ea5444.png) -->
+                <div class="bg-white rounded-2xl border border-[#d4dae4] p-6 shadow-sm space-y-6">
+                    <div class="flex items-start justify-between flex-wrap gap-4 border-b border-slate-100 pb-4">
+                        <div class="flex items-center gap-4">
+                            <!-- Blue Avatar Silhouette -->
+                            <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 text-xl font-bold">
+                                <i class="fa-solid fa-user"></i>
+                            </div>
+                            <div>
+                                <div class="flex items-center gap-3">
+                                    <h3 id="cand-header-fullname" class="text-lg font-bold text-slate-800">-</h3>
+                                    <!-- Dynamic State Banner -->
+                                    <span id="cand-header-status-banner" class="px-3 py-0.5 text-xs font-semibold rounded bg-amber-500 text-white">Checks Complete - Clear</span>
+                                </div>
+                                <div class="mt-1.5">
+                                    <select class="bg-slate-50 border border-slate-200 rounded text-xs px-2.5 py-1 text-slate-600 font-medium outline-none">
+                                        <option>Screening Tags</option>
+                                        <option>Active Verification</option>
+                                        <option>High Priority</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Top-Right Actions Block -->
+                        <div class="flex items-center gap-4 text-xs font-semibold text-slate-400">
+                            <button class="hover:text-slate-700 flex items-center gap-1.5"><i class="fa-solid fa-plus-circle text-blue-600"></i> Add New Checks</button>
+                            <button class="hover:text-slate-700 flex items-center gap-1.5"><i class="fa-regular fa-file-alt"></i> Documents and Disclosures</button>
+                            <button class="hover:text-slate-700 flex items-center gap-1.5"><i class="fa-solid fa-calculator"></i> Cost Summary</button>
+                        </div>
+                    </div>
+
+                    <!-- Meta details layout matching image_ea5444.png -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-3.5 text-xs">
+                        <!-- Left Data Table Column -->
+                        <div class="space-y-3">
+                            <div class="grid grid-cols-3">
+                                <span class="text-slate-400 font-semibold">Added By</span>
+                                <span class="col-span-2 text-slate-700 font-semibold">Work Validater</span>
+                            </div>
+                            <div class="grid grid-cols-3 items-center">
+                                <span class="text-slate-400 font-semibold flex items-center gap-1">Assignee <i class="fa-solid fa-circle-info text-[10px] text-blue-500"></i></span>
+                                <div class="col-span-2">
+                                    <select class="bg-white border border-slate-200 rounded text-xs px-2 py-1 text-slate-700 font-semibold outline-none focus:border-blue-500">
+                                        <option>Assignee Added (1)</option>
+                                        <option>debendu Roy</option>
+                                        <option>mrunali Stage</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-3">
+                                <span class="text-slate-400 font-semibold">Package</span>
+                                <span id="cand-header-meta-package" class="col-span-2 text-slate-700 font-semibold">-</span>
+                            </div>
+                            <div class="grid grid-cols-3">
+                                <span class="text-slate-400 font-semibold">Department</span>
+                                <span class="col-span-2 text-slate-700 font-semibold">Talent Acquisition</span>
+                            </div>
+                            <div class="grid grid-cols-3">
+                                <span class="text-slate-400 font-semibold">Location</span>
+                                <span class="col-span-2 text-slate-700 font-semibold">New York Clinic Hub</span>
+                            </div>
+                            <div class="grid grid-cols-3">
+                                <span class="text-slate-400 font-semibold">Order ID</span>
+                                <span id="cand-header-meta-orderid" class="col-span-2 text-slate-700 font-mono font-bold">-</span>
+                            </div>
+                            <div class="grid grid-cols-3">
+                                <span class="text-slate-400 font-semibold">Candidate ID</span>
+                                <span class="col-span-2 text-slate-500 font-mono text-[11px] truncate">6a30c359ccb303f20a14a568</span>
+                            </div>
+                            <div class="grid grid-cols-3">
+                                <span class="text-slate-400 font-semibold">ID</span>
+                                <a href="#" class="col-span-2 text-blue-600 font-bold hover:underline">Add</a>
+                            </div>
+                            <div class="grid grid-cols-3">
+                                <span class="text-slate-400 font-semibold">Expected Employment</span>
+                                <a href="#" class="col-span-2 text-blue-600 font-bold hover:underline">Add</a>
+                            </div>
+                            <div class="grid grid-cols-3">
+                                <span class="text-slate-400 font-semibold">Start Date</span>
+                                <a href="#" class="col-span-2 text-blue-600 font-bold hover:underline">Add</a>
+                            </div>
+                        </div>
+
+                        <!-- Right Data Table Column -->
+                        <div class="space-y-3">
+                            <div class="grid grid-cols-3">
+                                <span class="text-slate-400 font-semibold">Date Of Birth</span>
+                                <div class="col-span-2 flex items-center gap-1.5">
+                                    <span id="dob-masked" class="text-slate-700 font-semibold">06/16/XXXX</span>
+                                    <button onclick="toggleMaskValue('dob')" class="text-blue-600 hover:underline font-bold text-[11px]">View</button>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-3">
+                                <span class="text-slate-400 font-semibold flex items-center gap-1">Address <i class="fa-regular fa-file"></i></span>
+                                <span class="col-span-2 text-slate-700 font-semibold">Hill Road, Los Angeles, CA, 90003</span>
+                            </div>
+                            <div class="grid grid-cols-3">
+                                <span class="text-slate-400 font-semibold">Email Address</span>
+                                <span id="cand-header-meta-email" class="col-span-2 text-slate-700 font-semibold truncate">-</span>
+                            </div>
+                            <div class="grid grid-cols-3">
+                                <span class="text-slate-400 font-semibold">Phone #</span>
+                                <span class="col-span-2 text-slate-700 font-semibold">(222) 222-2222</span>
+                            </div>
+                            <div class="grid grid-cols-3">
+                                <span class="text-slate-400 font-semibold">Social Security #</span>
+                                <div class="col-span-2 flex items-center gap-1.5">
+                                    <span id="ssn-masked" class="text-slate-700 font-semibold">XXX-XX-2222</span>
+                                    <button onclick="toggleMaskValue('ssn')" class="text-blue-600 hover:underline font-bold text-[11px]">View</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -342,7 +437,7 @@
                     <!-- Left Column: Actions and Activity Feed (Compact and narrow) -->
                     <div class="lg:col-span-4 space-y-6">
                         <!-- Actions Card -->
-                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-4">
+                        <div class="bg-white p-5 rounded-xl border border-[#d4dae4] shadow-sm space-y-4">
                             <div class="flex justify-between items-center pb-2 border-b border-slate-100">
                                 <h3 class="text-xs font-bold text-slate-700 uppercase tracking-wider">Actions</h3>
                                 <span class="text-[10px] text-slate-400 font-semibold cursor-pointer hover:underline">More Actions...</span>
@@ -355,7 +450,7 @@
                         </div>
 
                         <!-- Activity Feed timeline exactly as in image_eb2586.png -->
-                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-4">
+                        <div class="bg-white p-5 rounded-xl border border-[#d4dae4] shadow-sm space-y-4">
                             <div class="flex justify-between items-center pb-2 border-b border-slate-100">
                                 <h3 class="text-xs font-bold text-slate-700 uppercase tracking-wider">Activity Feed</h3>
                                 <span class="text-[10px] text-blue-500 font-bold hover:underline cursor-pointer"><i class="fa-solid fa-cloud-arrow-down mr-1"></i> Export Activity Feed</span>
@@ -370,9 +465,9 @@
 
                     <!-- Right Column: Screening Checks with Visible Highlighted Scrollbar matching image_3ce564.png -->
                     <div class="lg:col-span-8 space-y-6">
-                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm relative">
+                        <div class="bg-white p-5 rounded-xl border border-[#d4dae4] shadow-sm relative">
                             
-                            <!-- Header block styled as image_eb2586.png -->
+                            <!-- Header block styled as image_eb2586.png and image_ea5444.png -->
                             <div class="flex items-start justify-between pb-4 border-b border-slate-100 mb-6">
                                 <div>
                                     <h3 class="text-base font-bold text-[#1b1b2a]">Health Screening Checks</h3>
@@ -435,7 +530,7 @@
             <button onclick="closeDrawer()" class="text-slate-400 hover:text-slate-600 text-2xl font-bold p-1 transition-colors">&times;</button>
         </div>
 
-        <!-- Filter Inputs configured like image_f49d7b.png -->
+        <!-- Filter Inputs configured like image_f49d7b.png and image_fb8e62.png with "Overall Status" rename -->
         <div class="p-6 border-b border-slate-100 bg-slate-50/50 grid grid-cols-3 gap-3">
             <div>
                 <label class="block text-[9px] font-extrabold text-slate-500 uppercase tracking-wider mb-1">Search Screening</label>
@@ -924,6 +1019,12 @@
         let homeActiveTabStatus = "all";
         let activeSidebarId = "nav-candidates";
 
+        // Dynamic State Masks for DOB / SSN
+        let maskStates = {
+            dob: true,
+            ssn: true
+        };
+
         // Keep track of collapsed states of the Categories in the Deep Dive page (Default collapsed)
         let categoryCollapseState = {
             "Drug Check": false,
@@ -934,6 +1035,15 @@
 
         // Keep track of collapsed states for individual checks (Default collapsed)
         let checksCollapseState = {};
+
+        function toggleMaskValue(type) {
+            maskStates[type] = !maskStates[type];
+            if (type === 'dob') {
+                document.getElementById('dob-masked').innerText = maskStates.dob ? "06/16/XXXX" : "06/16/1994";
+            } else if (type === 'ssn') {
+                document.getElementById('ssn-masked').innerText = maskStates.ssn ? "XXX-XX-2222" : "222-22-2222";
+            }
+        }
 
         function updateTabCounters() {
             document.getElementById("count-all").innerText = candidateDb.length;
@@ -948,18 +1058,18 @@
             if (activeSidebarId) {
                 const prevLink = document.getElementById(activeSidebarId);
                 if (prevLink) {
-                    prevLink.className = "flex items-center gap-3.5 px-4 py-3 rounded-lg hover:bg-slate-800 hover:text-white transition-all text-slate-400 font-medium";
+                    prevLink.className = "flex items-center gap-3.5 px-4 py-3 rounded-lg hover:bg-slate-50 hover:text-slate-800 transition-all text-slate-500 font-medium";
                     const prevIcon = prevLink.querySelector('i');
-                    if (prevIcon) prevIcon.className = prevIcon.className.replace('text-blue-500', '');
+                    if (prevIcon) prevIcon.className = prevIcon.className.replace('text-blue-600', 'text-slate-400');
                 }
             }
 
             const currLink = document.getElementById(sidebarId);
             if (currLink) {
-                currLink.className = "flex items-center gap-3.5 px-4 py-3 rounded-lg bg-slate-800 text-white font-semibold transition-all";
+                currLink.className = "flex items-center gap-3.5 px-4 py-3 rounded-lg bg-blue-50/70 text-blue-600 font-semibold transition-all";
                 const currIcon = currLink.querySelector('i');
-                if (currIcon && !currIcon.className.includes('text-blue-500')) {
-                    currIcon.className += " text-blue-500";
+                if (currIcon) {
+                    currIcon.className = currIcon.className.replace('text-slate-400', 'text-blue-600');
                 }
             }
             activeSidebarId = sidebarId;
@@ -1100,9 +1210,24 @@
             if (!targetCandidate) return;
 
             currentSelectedCandidate = targetCandidate;
-            document.getElementById('cand-detail-name').innerText = "Candidate Profile";
+            document.getElementById('cand-header-fullname').innerText = targetCandidate.name;
             document.getElementById('cand-detail-id').innerText = targetCandidate.orderId;
+            document.getElementById('cand-header-meta-orderid').innerText = targetCandidate.orderId;
             document.getElementById('cand-detail-pkg').innerText = targetCandidate.package;
+            document.getElementById('cand-header-meta-package').innerText = targetCandidate.package;
+            document.getElementById('cand-header-meta-email').innerText = `${targetCandidate.name.toLowerCase().replace(/ /g, '.')}@vetty.co`;
+
+            const statusBanner = document.getElementById('cand-header-status-banner');
+            statusBanner.innerText = `Status - ${targetCandidate.status}`;
+            if (targetCandidate.status === 'COI Expired' || targetCandidate.status === 'Adverse Action') {
+                statusBanner.className = "px-3 py-0.5 text-xs font-semibold rounded bg-red-500 text-white";
+            } else if (targetCandidate.status === 'Review Needed') {
+                statusBanner.className = "px-3 py-0.5 text-xs font-semibold rounded bg-amber-500 text-white";
+            } else if (targetCandidate.status === 'Ready For Onboarding' || targetCandidate.status === 'Reviewed') {
+                statusBanner.className = "px-3 py-0.5 text-xs font-semibold rounded bg-emerald-500 text-white";
+            } else {
+                statusBanner.className = "px-3 py-0.5 text-xs font-semibold rounded bg-blue-600 text-white";
+            }
 
             // Reset collapsible states to closed (false) by default so they start collapsed
             categoryCollapseState = {
@@ -1234,7 +1359,7 @@
                         <i class="fa-solid ${isCatExpanded ? 'fa-chevron-up' : 'fa-chevron-down'} text-[10px] text-slate-500"></i>
                     </div>
                     <div class="flex items-center gap-3">
-                        <div class="text-right">
+                        <div class="text-right flex flex-col items-end">
                             <span class="inline-block px-2.5 py-0.5 text-[9px] font-bold rounded ${catBadgeColor} uppercase tracking-wider">${catStatus}</span>
                             <span class="block text-[9px] text-slate-400 mt-0.5">${catDate}</span>
                         </div>
@@ -1302,23 +1427,15 @@
                                 </div>
                                 <div class="divide-y divide-slate-100 text-xs">
                                     <div class="flex justify-between px-4 py-2.5">
-                                        <span class="text-slate-500">Amphetamines :</span>
+                                        <span class="text-slate-500 font-semibold">Amphetamines :</span>
                                         <span class="font-bold text-slate-800">Negative</span>
                                     </div>
                                     <div class="flex justify-between px-4 py-2.5">
-                                        <span class="text-slate-500">Cocaine :</span>
+                                        <span class="text-slate-500 font-semibold">Opiates :</span>
                                         <span class="font-bold text-slate-800">Negative</span>
                                     </div>
                                     <div class="flex justify-between px-4 py-2.5">
-                                        <span class="text-slate-500">Marijuana :</span>
-                                        <span class="font-bold text-slate-800">Negative</span>
-                                    </div>
-                                    <div class="flex justify-between px-4 py-2.5">
-                                        <span class="text-slate-500">Opiates :</span>
-                                        <span class="font-bold text-slate-800">Negative</span>
-                                    </div>
-                                    <div class="flex justify-between px-4 py-2.5">
-                                        <span class="text-slate-500">Phencyclidine :</span>
+                                        <span class="text-slate-500 font-semibold">Amphet :</span>
                                         <span class="font-bold text-slate-800">Negative</span>
                                     </div>
                                 </div>
@@ -1331,23 +1448,23 @@
                                 </div>
                                 <div class="divide-y divide-slate-100 text-xs">
                                     <div class="flex justify-between px-4 py-2.5">
-                                        <span class="text-slate-500">Specimen ID :</span>
+                                        <span class="text-slate-500 font-semibold">Specimen ID :</span>
                                         <span class="font-bold text-slate-800">7959817598</span>
                                     </div>
                                     <div class="flex justify-between px-4 py-2.5">
-                                        <span class="text-slate-500">Date Collected :</span>
+                                        <span class="text-slate-500 font-semibold">Date Collected :</span>
                                         <span class="font-bold text-slate-800">06/03/2026</span>
                                     </div>
                                     <div class="flex justify-between px-4 py-2.5">
-                                        <span class="text-slate-500">Medical Review Officer :</span>
+                                        <span class="text-slate-500 font-semibold">Medical Review Officer :</span>
                                         <span class="font-bold text-slate-800">Kirk A. Roberts, MD</span>
                                     </div>
                                     <div class="flex justify-between px-4 py-2.5">
-                                        <span class="text-slate-500">Report :</span>
+                                        <span class="text-slate-500 font-semibold">Report :</span>
                                         <a href="#" class="font-bold text-blue-600 hover:underline">DAVID FAIRNAK - Drug Report.pdf</a>
                                     </div>
                                     <div class="flex justify-between px-4 py-2.5">
-                                        <span class="text-slate-500">Comment :</span>
+                                        <span class="text-slate-500 font-semibold">Comment :</span>
                                         <span class="font-bold text-slate-800">Negative</span>
                                     </div>
                                 </div>
@@ -1362,7 +1479,7 @@
                                 <i class="fa-solid ${isCheckExpanded ? 'fa-chevron-up' : 'fa-chevron-down'} text-slate-400"></i>
                             </div>
                             <div class="flex items-center gap-3">
-                                <div class="text-right">
+                                <div class="text-right flex flex-col items-end">
                                     <span class="inline-block px-2.5 py-1 text-[10px] font-bold rounded ${suborderColor} uppercase tracking-wider">${screen.suborderStatus}</span>
                                     <span class="block text-[9px] text-slate-400 mt-0.5">06/16/2026</span>
                                 </div>
@@ -1786,7 +1903,7 @@
             notification.innerHTML = `
                 <div class="flex items-center gap-2 justify-between">
                     <span class="flex items-center gap-1.5 font-bold"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> Vetty Concierge</span>
-                    <button onclick="this.parentElement.parentElement.remove()" class="text-slate-400 hover:text-white font-bold text-sm">&times;</button>
+                    <button onclick="this.parentElement.parentElement.remove()" class="text-slate-400 hover:white font-bold text-sm">&times;</button>
                 </div>
                 <p class="text-slate-300 leading-relaxed">
                     Hello! We are here to help. Live candidate screenings chat log support has been successfully initialized.
@@ -1805,3 +1922,4 @@
     </script>
 </body>
 </html>
+```
