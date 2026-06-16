@@ -61,6 +61,7 @@
             max-height: 540px;
             overflow-y: scroll !important; /* Force scrollbar visibility by default */
             padding-right: 8px;
+            max-width: 620px; /* Tighter layout to match image_ea5444.png perfectly, aligned with the right controls */
         }
         
         /* Custom styling specifically targeting the Forced screening checks scrollbar for maximum prominence */
@@ -287,7 +288,7 @@
                                     <th class="p-4">Created By</th>
                                     <th class="p-4">Package</th>
                                     <th class="p-4 text-center">Status</th>
-                                    <th class="p-4 text-center text-blue-600 bg-blue-50/50 border-x border-blue-100 font-extrabold shadow-sm">Health Screening</th>
+                                    <th class="p-4 text-center text-blue-600 bg-blue-50/50 border-x border-blue-100/50 font-extrabold shadow-sm">Health Screening</th>
                                     <th class="p-4 text-center">Staged Check</th>
                                     <th class="p-4">Alerts</th>
                                 </tr>
@@ -489,6 +490,7 @@
                                 </div>
                             </div>
 
+                            <!-- SCREENING NESTED ACCORDIONS - Constrained to a compact rectangular width matching alignment of controls -->
                             <!-- Screenings Nested Categories list container with explicit outer scroller -->
                             <div id="accordion-checks-container" class="overall-screening-scroll space-y-4 pb-10">
                                 <!-- Populated dynamically based on nested models -->
@@ -1922,4 +1924,3 @@
     </script>
 </body>
 </html>
-```
