@@ -8,66 +8,38 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- FontAwesome for precise SVG-equivalent icons -->
+    <!-- FontAwesome for precise SVG icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         body {
             font-family: 'Inter', sans-serif;
         }
         /* Custom scrollbar styling */
         ::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
+            width: 8px;
+            height: 8px;
         }
         ::-webkit-scrollbar-track {
             background: #f1f5f9;
         }
         ::-webkit-scrollbar-thumb {
             background: #cbd5e1;
-            border-radius: 3px;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
         }
         /* Drawer animation transitions */
         .drawer-transition {
             transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease-in-out;
-        }
-
-        /* Gap-Proof Continuous Container Timelines */
-        .tracking-timeline {
-            position: relative;
-        }
-        /* Continuous blue line running behind dots on container level */
-        .tracking-timeline-blue::before {
-            content: '';
-            position: absolute;
-            left: 16px; /* Centered with dot */
-            top: 10px;  /* Starts at the center of the first top dot */
-            bottom: 24px; /* Stops neatly at the center of the last bottom dot */
-            width: 2px;
-            background-color: #3b82f6; /* Standard track blue */
-            z-index: 10;
-        }
-        /* Continuous gray line running behind dots for activity tracking logs */
-        .tracking-timeline-gray::before {
-            content: '';
-            position: absolute;
-            left: 16px;
-            top: 10px;
-            bottom: 32px;
-            width: 2px;
-            background-color: #cbd5e1;
-            z-index: 10;
-        }
-        .tracking-item {
-            position: relative;
-            padding-left: 2.5rem; /* Match pl-10 */
-            padding-bottom: 1.25rem; /* Clear vertical separation */
         }
     </style>
 </head>
 <body class="bg-[#f3f4f6] text-[#1e293b] min-h-screen flex overflow-hidden">
 
     <aside class="w-[260px] bg-[#222235] text-slate-300 flex flex-col flex-shrink-0 z-20 shadow-xl border-r border-slate-800">
-        <!-- Brand / Toggle Header -->
+        <!-- Brand Header -->
         <div class="h-16 flex items-center justify-between px-6 border-b border-slate-800">
             <div class="flex items-center gap-3">
                 <div class="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center font-bold text-white shadow-md">V</div>
@@ -129,9 +101,9 @@
             </a>
         </nav>
 
+        <!-- Floating Chat Support Badge from image_f3ca89.png -->
         <div class="p-4 border-t border-slate-800 flex items-center justify-between bg-[#1b1b2a]">
             <div class="flex items-center gap-3">
-                <!-- Green Chat Circle Indicator -->
                 <button onclick="openChatSupport()" class="w-11 h-11 rounded-full bg-emerald-500 hover:bg-emerald-600 flex items-center justify-center text-white shadow-lg shadow-emerald-950/40 relative group transition-transform hover:scale-105">
                     <i class="fa-regular fa-comments text-lg"></i>
                     <span class="absolute top-0 right-0 w-3 h-3 bg-red-500 rounded-full border-2 border-emerald-500 animate-pulse"></span>
@@ -150,7 +122,7 @@
     </aside>
 
     <main class="flex-1 flex flex-col overflow-hidden relative">
-
+        <!-- Dashboard Header -->
         <header class="h-16 bg-white border-b border-slate-200 flex items-center justify-between px-8 z-10 flex-shrink-0">
             <div class="flex items-center gap-2">
                 <h1 id="page-title" class="text-lg font-bold text-slate-800">Candidates Directory</h1>
@@ -168,22 +140,23 @@
             </div>
         </header>
 
-        <div class="flex-1 overflow-y-auto relative">
+        <!-- Scrollable Page Frame -->
+        <div class="flex-1 overflow-y-auto relative bg-[#f8fafc]">
 
+            <!-- HOME DIRECTORY SCREEN -->
             <section id="home-screen" class="p-8 space-y-6">
                 
-                <!-- Filters Panel exactly as modeled in image_f42881.png -->
+                <!-- Filters Panel Configured exactly like image_f42881.png -->
                 <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-4">
                     <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
                         <div>
                             <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Package Filter</label>
                             <select id="home-filter-package" onchange="applyHomeFilters()" class="w-full bg-[#f8fafc] border border-slate-200 text-xs rounded-lg px-3 py-2.5 outline-none focus:border-blue-500 text-slate-700 font-semibold">
                                 <option value="all">All Packages</option>
-                                <option value="AutoPAA and Market...">AutoPAA and Market...</option>
-                                <option value="stg1-ssn, mvr stg2-n...">stg1-ssn, mvr stg2-n...</option>
-                                <option value="stg1-ssn, mvr stg2-c...">stg1-ssn, mvr stg2-c...</option>
-                                <option value="federal crim">federal crim</option>
-                                <option value="County crim, state crl...">County crim, state crl...</option>
+                                <option value="Executive Clinical Core">Executive Clinical Core</option>
+                                <option value="Standard Care Package">Standard Care Package</option>
+                                <option value="General Screening Pack">General Screening Pack</option>
+                                <option value="Basic Physical Verification">Basic Physical Verification</option>
                             </select>
                         </div>
                         <div>
@@ -203,8 +176,9 @@
                             <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Location</label>
                             <select class="w-full bg-[#f8fafc] border border-slate-200 text-xs rounded-lg px-3 py-2.5 outline-none focus:border-blue-500 text-slate-700 font-semibold">
                                 <option>Select Location</option>
-                                <option>New York</option>
-                                <option>California</option>
+                                <option>New York Clinic Hub</option>
+                                <option>California Testing Lab</option>
+                                <option>Texas Diagnostic Lab</option>
                             </select>
                         </div>
                     </div>
@@ -221,7 +195,6 @@
                     </div>
                 </div>
 
-                <!-- Dynamic Tab Indicators calculated from DB dynamically -->
                 <div class="flex items-center gap-1 overflow-x-auto border-b border-slate-200 pb-0.5">
                     <button onclick="filterStatusTab('all')" id="tab-all" class="px-4 py-2.5 text-xs font-bold border-b-2 border-blue-600 text-blue-600 whitespace-nowrap tab-btn">All Candidates (<span id="count-all">0</span>)</button>
                     <button onclick="filterStatusTab('Pending Candidate')" id="tab-pending" class="px-4 py-2.5 text-xs font-semibold text-slate-500 hover:text-slate-800 border-b-2 border-transparent hover:border-slate-300 whitespace-nowrap tab-btn">Pending Candidate (<span id="count-pending">0</span>)</button>
@@ -231,6 +204,7 @@
                     <button onclick="filterStatusTab('COI Expired')" id="tab-alerts" class="px-4 py-2.5 text-xs font-semibold text-slate-500 hover:text-slate-800 border-b-2 border-transparent hover:border-slate-300 whitespace-nowrap tab-btn">Alerts (<span id="count-alerts">0</span>)</button>
                 </div>
 
+                <!-- Candidates Table View exactly matching image_f42881.png -->
                 <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
                     <div class="overflow-x-auto">
                         <table class="w-full text-left border-collapse">
@@ -251,7 +225,7 @@
                                 </tr>
                             </thead>
                             <tbody id="candidate-table-body" class="divide-y divide-slate-100 text-xs text-slate-700">
-                                <!-- Populated dynamically by generateCandidateTable() -->
+                                <!-- Loaded dynamically -->
                             </tbody>
                         </table>
                     </div>
@@ -259,7 +233,7 @@
             </section>
 
             <section id="details-screen" class="hidden p-8 space-y-6">
-                <!-- Back Header Navigation -->
+                <!-- Header Back Action -->
                 <div class="flex items-center justify-between border-b border-slate-200 pb-5 flex-wrap gap-4">
                     <div class="flex items-center gap-4">
                         <button onclick="showScreen('home-screen')" class="flex items-center gap-2 text-slate-500 hover:text-slate-800 text-xs font-bold bg-white px-3.5 py-2 border border-slate-200 rounded-lg shadow-sm transition-all active:scale-95">
@@ -270,76 +244,70 @@
                             <p class="text-[11px] text-slate-500 font-semibold mt-0.5">Order ID: <span id="cand-detail-id" class="font-mono text-slate-700">-</span> | Package: <span id="cand-detail-pkg" class="text-slate-700">-</span></p>
                         </div>
                     </div>
-                    <div class="flex items-center gap-3">
-                        <button onclick="openFormModal('modify-order')" class="bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 px-4 py-2 rounded-lg text-xs font-bold transition-all active:scale-95">
-                            Modify Order
-                        </button>
-                        <button onclick="openFormModal('change-location')" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-xs font-bold shadow-sm transition-all active:scale-95">
-                            Change Location for All
-                        </button>
-                    </div>
                 </div>
 
-                <!-- Two Column Layout matching image_f4b3e4.png view -->
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                <!-- Deep Dive Content Area -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start pb-20">
                     
-                    <!-- Left Side: Interactive Bullet Timeline Log of System Notes -->
-                    <div class="lg:col-span-4 bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-6">
-                        <h3 class="text-[11px] font-bold text-slate-400 uppercase tracking-wider pb-3 border-b border-slate-100 flex justify-between items-center">
-                            <span>Live Case Tracking Activity</span>
-                            <i class="fa-solid fa-list-check text-slate-400"></i>
-                        </h3>
-                        <!-- Scrolling support inside log updates with secure padding and inner absolute line alignment -->
-                        <div class="max-h-[500px] overflow-y-auto pr-2 tracking-timeline tracking-timeline-gray space-y-6 text-[11px]">
-                            <div class="tracking-item">
-                                <span class="absolute left-[8px] top-1 w-4 h-4 rounded-full bg-white border-2 border-blue-600 ring-4 ring-blue-100 flex items-center justify-center flex-shrink-0 aspect-square z-20"></span>
-                                <div class="flex justify-between items-start">
-                                    <span class="font-bold text-slate-800">Note From Client User</span>
-                                    <span class="text-[9px] text-slate-400 font-mono">04/15/2026</span>
-                                </div>
-                                <p class="text-slate-500 text-[10px] mt-1 bg-slate-50 p-2 rounded border border-slate-100 italic">"send from client dash"</p>
+                    <!-- Left Column: Actions and Gap-free Activity Feed -->
+                    <div class="lg:col-span-4 space-y-6">
+                        <!-- Actions Card -->
+                        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-4">
+                            <div class="flex justify-between items-center pb-2 border-b border-slate-100">
+                                <h3 class="text-sm font-bold text-slate-700">Actions</h3>
+                                <span class="text-[10px] text-slate-400 font-semibold cursor-pointer hover:underline">More Actions...</span>
                             </div>
-                            <div class="tracking-item">
-                                <span class="absolute left-[8px] top-1 w-4 h-4 rounded-full bg-white border-2 border-blue-600 ring-4 ring-blue-100 flex-shrink-0 aspect-square z-20"></span>
-                                <div class="flex justify-between items-start">
-                                    <span class="font-bold text-slate-800">Note from Vetty (Researcher)</span>
-                                    <span class="text-[9px] text-slate-400 font-mono">04/15/2026</span>
-                                </div>
-                                <p class="text-slate-500 text-[10px] mt-1 bg-slate-50 p-2 rounded border border-slate-100 italic">"test kromfox notes"</p>
+                            <div class="border border-emerald-200 bg-emerald-50/50 p-4 rounded-xl space-y-2">
+                                <span class="inline-block px-2.5 py-0.5 text-[10px] font-bold bg-emerald-500 text-white rounded uppercase tracking-wider">Clear</span>
+                                <p class="text-xs font-bold text-slate-800">No Issues Were Found</p>
+                                <p class="text-[11px] text-slate-500 leading-relaxed">The screening was completed on 06/15/2026. No issues were found.</p>
                             </div>
-                            <div class="tracking-item">
-                                <span class="absolute left-[10px] top-1.5 w-3 h-3 rounded-full bg-slate-400 border border-white flex-shrink-0 aspect-square z-20"></span>
-                                <div class="flex justify-between items-start">
-                                    <span class="text-slate-600 font-semibold">Assigned order to Mrunali, Kajal and Nikhil.</span>
-                                    <span class="text-[9px] text-slate-400 font-mono">04/15/2026</span>
-                                </div>
+                        </div>
+
+                        <!-- Activity Feed scrollable timeline exactly as in image_4c6cbe.png -->
+                        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-4">
+                            <div class="flex justify-between items-center pb-2 border-b border-slate-100">
+                                <h3 class="text-sm font-bold text-slate-700">Activity Feed</h3>
+                                <span class="text-[10px] text-blue-500 font-bold hover:underline cursor-pointer"><i class="fa-solid fa-cloud-arrow-down mr-1"></i> Export Activity Feed</span>
                             </div>
-                            <div class="tracking-item">
-                                <span class="absolute left-[10px] top-1.5 w-3 h-3 rounded-full bg-slate-400 border border-white flex-shrink-0 aspect-square z-20"></span>
-                                <div class="flex justify-between items-start">
-                                    <span class="text-slate-600 font-semibold">Donor Pass Created for 10 Panel Drug + Nicotine</span>
-                                    <span class="text-[9px] text-slate-400 font-mono">04/15/2026</span>
+                            <div class="max-h-[380px] overflow-y-auto pr-2 relative">
+                                <!-- Scroll-proof layout wrapper with continuous absolute line background -->
+                                <div id="activity-timeline-feed" class="space-y-6 text-[11px] relative pb-4 z-10">
+                                    <!-- Populated dynamically -->
                                 </div>
                             </div>
                         </div>
                     </div>
 
+                    <!-- Right Column: Screening Checks with Double Dropdowns image_4cc6bc.png -->
                     <div class="lg:col-span-8 space-y-6">
-                        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
-                            <div class="flex items-center justify-between pb-4 border-b border-slate-100 mb-6">
-                                <h3 class="text-base font-bold text-slate-800">Health Screening Checks</h3>
-                                <div class="flex items-center gap-3">
-                                    <span class="text-xs font-bold text-slate-500">Expand All</span>
-                                    <!-- Expand All Switch Toggle -->
-                                    <button id="expandAllToggle" onclick="toggleExpandAll()" class="w-11 h-6 bg-slate-200 rounded-full relative transition-colors focus:outline-none">
-                                        <span class="dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform shadow-sm"></span>
-                                    </button>
+                        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm relative">
+                            
+                            <!-- Header block styled as image_4c6cbe.png -->
+                            <div class="flex items-start justify-between pb-4 border-b border-slate-100 mb-6">
+                                <div>
+                                    <h3 class="text-base font-bold text-[#1b1b2a]">Health Screening Checks</h3>
+                                    <p class="text-[11px] text-slate-400 font-semibold">Verified Profile</p>
+                                </div>
+                                <div class="flex flex-col items-end gap-2">
+                                    <div class="flex items-center gap-3">
+                                        <span class="text-xs font-bold text-slate-500">Expand All</span>
+                                        <!-- Expand All Toggle Switch -->
+                                        <button id="expandAllToggle" onclick="toggleExpandAll()" class="w-11 h-6 bg-slate-200 rounded-full relative transition-colors focus:outline-none">
+                                            <span class="dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform shadow-sm"></span>
+                                        </button>
+                                    </div>
+                                    <!-- Action links aligned underneath on the right as image_4c6cbe.png -->
+                                    <div class="flex flex-col items-end gap-1.5 mt-1">
+                                        <button onclick="openFormModal('modify-order')" class="text-blue-600 hover:underline font-bold text-xs"><i class="fa-solid fa-pen-to-square mr-1"></i> Modify Order</button>
+                                        <button onclick="openFormModal('change-location')" class="text-blue-600 hover:underline font-bold text-xs">Change Location for All</button>
+                                    </div>
                                 </div>
                             </div>
 
-                            <!-- Accordions Target Container with dedicated scrolling boundary -->
-                            <div id="accordion-checks-container" class="space-y-6 max-h-[550px] overflow-y-auto pr-2">
-                                <!-- Populated dynamically based on candidate clicks -->
+                            <!-- Screenings Nested Categories list container with custom scroll overflow parameters -->
+                            <div id="accordion-checks-container" class="space-y-6 pb-10">
+                                <!-- Populated dynamically based on nested models -->
                             </div>
                         </div>
                     </div>
@@ -347,6 +315,7 @@
                 </div>
             </section>
 
+            <!-- PLACEHOLDER MODULAR SCREEN -->
             <section id="placeholder-screen" class="hidden p-8 space-y-6">
                 <div class="bg-white p-10 rounded-xl border border-slate-200 shadow-sm text-center max-w-xl mx-auto my-12 space-y-4">
                     <div class="w-16 h-16 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center text-2xl mx-auto">
@@ -364,6 +333,7 @@
         </div>
     </main>
 
+    <!-- SLIDE DRAWERS & MODALS -->
     <div id="drawer-backdrop" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 z-40" onclick="closeDrawer()"></div>
     
     <div id="quick-drawer" class="fixed right-0 top-0 bottom-0 w-[640px] bg-white shadow-2xl z-50 transform translate-x-full drawer-transition flex flex-col">
@@ -376,7 +346,7 @@
             <button onclick="closeDrawer()" class="text-slate-400 hover:text-slate-600 text-2xl font-bold p-1 transition-colors">&times;</button>
         </div>
 
-        <!-- Dynamic Filter inputs from image_f49d7b.png -->
+        <!-- Filter Inputs configured like image_f49d7b.png -->
         <div class="p-6 border-b border-slate-100 bg-slate-50/50 grid grid-cols-3 gap-3">
             <div>
                 <label class="block text-[9px] font-extrabold text-slate-500 uppercase tracking-wider mb-1">Search Screening</label>
@@ -399,16 +369,15 @@
                     <option value="all">All Suborder Statuses</option>
                     <option value="Review Needed">Review Needed</option>
                     <option value="Canceled">Canceled</option>
-                    <option value="Unreported">Unreported</option>
                     <option value="Unable to Verify">Unable to Verify</option>
                     <option value="Clear">Clear</option>
                 </select>
             </div>
         </div>
 
-        <!-- Drawer Body list container with explicit scrolling layout supporting image_f3c3a3.png -->
-        <div id="drawer-body-list" class="flex-1 overflow-y-auto p-6 space-y-6 max-h-[calc(100vh-210px)]">
-            <!-- Populated Dynamically via renderDrawerListContent() -->
+        <!-- Drawer Content listing container with scrolling rules -->
+        <div id="drawer-body-list" class="flex-1 overflow-y-auto p-6 space-y-6 max-h-[calc(100vh-210px)] pb-10">
+            <!-- Rendered dynamically -->
         </div>
 
         <!-- Drawer Footer -->
@@ -419,7 +388,7 @@
         </div>
     </div>
 
-    <!-- Modals Overlay -->
+    <!-- Actions modal overlays -->
     <div id="form-modal-overlay" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="bg-white rounded-xl shadow-2xl border border-slate-200 w-full max-w-md overflow-hidden transform scale-95 transition-all">
             <div class="p-5 border-b border-slate-100 flex justify-between items-center bg-slate-50">
@@ -428,7 +397,7 @@
             </div>
             <div class="p-6 space-y-4">
                 <div id="modal-form-fields" class="space-y-3">
-                    <!-- Loaded dynamically via js -->
+                    <!-- Loaded dynamically -->
                 </div>
                 <div class="flex justify-end gap-2.5 pt-4 border-t border-slate-100">
                     <button onclick="closeFormModal()" class="bg-slate-100 hover:bg-slate-200 text-slate-600 px-4 py-2 rounded-lg text-xs font-bold">Cancel</button>
@@ -439,110 +408,88 @@
     </div>
 
     <script>
+        // Database containing realistic sequences matching image_4cc6bc.png and image_4b6e5a.png
         const candidateDb = [
             {
-                name: "Autopaatest Done",
+                name: "Mark Lewis", // Renamed from Autopaatest Done
                 orderId: "K1MOC",
-                lastRun: "02/23/2026",
+                lastRun: "06/16/2026",
                 dateAdded: "02/13/2026",
                 expectedEndDate: "—",
                 createdBy: "mrunali Stage...",
-                package: "AutoPAA and Market...",
+                package: "Executive Clinical Core",
                 status: "COI Expired",
                 stagedCheck: "—",
                 alerts: "Insurance document expired",
                 screenings: [
                     {
-                        category: "DRUGS",
+                        category: "Drug Check",
                         name: "5 Panel Drug",
-                        orderStatus: "Clear",
-                        suborderStatus: "Clear",
-                        history: [
-                            { status: "Order Created", date: "02/13/2026 09:12 AM" },
-                            { status: "Donor Pass Creation Pending", date: "02/13/2026 11:00 AM" },
-                            { status: "Donor Pass Created", date: "02/13/2026 01:25 PM" },
-                            { status: "Scheduled", date: "02/14/2026 10:00 AM" },
-                            { status: "Collection/Testing Pending", date: "02/15/2026 08:30 AM" },
-                            { status: "Collection Completed", date: "02/16/2026 04:45 PM" },
-                            { status: "Received at Lab", date: "02/17/2026 11:15 AM" },
-                            { status: "Pending MRO Review", date: "02/18/2026 02:00 PM" },
-                            { status: "MRO Review - In Progress", date: "02/18/2026 03:30 PM" },
-                            { status: "Clear", date: "02/19/2026 09:00 AM" }
-                        ]
-                    },
-                    {
-                        category: "DRUGS",
-                        name: "7 Panel Drug",
                         orderStatus: "InProgress",
                         suborderStatus: "Review Needed",
                         history: [
-                            { status: "Order Created", date: "02/13/2026 09:15 AM" },
-                            { status: "Donor Pass Creation Pending", date: "02/13/2026 11:10 AM" },
-                            { status: "Donor Pass Created", date: "02/13/2026 01:30 PM" },
-                            { status: "Scheduled", date: "02/15/2026 09:00 AM" },
-                            { status: "Collection/Testing Pending", date: "02/16/2026 02:00 PM" },
-                            { status: "Collection Completed", date: "02/18/2026 03:00 PM" },
-                            { status: "Received at Lab", date: "02/20/2026 10:30 AM" },
-                            { status: "Pending MRO Review", date: "02/22/2026 04:00 PM" },
-                            { status: "MRO Review - In Progress", date: "02/23/2026 09:00 AM" },
-                            { status: "Review Needed", date: "02/23/2026 11:00 AM" }
+                            { status: "Order Created", date: "06/13/2026 09:12 AM" },
+                            { status: "Donor Pass Creation Pending", date: "06/13/2026 11:00 AM" },
+                            { status: "Donor Pass Created", date: "06/13/2026 01:25 PM" },
+                            { status: "Scheduled", date: "06/14/2026 10:00 AM" },
+                            { status: "Collection/Testing Pending", date: "06/15/2026 08:30 AM" },
+                            { status: "Collection Completed", date: "06/16/2026 04:45 PM" },
+                            { status: "Received at Lab", date: "06/16/2026 11:15 AM" },
+                            { status: "Pending MRO Review", date: "06/16/2026 02:00 PM" },
+                            { status: "MRO Review - In Progress", date: "06/16/2026 03:30 PM" },
+                            { status: "Review Needed", date: "06/16/2026 04:50 PM" }
                         ]
                     },
                     {
-                        category: "DRUGS",
-                        name: "10 Panel Drug",
-                        orderStatus: "InProgress",
-                        suborderStatus: "Canceled",
+                        category: "Titers",
+                        name: "Hep B Surface Antigen (HBsAG)",
+                        orderStatus: "Clear",
+                        suborderStatus: "Clear",
                         history: [
-                            { status: "Order Created", date: "02/13/2026 09:20 AM" },
-                            { status: "Donor Pass Creation Pending", date: "02/13/2026 11:30 AM" },
-                            { status: "Donor Pass Created", date: "02/13/2026 02:00 PM" },
-                            { status: "Scheduled", date: "02/14/2026 10:15 AM" },
-                            { status: "Canceled", date: "02/15/2026 12:40 PM" }
+                            { status: "Order Created", date: "06/13/2026 09:35 AM" },
+                            { status: "Donor Pass Creation Pending", date: "06/13/2026 12:05 PM" },
+                            { status: "Donor Pass Created", date: "06/13/2026 02:30 PM" },
+                            { status: "Scheduled", date: "06/15/2026 01:00 PM" },
+                            { status: "Collection/Testing Pending", date: "06/15/2026 04:00 PM" },
+                            { status: "Collection Completed", date: "06/16/2026 04:30 PM" },
+                            { status: "Received at Lab", date: "06/16/2026 11:00 AM" },
+                            { status: "Clear", date: "06/16/2026 02:00 PM" }
                         ]
                     },
                     {
-                        category: "DRUGS",
-                        name: "Drug 20sep",
+                        category: "Titers",
+                        name: "QuantiFERON-TB Gold",
+                        orderStatus: "Clear",
+                        suborderStatus: "Clear",
+                        history: [
+                            { status: "Order Created", date: "06/13/2026 09:30 AM" },
+                            { status: "Donor Pass Creation Pending", date: "06/13/2026 11:55 AM" },
+                            { status: "Donor Pass Created", date: "06/13/2026 02:15 PM" },
+                            { status: "Scheduled", date: "06/15/2026 11:00 AM" },
+                            { status: "Collection Completed", date: "06/16/2026 02:30 PM" },
+                            { status: "Received at Lab", date: "06/16/2026 09:15 AM" },
+                            { status: "Clear", date: "06/16/2026 11:15 AM" }
+                        ]
+                    },
+                    {
+                        category: "Basic Physical",
+                        name: "Pre-Employment Physical Assessment",
                         orderStatus: "InProgress",
                         suborderStatus: "Unable to Verify",
                         history: [
-                            { status: "Order Created", date: "02/13/2026 09:25 AM" },
-                            { status: "Donor Pass Creation Pending", date: "02/13/2026 11:45 AM" },
-                            { status: "Unable to Verify", date: "02/14/2026 04:10 PM" }
+                            { status: "Order Created", date: "06/13/2026 09:25 AM" },
+                            { status: "Donor Pass Creation Pending", date: "06/13/2026 11:45 AM" },
+                            { status: "Unable to Verify", date: "06/14/2026 04:10 PM" }
                         ]
                     },
                     {
-                        category: "TITERS",
-                        name: "Hep B Surface Antibody (HBsAb)",
-                        orderStatus: "Clear",
-                        suborderStatus: "Clear",
-                        history: [
-                            { status: "Order Created", date: "02/13/2026 09:30 AM" },
-                            { status: "Donor Pass Creation Pending", date: "02/13/2026 11:55 AM" },
-                            { status: "Donor Pass Created", date: "02/13/2026 02:15 PM" },
-                            { status: "Scheduled", date: "02/15/2026 11:00 AM" },
-                            { status: "Collection/Testing Pending", date: "02/17/2026 03:00 PM" },
-                            { status: "Collection Completed", date: "02/20/2026 02:30 PM" },
-                            { status: "Received at Lab", date: "02/22/2026 09:15 AM" },
-                            { status: "Clear", date: "02/23/2026 11:15 AM" }
-                        ]
-                    },
-                    {
-                        category: "TITERS",
-                        name: "Hep B Surface Antigen (HBsAG)",
+                        category: "Vaccine",
+                        name: "MMR Vaccine",
                         orderStatus: "InProgress",
                         suborderStatus: "Review Needed",
                         history: [
-                            { status: "Order Created", date: "02/13/2026 09:35 AM" },
-                            { status: "Donor Pass Creation Pending", date: "02/13/2026 12:05 PM" },
-                            { status: "Donor Pass Created", date: "02/13/2026 02:30 PM" },
-                            { status: "Scheduled", date: "02/15/2026 01:00 PM" },
-                            { status: "Collection/Testing Pending", date: "02/17/2026 04:00 PM" },
-                            { status: "Collection Completed", date: "02/20/2026 04:30 PM" },
-                            { status: "Received at Lab", date: "02/22/2026 11:00 AM" },
-                            { status: "Pending MRO Review", date: "02/23/2026 10:00 AM" },
-                            { status: "Review Needed", date: "02/23/2026 02:00 PM" }
+                            { status: "Order Created", date: "06/12/2026 01:00 PM" },
+                            { status: "Review Needed", date: "06/16/2026 02:00 PM" }
                         ]
                     }
                 ]
@@ -550,27 +497,27 @@
             {
                 name: "Depdedentflow Test",
                 orderId: "AYWT4",
-                lastRun: "02/23/2026",
+                lastRun: "06/16/2026",
                 dateAdded: "02/12/2026",
                 expectedEndDate: "—",
                 createdBy: "mrunali Stage...",
-                package: "stg1-ssn, mvr stg2-n...",
+                package: "Standard Care Package",
                 status: "In Progress",
                 stagedCheck: "Stage1",
                 alerts: "Donor Pass Expired",
                 screenings: [
                     {
-                        category: "DRUGS",
-                        name: "5 Panel Drug",
+                        category: "Drug Check",
+                        name: "9 Panel Instant Drug Screen",
                         orderStatus: "InProgress",
                         suborderStatus: "Review Needed",
                         history: [
-                            { status: "Order Created", date: "02/12/2026 10:00 AM" },
-                            { status: "Donor Pass Creation Pending", date: "02/12/2026 11:30 AM" },
-                            { status: "Donor Pass Created", date: "02/12/2026 03:00 PM" },
-                            { status: "Scheduled", date: "02/14/2026 09:00 AM" },
-                            { status: "Collection Completed", date: "02/18/2026 04:30 PM" },
-                            { status: "Review Needed", date: "02/23/2026 03:45 PM" }
+                            { status: "Order Created", date: "06/12/2026 10:00 AM" },
+                            { status: "Donor Pass Creation Pending", date: "06/12/2026 11:30 AM" },
+                            { status: "Donor Pass Created", date: "06/12/2026 03:00 PM" },
+                            { status: "Scheduled", date: "06/14/2026 09:00 AM" },
+                            { status: "Collection Completed", date: "06/16/2026 04:30 PM" },
+                            { status: "Review Needed", date: "06/16/2026 03:45 PM" }
                         ]
                     }
                 ]
@@ -578,23 +525,23 @@
             {
                 name: "Stagecheck Test",
                 orderId: "JM755",
-                lastRun: "02/23/2026",
+                lastRun: "06/16/2026",
                 dateAdded: "02/12/2026",
-                expectedEndDate: "03/31/2026",
+                expectedEndDate: "06/31/2026",
                 createdBy: "mrunali Stage...",
-                package: "stg1-ssn, mvr stg2-c...",
+                package: "General Screening Pack",
                 status: "In Progress",
                 stagedCheck: "Stage1",
                 alerts: "Donor Pass Expired",
                 screenings: [
                     {
-                        category: "TITERS",
-                        name: "Hep B Surface Antigen (HBsAG)",
+                        category: "Vaccine",
+                        name: "MMR Vaccine",
                         orderStatus: "InProgress",
                         suborderStatus: "Review Needed",
                         history: [
-                            { status: "Order Created", date: "02/12/2026 01:00 PM" },
-                            { status: "Review Needed", date: "02/23/2026 02:00 PM" }
+                            { status: "Order Created", date: "06/12/2026 01:00 PM" },
+                            { status: "Review Needed", date: "06/16/2026 02:00 PM" }
                         ]
                     }
                 ]
@@ -602,23 +549,23 @@
             {
                 name: "Rodrigo Joseph",
                 orderId: "UTMUZ",
-                lastRun: "02/19/2026",
+                lastRun: "06/16/2026",
                 dateAdded: "02/18/2026",
-                expectedEndDate: "02/28/2026",
+                expectedEndDate: "02/26/2026",
                 createdBy: "debendu Roy",
-                package: "federal crim",
+                package: "Basic Physical Verification",
                 status: "In Progress",
                 stagedCheck: "—",
                 alerts: "—",
                 screenings: [
                     {
-                        category: "DRUGS",
-                        name: "10 Panel Drug",
+                        category: "Basic Physical",
+                        name: "Basic Physical Evaluation",
                         orderStatus: "InProgress",
                         suborderStatus: "Canceled",
                         history: [
-                            { status: "Order Created", date: "02/18/2026 09:00 AM" },
-                            { status: "Canceled", date: "02/19/2026 04:30 PM" }
+                            { status: "Order Created", date: "06/15/2026 09:00 AM" },
+                            { status: "Canceled", date: "06/16/2026 04:30 PM" }
                         ]
                     }
                 ]
@@ -626,23 +573,23 @@
             {
                 name: "Anup3 Kumar",
                 orderId: "ZVZO9",
-                lastRun: "02/18/2026",
+                lastRun: "06/15/2026",
                 dateAdded: "02/18/2026",
                 expectedEndDate: "—",
                 createdBy: "testing Covid",
-                package: "federal crim",
+                package: "Basic Physical Verification",
                 status: "In Progress",
                 stagedCheck: "—",
                 alerts: "—",
                 screenings: [
                     {
-                        category: "DRUGS",
-                        name: "Drug 20sep",
+                        category: "Drug Check",
+                        name: "9 Panel Instant Drug Screen",
                         orderStatus: "InProgress",
                         suborderStatus: "Unable to Verify",
                         history: [
-                            { status: "Order Created", date: "02/18/2026 10:00 AM" },
-                            { status: "Unable to Verify", date: "02/18/2026 06:00 PM" }
+                            { status: "Order Created", date: "06/15/2026 10:00 AM" },
+                            { status: "Unable to Verify", date: "06/15/2026 06:00 PM" }
                         ]
                     }
                 ]
@@ -650,23 +597,23 @@
             {
                 name: "Criminalhistory Test",
                 orderId: "JS1FP",
-                lastRun: "02/13/2026",
+                lastRun: "06/13/2026",
                 dateAdded: "02/13/2026",
                 expectedEndDate: "—",
                 createdBy: "mrunali Stage...",
-                package: "County crim, state crl...",
+                package: "Standard Care Package",
                 status: "Ready For Onboarding",
                 stagedCheck: "—",
                 alerts: "—",
                 screenings: [
                     {
-                        category: "DRUGS",
-                        name: "10 Panel Drug",
+                        category: "Drug Check",
+                        name: "5 Panel Drug Screen",
                         orderStatus: "Clear",
                         suborderStatus: "Clear",
                         history: [
-                            { status: "Order Created", date: "02/13/2026 08:00 AM" },
-                            { status: "Clear", date: "02/13/2026 06:30 PM" }
+                            { status: "Order Created", date: "06/13/2026 08:00 AM" },
+                            { status: "Clear", date: "06/13/2026 06:30 PM" }
                         ]
                     }
                 ]
@@ -674,47 +621,47 @@
             {
                 name: "Samson Inite",
                 orderId: "7KAIP",
-                lastRun: "04/15/2026",
-                dateAdded: "01/07/2026",
+                lastRun: "06/16/2026",
+                dateAdded: "02/07/2026",
                 expectedEndDate: "—",
                 createdBy: "mrunali Stage...",
-                package: "SSN+MVR +C C +Co...",
+                package: "Standard Care Package",
                 status: "Review Needed",
                 stagedCheck: "—",
                 alerts: "—",
                 screenings: [
                     {
-                        category: "DRUGS",
-                        name: "7 Panel Drug",
+                        category: "Drug Check",
+                        name: "5 Panel Drug Screen",
                         orderStatus: "InProgress",
                         suborderStatus: "Review Needed",
                         history: [
-                            { status: "Order Created", date: "01/07/2026 09:00 AM" },
-                            { status: "Review Needed", date: "04/15/2026 11:00 AM" }
+                            { status: "Order Created", date: "06/07/2026 09:00 AM" },
+                            { status: "Review Needed", date: "06/16/2026 11:00 AM" }
                         ]
                     }
                 ]
             },
             {
-                name: "Autopaano Test",
+                name: "Autopaanno Test",
                 orderId: "OPYRQ",
-                lastRun: "02/13/2026",
+                lastRun: "06/13/2026",
                 dateAdded: "02/13/2026",
                 expectedEndDate: "—",
                 createdBy: "mrunali Stage...",
-                package: "Auto PAA with Color...",
+                package: "Standard Care Package",
                 status: "Review Needed",
                 stagedCheck: "—",
                 alerts: "—",
                 screenings: [
                     {
-                        category: "VACCINES",
+                        category: "Vaccine",
                         name: "Varicella Vaccine",
                         orderStatus: "InProgress",
                         suborderStatus: "Review Needed",
                         history: [
-                            { status: "Order Created", date: "02/13/2026 10:00 AM" },
-                            { status: "Review Needed", date: "02/13/2026 04:15 PM" }
+                            { status: "Order Created", date: "06/13/2026 10:00 AM" },
+                            { status: "Review Needed", date: "06/13/2026 04:15 PM" }
                         ]
                     }
                 ]
@@ -722,23 +669,23 @@
             {
                 name: "Paaemall Test",
                 orderId: "YUGH4",
-                lastRun: "02/13/2026",
+                lastRun: "06/13/2026",
                 dateAdded: "02/13/2026",
                 expectedEndDate: "—",
                 createdBy: "mrunali Stage...",
-                package: "preadvser flow pack...",
+                package: "Standard Care Package",
                 status: "COI Expired",
                 stagedCheck: "—",
                 alerts: "Dispute was not changed",
                 screenings: [
                     {
-                        category: "DRUGS",
-                        name: "10 Panel Drug",
+                        category: "Drug Check",
+                        name: "5 Panel Drug Screen",
                         orderStatus: "InProgress",
                         suborderStatus: "Canceled",
                         history: [
-                            { status: "Order Created", date: "02/13/2026 09:00 AM" },
-                            { status: "Canceled", date: "02/13/2026 02:00 PM" }
+                            { status: "Order Created", date: "06/13/2026 09:00 AM" },
+                            { status: "Canceled", date: "06/13/2026 02:00 PM" }
                         ]
                     }
                 ]
@@ -746,23 +693,23 @@
             {
                 name: "Fill On Behaf Gmap",
                 orderId: "HRXMK",
-                lastRun: "04/15/2026",
+                lastRun: "06/16/2026",
                 dateAdded: "01/07/2026",
                 expectedEndDate: "—",
                 createdBy: "testing Covid",
-                package: "9 panel Instant drug",
+                package: "Executive Clinical Core",
                 status: "In Progress",
                 stagedCheck: "—",
                 alerts: "—",
                 screenings: [
                     {
-                        category: "DRUGS",
-                        name: "5 Panel Drug",
+                        category: "Drug Check",
+                        name: "5 Panel Drug Screen",
                         orderStatus: "InProgress",
                         suborderStatus: "Review Needed",
                         history: [
-                            { status: "Order Created", date: "01/07/2026 10:00 AM" },
-                            { status: "Review Needed", date: "04/15/2026 03:00 PM" }
+                            { status: "Order Created", date: "06/07/2026 10:00 AM" },
+                            { status: "Review Needed", date: "06/16/2026 03:00 PM" }
                         ]
                     }
                 ]
@@ -770,22 +717,22 @@
             {
                 name: "Stacy Peter",
                 orderId: "QJ4WA",
-                lastRun: "04/15/2026",
+                lastRun: "06/16/2026",
                 dateAdded: "01/07/2026",
                 expectedEndDate: "—",
                 createdBy: "testing Covid",
-                package: "9 panel Instant drug",
+                package: "Executive Clinical Core",
                 status: "Pending Candidate",
                 stagedCheck: "—",
                 alerts: "Donor Pass Created",
                 screenings: [
                     {
-                        category: "DRUGS",
-                        name: "5 Panel Drug",
+                        category: "Drug Check",
+                        name: "5 Panel Drug Screen",
                         orderStatus: "InProgress",
                         suborderStatus: "Review Needed",
                         history: [
-                            { status: "Order Created", date: "01/07/2026 10:00 AM" }
+                            { status: "Order Created", date: "06/07/2026 10:00 AM" }
                         ]
                     }
                 ]
@@ -793,11 +740,11 @@
             {
                 name: "Nhhhh Tests",
                 orderId: "GUIEL",
-                lastRun: "04/15/2026",
+                lastRun: "06/16/2026",
                 dateAdded: "01/07/2026",
                 expectedEndDate: "—",
                 createdBy: "testing Covid",
-                package: "county criminal in p...",
+                package: "Executive Clinical Core",
                 status: "Pending Candidate",
                 stagedCheck: "—",
                 alerts: "—",
@@ -806,11 +753,11 @@
             {
                 name: "Hollis Davis",
                 orderId: "ZJK4K",
-                lastRun: "04/15/2026",
+                lastRun: "06/16/2026",
                 dateAdded: "01/07/2026",
                 expectedEndDate: "11/12/2048",
                 createdBy: "testing Covid",
-                package: "Empty package",
+                package: "Basic Physical Verification",
                 status: "Pending Candidate",
                 stagedCheck: "—",
                 alerts: "—",
@@ -819,11 +766,11 @@
             {
                 name: "Stanley House",
                 orderId: "6A6CG",
-                lastRun: "04/15/2026",
+                lastRun: "06/16/2026",
                 dateAdded: "01/07/2026",
                 expectedEndDate: "11/12/2048",
                 createdBy: "testing Covid",
-                package: "SSN only",
+                package: "Executive Clinical Core",
                 status: "Pending Candidate",
                 stagedCheck: "—",
                 alerts: "—",
@@ -832,11 +779,11 @@
             {
                 name: "Tina Jain",
                 orderId: "5BQTG",
-                lastRun: "04/15/2026",
+                lastRun: "06/16/2026",
                 dateAdded: "01/07/2026",
                 expectedEndDate: "—",
                 createdBy: "testing Covid",
-                package: "county criminal in p...",
+                package: "Executive Clinical Core",
                 status: "Pending Candidate",
                 stagedCheck: "—",
                 alerts: "—",
@@ -845,11 +792,11 @@
             {
                 name: "Test Prepod",
                 orderId: "HFG72",
-                lastRun: "01/07/2026",
+                lastRun: "06/07/2026",
                 dateAdded: "01/07/2026",
                 expectedEndDate: "—",
                 createdBy: "testing Covid",
-                package: "Abuse Registry - Wis...",
+                package: "Executive Clinical Core",
                 status: "Pending Candidate",
                 stagedCheck: "—",
                 alerts: "—",
@@ -858,11 +805,11 @@
             {
                 name: "Ttgg Hh",
                 orderId: "LUJCK",
-                lastRun: "01/06/2026",
+                lastRun: "06/06/2026",
                 dateAdded: "01/06/2026",
                 expectedEndDate: "—",
                 createdBy: "testing Covid",
-                package: "county criminal in p...",
+                package: "Executive Clinical Core",
                 status: "Pending Candidate",
                 stagedCheck: "—",
                 alerts: "—",
@@ -871,11 +818,11 @@
             {
                 name: "Dfssf Sfs",
                 orderId: "S6HM6",
-                lastRun: "01/05/2026",
+                lastRun: "06/05/2026",
                 dateAdded: "01/05/2026",
                 expectedEndDate: "—",
                 createdBy: "testing Covid",
-                package: "SSN only",
+                package: "Executive Clinical Core",
                 status: "Pending Candidate",
                 stagedCheck: "—",
                 alerts: "—",
@@ -883,15 +830,25 @@
             }
         ];
 
-        // Active State Variables
         let currentSelectedCandidate = candidateDb[0];
         let homeActiveTabStatus = "all";
         let activeSidebarId = "nav-candidates";
 
+        // Keep track of collapsed states of the Categories in the Deep Dive page (Default expanded)
+        let categoryCollapseState = {
+            "Drug Check": true,
+            "Titers": true,
+            "Basic Physical": true,
+            "Vaccine": true
+        };
+
+        // Keep track of collapsed states for individual checks
+        let checksCollapseState = {};
+
         function updateTabCounters() {
             document.getElementById("count-all").innerText = candidateDb.length;
             document.getElementById("count-pending").innerText = candidateDb.filter(c => c.status === "Pending Candidate").length;
-            document.getElementById("count-progress").innerText = candidateDb.filter(c => c.status === "In Progress").length;
+            document.getElementById("count-progress").innerText = candidateDb.filter(c => c.status === "In Progress" || c.status === "In Progress").length;
             document.getElementById("count-review").innerText = candidateDb.filter(c => c.status === "Review Needed").length;
             document.getElementById("count-onboarding").innerText = candidateDb.filter(c => c.status === "Ready For Onboarding").length;
             document.getElementById("count-alerts").innerText = candidateDb.filter(c => c.status === "COI Expired" || c.status === "Adverse Action").length;
@@ -962,7 +919,7 @@
                 } else if (cand.status === "Reviewed" || cand.status === "Ready For Onboarding") {
                     badgeStyle = "bg-emerald-500 text-white";
                 } else if (cand.status === "Review Needed") {
-                    badgeStyle = "bg-yellow-500 text-slate-950 font-extrabold";
+                    badgeStyle = "bg-amber-500 text-white font-bold";
                 } else if (cand.status === "Pending Candidate") {
                     badgeStyle = "bg-amber-100 text-amber-800 border border-amber-200 font-bold";
                 }
@@ -1039,7 +996,7 @@
             const activeBtn = document.getElementById(matchingTabs[statusKey]);
             if (activeBtn) {
                 if (statusKey === 'Review Needed') {
-                    activeBtn.className = "px-4 py-2.5 text-xs font-bold border-b-2 border-yellow-500 text-yellow-600 whitespace-nowrap tab-btn";
+                    activeBtn.className = "px-4 py-2.5 text-xs font-bold border-b-2 border-amber-500 text-amber-600 whitespace-nowrap tab-btn";
                 } else {
                     activeBtn.className = "px-4 py-2.5 text-xs font-bold border-b-2 border-blue-600 text-blue-600 whitespace-nowrap tab-btn";
                 }
@@ -1057,8 +1014,68 @@
             document.getElementById('cand-detail-id').innerText = targetCandidate.orderId;
             document.getElementById('cand-detail-pkg').innerText = targetCandidate.package;
 
+            // Reset collapsible states for individual checks inside this candidate to true (expanded)
+            checksCollapseState = {};
+            if (targetCandidate.screenings) {
+                targetCandidate.screenings.forEach(s => {
+                    checksCollapseState[`${s.category}-${s.name}`] = true;
+                });
+            }
+
             generateDeepDiveAccordionContent(targetCandidate);
+            generateActivityFeed(targetCandidate);
             showScreen('details-screen', activeSidebarId);
+        }
+
+        function generateActivityFeed(candidate) {
+            const container = document.getElementById('activity-timeline-feed');
+            container.innerHTML = "";
+
+            // Unified relative container setup with perfect grid coordinate alignment
+            container.className = "relative pl-8 pr-2";
+
+            // Uninterrupted single vector line passing through mathematical center of circular status dots
+            const verticalLine = document.createElement('div');
+            verticalLine.className = "absolute left-[15px] top-2 bottom-6 w-[2px] bg-blue-500/30 z-0";
+            container.appendChild(verticalLine);
+
+            const feeds = [
+                { title: "Note From Client User", desc: "send from client dash", date: "06/16/2026" },
+                { title: "Note from Vetty (Researcher)", desc: "test kromfox notes", date: "06/15/2026" },
+                { title: "Assigned order to Mrunali, Kajal and Nikhil", desc: "", date: "06/15/2026" },
+                { title: "Donor Pass Created for 5 Panel Drug + Physical Assessment", desc: "", date: "06/15/2026" }
+            ];
+
+            feeds.forEach((feed) => {
+                const item = document.createElement('div');
+                item.className = "flex gap-4 relative text-[11px] z-10 pb-4";
+
+                item.innerHTML = `
+                    <!-- Center aligned perfectly round timeline node on vertical path -->
+                    <div class="w-8 flex justify-center items-start flex-shrink-0 relative -ml-8">
+                        <div class="w-4 h-4 rounded-full bg-white border-2 border-blue-500 ring-4 ring-blue-100 flex-shrink-0 aspect-square z-20 mt-1"></div>
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex justify-between items-start flex-wrap gap-2">
+                            <span class="font-bold text-slate-800">${feed.title}</span>
+                            <span class="text-[9px] text-slate-400 font-mono">${feed.date}</span>
+                        </div>
+                        ${feed.desc ? `<p class="text-slate-500 text-[10px] mt-1 bg-slate-50 p-2 rounded border border-slate-100 italic">"${feed.desc}"</p>` : ''}
+                    </div>
+                `;
+                container.appendChild(item);
+            });
+        }
+
+        function toggleCategoryCollapse(category) {
+            categoryCollapseState[category] = !categoryCollapseState[category];
+            generateDeepDiveAccordionContent(currentSelectedCandidate);
+        }
+
+        function toggleCheckCollapse(category, checkName) {
+            const key = `${category}-${checkName}`;
+            checksCollapseState[key] = !checksCollapseState[key];
+            generateDeepDiveAccordionContent(currentSelectedCandidate);
         }
 
         function generateDeepDiveAccordionContent(candidate) {
@@ -1070,23 +1087,67 @@
                 return;
             }
 
-            const categories = ["DRUGS", "TITERS", "VACCINES"];
+            // Separated Categories: Clean split to avoid any "Titer / Vaccine" combinations
+            const categories = ["Drug Check", "Titers", "Basic Physical", "Vaccine"];
+            
             categories.forEach(cat => {
                 const filteredScreens = candidate.screenings.filter(s => s.category === cat);
                 if (filteredScreens.length === 0) return;
 
+                const isCatExpanded = categoryCollapseState[cat] !== false;
+
+                // Category Dropdown Header matching image_4cc6bc.png
                 const catHeader = document.createElement("div");
-                catHeader.className = "flex items-center justify-between border-b border-slate-200 pb-2 mt-4 flex-shrink-0";
+                catHeader.className = "border border-slate-200 bg-slate-50 hover:bg-slate-100/80 rounded-lg p-3.5 flex items-center justify-between cursor-pointer transition-colors mt-4 select-none";
+                catHeader.onclick = () => toggleCategoryCollapse(cat);
+
+                // Determine category status values
+                let catStatus = "Clear";
+                let catDate = "06/16/2026";
+                if (filteredScreens.some(s => s.suborderStatus === "Review Needed")) {
+                    catStatus = "Review Needed";
+                } else if (filteredScreens.some(s => s.suborderStatus === "Unable to Verify")) {
+                    catStatus = "Unable to Verify";
+                } else if (filteredScreens.some(s => s.suborderStatus === "Canceled")) {
+                    catStatus = "Canceled";
+                } else if (filteredScreens.some(s => s.orderStatus === "InProgress")) {
+                    catStatus = "In Progress";
+                }
+
+                let catBadgeColor = "bg-blue-600 text-white";
+                if (catStatus === "Review Needed") catBadgeColor = "bg-amber-500 text-white font-bold";
+                else if (catStatus === "Clear") catBadgeColor = "bg-emerald-500 text-white";
+                else if (catStatus === "Canceled") catBadgeColor = "bg-red-500 text-white";
+                else if (catStatus === "Unable to Verify") catBadgeColor = "bg-purple-500 text-white";
+
                 catHeader.innerHTML = `
                     <div class="flex items-center gap-2">
-                        <span class="text-xs font-bold text-slate-800 tracking-wide">${cat}</span>
-                        <i class="fa-solid fa-chevron-down text-[10px] text-slate-400"></i>
+                        <span class="text-xs font-bold text-slate-800 tracking-wide uppercase">${cat}</span>
+                        <i class="fa-solid ${isCatExpanded ? 'fa-chevron-up' : 'fa-chevron-down'} text-[10px] text-slate-500"></i>
                     </div>
-                    <div class="flex flex-col items-end">
-                        <span class="inline-block px-2 py-0.5 text-[9px] font-bold rounded bg-blue-600 text-white uppercase tracking-wider">In Progress</span>
+                    <!-- Combined badge and cloud icon strictly side-by-side on same horizontal row -->
+                    <div class="flex items-center gap-3">
+                        <div class="text-right">
+                            <span class="inline-block px-2.5 py-0.5 text-[9px] font-bold rounded ${catBadgeColor} uppercase tracking-wider">${catStatus}</span>
+                            <span class="block text-[9px] text-slate-400 mt-0.5">${catDate}</span>
+                        </div>
+                        <button class="text-slate-400 hover:text-slate-600" title="Download Document">
+                            <i class="fa-solid fa-cloud-arrow-down text-base"></i>
+                        </button>
                     </div>
                 `;
                 container.appendChild(catHeader);
+
+                // Child list container wrapper
+                const catChildrenWrapper = document.createElement("div");
+                catChildrenWrapper.className = `space-y-4 mt-2 pl-2 transition-all duration-300 ${isCatExpanded ? 'block' : 'hidden'}`;
+                container.appendChild(catChildrenWrapper);
+
+                // Center-aligned notification sentence displayed directly under parent category expander
+                const statusSentenceDiv = document.createElement("div");
+                statusSentenceDiv.className = "text-center py-2.5 text-slate-700 font-bold text-xs select-text bg-white border border-slate-200/60 rounded-lg shadow-sm";
+                statusSentenceDiv.innerText = `This check is ${catStatus}`;
+                catChildrenWrapper.appendChild(statusSentenceDiv);
 
                 filteredScreens.forEach((screen, index) => {
                     const isReviewNeeded = screen.suborderStatus === "Review Needed";
@@ -1095,67 +1156,83 @@
                     const isVerifyError = screen.suborderStatus === "Unable to Verify";
 
                     let suborderColor = "bg-blue-600 text-white";
-                    if (isReviewNeeded) suborderColor = "bg-yellow-500 text-slate-950 font-bold";
+                    if (isReviewNeeded) suborderColor = "bg-amber-500 text-white font-bold";
                     else if (isClear) suborderColor = "bg-emerald-500 text-white";
                     else if (isCanceled) suborderColor = "bg-red-500 text-white";
                     else if (isVerifyError) suborderColor = "bg-purple-500 text-white";
 
+                    const checkKey = `${cat}-${screen.name}`;
+                    const isCheckExpanded = checksCollapseState[checkKey] !== false;
+
                     const checkBlock = document.createElement("div");
                     checkBlock.className = "border border-slate-200 rounded-lg overflow-hidden bg-white shadow-sm flex-shrink-0";
-                    checkBlock.id = `deepdive-check-${cat}-${index}`;
 
                     // Reverse chronological history sequence (Bottom to Top)
                     const reversedHistory = [...screen.history].reverse();
 
                     // Map top status dot matching outside color status
-                    let topDotColorClass = 'bg-blue-600 ring-blue-100';
+                    let topDotColorClass = 'bg-blue-600';
+                    let topRingColorClass = 'ring-blue-100';
                     if (screen.suborderStatus === 'Review Needed') {
-                        topDotColorClass = 'bg-yellow-500 ring-yellow-100';
+                        topDotColorClass = 'bg-amber-500';
+                        topRingColorClass = 'ring-amber-100';
                     } else if (screen.suborderStatus === 'Clear') {
-                        topDotColorClass = 'bg-emerald-500 ring-emerald-100';
+                        topDotColorClass = 'bg-emerald-500';
+                        topRingColorClass = 'ring-emerald-100';
                     } else if (screen.suborderStatus === 'Canceled') {
-                        topDotColorClass = 'bg-red-500 ring-red-100';
+                        topDotColorClass = 'bg-red-500';
+                        topRingColorClass = 'ring-red-100';
                     } else if (screen.suborderStatus === 'Unable to Verify') {
-                        topDotColorClass = 'bg-purple-500 ring-purple-100';
+                        topDotColorClass = 'bg-purple-500';
+                        topRingColorClass = 'ring-purple-100';
                     } else if (screen.suborderStatus === 'Unreported') {
-                        topDotColorClass = 'bg-orange-500 ring-orange-100';
+                        topDotColorClass = 'bg-orange-500';
+                        topRingColorClass = 'ring-orange-100';
                     }
 
                     checkBlock.innerHTML = `
-                        <button class="w-full bg-white hover:bg-slate-50/50 p-4 flex justify-between items-center transition-colors focus:outline-none text-xs" onclick="toggleDeepdiveCheck('${cat}-${index}')">
+                        <button class="w-full bg-white hover:bg-slate-50/50 p-4 flex justify-between items-center transition-colors focus:outline-none text-xs" onclick="toggleCheckCollapse('${cat}', '${screen.name}')">
                             <div class="flex items-center gap-2">
                                 <span class="font-bold text-slate-700">${screen.name}</span>
+                                <i class="fa-solid ${isCheckExpanded ? 'fa-chevron-up' : 'fa-chevron-down'} text-slate-400"></i>
                             </div>
                             <div class="flex items-center gap-3">
-                                <span class="inline-block px-2.5 py-1 text-[10px] font-bold rounded ${suborderColor} uppercase tracking-wider">${screen.suborderStatus}</span>
-                                <i id="arrow-deepdive-${cat}-${index}" class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
+                                <div class="text-right">
+                                    <span class="inline-block px-2.5 py-1 text-[10px] font-bold rounded ${suborderColor} uppercase tracking-wider">${screen.suborderStatus}</span>
+                                    <span class="block text-[9px] text-slate-400 mt-0.5">06/16/2026</span>
+                                </div>
+                                <button class="text-slate-400 hover:text-slate-600" title="Download Document">
+                                    <i class="fa-solid fa-cloud-arrow-down text-base"></i>
+                                </button>
                             </div>
                         </button>
 
-                        <div id="deepdive-content-${cat}-${index}" class="hidden p-5 space-y-5 border-t border-slate-100 bg-slate-50/30">
+                        <div class="${isCheckExpanded ? 'block' : 'hidden'} p-5 space-y-5 border-t border-slate-100 bg-slate-50/30">
                             
-                            <!-- Cleaned-up status description line matching image_f4285d.png parameters but without the thick orange borders -->
-                            <div class="text-slate-800 text-xs font-bold py-1 px-1.5 flex items-center gap-2">
-                                <span class="w-2 h-2 rounded-full bg-amber-500"></span>
-                                <span>Status: ${screen.suborderStatus}</span>
-                            </div>
-
-                            <!-- Restructured and renamed progress path timeline panel -->
-                            <div class="mt-2 bg-white p-4 rounded-lg border border-slate-200 shadow-inner">
-                                <h4 class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-4 border-b border-slate-100 pb-2">Screening Status Tracking</h4>
+                            <div class="mt-2 bg-white p-4 rounded-lg border border-slate-200/60 relative">
                                 
-                                <div class="relative py-2 max-h-[220px] overflow-y-auto pr-2 tracking-timeline tracking-timeline-blue">
-                                    <div class="space-y-4">
+                                <div class="relative py-2 max-h-[300px] overflow-y-auto pr-2 pl-8">
+                                    <!-- Unified absolute vertical path with mathematically centered parameters matching image_e7e2d4.png -->
+                                    <div class="absolute left-[15px] top-[16px] bottom-[16px] w-[2px] bg-blue-500/30 z-0"></div>
+
+                                    <div class="space-y-0 relative z-10">
                                         ${reversedHistory.map((step, sIdx) => {
                                             const isNewest = sIdx === 0;
-                                            const dotColor = isNewest ? topDotColorClass : 'bg-blue-600 ring-blue-100';
+                                            const dotColor = isNewest ? topDotColorClass : 'bg-blue-600';
+                                            const ringColor = isNewest ? topRingColorClass : 'ring-blue-100';
                                             const fontStyle = isNewest ? 'font-bold text-slate-900' : 'font-semibold text-slate-600';
                                             return `
-                                                <div class="tracking-item relative text-[11px]">
-                                                    <span class="absolute left-[10px] top-1.5 w-3.5 h-3.5 rounded-full ${dotColor} border border-white ring-4 shadow-sm inline-block flex-shrink-0 aspect-square z-20"></span>
-                                                    <div class="flex justify-between items-center bg-slate-50/80 p-2.5 rounded border border-slate-100 flex-wrap gap-2">
-                                                        <span class="${fontStyle}">${step.status}</span>
-                                                        <span class="text-slate-500 font-mono text-[10px] font-medium">${step.date}</span>
+                                                <div class="flex items-stretch gap-4 text-[11px] relative">
+                                                    <!-- Left column: perfectly round nodes centered exactly on timeline line -->
+                                                    <div class="w-8 flex justify-center items-start flex-shrink-0 relative -ml-8">
+                                                        <div class="w-3.5 h-3.5 rounded-full ${dotColor} border border-white ring-4 ${ringColor} flex-shrink-0 aspect-square z-20 mt-1.5"></div>
+                                                    </div>
+                                                    <!-- Right column: borderless details state label -->
+                                                    <div class="flex-1 pb-4">
+                                                        <div class="flex justify-between items-center py-1 flex-wrap gap-2">
+                                                            <span class="${fontStyle}">${step.status}</span>
+                                                            <span class="text-slate-500 font-mono text-[10px] font-medium">${step.date}</span>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             `;
@@ -1165,12 +1242,12 @@
                             </div>
                         </div>
                     `;
-                    container.appendChild(checkBlock);
+                    catChildrenWrapper.appendChild(checkBlock);
                 });
             });
         }
 
-        let allDeepdiveExpanded = false;
+        let allDeepdiveExpanded = true;
         function toggleExpandAll() {
             allDeepdiveExpanded = !allDeepdiveExpanded;
             const toggleBtn = document.getElementById('expandAllToggle');
@@ -1186,37 +1263,19 @@
                 dot.classList.remove('translate-x-5');
             }
 
-            currentSelectedCandidate.screenings.forEach((screen) => {
-                const categories = ["DRUGS", "TITERS", "VACCINES"];
-                categories.forEach(cat => {
-                    const idx = currentSelectedCandidate.screenings.filter(s => s.category === cat).indexOf(screen);
-                    if (idx === -1) return;
-                    const targetContent = document.getElementById(`deepdive-content-${cat}-${idx}`);
-                    const arrow = document.getElementById(`arrow-deepdive-${cat}-${idx}`);
-                    if (targetContent) {
-                        if (allDeepdiveExpanded) {
-                            targetContent.classList.remove('hidden');
-                            arrow.classList.add('rotate-180');
-                        } else {
-                            targetContent.classList.add('hidden');
-                            arrow.classList.remove('rotate-180');
-                        }
-                    }
-                });
+            // Set all categories and individual checks to the same expansion state
+            const categories = ["Drug Check", "Titers", "Basic Physical", "Vaccine"];
+            categories.forEach(cat => {
+                categoryCollapseState[cat] = allDeepdiveExpanded;
             });
-        }
 
-        function toggleDeepdiveCheck(identifier) {
-            const targetContent = document.getElementById(`deepdive-content-${identifier}`);
-            const arrow = document.getElementById(`arrow-deepdive-${identifier}`);
-            
-            if (targetContent.classList.contains('hidden')) {
-                targetContent.classList.remove('hidden');
-                arrow.classList.add('rotate-180');
-            } else {
-                targetContent.classList.add('hidden');
-                arrow.classList.remove('rotate-180');
+            if (currentSelectedCandidate.screenings) {
+                currentSelectedCandidate.screenings.forEach(s => {
+                    checksCollapseState[`${s.category}-${s.name}`] = allDeepdiveExpanded;
+                });
             }
+
+            generateDeepDiveAccordionContent(currentSelectedCandidate);
         }
 
         let drawerScreeningsData = [];
@@ -1282,7 +1341,7 @@
                 return;
             }
 
-            const categories = ["DRUGS", "TITERS", "VACCINES"];
+            const categories = ["Drug Check", "Titers", "Basic Physical", "Vaccine"];
             
             categories.forEach(cat => {
                 const listItems = drawerScreeningsData.filter(s => s.category === cat);
@@ -1290,7 +1349,7 @@
 
                 const catHeaderDiv = document.createElement("div");
                 catHeaderDiv.className = "text-xs font-bold text-slate-500 bg-slate-50 px-4 py-2 rounded-t-lg border border-slate-200 border-b-0 uppercase tracking-wider mt-2";
-                catHeaderDiv.innerText = `${cat.charAt(0) + cat.slice(1).toLowerCase()} (${listItems.length})`;
+                catHeaderDiv.innerText = `${cat} (${listItems.length})`;
                 container.appendChild(catHeaderDiv);
 
                 const tableWrapper = document.createElement("div");
@@ -1313,69 +1372,69 @@
                     const isClear = screen.suborderStatus === "Clear";
                     const isReview = screen.suborderStatus === "Review Needed";
                     const isCanceled = screen.suborderStatus === "Canceled";
-                    const isUnreported = screen.suborderStatus === "Unreported";
                     const isVerifyError = screen.suborderStatus === "Unable to Verify";
 
                     let suborderTextStyle = "text-blue-600";
                     if (isClear) suborderTextStyle = "text-emerald-500 font-bold";
-                    else if (isReview) suborderTextStyle = "text-yellow-600 font-extrabold";
+                    else if (isReview) suborderTextStyle = "text-amber-500 font-extrabold";
                     else if (isCanceled) suborderTextStyle = "text-red-500 font-bold";
-                    else if (isUnreported) suborderTextStyle = "text-orange-500 font-bold";
                     else if (isVerifyError) suborderTextStyle = "text-purple-500 font-bold";
 
-                    // Reverse chronological sequence
                     const reversedHistory = [...screen.history].reverse();
 
-                    // Dot color matching overall status badge
-                    let topDotColorClass = 'bg-blue-600 ring-blue-100';
+                    let topDotColorClass = 'bg-blue-600';
+                    let topRingColorClass = 'ring-blue-100';
                     if (screen.suborderStatus === 'Review Needed') {
-                        topDotColorClass = 'bg-yellow-500 ring-yellow-100';
+                        topDotColorClass = 'bg-amber-500';
+                        topRingColorClass = 'ring-amber-100';
                     } else if (screen.suborderStatus === 'Clear') {
-                        topDotColorClass = 'bg-emerald-500 ring-emerald-100';
+                        topDotColorClass = 'bg-emerald-500';
+                        topRingColorClass = 'ring-emerald-100';
                     } else if (screen.suborderStatus === 'Canceled') {
-                        topDotColorClass = 'bg-red-500 ring-red-100';
+                        topDotColorClass = 'bg-red-500';
+                        topRingColorClass = 'ring-red-100';
                     } else if (screen.suborderStatus === 'Unable to Verify') {
-                        topDotColorClass = 'bg-purple-500 ring-purple-100';
-                    } else if (screen.suborderStatus === 'Unreported') {
-                        topDotColorClass = 'bg-orange-500 ring-orange-100';
+                        topDotColorClass = 'bg-purple-500';
+                        topRingColorClass = 'ring-purple-100';
                     }
 
                     rowContainer.innerHTML = `
                         <button onclick="toggleDrawerInlineTracker('${rowId}')" class="w-full grid grid-cols-12 p-3 items-center hover:bg-slate-50/50 focus:outline-none text-left transition-colors font-medium">
                             <div class="col-span-6 flex items-center gap-1.5 font-bold text-slate-700 flex-wrap">
                                 <span>${screen.name}</span>
-                                ${isUnreported ? `<span class="bg-orange-100 text-orange-700 text-[8px] px-1 rounded font-bold uppercase">Unreported History</span>` : ''}
                             </div>
                             <div class="col-span-3 text-center font-bold text-blue-600">${screen.orderStatus}</div>
                             <div class="col-span-3 text-center ${suborderTextStyle}">${screen.suborderStatus}</div>
                         </button>
                         
-                        <!-- Collapsible inline tracker details inside drawer check tracking -->
+                        <!-- Collapsible inline tracker details inside drawer -->
                         <div id="${rowId}" class="hidden p-4 bg-slate-50/50 border-t border-slate-200/60 space-y-4">
                             
-                            <!-- Restored status text without bounding orange border box -->
-                            <div class="text-slate-800 text-[11px] font-bold py-1 px-1 flex items-center gap-2 bg-white rounded border border-slate-200/80">
-                                <span class="w-2 h-2 rounded-full bg-amber-500"></span>
-                                <span>Status: ${screen.suborderStatus}</span>
+                            <!-- Center-aligned Notification Sentence -->
+                            <div class="text-center py-2.5 text-slate-700 font-bold text-xs bg-white border border-slate-100 rounded-lg shadow-sm">
+                                This check is ${screen.suborderStatus}
                             </div>
 
-                            <h5 class="text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-2 flex items-center gap-1">
-                                <i class="fa-solid fa-clock-rotate-left"></i> Screening Status Tracking
-                            </h5>
-                            
-                            <!-- Milestone path with container-level uninterrupted blue connection line -->
-                            <div class="relative py-2 max-h-[160px] overflow-y-auto pr-1 tracking-timeline tracking-timeline-blue">
-                                <div class="space-y-4">
+                            <div class="relative py-2 max-h-[220px] overflow-y-auto pr-1 pl-8">
+                                <!-- Continuous vector line behind items with mathematical center coordinates -->
+                                <div class="absolute left-[15px] top-[16px] bottom-[16px] w-[2px] bg-blue-500/30 z-0"></div>
+
+                                <div class="space-y-0 relative z-10">
                                     ${reversedHistory.map((step, stepIdx) => {
                                         const isCurrent = stepIdx === 0;
-                                        const dotBg = isCurrent ? topDotColorClass : 'bg-blue-600 ring-blue-100';
+                                        const dotBg = isCurrent ? topDotColorClass : 'bg-blue-600';
+                                        const ringBg = isCurrent ? topRingColorClass : 'ring-blue-100';
                                         const txtStyle = isCurrent ? 'font-bold text-slate-900' : 'font-medium text-slate-500';
                                         return `
-                                            <div class="tracking-item relative text-[11px]">
-                                                <span class="absolute left-[11px] top-1.5 w-3 h-3 rounded-full ${dotBg} border border-white ring-2 inline-block flex-shrink-0 aspect-square z-20"></span>
-                                                <div class="flex justify-between items-center bg-white p-2 rounded shadow-sm border border-slate-100 flex-wrap gap-1.5">
-                                                    <span class="${txtStyle}">${step.status}</span>
-                                                    <span class="text-slate-400 font-mono text-[9px]">${step.date}</span>
+                                            <div class="flex items-stretch gap-4 text-[11px] relative">
+                                                <div class="w-8 flex justify-center items-start flex-shrink-0 relative -ml-8">
+                                                    <div class="w-3 h-3 rounded-full ${dotBg} border border-white ring-2 ${ringBg} flex-shrink-0 aspect-square z-20 mt-1"></div>
+                                                </div>
+                                                <div class="flex-1 pb-4">
+                                                    <div class="flex justify-between items-center py-1 flex-wrap gap-1.5">
+                                                        <span class="${txtStyle}">${step.status}</span>
+                                                        <span class="text-slate-400 font-mono text-[9px]">${step.date}</span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         `;
@@ -1421,9 +1480,10 @@
                     <div>
                         <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Package</label>
                         <select id="form-cand-package" class="w-full text-xs border border-slate-200 rounded p-2.5 outline-none focus:border-blue-500 font-semibold text-slate-700">
-                            <option>AutoPAA and Market...</option>
-                            <option>stg1-ssn, mvr stg2-n...</option>
-                            <option>federal crim</option>
+                            <option>Executive Clinical Core</option>
+                            <option>Standard Care Package</option>
+                            <option>General Screening Pack</option>
+                            <option>Basic Physical Verification</option>
                         </select>
                     </div>
                     <div>
@@ -1480,8 +1540,8 @@
                 const newCandObj = {
                     name: nameField.value.trim(),
                     orderId: Math.random().toString(36).substring(2, 7).toUpperCase(),
-                    lastRun: "06/03/2026",
-                    dateAdded: "06/03/2026",
+                    lastRun: "06/16/2026",
+                    dateAdded: "06/16/2026",
                     expectedEndDate: "—",
                     createdBy: "debendu Roy",
                     package: pkgField.value,
@@ -1490,13 +1550,13 @@
                     alerts: "—",
                     screenings: [
                         {
-                            category: "TITERS",
-                            name: "Hep B Surface Antibody (HBsAb)",
+                            category: "Drug Check",
+                            name: "5 Panel Drug",
                             orderStatus: "InProgress",
                             suborderStatus: "Review Needed",
                             history: [
-                                { status: "Order Created", date: "06/03/2026 10:00 AM" },
-                                { status: "Review Needed", date: "06/03/2026 02:00 PM" }
+                                { status: "Order Created", date: "06/16/2026 10:00 AM" },
+                                { status: "Review Needed", date: "06/16/2026 02:00 PM" }
                             ]
                         }
                     ]
@@ -1530,7 +1590,6 @@
             }, 2000);
         }
 
-        // Initialize table values on system load
         window.onload = function () {
             generateCandidateTable(candidateDb);
             updateTabCounters();
