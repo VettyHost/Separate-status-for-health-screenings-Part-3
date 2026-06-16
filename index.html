@@ -129,12 +129,11 @@
 </head>
 <body class="bg-[#f3f4f6] text-[#1e293b] min-h-screen flex overflow-hidden">
 
-    <!-- Sidebar Panel matching image_ea5444.png light theme and LaSalle Network identity -->
     <aside class="w-[260px] bg-white text-slate-500 flex flex-col flex-shrink-0 z-20 shadow-sm border-r border-slate-200">
         <!-- LaSalle Network Brand Header -->
         <div class="h-20 flex flex-col justify-center px-6 border-b border-slate-100">
             <div class="flex items-center gap-2.5">
-                <!-- LaSalle Network Placeholder Logo -->
+                <!-- LaSalle Network Logo -->
                 <div class="flex items-center justify-center w-8 h-8 rounded bg-emerald-50 border border-slate-200 text-emerald-600">
                     <i class="fa-solid fa-network-wired text-sm"></i>
                 </div>
@@ -235,7 +234,6 @@
             </div>
         </header>
 
-        <!-- Scrollable Page Frame - Handle whole-page scrolls prominently matching image_df48bf.png -->
         <div class="flex-1 overflow-y-auto main-page-scrollbar relative bg-[#f8fafc]">
 
             <!-- HOME DIRECTORY SCREEN (Restricted to a premium max width of 1200px to prevent layout bloat) -->
@@ -327,7 +325,6 @@
                 </div>
             </section>
 
-            <!-- CANDIDATE PROFILE SCREEN (Capped to a perfectly matched 810px width to ensure absolute side-to-side vertical alignment) -->
             <section id="details-screen" class="hidden p-6 space-y-6 mx-auto w-full profile-max-width">
                 <!-- Header Back Action -->
                 <div class="flex items-center justify-between border-b border-slate-200 pb-4 flex-wrap gap-4">
@@ -342,7 +339,110 @@
                     </div>
                 </div>
 
-                <!-- Multi-column grid optimized for a compact and sharp dashboard look (flexbox-driven side-to-side alignment) -->
+                <!-- TOP Profile summary card from image_ea5444.png & image_d06b23.png spanning full profile-max-width -->
+                <div class="bg-white rounded-2xl border border-[#d4dae4] p-5 shadow-sm space-y-5">
+                    <div class="flex justify-between items-start flex-wrap gap-4 border-b border-slate-100 pb-3">
+                        <div class="flex items-center gap-3">
+                            <!-- Blue Avatar Silhouette -->
+                            <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 text-lg font-bold">
+                                <i class="fa-solid fa-user"></i>
+                            </div>
+                            <div>
+                                <div class="flex items-center gap-2">
+                                    <h3 id="cand-header-fullname" class="text-base font-bold text-slate-800">-</h3>
+                                    <span id="cand-header-status-banner" class="px-2.5 py-0.5 text-[10px] font-semibold rounded bg-emerald-500 text-white">Checks Complete - Clear</span>
+                                </div>
+                                <div class="mt-1 flex items-center gap-2">
+                                    <select class="bg-white border border-slate-200 rounded text-[10px] px-2 py-0.5 text-slate-600 font-semibold outline-none">
+                                        <option>Screening Tags</option>
+                                        <option>Active Verification</option>
+                                        <option>High Priority</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Lined-up top right action links -->
+                        <div class="flex items-center gap-4 text-[11px] font-semibold text-slate-500 pt-1">
+                            <button class="hover:text-slate-800 flex items-center gap-1"><i class="fa-solid fa-plus-circle text-blue-600 text-[10px]"></i> Add New Checks</button>
+                            <button class="hover:text-slate-800 flex items-center gap-1"><i class="fa-regular fa-file-alt text-[10px]"></i> Documents and Disclosures</button>
+                            <button class="hover:text-slate-800 flex items-center gap-1"><i class="fa-solid fa-calculator text-[10px]"></i> Cost Summary</button>
+                        </div>
+                    </div>
+
+                    <!-- Meta details layout matching image_ea5444.png & image_d06b23.png -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-2.5 text-[11px]">
+                        <!-- Left Column -->
+                        <div class="space-y-2">
+                            <div class="grid grid-cols-3">
+                                <span class="text-slate-400 font-semibold">Added By</span>
+                                <span class="col-span-2 text-slate-700 font-semibold">Work Validater</span>
+                            </div>
+                            <div class="grid grid-cols-3 items-center">
+                                <span class="text-slate-400 font-semibold flex items-center gap-1">Assignee <i class="fa-solid fa-circle-info text-[9px] text-blue-500"></i></span>
+                                <div class="col-span-2">
+                                    <select class="bg-white border border-slate-200 rounded text-[10px] px-1.5 py-0.5 text-slate-700 font-semibold outline-none focus:border-blue-500">
+                                        <option>Assignee Added (1)</option>
+                                        <option>debendu Roy</option>
+                                        <option>mrunali Stage</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-3">
+                                <span class="text-slate-400 font-semibold">Package</span>
+                                <span id="cand-header-meta-package" class="col-span-2 text-slate-700 font-semibold truncate">-</span>
+                            </div>
+                            <div class="grid grid-cols-3">
+                                <span class="text-slate-400 font-semibold">Department</span>
+                                <span class="col-span-2 text-slate-700 font-semibold">Talent Acquisition</span>
+                            </div>
+                            <div class="grid grid-cols-3">
+                                <span class="text-slate-400 font-semibold">Location</span>
+                                <span class="col-span-2 text-slate-700 font-semibold">New York Clinic Hub</span>
+                            </div>
+                            <div class="grid grid-cols-3">
+                                <span class="text-slate-400 font-semibold">Order ID</span>
+                                <span id="cand-header-meta-orderid" class="col-span-2 text-slate-700 font-mono font-bold">-</span>
+                            </div>
+                            <div class="grid grid-cols-3">
+                                <span class="text-slate-400 font-semibold">Candidate ID</span>
+                                <span class="col-span-2 text-slate-500 font-mono text-[10px] truncate">6a30c359ccb303f2...</span>
+                            </div>
+                        </div>
+
+                        <!-- Right Column -->
+                        <div class="space-y-2">
+                            <div class="grid grid-cols-3">
+                                <span class="text-slate-400 font-semibold">Date Of Birth</span>
+                                <div class="col-span-2 flex items-center gap-1">
+                                    <span id="dob-masked" class="text-slate-700 font-semibold">06/16/XXXX</span>
+                                    <button onclick="toggleMaskValue('dob')" class="text-blue-600 hover:underline font-bold text-[10px]">View</button>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-3">
+                                <span class="text-slate-400 font-semibold flex items-center gap-0.5">Address <i class="fa-regular fa-file text-[10px]"></i></span>
+                                <span class="col-span-2 text-slate-700 font-semibold leading-tight">Hill Road, Los Angeles, CA</span>
+                            </div>
+                            <div class="grid grid-cols-3">
+                                <span class="text-slate-400 font-semibold">Email Address</span>
+                                <span id="cand-header-meta-email" class="col-span-2 text-slate-700 font-semibold truncate">-</span>
+                            </div>
+                            <div class="grid grid-cols-3">
+                                <span class="text-slate-400 font-semibold">Phone #</span>
+                                <span class="col-span-2 text-slate-700 font-semibold">(222) 222-2222</span>
+                            </div>
+                            <div class="grid grid-cols-3">
+                                <span class="text-slate-400 font-semibold">Social Security #</span>
+                                <div class="col-span-2 flex items-center gap-1">
+                                    <span id="ssn-masked" class="text-slate-700 font-semibold">XXX-XX-2222</span>
+                                    <button onclick="toggleMaskValue('ssn')" class="text-blue-600 hover:underline font-bold text-[10px]">View</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Multi-column grid matching image_ea5444.png & image_d06b23.png layout -->
                 <div class="flex flex-col lg:flex-row gap-6 items-start w-full">
                     
                     <!-- Left Column: Actions and Activity Feed (Strictly 286px wide for straight-line desktop alignment) -->
@@ -360,7 +460,7 @@
                             </div>
                         </div>
 
-                        <!-- Activity Feed timeline exactly as in image_eb2586.png -->
+                        <!-- Activity Feed timeline exactly as in image_eb2586.png & image_d06b23.png -->
                         <div class="bg-white p-5 rounded-xl border border-[#d4dae4] shadow-sm space-y-4">
                             <div class="flex justify-between items-center pb-2 border-b border-slate-100">
                                 <h3 class="text-xs font-bold text-slate-700 uppercase tracking-wider">Activity Feed</h3>
@@ -374,128 +474,18 @@
                         </div>
                     </div>
 
-                    <!-- Right Column: Candidate Profile & Screening Checks with Visible Highlighted Scrollbar matching image_3ce564.png -->
-                    <!-- Capped at exactly 500px to achieve perfect straight-line vertical borders with the upper profile box -->
+                    <!-- Right Column: Screening Checks Card (Capped at exactly 500px to achieve perfect straight-line vertical borders) -->
                     <div class="w-full lg:w-[500px] lg:flex-shrink-0 space-y-6">
                         
-                        <!-- Top Comprehensive Header Metadata Card (Moved here to align borders perfectly with below checks card) -->
-                        <div class="bg-white rounded-2xl border border-[#d4dae4] p-5 shadow-sm space-y-5">
-                            <div class="flex justify-between items-start flex-wrap gap-4 border-b border-slate-100 pb-3">
-                                <div class="flex items-center gap-3">
-                                    <!-- Blue Avatar Silhouette -->
-                                    <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 text-lg font-bold">
-                                        <i class="fa-solid fa-user"></i>
-                                    </div>
-                                    <div>
-                                        <div class="flex items-center gap-2">
-                                            <h3 id="cand-header-fullname" class="text-base font-bold text-slate-800">-</h3>
-                                        </div>
-                                        <div class="mt-1 flex items-center gap-2">
-                                            <span id="cand-header-status-banner" class="px-2 py-0.5 text-[10px] font-semibold rounded bg-amber-500 text-white">Checks Complete - Clear</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- MOVED ACTIONS TO RIGHT SIDE TO PRESERVE HIGH DENSITY AS PER image_df48bf.png -->
-                                <div class="flex flex-col items-end gap-1 text-[11px] font-semibold text-slate-500 pt-1">
-                                    <button class="hover:text-slate-800 flex items-center gap-1"><i class="fa-solid fa-plus-circle text-blue-600 text-[10px]"></i> Add New Checks</button>
-                                    <button class="hover:text-slate-800 flex items-center gap-1"><i class="fa-regular fa-file-alt text-[10px]"></i> Documents and Disclosures</button>
-                                    <button class="hover:text-slate-800 flex items-center gap-1"><i class="fa-solid fa-calculator text-[10px]"></i> Cost Summary</button>
-                                </div>
-                            </div>
-
-                            <!-- Meta details layout matching image_ea5444.png but optimized for 500px width -->
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-2.5 text-[11px]">
-                                <!-- Left Data Table Column -->
-                                <div class="space-y-2">
-                                    <div class="grid grid-cols-3">
-                                        <span class="text-slate-400 font-semibold">Added By</span>
-                                        <span class="col-span-2 text-slate-700 font-semibold">Work Validater</span>
-                                    </div>
-                                    <div class="grid grid-cols-3 items-center">
-                                        <span class="text-slate-400 font-semibold flex items-center gap-1">Assignee <i class="fa-solid fa-circle-info text-[9px] text-blue-500"></i></span>
-                                        <div class="col-span-2">
-                                            <select class="bg-white border border-slate-200 rounded text-[10px] px-1.5 py-0.5 text-slate-700 font-semibold outline-none focus:border-blue-500">
-                                                <option>Assignee Added (1)</option>
-                                                <option>debendu Roy</option>
-                                                <option>mrunali Stage</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="grid grid-cols-3">
-                                        <span class="text-slate-400 font-semibold">Package</span>
-                                        <span id="cand-header-meta-package" class="col-span-2 text-slate-700 font-semibold truncate">-</span>
-                                    </div>
-                                    <div class="grid grid-cols-3">
-                                        <span class="text-slate-400 font-semibold">Department</span>
-                                        <span class="col-span-2 text-slate-700 font-semibold">Talent Acquisition</span>
-                                    </div>
-                                    <div class="grid grid-cols-3">
-                                        <span class="text-slate-400 font-semibold">Location</span>
-                                        <span class="col-span-2 text-slate-700 font-semibold">New York Clinic Hub</span>
-                                    </div>
-                                    <div class="grid grid-cols-3">
-                                        <span class="text-slate-400 font-semibold">Order ID</span>
-                                        <span id="cand-header-meta-orderid" class="col-span-2 text-slate-700 font-mono font-bold">-</span>
-                                    </div>
-                                    <div class="grid grid-cols-3">
-                                        <span class="text-slate-400 font-semibold">Candidate ID</span>
-                                        <span class="col-span-2 text-slate-500 font-mono text-[10px] truncate">6a30c359ccb303f2...</span>
-                                    </div>
-                                </div>
-
-                                <!-- Right Data Table Column -->
-                                <div class="space-y-2">
-                                    <div class="grid grid-cols-3">
-                                        <span class="text-slate-400 font-semibold">DOB</span>
-                                        <div class="col-span-2 flex items-center gap-1">
-                                            <span id="dob-masked" class="text-slate-700 font-semibold">06/16/XXXX</span>
-                                            <button onclick="toggleMaskValue('dob')" class="text-blue-600 hover:underline font-bold text-[10px]">View</button>
-                                        </div>
-                                    </div>
-                                    <div class="grid grid-cols-3">
-                                        <span class="text-slate-400 font-semibold flex items-center gap-0.5">Address <i class="fa-regular fa-file text-[10px]"></i></span>
-                                        <span class="col-span-2 text-slate-700 font-semibold leading-tight">Hill Road, Los Angeles, CA</span>
-                                    </div>
-                                    <div class="grid grid-cols-3">
-                                        <span class="text-slate-400 font-semibold">Email</span>
-                                        <span id="cand-header-meta-email" class="col-span-2 text-slate-700 font-semibold truncate">-</span>
-                                    </div>
-                                    <div class="grid grid-cols-3">
-                                        <span class="text-slate-400 font-semibold">Phone #</span>
-                                        <span class="col-span-2 text-slate-700 font-semibold">(222) 222-2222</span>
-                                    </div>
-                                    <div class="grid grid-cols-3">
-                                        <span class="text-slate-400 font-semibold">SSN</span>
-                                        <div class="col-span-2 flex items-center gap-1">
-                                            <span id="ssn-masked" class="text-slate-700 font-semibold">XXX-XX-2222</span>
-                                            <button onclick="toggleMaskValue('ssn')" class="text-blue-600 hover:underline font-bold text-[10px]">View</button>
-                                        </div>
-                                    </div>
-                                    <div class="grid grid-cols-3">
-                                        <span class="text-slate-400 font-semibold">Tags</span>
-                                        <div class="col-span-2">
-                                            <select class="bg-slate-50 border border-slate-200 rounded text-[10px] px-1 py-0.5 text-slate-600 font-medium outline-none">
-                                                <option>Screening Tags</option>
-                                                <option>Active Verification</option>
-                                                <option>High Priority</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                         <!-- Health Screening Checks Panel Card -->
                         <div class="bg-white p-5 rounded-xl border border-[#d4dae4] shadow-sm relative w-full">
                             
-                            <!-- Header block styled as image_eb2586.png / image_df48bf.png (actions shifted left) -->
+                            <!-- Header block styled as image_eb2586.png / image_df48bf.png -->
                             <div class="flex justify-between items-start border-b border-slate-100 pb-4 mb-6">
                                 <div>
                                     <h3 class="text-base font-bold text-[#1b1b2a]">Health Screening Checks</h3>
                                     <p class="text-[11px] text-slate-400 font-semibold">Verified Profile</p>
                                 </div>
-                                <!-- MOVED CONTROLS TO THE VERTICAL STACK ON EXTREME RIGHT as per user instruction and image_df48bf.png / image_de7e27.png -->
                                 <div class="flex flex-col items-end gap-1.5 text-xs text-right select-none">
                                     <div class="flex items-center gap-2">
                                         <span class="text-xs font-bold text-slate-500">Expand All</span>
@@ -509,7 +499,6 @@
                                 </div>
                             </div>
 
-                            <!-- SCREENING NESTED ACCORDIONS - Constrained to a compact rectangular width matching alignment of controls -->
                             <!-- Screenings Nested Categories list container with explicit outer scroller -->
                             <div id="accordion-checks-container" class="overall-screening-scroll space-y-4 pb-10" style="width: 100%; max-width: 100%;">
                                 <!-- Populated dynamically based on nested models -->
@@ -538,7 +527,6 @@
         </div>
     </main>
 
-    <!-- SLIDE DRAWERS & MODALS -->
     <div id="drawer-backdrop" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 z-40" onclick="closeDrawer()"></div>
     
     <div id="quick-drawer" class="fixed right-0 top-0 bottom-0 w-[640px] bg-white shadow-2xl z-50 transform translate-x-full drawer-transition flex flex-col">
@@ -615,6 +603,91 @@
     <script>
         // Database containing realistic sequences matching image_4cc6bc.png and image_4b6e5a.png
         const candidateDb = [
+            {
+                name: "Debendu Roy",
+                orderId: "H9OUK",
+                lastRun: "06/16/2026",
+                dateAdded: "02/13/2026",
+                expectedEndDate: "—",
+                createdBy: "Work Validater",
+                package: "Empty pkg New",
+                status: "Clear",
+                stagedCheck: "—",
+                alerts: "—",
+                screenings: [
+                    {
+                        category: "Drug Check",
+                        name: "5 Panel Drug",
+                        orderStatus: "InProgress",
+                        suborderStatus: "Review Needed",
+                        hasResults: true, // For rendering the Results/Details 1 tables
+                        history: [
+                            { status: "Order Created", date: "06/13/2026 09:12 AM" },
+                            { status: "Donor Pass Creation Pending", date: "06/13/2026 11:00 AM" },
+                            { status: "Donor Pass Created", date: "06/13/2026 01:25 PM" },
+                            { status: "Scheduled", date: "06/14/2026 10:00 AM" },
+                            { status: "Collection/Testing Pending", date: "06/15/2026 08:30 AM" },
+                            { status: "Collection Completed", date: "06/16/2026 04:45 PM" },
+                            { status: "Received at Lab", date: "06/16/2026 11:15 AM" },
+                            { status: "Pending MRO Review", date: "06/16/2026 02:00 PM" },
+                            { status: "MRO Review - In Progress", date: "06/16/2026 03:30 PM" },
+                            { status: "Review Needed", date: "06/16/2026 04:50 PM" }
+                        ]
+                    },
+                    {
+                        category: "Titers",
+                        name: "Hep B Surface Antigen (HBsAG)",
+                        orderStatus: "Clear",
+                        suborderStatus: "Clear",
+                        history: [
+                            { status: "Order Created", date: "06/13/2026 09:35 AM" },
+                            { status: "Donor Pass Creation Pending", date: "06/13/2026 12:05 PM" },
+                            { status: "Donor Pass Created", date: "06/13/2026 02:30 PM" },
+                            { status: "Scheduled", date: "06/15/2026 01:00 PM" },
+                            { status: "Collection/Testing Pending", date: "06/15/2026 04:00 PM" },
+                            { status: "Collection Completed", date: "06/16/2026 04:30 PM" },
+                            { status: "Received at Lab", date: "06/16/2026 11:00 AM" },
+                            { status: "Clear", date: "06/16/2026 02:00 PM" }
+                        ]
+                    },
+                    {
+                        category: "Titers",
+                        name: "QuantiFERON-TB Gold",
+                        orderStatus: "Clear",
+                        suborderStatus: "Clear",
+                        history: [
+                            { status: "Order Created", date: "06/13/2026 09:30 AM" },
+                            { status: "Donor Pass Creation Pending", date: "06/13/2026 11:55 AM" },
+                            { status: "Donor Pass Created", date: "06/13/2026 02:15 PM" },
+                            { status: "Scheduled", date: "06/15/2026 11:00 AM" },
+                            { status: "Collection Completed", date: "06/16/2026 02:30 PM" },
+                            { status: "Received at Lab", date: "06/16/2026 09:15 AM" },
+                            { status: "Clear", date: "06/16/2026 11:15 AM" }
+                        ]
+                    },
+                    {
+                        category: "Basic Physical",
+                        name: "Pre-Employment Physical Assessment",
+                        orderStatus: "InProgress",
+                        suborderStatus: "Unable to Verify",
+                        history: [
+                            { status: "Order Created", date: "06/13/2026 09:25 AM" },
+                            { status: "Donor Pass Creation Pending", date: "06/13/2026 11:45 AM" },
+                            { status: "Unable to Verify", date: "06/14/2026 04:10 PM" }
+                        ]
+                    },
+                    {
+                        category: "Vaccine",
+                        name: "MMR Vaccine",
+                        orderStatus: "InProgress",
+                        suborderStatus: "Review Needed",
+                        history: [
+                            { status: "Order Created", date: "06/12/2026 01:00 PM" },
+                            { status: "Review Needed", date: "06/16/2026 02:00 PM" }
+                        ]
+                    }
+                ]
+            },
             {
                 name: "Mark Lewis", // Renamed from Autopaatest Done as per user requests
                 orderId: "K1MOC",
@@ -1143,6 +1216,8 @@
                     badgeStyle = "bg-amber-500 text-white font-bold";
                 } else if (cand.status === "Pending Candidate") {
                     badgeStyle = "bg-amber-100 text-amber-800 border border-amber-200 font-bold";
+                } else if (cand.status === "Clear") {
+                    badgeStyle = "bg-emerald-500 text-white";
                 }
 
                 tr.innerHTML = `
@@ -1182,7 +1257,7 @@
             let filteredList = candidateDb.filter(cand => {
                 if (homeActiveTabStatus !== "all") {
                     if (homeActiveTabStatus === "COI Expired" && cand.status !== "COI Expired" && cand.status !== "Adverse Action") return false;
-                    if (homeActiveTabStatus === "In Progress" && cand.status !== "In Progress") return false;
+                    if (homeActiveTabStatus === "In Progress" && cand.status !== "In Progress" && cand.status !== "In Progress") return false;
                     if (homeActiveTabStatus === "Review Needed" && cand.status !== "Review Needed") return false;
                     if (homeActiveTabStatus === "Ready For Onboarding" && cand.status !== "Ready For Onboarding") return false;
                     if (homeActiveTabStatus === "Pending Candidate" && cand.status !== "Pending Candidate") return false;
@@ -1244,7 +1319,7 @@
                 statusBanner.className = "px-3 py-0.5 text-xs font-semibold rounded bg-red-500 text-white";
             } else if (targetCandidate.status === 'Review Needed') {
                 statusBanner.className = "px-3 py-0.5 text-xs font-semibold rounded bg-amber-500 text-white";
-            } else if (targetCandidate.status === 'Ready For Onboarding' || targetCandidate.status === 'Reviewed') {
+            } else if (targetCandidate.status === 'Ready For Onboarding' || targetCandidate.status === 'Reviewed' || targetCandidate.status === 'Clear') {
                 statusBanner.className = "px-3 py-0.5 text-xs font-semibold rounded bg-emerald-500 text-white";
             } else {
                 statusBanner.className = "px-3 py-0.5 text-xs font-semibold rounded bg-blue-600 text-white";
@@ -1298,11 +1373,11 @@
                 let lineSegmentHtml = '';
                 if (feeds.length > 1) {
                     if (isFirst) {
-                        lineSegmentHtml = `<div class="absolute left-[15px] top-[12px] bottom-0 w-[2px] bg-blue-500/30 z-0"></div>`;
+                        lineSegmentHtml = `<div class="absolute left-1/2 -translate-x-1/2 top-[12px] bottom-0 w-[2px] bg-blue-500/30 z-0"></div>`;
                     } else if (isLast) {
-                        lineSegmentHtml = `<div class="absolute left-[15px] top-0 h-[12px] w-[2px] bg-blue-500/30 z-0"></div>`;
+                        lineSegmentHtml = `<div class="absolute left-1/2 -translate-x-1/2 top-0 h-[12px] w-[2px] bg-blue-500/30 z-0"></div>`;
                     } else {
-                        lineSegmentHtml = `<div class="absolute left-[15px] top-0 bottom-0 w-[2px] bg-blue-500/30 z-0"></div>`;
+                        lineSegmentHtml = `<div class="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-[2px] bg-blue-500/30 z-0"></div>`;
                     }
                 }
 
@@ -1525,11 +1600,11 @@
                                             let lineSegmentHtml = '';
                                             if (reversedHistory.length > 1) {
                                                 if (isNewest) {
-                                                    lineSegmentHtml = `<div class="absolute left-[15px] top-[12px] bottom-0 w-[2px] bg-blue-500/30 z-0"></div>`;
+                                                    lineSegmentHtml = `<div class="absolute left-1/2 -translate-x-1/2 top-[12px] bottom-0 w-[2px] bg-blue-500/30 z-0"></div>`;
                                                 } else if (isOldest) {
-                                                    lineSegmentHtml = `<div class="absolute left-[15px] top-0 h-[13px] w-[2px] bg-blue-500/30 z-0"></div>`;
+                                                    lineSegmentHtml = `<div class="absolute left-1/2 -translate-x-1/2 top-0 h-[13px] w-[2px] bg-blue-500/30 z-0"></div>`;
                                                 } else {
-                                                    lineSegmentHtml = `<div class="absolute left-[15px] top-0 bottom-0 w-[2px] bg-blue-500/30 z-0"></div>`;
+                                                    lineSegmentHtml = `<div class="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-[2px] bg-blue-500/30 z-0"></div>`;
                                                 }
                                             }
 
@@ -1758,11 +1833,11 @@
                                         let lineSegmentHtml = '';
                                         if (reversedHistory.length > 1) {
                                             if (isCurrent) {
-                                                lineSegmentHtml = `<div class="absolute left-[15px] top-[12px] bottom-0 w-[2px] bg-blue-500/30 z-0"></div>`;
+                                                lineSegmentHtml = `<div class="absolute left-1/2 -translate-x-1/2 top-[12px] bottom-0 w-[2px] bg-blue-500/30 z-0"></div>`;
                                             } else if (isOldest) {
-                                                lineSegmentHtml = `<div class="absolute left-[15px] top-0 h-[12px] w-[2px] bg-blue-500/30 z-0"></div>`;
+                                                lineSegmentHtml = `<div class="absolute left-1/2 -translate-x-1/2 top-0 h-[12px] w-[2px] bg-blue-500/30 z-0"></div>`;
                                             } else {
-                                                lineSegmentHtml = `<div class="absolute left-[15px] top-0 bottom-0 w-[2px] bg-blue-500/30 z-0"></div>`;
+                                                lineSegmentHtml = `<div class="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-[2px] bg-blue-500/30 z-0"></div>`;
                                             }
                                         }
 
