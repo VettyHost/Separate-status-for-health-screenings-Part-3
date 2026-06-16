@@ -15,13 +15,14 @@
         body {
             font-family: 'Inter', sans-serif;
         }
-        /* Custom scrollbar styling */
+        /* Custom scrollbar styling to ensure high visibility */
         ::-webkit-scrollbar {
             width: 8px;
             height: 8px;
         }
         ::-webkit-scrollbar-track {
             background: #f1f5f9;
+            border-radius: 4px;
         }
         ::-webkit-scrollbar-thumb {
             background: #cbd5e1;
@@ -30,9 +31,27 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #94a3b8;
         }
+        
         /* Drawer animation transitions */
         .drawer-transition {
             transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease-in-out;
+        }
+
+        /* Specific scrollable inner timeline containers */
+        .inner-scroll-timeline {
+            max-height: 240px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+        .inner-scroll-timeline::-webkit-scrollbar {
+            width: 5px;
+        }
+        .inner-scroll-timeline::-webkit-scrollbar-track {
+            background: #f8fafc;
+        }
+        .inner-scroll-timeline::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 9999px;
         }
     </style>
 </head>
@@ -57,7 +76,7 @@
             </button>
         </div>
 
-        <!-- Navigation Links exactly matching image_f3ca89.png -->
+        <!-- Navigation Links matching image_f3ca89.png -->
         <nav class="flex-1 px-3 space-y-1 overflow-y-auto">
             <a href="#" id="nav-candidates" onclick="showScreen('home-screen', 'nav-candidates')" class="flex items-center gap-3.5 px-4 py-3 rounded-lg bg-slate-800 text-white font-semibold transition-all">
                 <i class="fa-solid fa-users text-blue-500 w-5 text-center text-base"></i>
@@ -195,6 +214,7 @@
                     </div>
                 </div>
 
+                <!-- SCREENING TABS -->
                 <div class="flex items-center gap-1 overflow-x-auto border-b border-slate-200 pb-0.5">
                     <button onclick="filterStatusTab('all')" id="tab-all" class="px-4 py-2.5 text-xs font-bold border-b-2 border-blue-600 text-blue-600 whitespace-nowrap tab-btn">All Candidates (<span id="count-all">0</span>)</button>
                     <button onclick="filterStatusTab('Pending Candidate')" id="tab-pending" class="px-4 py-2.5 text-xs font-semibold text-slate-500 hover:text-slate-800 border-b-2 border-transparent hover:border-slate-300 whitespace-nowrap tab-btn">Pending Candidate (<span id="count-pending">0</span>)</button>
@@ -204,7 +224,6 @@
                     <button onclick="filterStatusTab('COI Expired')" id="tab-alerts" class="px-4 py-2.5 text-xs font-semibold text-slate-500 hover:text-slate-800 border-b-2 border-transparent hover:border-slate-300 whitespace-nowrap tab-btn">Alerts (<span id="count-alerts">0</span>)</button>
                 </div>
 
-                <!-- Candidates Table View exactly matching image_f42881.png -->
                 <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
                     <div class="overflow-x-auto">
                         <table class="w-full text-left border-collapse">
@@ -232,6 +251,7 @@
                 </div>
             </section>
 
+            <!-- CANDIDATE DEEP DIVE SCREEN -->
             <section id="details-screen" class="hidden p-8 space-y-6">
                 <!-- Header Back Action -->
                 <div class="flex items-center justify-between border-b border-slate-200 pb-5 flex-wrap gap-4">
@@ -264,7 +284,7 @@
                             </div>
                         </div>
 
-                        <!-- Activity Feed scrollable timeline exactly as in image_4c6cbe.png -->
+                        <!-- Activity Feed timeline exactly as in image_4c6cbe.png -->
                         <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-4">
                             <div class="flex justify-between items-center pb-2 border-b border-slate-100">
                                 <h3 class="text-sm font-bold text-slate-700">Activity Feed</h3>
@@ -299,13 +319,13 @@
                                     </div>
                                     <!-- Action links aligned underneath on the right as image_4c6cbe.png -->
                                     <div class="flex flex-col items-end gap-1.5 mt-1">
-                                        <button onclick="openFormModal('modify-order')" class="text-blue-600 hover:underline font-bold text-xs"><i class="fa-solid fa-pen-to-square mr-1"></i> Modify Order</button>
+                                        <button onclick="openFormModal('modify-order')" class="text-blue-600 hover:underline font-bold text-xs">Modify Order</button>
                                         <button onclick="openFormModal('change-location')" class="text-blue-600 hover:underline font-bold text-xs">Change Location for All</button>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Screenings Nested Categories list container with custom scroll overflow parameters -->
+                            <!-- Screenings Nested Categories list container -->
                             <div id="accordion-checks-container" class="space-y-6 pb-10">
                                 <!-- Populated dynamically based on nested models -->
                             </div>
@@ -375,7 +395,7 @@
             </div>
         </div>
 
-        <!-- Drawer Content listing container with scrolling rules -->
+        <!-- Drawer Content listing container -->
         <div id="drawer-body-list" class="flex-1 overflow-y-auto p-6 space-y-6 max-h-[calc(100vh-210px)] pb-10">
             <!-- Rendered dynamically -->
         </div>
@@ -834,15 +854,15 @@
         let homeActiveTabStatus = "all";
         let activeSidebarId = "nav-candidates";
 
-        // Keep track of collapsed states of the Categories in the Deep Dive page (Default expanded)
+        // Keep track of collapsed states of the Categories in the Deep Dive page (Default collapsed)
         let categoryCollapseState = {
-            "Drug Check": true,
-            "Titers": true,
-            "Basic Physical": true,
-            "Vaccine": true
+            "Drug Check": false,
+            "Titers": false,
+            "Basic Physical": false,
+            "Vaccine": false
         };
 
-        // Keep track of collapsed states for individual checks
+        // Keep track of collapsed states for individual checks (Default collapsed)
         let checksCollapseState = {};
 
         function updateTabCounters() {
@@ -1014,13 +1034,28 @@
             document.getElementById('cand-detail-id').innerText = targetCandidate.orderId;
             document.getElementById('cand-detail-pkg').innerText = targetCandidate.package;
 
-            // Reset collapsible states for individual checks inside this candidate to true (expanded)
+            // Reset collapsible states for category groups to collapsed (false) by default
+            categoryCollapseState = {
+                "Drug Check": false,
+                "Titers": false,
+                "Basic Physical": false,
+                "Vaccine": false
+            };
+
+            // Reset collapsible states for individual checks inside this candidate to collapsed (false) by default
             checksCollapseState = {};
             if (targetCandidate.screenings) {
                 targetCandidate.screenings.forEach(s => {
-                    checksCollapseState[`${s.category}-${s.name}`] = true;
+                    checksCollapseState[`${s.category}-${s.name}`] = false;
                 });
             }
+
+            // Expand all toggle tracking is initialized as off (false)
+            allDeepdiveExpanded = false;
+            const toggleBtn = document.getElementById('expandAllToggle');
+            const dot = toggleBtn.querySelector('.dot');
+            toggleBtn.className = "w-11 h-6 bg-slate-200 rounded-full relative transition-colors focus:outline-none";
+            dot.className = "dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform shadow-sm";
 
             generateDeepDiveAccordionContent(targetCandidate);
             generateActivityFeed(targetCandidate);
@@ -1034,11 +1069,6 @@
             // Unified relative container setup with perfect grid coordinate alignment
             container.className = "relative pl-8 pr-2";
 
-            // Uninterrupted single vector line passing through mathematical center of circular status dots
-            const verticalLine = document.createElement('div');
-            verticalLine.className = "absolute left-[15px] top-2 bottom-6 w-[2px] bg-blue-500/30 z-0";
-            container.appendChild(verticalLine);
-
             const feeds = [
                 { title: "Note From Client User", desc: "send from client dash", date: "06/16/2026" },
                 { title: "Note from Vetty (Researcher)", desc: "test kromfox notes", date: "06/15/2026" },
@@ -1046,13 +1076,29 @@
                 { title: "Donor Pass Created for 5 Panel Drug + Physical Assessment", desc: "", date: "06/15/2026" }
             ];
 
-            feeds.forEach((feed) => {
+            feeds.forEach((feed, fIdx) => {
                 const item = document.createElement('div');
-                item.className = "flex gap-4 relative text-[11px] z-10 pb-4";
+                item.className = "flex gap-4 relative text-[11px] pb-4";
+
+                const isFirst = fIdx === 0;
+                const isLast = fIdx === feeds.length - 1;
+                
+                // Segment-based line connector inside relative coordinates
+                let lineSegmentHtml = '';
+                if (feeds.length > 1) {
+                    if (isFirst) {
+                        lineSegmentHtml = `<div class="absolute left-[15px] top-[12px] bottom-0 w-[2px] bg-blue-500/30 z-0"></div>`;
+                    } else if (isLast) {
+                        lineSegmentHtml = `<div class="absolute left-[15px] top-0 h-[12px] w-[2px] bg-blue-500/30 z-0"></div>`;
+                    } else {
+                        lineSegmentHtml = `<div class="absolute left-[15px] top-0 bottom-0 w-[2px] bg-blue-500/30 z-0"></div>`;
+                    }
+                }
 
                 item.innerHTML = `
                     <!-- Center aligned perfectly round timeline node on vertical path -->
                     <div class="w-8 flex justify-center items-start flex-shrink-0 relative -ml-8">
+                        ${lineSegmentHtml}
                         <div class="w-4 h-4 rounded-full bg-white border-2 border-blue-500 ring-4 ring-blue-100 flex-shrink-0 aspect-square z-20 mt-1"></div>
                     </div>
                     <div class="flex-1">
@@ -1094,7 +1140,7 @@
                 const filteredScreens = candidate.screenings.filter(s => s.category === cat);
                 if (filteredScreens.length === 0) return;
 
-                const isCatExpanded = categoryCollapseState[cat] !== false;
+                const isCatExpanded = categoryCollapseState[cat] === true;
 
                 // Category Dropdown Header matching image_4cc6bc.png
                 const catHeader = document.createElement("div");
@@ -1162,7 +1208,7 @@
                     else if (isVerifyError) suborderColor = "bg-purple-500 text-white";
 
                     const checkKey = `${cat}-${screen.name}`;
-                    const isCheckExpanded = checksCollapseState[checkKey] !== false;
+                    const isCheckExpanded = checksCollapseState[checkKey] === true;
 
                     const checkBlock = document.createElement("div");
                     checkBlock.className = "border border-slate-200 rounded-lg overflow-hidden bg-white shadow-sm flex-shrink-0";
@@ -1209,15 +1255,28 @@
 
                         <div class="${isCheckExpanded ? 'block' : 'hidden'} p-5 space-y-5 border-t border-slate-100 bg-slate-50/30">
                             
+                            <!-- Scrollable parent wrapper containing standard non-drifting inner track layout -->
                             <div class="mt-2 bg-white p-4 rounded-lg border border-slate-200/60 relative">
                                 
                                 <div class="relative py-2 max-h-[300px] overflow-y-auto pr-2 pl-8">
                                     <!-- Unified absolute vertical path with mathematically centered parameters matching image_e7e2d4.png -->
-                                    <div class="absolute left-[15px] top-[16px] bottom-[16px] w-[2px] bg-blue-500/30 z-0"></div>
-
                                     <div class="space-y-0 relative z-10">
                                         ${reversedHistory.map((step, sIdx) => {
                                             const isNewest = sIdx === 0;
+                                            const isOldest = sIdx === reversedHistory.length - 1;
+                                            
+                                            // Dynamic segment-based connecting lines passing through dot center
+                                            let lineSegmentHtml = '';
+                                            if (reversedHistory.length > 1) {
+                                                if (isNewest) {
+                                                    lineSegmentHtml = `<div class="absolute left-[15px] top-[13px] bottom-0 w-[2px] bg-blue-500/30 z-0"></div>`;
+                                                } else if (isOldest) {
+                                                    lineSegmentHtml = `<div class="absolute left-[15px] top-0 h-[13px] w-[2px] bg-blue-500/30 z-0"></div>`;
+                                                } else {
+                                                    lineSegmentHtml = `<div class="absolute left-[15px] top-0 bottom-0 w-[2px] bg-blue-500/30 z-0"></div>`;
+                                                }
+                                            }
+
                                             const dotColor = isNewest ? topDotColorClass : 'bg-blue-600';
                                             const ringColor = isNewest ? topRingColorClass : 'ring-blue-100';
                                             const fontStyle = isNewest ? 'font-bold text-slate-900' : 'font-semibold text-slate-600';
@@ -1225,6 +1284,7 @@
                                                 <div class="flex items-stretch gap-4 text-[11px] relative">
                                                     <!-- Left column: perfectly round nodes centered exactly on timeline line -->
                                                     <div class="w-8 flex justify-center items-start flex-shrink-0 relative -ml-8">
+                                                        ${lineSegmentHtml}
                                                         <div class="w-3.5 h-3.5 rounded-full ${dotColor} border border-white ring-4 ${ringColor} flex-shrink-0 aspect-square z-20 mt-1.5"></div>
                                                     </div>
                                                     <!-- Right column: borderless details state label -->
@@ -1247,7 +1307,7 @@
             });
         }
 
-        let allDeepdiveExpanded = true;
+        let allDeepdiveExpanded = false;
         function toggleExpandAll() {
             allDeepdiveExpanded = !allDeepdiveExpanded;
             const toggleBtn = document.getElementById('expandAllToggle');
@@ -1256,11 +1316,13 @@
             if (allDeepdiveExpanded) {
                 toggleBtn.classList.remove('bg-slate-200');
                 toggleBtn.classList.add('bg-blue-600');
+                dot.classList.remove('translate-x-1');
                 dot.classList.add('translate-x-5');
             } else {
                 toggleBtn.classList.add('bg-slate-200');
                 toggleBtn.classList.remove('bg-blue-600');
                 dot.classList.remove('translate-x-5');
+                dot.classList.add('translate-x-1');
             }
 
             // Set all categories and individual checks to the same expansion state
@@ -1416,18 +1478,30 @@
                             </div>
 
                             <div class="relative py-2 max-h-[220px] overflow-y-auto pr-1 pl-8">
-                                <!-- Continuous vector line behind items with mathematical center coordinates -->
-                                <div class="absolute left-[15px] top-[16px] bottom-[16px] w-[2px] bg-blue-500/30 z-0"></div>
-
                                 <div class="space-y-0 relative z-10">
                                     ${reversedHistory.map((step, stepIdx) => {
                                         const isCurrent = stepIdx === 0;
+                                        const isOldest = stepIdx === reversedHistory.length - 1;
+
+                                        // Segment-based tracking lines to preserve connection on scroll
+                                        let lineSegmentHtml = '';
+                                        if (reversedHistory.length > 1) {
+                                            if (isCurrent) {
+                                                lineSegmentHtml = `<div class="absolute left-[15px] top-[12px] bottom-0 w-[2px] bg-blue-500/30 z-0"></div>`;
+                                            } else if (isOldest) {
+                                                lineSegmentHtml = `<div class="absolute left-[15px] top-0 h-[12px] w-[2px] bg-blue-500/30 z-0"></div>`;
+                                            } else {
+                                                lineSegmentHtml = `<div class="absolute left-[15px] top-0 bottom-0 w-[2px] bg-blue-500/30 z-0"></div>`;
+                                            }
+                                        }
+
                                         const dotBg = isCurrent ? topDotColorClass : 'bg-blue-600';
                                         const ringBg = isCurrent ? topRingColorClass : 'ring-blue-100';
                                         const txtStyle = isCurrent ? 'font-bold text-slate-900' : 'font-medium text-slate-500';
                                         return `
                                             <div class="flex items-stretch gap-4 text-[11px] relative">
                                                 <div class="w-8 flex justify-center items-start flex-shrink-0 relative -ml-8">
+                                                    ${lineSegmentHtml}
                                                     <div class="w-3 h-3 rounded-full ${dotBg} border border-white ring-2 ${ringBg} flex-shrink-0 aspect-square z-20 mt-1"></div>
                                                 </div>
                                                 <div class="flex-1 pb-4">
