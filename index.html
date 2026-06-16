@@ -37,7 +37,7 @@
         }
 
         body {
-            font-family: 'Inter', 'ClearSans', -apple-system, sans-serif;
+            font-family: 'Inter', -apple-system, sans-serif;
             box-sizing: border-box;
         }
         
@@ -106,18 +106,21 @@
             background: #1e293b !important; /* Dark Slate-800 on hover */
         }
 
-        /* Applied custom tile dimensions from the hint */
-        .info-box-custom {
-            padding-top: 25px;
-            padding-bottom: 10px;
+        /* Sleek Rectangular Category Card matching image_eab983.png */
+        .category-tile-sleek {
+            padding-top: 14px;
+            padding-bottom: 14px;
+            padding-left: 20px;
+            padding-right: 20px;
             border-radius: 16px;
-            background-color: #white;
+            background-color: #ffffff;
             border: 1px solid #d4dae4 !important;
+            margin-bottom: 16px;
+            transition: all 0.2s ease-in-out;
         }
-
-        .check-container-custom {
-            margin-bottom: 30px;
-            padding-bottom: 10px;
+        .category-tile-sleek:hover {
+            border-color: #cbd5e1 !important;
+            background-color: #f8fafc;
         }
     </style>
 </head>
@@ -200,9 +203,9 @@
                 </div>
             </div>
             <div class="flex gap-1 text-slate-600">
-                <span class="w-1.5 h-1.5 bg-slate-500 rounded-full"></span>
-                <span class="w-1.5 h-1.5 bg-slate-500 rounded-full"></span>
-                <span class="w-1.5 h-1.5 bg-slate-500 rounded-full"></span>
+                <span class="w-1.5 h-1.5 bg-slate-50 rounded-full"></span>
+                <span class="w-1.5 h-1.5 bg-slate-50 rounded-full"></span>
+                <span class="w-1.5 h-1.5 bg-slate-50 rounded-full"></span>
             </div>
         </div>
     </aside>
@@ -367,7 +370,7 @@
 
                     <!-- Right Column: Screening Checks with Visible Highlighted Scrollbar matching image_3ce564.png -->
                     <div class="lg:col-span-8 space-y-6">
-                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm relative info-box-custom">
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm relative">
                             
                             <!-- Header block styled as image_eb2586.png -->
                             <div class="flex items-start justify-between pb-4 border-b border-slate-100 mb-6">
@@ -392,7 +395,7 @@
                             </div>
 
                             <!-- Screenings Nested Categories list container with explicit outer scroller -->
-                            <div id="accordion-checks-container" class="overall-screening-scroll space-y-6 pb-10">
+                            <div id="accordion-checks-container" class="overall-screening-scroll space-y-4 pb-10">
                                 <!-- Populated dynamically based on nested models -->
                             </div>
                         </div>
@@ -1202,9 +1205,9 @@
 
                 const isCatExpanded = categoryCollapseState[cat] === true;
 
-                // Category Dropdown Header - Customized based on element.style hints
+                // Category Dropdown Header - Sleek Rectangular Layout styled as image_eab983.png
                 const catHeader = document.createElement("div");
-                catHeader.className = "info-box-custom px-4 py-3 flex items-center justify-between cursor-pointer transition-colors mt-4 select-none check-container-custom";
+                catHeader.className = "category-tile-sleek flex items-center justify-between cursor-pointer select-none";
                 catHeader.onclick = () => toggleCategoryCollapse(cat);
 
                 let catStatus = "Clear";
@@ -1802,4 +1805,3 @@
     </script>
 </body>
 </html>
-```
