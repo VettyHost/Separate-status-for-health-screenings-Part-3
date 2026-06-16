@@ -344,8 +344,8 @@
                                     </div>
                                     <!-- Action links aligned underneath on the right as image_4c6cbe.png -->
                                     <div class="flex flex-col items-end gap-1.5 mt-1">
-                                        <button onclick="openFormModal('modify-order')" class="text-blue-600 hover:underline font-bold text-xs">Modify Order</button>
-                                        <button onclick="openFormModal('change-location')" class="text-blue-600 hover:underline font-bold text-xs">Change Location for All</button>
+                                        <button onclick="openFormModal('modify-order')" class="text-blue-600 hover:underline font-bold text-xs font-sans">Modify Order</button>
+                                        <button onclick="openFormModal('change-location')" class="text-blue-600 hover:underline font-bold text-xs font-sans">Change Location for All</button>
                                     </div>
                                 </div>
                             </div>
@@ -401,9 +401,9 @@
                 </div>
             </div>
             <div>
-                <label class="block text-[9px] font-extrabold text-slate-500 uppercase tracking-wider mb-1">Order Status</label>
+                <label class="block text-[9px] font-extrabold text-slate-500 uppercase tracking-wider mb-1">Overall Status</label>
                 <select id="drawer-filter-order-status" onchange="filterDrawerScreenings()" class="w-full text-xs border border-slate-200 rounded p-2 outline-none focus:border-blue-500 text-slate-600 bg-white font-semibold">
-                    <option value="all">All Order Statuses</option>
+                    <option value="all">All Overall Statuses</option>
                     <option value="InProgress">InProgress</option>
                     <option value="Clear">Clear</option>
                 </select>
@@ -1155,7 +1155,7 @@
                 return;
             }
 
-            // Separated Categories: Clean split to avoid any combined sections
+            // Separated Categories: Clean split to avoid any combined TITER / VACCINE section
             const categories = ["Drug Check", "Titers", "Basic Physical", "Vaccine"];
             
             categories.forEach(cat => {
@@ -1432,20 +1432,41 @@
                 const listItems = drawerScreeningsData.filter(s => s.category === cat);
                 if (listItems.length === 0) return;
 
+                // Calculate Category level overall status dynamically for display on the right side of Category header block as image_fb8e62.png
+                let catOverallStatus = "Clear";
+                if (listItems.some(item => item.suborderStatus === "Review Needed")) {
+                    catOverallStatus = "Review Needed";
+                } else if (listItems.some(item => item.suborderStatus === "Unable to Verify")) {
+                    catOverallStatus = "Unable to Verify";
+                } else if (listItems.some(item => item.suborderStatus === "Canceled")) {
+                    catOverallStatus = "Canceled";
+                } else if (listItems.some(item => item.orderStatus === "InProgress")) {
+                    catOverallStatus = "In Progress";
+                }
+
+                let catBadgeColor = "bg-blue-600 text-white";
+                if (catOverallStatus === "Review Needed") catBadgeColor = "bg-amber-500 text-white font-bold";
+                else if (catOverallStatus === "Clear") catBadgeColor = "bg-emerald-500 text-white";
+                else if (catOverallStatus === "Canceled") catBadgeColor = "bg-red-500 text-white";
+                else if (catOverallStatus === "Unable to Verify") catBadgeColor = "bg-purple-500 text-white";
+
                 const catHeaderDiv = document.createElement("div");
-                catHeaderDiv.className = "text-xs font-bold text-slate-500 bg-slate-50 px-4 py-2 rounded-t-lg border border-slate-200 border-b-0 uppercase tracking-wider mt-2";
-                catHeaderDiv.innerText = `${cat} (${listItems.length})`;
+                catHeaderDiv.className = "text-xs font-bold text-slate-500 bg-slate-50 px-4 py-2.5 rounded-t-lg border border-slate-200 border-b-0 uppercase tracking-wider mt-4 flex justify-between items-center";
+                catHeaderDiv.innerHTML = `
+                    <span>${cat} (${listItems.length})</span>
+                    <span class="inline-block px-2.5 py-0.5 text-[9px] font-bold rounded ${catBadgeColor} uppercase tracking-wider">${catOverallStatus}</span>
+                `;
                 container.appendChild(catHeaderDiv);
 
                 const tableWrapper = document.createElement("div");
                 tableWrapper.className = "border border-slate-200 rounded-b-lg overflow-hidden divide-y divide-slate-200 bg-white shadow-sm mb-4";
 
+                // Re-aligned headers inside categories to completely remove ORDER STATUS column as requested in image_fb8e62.png
                 const tableHeader = document.createElement("div");
                 tableHeader.className = "grid grid-cols-12 bg-slate-50/50 p-3 text-[10px] uppercase font-bold text-slate-400 border-b border-slate-200";
                 tableHeader.innerHTML = `
-                    <div class="col-span-6">Health Screening</div>
-                    <div class="col-span-3 text-center">Order Status</div>
-                    <div class="col-span-3 text-center">Suborder Status</div>
+                    <div class="col-span-8">Health Screening</div>
+                    <div class="col-span-4 text-center">Suborder Status</div>
                 `;
                 tableWrapper.appendChild(tableHeader);
 
@@ -1483,13 +1504,13 @@
                         topRingColorClass = 'ring-purple-100';
                     }
 
+                    // Formatted grid row cols: col-span-8 (Screen Name) and col-span-4 (Suborder status text) to match image_fb8e62.png
                     rowContainer.innerHTML = `
                         <div onclick="toggleDrawerInlineTracker('${rowId}')" class="w-full grid grid-cols-12 p-3 items-center hover:bg-slate-50/50 cursor-pointer text-left transition-colors font-medium select-none">
-                            <div class="col-span-6 flex items-center gap-1.5 font-bold text-slate-700 flex-wrap">
+                            <div class="col-span-8 flex items-center gap-1.5 font-bold text-slate-700 flex-wrap">
                                 <span>${screen.name}</span>
                             </div>
-                            <div class="col-span-3 text-center font-bold text-blue-600">${screen.orderStatus}</div>
-                            <div class="col-span-3 text-center ${suborderTextStyle}">${screen.suborderStatus}</div>
+                            <div class="col-span-4 text-center ${suborderTextStyle}">${screen.suborderStatus}</div>
                         </div>
                         
                         <!-- Collapsible inline tracker details inside drawer -->
