@@ -12,9 +12,35 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
+        :root {
+            --blue: #007bff;
+            --indigo: #6610f2;
+            --purple: #6f42c1;
+            --pink: #e83e8c;
+            --red: #dc3545;
+            --orange: #fd7e14;
+            --yellow: #ffc107;
+            --green: #28a745;
+            --teal: #20c997;
+            --cyan: #17a2b8;
+            --white: #fff;
+            --gray: #6c757d;
+            --gray-dark: #343a40;
+            --primary: #007bff;
+            --secondary: #6c757d;
+            --success: #28a745;
+            --info: #17a2b8;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --light: #f8f9fa;
+            --dark: #343a40;
         }
+
+        body {
+            font-family: 'Inter', 'ClearSans', -apple-system, sans-serif;
+            box-sizing: border-box;
+        }
+        
         /* Custom scrollbar styling to ensure high visibility */
         ::-webkit-scrollbar {
             width: 8px;
@@ -78,6 +104,20 @@
         }
         .overall-screening-scroll::-webkit-scrollbar-thumb:hover {
             background: #1e293b !important; /* Dark Slate-800 on hover */
+        }
+
+        /* Applied custom tile dimensions from the hint */
+        .info-box-custom {
+            padding-top: 25px;
+            padding-bottom: 10px;
+            border-radius: 16px;
+            background-color: #white;
+            border: 1px solid #d4dae4 !important;
+        }
+
+        .check-container-custom {
+            margin-bottom: 30px;
+            padding-bottom: 10px;
         }
     </style>
 </head>
@@ -316,7 +356,6 @@
                                 <span class="text-[10px] text-blue-500 font-bold hover:underline cursor-pointer"><i class="fa-solid fa-cloud-arrow-down mr-1"></i> Export Activity Feed</span>
                             </div>
                             <div class="pr-2 relative">
-                                <!-- Continuous vertical path tracking starting from the exact middle of the first dot and ending exactly at the center of the last dot -->
                                 <div id="activity-timeline-feed" class="space-y-6 text-[11px] relative pb-4 z-10">
                                     <!-- Populated dynamically with segment connectors -->
                                 </div>
@@ -326,7 +365,7 @@
 
                     <!-- Right Column: Screening Checks with Visible Highlighted Scrollbar matching image_3ce564.png -->
                     <div class="lg:col-span-8 space-y-6">
-                        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm relative">
+                        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm relative info-box-custom">
                             
                             <!-- Header block styled as image_4c6cbe.png -->
                             <div class="flex items-start justify-between pb-4 border-b border-slate-100 mb-6">
@@ -472,6 +511,7 @@
                         name: "5 Panel Drug",
                         orderStatus: "InProgress",
                         suborderStatus: "Review Needed",
+                        hasResults: true, // For rendering the Results/Details 1 tables
                         history: [
                             { status: "Order Created", date: "06/13/2026 09:12 AM" },
                             { status: "Donor Pass Creation Pending", date: "06/13/2026 11:00 AM" },
@@ -1088,8 +1128,6 @@
         function generateActivityFeed(candidate) {
             const container = document.getElementById('activity-timeline-feed');
             container.innerHTML = "";
-
-            // Use relative list elements with individual segment connectors to guarantee scroll compatibility
             container.className = "relative pl-8 pr-2";
 
             const feeds = [
@@ -1106,7 +1144,6 @@
                 const isFirst = fIdx === 0;
                 const isLast = fIdx === feeds.length - 1;
                 
-                // Continuous segment logic
                 let lineSegmentHtml = '';
                 if (feeds.length > 1) {
                     if (isFirst) {
@@ -1155,7 +1192,6 @@
                 return;
             }
 
-            // Separated Categories: Clean split to avoid any combined TITER / VACCINE section
             const categories = ["Drug Check", "Titers", "Basic Physical", "Vaccine"];
             
             categories.forEach(cat => {
@@ -1164,12 +1200,11 @@
 
                 const isCatExpanded = categoryCollapseState[cat] === true;
 
-                // Category Dropdown Header
+                // Category Dropdown Header - Customized based on element.style hints
                 const catHeader = document.createElement("div");
-                catHeader.className = "border border-slate-200 bg-slate-50 hover:bg-slate-100/80 rounded-lg p-3.5 flex items-center justify-between cursor-pointer transition-colors mt-4 select-none";
+                catHeader.className = "info-box-custom px-4 py-3 flex items-center justify-between cursor-pointer transition-colors mt-4 select-none check-container-custom";
                 catHeader.onclick = () => toggleCategoryCollapse(cat);
 
-                // Calculate general status parameters for categories
                 let catStatus = "Clear";
                 let catDate = "06/16/2026";
                 if (filteredScreens.some(s => s.suborderStatus === "Review Needed")) {
@@ -1193,7 +1228,6 @@
                         <span class="text-xs font-bold text-slate-800 tracking-wide uppercase">${cat}</span>
                         <i class="fa-solid ${isCatExpanded ? 'fa-chevron-up' : 'fa-chevron-down'} text-[10px] text-slate-500"></i>
                     </div>
-                    <!-- Combined status and download icon aligned strictly side by side -->
                     <div class="flex items-center gap-3">
                         <div class="text-right">
                             <span class="inline-block px-2.5 py-0.5 text-[9px] font-bold rounded ${catBadgeColor} uppercase tracking-wider">${catStatus}</span>
@@ -1233,12 +1267,10 @@
                     const isCheckExpanded = checksCollapseState[checkKey] === true;
 
                     const checkBlock = document.createElement("div");
-                    checkBlock.className = "border border-slate-200 rounded-lg overflow-hidden bg-white shadow-sm flex-shrink-0";
+                    checkBlock.className = "border border-slate-200 rounded-lg overflow-hidden bg-white shadow-sm flex-shrink-0 mb-2";
 
-                    // Reverse chronology sequence (Oldest at BOTTOM, Newest at TOP)
                     const reversedHistory = [...screen.history].reverse();
 
-                    // Map top status dot matching outside color status
                     let topDotColorClass = 'bg-blue-600';
                     let topRingColorClass = 'ring-blue-100';
                     if (screen.suborderStatus === 'Review Needed') {
@@ -1253,12 +1285,71 @@
                     } else if (screen.suborderStatus === 'Unable to Verify') {
                         topDotColorClass = 'bg-purple-500';
                         topRingColorClass = 'ring-purple-100';
-                    } else if (screen.suborderStatus === 'Unreported') {
-                        topDotColorClass = 'bg-orange-500';
-                        topRingColorClass = 'ring-orange-100';
                     }
 
-                    // Removed max-height/nested scroll blocks so tracking flow is beautifully integrated into overall page scrolling
+                    let resultsTableHtml = "";
+                    if (isCheckExpanded && screen.hasResults) {
+                        resultsTableHtml = `
+                            <!-- Results Panel from image_eba186.png -->
+                            <div class="mt-4 mb-4 border border-slate-200 rounded-lg overflow-hidden bg-white">
+                                <div class="bg-slate-50 px-4 py-2 text-[11px] font-bold text-slate-500 border-b border-slate-200">
+                                    Results
+                                </div>
+                                <div class="divide-y divide-slate-100 text-xs">
+                                    <div class="flex justify-between px-4 py-2.5">
+                                        <span class="text-slate-500">Amphetamines :</span>
+                                        <span class="font-bold text-slate-800">Negative</span>
+                                    </div>
+                                    <div class="flex justify-between px-4 py-2.5">
+                                        <span class="text-slate-500">Cocaine :</span>
+                                        <span class="font-bold text-slate-800">Negative</span>
+                                    </div>
+                                    <div class="flex justify-between px-4 py-2.5">
+                                        <span class="text-slate-500">Marijuana :</span>
+                                        <span class="font-bold text-slate-800">Negative</span>
+                                    </div>
+                                    <div class="flex justify-between px-4 py-2.5">
+                                        <span class="text-slate-500">Opiates :</span>
+                                        <span class="font-bold text-slate-800">Negative</span>
+                                    </div>
+                                    <div class="flex justify-between px-4 py-2.5">
+                                        <span class="text-slate-500">Phencyclidine :</span>
+                                        <span class="font-bold text-slate-800">Negative</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Details 1 Panel from image_eba186.png -->
+                            <div class="mb-4 border border-slate-200 rounded-lg overflow-hidden bg-white">
+                                <div class="bg-slate-50 px-4 py-2 text-[11px] font-bold text-slate-500 border-b border-slate-200">
+                                    Details 1
+                                </div>
+                                <div class="divide-y divide-slate-100 text-xs">
+                                    <div class="flex justify-between px-4 py-2.5">
+                                        <span class="text-slate-500">Specimen ID :</span>
+                                        <span class="font-bold text-slate-800">7959817598</span>
+                                    </div>
+                                    <div class="flex justify-between px-4 py-2.5">
+                                        <span class="text-slate-500">Date Collected :</span>
+                                        <span class="font-bold text-slate-800">06/03/2026</span>
+                                    </div>
+                                    <div class="flex justify-between px-4 py-2.5">
+                                        <span class="text-slate-500">Medical Review Officer :</span>
+                                        <span class="font-bold text-slate-800">Kirk A. Roberts, MD</span>
+                                    </div>
+                                    <div class="flex justify-between px-4 py-2.5">
+                                        <span class="text-slate-500">Report :</span>
+                                        <a href="#" class="font-bold text-blue-600 hover:underline">DAVID FAIRNAK - Drug Report.pdf</a>
+                                    </div>
+                                    <div class="flex justify-between px-4 py-2.5">
+                                        <span class="text-slate-500">Comment :</span>
+                                        <span class="font-bold text-slate-800">Negative</span>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    }
+
                     checkBlock.innerHTML = `
                         <div class="w-full bg-white hover:bg-slate-50/50 p-4 flex justify-between items-center transition-colors cursor-pointer text-xs select-none" onclick="toggleCheckCollapse('${cat}', '${screen.name}')">
                             <div class="flex items-center gap-2">
@@ -1278,17 +1369,16 @@
 
                         <div class="${isCheckExpanded ? 'block' : 'hidden'} p-5 space-y-5 border-t border-slate-100 bg-slate-50/30">
                             
-                            <!-- Scrollable parent wrapper containing standard non-drifting inner track layout -->
+                            ${resultsTableHtml}
+
+                            <!-- Progress timelines with dates and sequential status parameters -->
                             <div class="mt-2 bg-white p-4 rounded-lg border border-slate-200/60 relative">
-                                
                                 <div class="relative py-2 pr-1 pl-8">
-                                    <!-- Unified absolute vertical path with mathematically centered parameters matching image_e7e2d4.png -->
                                     <div class="space-y-0 relative z-10">
                                         ${reversedHistory.map((step, sIdx) => {
                                             const isNewest = sIdx === 0;
                                             const isOldest = sIdx === reversedHistory.length - 1;
                                             
-                                            // Dynamic segment-based connecting lines passing through dot center
                                             let lineSegmentHtml = '';
                                             if (reversedHistory.length > 1) {
                                                 if (isNewest) {
@@ -1305,12 +1395,10 @@
                                             const fontStyle = isNewest ? 'font-bold text-slate-900' : 'font-semibold text-slate-600';
                                             return `
                                                 <div class="flex items-stretch gap-4 text-[11px] relative">
-                                                    <!-- Left column: perfectly round nodes centered exactly on timeline line -->
                                                     <div class="w-8 flex justify-center items-start flex-shrink-0 relative -ml-8">
                                                         ${lineSegmentHtml}
                                                         <div class="w-3.5 h-3.5 rounded-full ${dotColor} border border-white ring-4 ${ringColor} flex-shrink-0 aspect-square z-20 mt-1.5"></div>
                                                     </div>
-                                                    <!-- Right column: borderless details state label -->
                                                     <div class="flex-1 pb-4">
                                                         <div class="flex justify-between items-center py-1 flex-wrap gap-2">
                                                             <span class="${fontStyle}">${step.status}</span>
@@ -1504,7 +1592,6 @@
                         topRingColorClass = 'ring-purple-100';
                     }
 
-                    // Formatted grid row cols: col-span-8 (Screen Name) and col-span-4 (Suborder status text) to match image_fb8e62.png
                     rowContainer.innerHTML = `
                         <div onclick="toggleDrawerInlineTracker('${rowId}')" class="w-full grid grid-cols-12 p-3 items-center hover:bg-slate-50/50 cursor-pointer text-left transition-colors font-medium select-none">
                             <div class="col-span-8 flex items-center gap-1.5 font-bold text-slate-700 flex-wrap">
@@ -1513,10 +1600,8 @@
                             <div class="col-span-4 text-center ${suborderTextStyle}">${screen.suborderStatus}</div>
                         </div>
                         
-                        <!-- Collapsible inline tracker details inside drawer -->
                         <div id="${rowId}" class="hidden p-4 bg-slate-50/50 border-t border-slate-200/60 space-y-4">
                             
-                            <!-- Center-aligned Notification Sentence -->
                             <div class="text-center py-2.5 text-slate-700 font-bold text-xs bg-white border border-slate-100 rounded-lg shadow-sm">
                                 This check is ${screen.suborderStatus}
                             </div>
@@ -1527,7 +1612,6 @@
                                         const isCurrent = stepIdx === 0;
                                         const isOldest = stepIdx === reversedHistory.length - 1;
 
-                                        // Segment-based tracking lines to preserve connection on scroll
                                         let lineSegmentHtml = '';
                                         if (reversedHistory.length > 1) {
                                             if (isCurrent) {
@@ -1672,6 +1756,7 @@
                             name: "5 Panel Drug",
                             orderStatus: "InProgress",
                             suborderStatus: "Review Needed",
+                            hasResults: true,
                             history: [
                                 { status: "Order Created", date: "06/16/2026 10:00 AM" },
                                 { status: "Review Needed", date: "06/16/2026 02:00 PM" }
