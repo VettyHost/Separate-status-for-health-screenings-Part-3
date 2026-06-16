@@ -61,7 +61,6 @@
             max-height: 540px;
             overflow-y: scroll !important; /* Force scrollbar visibility by default */
             padding-right: 8px;
-            max-width: 500px; /* Slimmer layout to match image_ea5444.png perfectly, aligned with the right controls */
         }
         
         /* Custom styling specifically targeting the Forced screening checks scrollbar for maximum prominence */
@@ -487,7 +486,8 @@
 
                     <!-- Right Column: Screening Checks with Visible Highlighted Scrollbar matching image_3ce564.png -->
                     <div class="lg:col-span-8 space-y-6">
-                        <div class="bg-white p-5 rounded-xl border border-[#d4dae4] shadow-sm relative">
+                        <!-- Strict max-width constraint wrapper to remove empty central white spaces and align with controls as per image_de7e27.png -->
+                        <div class="bg-white p-5 rounded-xl border border-[#d4dae4] shadow-sm relative" style="max-width: 500px; width: 100%;">
                             
                             <!-- Header block styled as image_eb2586.png / image_df48bf.png (actions shifted left) -->
                             <div class="flex justify-between items-start border-b border-slate-100 pb-4 mb-6">
@@ -495,7 +495,7 @@
                                     <h3 class="text-base font-bold text-[#1b1b2a]">Health Screening Checks</h3>
                                     <p class="text-[11px] text-slate-400 font-semibold">Verified Profile</p>
                                 </div>
-                                <!-- MOVED CONTROLS TO THE VERTICAL STACK ON EXTREME RIGHT as per user instruction and image_df48bf.png -->
+                                <!-- MOVED CONTROLS TO THE VERTICAL STACK ON EXTREME RIGHT as per user instruction and image_df48bf.png / image_de7e27.png -->
                                 <div class="flex flex-col items-end gap-1.5 text-xs text-right select-none">
                                     <div class="flex items-center gap-2">
                                         <span class="text-xs font-bold text-slate-500">Expand All</span>
@@ -511,7 +511,7 @@
 
                             <!-- SCREENING NESTED ACCORDIONS - Constrained to a compact rectangular width matching alignment of controls -->
                             <!-- Screenings Nested Categories list container with explicit outer scroller -->
-                            <div id="accordion-checks-container" class="overall-screening-scroll space-y-4 pb-10">
+                            <div id="accordion-checks-container" class="overall-screening-scroll space-y-4 pb-10" style="width: 100%; max-width: 100%;">
                                 <!-- Populated dynamically based on nested models -->
                             </div>
                         </div>
@@ -1525,7 +1525,7 @@
                                             let lineSegmentHtml = '';
                                             if (reversedHistory.length > 1) {
                                                 if (isNewest) {
-                                                    lineSegmentHtml = `<div class="absolute left-[15px] top-[13px] bottom-0 w-[2px] bg-blue-500/30 z-0"></div>`;
+                                                    lineSegmentHtml = `<div class="absolute left-[15px] top-[12px] bottom-0 w-[2px] bg-blue-500/30 z-0"></div>`;
                                                 } else if (isOldest) {
                                                     lineSegmentHtml = `<div class="absolute left-[15px] top-0 h-[13px] w-[2px] bg-blue-500/30 z-0"></div>`;
                                                 } else {
