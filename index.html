@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vetty - Premium Client Dashboard</title>
+    <title>LaSalle Network - Vetty Premium Client Dashboard</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts Inter -->
@@ -118,6 +118,12 @@
         .category-tile-sleek:hover {
             border-color: #cbd5e1 !important;
             background-color: #f8fafc;
+        }
+
+        /* Perfect mathematical vertical alignment configuration */
+        .profile-max-width {
+            max-width: 810px !important;
+            width: 100%;
         }
     </style>
 </head>
@@ -321,8 +327,8 @@
                 </div>
             </section>
 
-            <!-- CANDIDATE PROFILE SCREEN (Restricted to a premium max width of 1200px to match image_eb2586.png and image_ea5444.png perfectly) -->
-            <section id="details-screen" class="hidden p-6 space-y-6 max-w-[1200px] mx-auto w-full">
+            <!-- CANDIDATE PROFILE SCREEN (Capped to a perfectly matched 810px width to ensure absolute side-to-side vertical alignment) -->
+            <section id="details-screen" class="hidden p-6 space-y-6 mx-auto w-full profile-max-width">
                 <!-- Header Back Action -->
                 <div class="flex items-center justify-between border-b border-slate-200 pb-4 flex-wrap gap-4">
                     <div class="flex items-center gap-4">
@@ -336,127 +342,11 @@
                     </div>
                 </div>
 
-                <!-- Top Comprehensive Header Metadata Card (exactly matching image_ea5444.png & optimized for white space utilization) -->
-                <div class="bg-white rounded-2xl border border-[#d4dae4] p-6 shadow-sm space-y-6">
-                    <div class="flex justify-between items-start flex-wrap gap-4 border-b border-slate-100 pb-4">
-                        <div class="flex items-center gap-4">
-                            <!-- Blue Avatar Silhouette -->
-                            <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 text-xl font-bold">
-                                <i class="fa-solid fa-user"></i>
-                            </div>
-                            <div>
-                                <div class="flex items-center gap-3">
-                                    <h3 id="cand-header-fullname" class="text-lg font-bold text-slate-800">-</h3>
-                                    <!-- Dynamic State Banner -->
-                                    <span id="cand-header-status-banner" class="px-3 py-0.5 text-xs font-semibold rounded bg-amber-500 text-white">Checks Complete - Clear</span>
-                                </div>
-                                <div class="mt-1.5 flex items-center gap-2">
-                                    <select class="bg-slate-50 border border-slate-200 rounded text-xs px-2.5 py-1 text-slate-600 font-medium outline-none">
-                                        <option>Screening Tags</option>
-                                        <option>Active Verification</option>
-                                        <option>High Priority</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- MOVED SHAPE & PROFILE OPTIONS TO THE LEFT TO USE WHITE SPACES EFFECTIVELY as per image_df48bf.png -->
-                        <div class="flex items-center gap-4 text-xs font-semibold text-slate-500 flex-wrap pt-2">
-                            <button class="hover:text-slate-800 flex items-center gap-1.5"><i class="fa-solid fa-plus-circle text-blue-600"></i> Add New Checks</button>
-                            <button class="hover:text-slate-800 flex items-center gap-1.5"><i class="fa-regular fa-file-alt"></i> Documents and Disclosures</button>
-                            <button class="hover:text-slate-800 flex items-center gap-1.5"><i class="fa-solid fa-calculator"></i> Cost Summary</button>
-                        </div>
-                    </div>
-
-                    <!-- Meta details layout matching image_ea5444.png -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-3.5 text-xs">
-                        <!-- Left Data Table Column -->
-                        <div class="space-y-3">
-                            <div class="grid grid-cols-3">
-                                <span class="text-slate-400 font-semibold">Added By</span>
-                                <span class="col-span-2 text-slate-700 font-semibold">Work Validater</span>
-                            </div>
-                            <div class="grid grid-cols-3 items-center">
-                                <span class="text-slate-400 font-semibold flex items-center gap-1">Assignee <i class="fa-solid fa-circle-info text-[10px] text-blue-500"></i></span>
-                                <div class="col-span-2">
-                                    <select class="bg-white border border-slate-200 rounded text-xs px-2 py-1 text-slate-700 font-semibold outline-none focus:border-blue-500">
-                                        <option>Assignee Added (1)</option>
-                                        <option>debendu Roy</option>
-                                        <option>mrunali Stage</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="grid grid-cols-3">
-                                <span class="text-slate-400 font-semibold">Package</span>
-                                <span id="cand-header-meta-package" class="col-span-2 text-slate-700 font-semibold">-</span>
-                            </div>
-                            <div class="grid grid-cols-3">
-                                <span class="text-slate-400 font-semibold">Department</span>
-                                <span class="col-span-2 text-slate-700 font-semibold">Talent Acquisition</span>
-                            </div>
-                            <div class="grid grid-cols-3">
-                                <span class="text-slate-400 font-semibold">Location</span>
-                                <span class="col-span-2 text-slate-700 font-semibold">New York Clinic Hub</span>
-                            </div>
-                            <div class="grid grid-cols-3">
-                                <span class="text-slate-400 font-semibold">Order ID</span>
-                                <span id="cand-header-meta-orderid" class="col-span-2 text-slate-700 font-mono font-bold">-</span>
-                            </div>
-                            <div class="grid grid-cols-3">
-                                <span class="text-slate-400 font-semibold">Candidate ID</span>
-                                <span class="col-span-2 text-slate-500 font-mono text-[11px] truncate">6a30c359ccb303f20a14a568</span>
-                            </div>
-                            <div class="grid grid-cols-3">
-                                <span class="text-slate-400 font-semibold">ID</span>
-                                <a href="#" class="col-span-2 text-blue-600 font-bold hover:underline">Add</a>
-                            </div>
-                            <div class="grid grid-cols-3">
-                                <span class="text-slate-400 font-semibold">Expected Employment</span>
-                                <a href="#" class="col-span-2 text-blue-600 font-bold hover:underline">Add</a>
-                            </div>
-                            <div class="grid grid-cols-3">
-                                <span class="text-slate-400 font-semibold">Start Date</span>
-                                <a href="#" class="col-span-2 text-blue-600 font-bold hover:underline">Add</a>
-                            </div>
-                        </div>
-
-                        <!-- Right Data Table Column -->
-                        <div class="space-y-3">
-                            <div class="grid grid-cols-3">
-                                <span class="text-slate-400 font-semibold">Date Of Birth</span>
-                                <div class="col-span-2 flex items-center gap-1.5">
-                                    <span id="dob-masked" class="text-slate-700 font-semibold">06/16/XXXX</span>
-                                    <button onclick="toggleMaskValue('dob')" class="text-blue-600 hover:underline font-bold text-[11px]">View</button>
-                                </div>
-                            </div>
-                            <div class="grid grid-cols-3">
-                                <span class="text-slate-400 font-semibold flex items-center gap-1">Address <i class="fa-regular fa-file"></i></span>
-                                <span class="col-span-2 text-slate-700 font-semibold">Hill Road, Los Angeles, CA, 90003</span>
-                            </div>
-                            <div class="grid grid-cols-3">
-                                <span class="text-slate-400 font-semibold">Email Address</span>
-                                <span id="cand-header-meta-email" class="col-span-2 text-slate-700 font-semibold truncate">-</span>
-                            </div>
-                            <div class="grid grid-cols-3">
-                                <span class="text-slate-400 font-semibold">Phone #</span>
-                                <span class="col-span-2 text-slate-700 font-semibold">(222) 222-2222</span>
-                            </div>
-                            <div class="grid grid-cols-3">
-                                <span class="text-slate-400 font-semibold">Social Security #</span>
-                                <div class="col-span-2 flex items-center gap-1.5">
-                                    <span id="ssn-masked" class="text-slate-700 font-semibold">XXX-XX-2222</span>
-                                    <button onclick="toggleMaskValue('ssn')" class="text-blue-600 hover:underline font-bold text-[11px]">View</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Multi-column grid optimized for a compact and sharp dashboard look (gap-6 instead of gap-8) -->
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                <!-- Multi-column grid optimized for a compact and sharp dashboard look (flexbox-driven side-to-side alignment) -->
+                <div class="flex flex-col lg:flex-row gap-6 items-start w-full">
                     
-                    <!-- Left Column: Actions and Activity Feed (Compact and narrow) -->
-                    <div class="lg:col-span-4 space-y-6">
+                    <!-- Left Column: Actions and Activity Feed (Strictly 286px wide for straight-line desktop alignment) -->
+                    <div class="w-full lg:w-[286px] lg:flex-shrink-0 space-y-6">
                         <!-- Actions Card -->
                         <div class="bg-white p-5 rounded-xl border border-[#d4dae4] shadow-sm space-y-4">
                             <div class="flex justify-between items-center pb-2 border-b border-slate-100">
@@ -484,10 +374,120 @@
                         </div>
                     </div>
 
-                    <!-- Right Column: Screening Checks with Visible Highlighted Scrollbar matching image_3ce564.png -->
-                    <div class="lg:col-span-8 space-y-6">
-                        <!-- Strict max-width constraint wrapper to remove empty central white spaces and align with controls as per image_de7e27.png -->
-                        <div class="bg-white p-5 rounded-xl border border-[#d4dae4] shadow-sm relative" style="max-width: 500px; width: 100%;">
+                    <!-- Right Column: Candidate Profile & Screening Checks with Visible Highlighted Scrollbar matching image_3ce564.png -->
+                    <!-- Capped at exactly 500px to achieve perfect straight-line vertical borders with the upper profile box -->
+                    <div class="w-full lg:w-[500px] lg:flex-shrink-0 space-y-6">
+                        
+                        <!-- Top Comprehensive Header Metadata Card (Moved here to align borders perfectly with below checks card) -->
+                        <div class="bg-white rounded-2xl border border-[#d4dae4] p-5 shadow-sm space-y-5">
+                            <div class="flex justify-between items-start flex-wrap gap-4 border-b border-slate-100 pb-3">
+                                <div class="flex items-center gap-3">
+                                    <!-- Blue Avatar Silhouette -->
+                                    <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 text-lg font-bold">
+                                        <i class="fa-solid fa-user"></i>
+                                    </div>
+                                    <div>
+                                        <div class="flex items-center gap-2">
+                                            <h3 id="cand-header-fullname" class="text-base font-bold text-slate-800">-</h3>
+                                        </div>
+                                        <div class="mt-1 flex items-center gap-2">
+                                            <span id="cand-header-status-banner" class="px-2 py-0.5 text-[10px] font-semibold rounded bg-amber-500 text-white">Checks Complete - Clear</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- MOVED ACTIONS TO RIGHT SIDE TO PRESERVE HIGH DENSITY AS PER image_df48bf.png -->
+                                <div class="flex flex-col items-end gap-1 text-[11px] font-semibold text-slate-500 pt-1">
+                                    <button class="hover:text-slate-800 flex items-center gap-1"><i class="fa-solid fa-plus-circle text-blue-600 text-[10px]"></i> Add New Checks</button>
+                                    <button class="hover:text-slate-800 flex items-center gap-1"><i class="fa-regular fa-file-alt text-[10px]"></i> Documents and Disclosures</button>
+                                    <button class="hover:text-slate-800 flex items-center gap-1"><i class="fa-solid fa-calculator text-[10px]"></i> Cost Summary</button>
+                                </div>
+                            </div>
+
+                            <!-- Meta details layout matching image_ea5444.png but optimized for 500px width -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-2.5 text-[11px]">
+                                <!-- Left Data Table Column -->
+                                <div class="space-y-2">
+                                    <div class="grid grid-cols-3">
+                                        <span class="text-slate-400 font-semibold">Added By</span>
+                                        <span class="col-span-2 text-slate-700 font-semibold">Work Validater</span>
+                                    </div>
+                                    <div class="grid grid-cols-3 items-center">
+                                        <span class="text-slate-400 font-semibold flex items-center gap-1">Assignee <i class="fa-solid fa-circle-info text-[9px] text-blue-500"></i></span>
+                                        <div class="col-span-2">
+                                            <select class="bg-white border border-slate-200 rounded text-[10px] px-1.5 py-0.5 text-slate-700 font-semibold outline-none focus:border-blue-500">
+                                                <option>Assignee Added (1)</option>
+                                                <option>debendu Roy</option>
+                                                <option>mrunali Stage</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="grid grid-cols-3">
+                                        <span class="text-slate-400 font-semibold">Package</span>
+                                        <span id="cand-header-meta-package" class="col-span-2 text-slate-700 font-semibold truncate">-</span>
+                                    </div>
+                                    <div class="grid grid-cols-3">
+                                        <span class="text-slate-400 font-semibold">Department</span>
+                                        <span class="col-span-2 text-slate-700 font-semibold">Talent Acquisition</span>
+                                    </div>
+                                    <div class="grid grid-cols-3">
+                                        <span class="text-slate-400 font-semibold">Location</span>
+                                        <span class="col-span-2 text-slate-700 font-semibold">New York Clinic Hub</span>
+                                    </div>
+                                    <div class="grid grid-cols-3">
+                                        <span class="text-slate-400 font-semibold">Order ID</span>
+                                        <span id="cand-header-meta-orderid" class="col-span-2 text-slate-700 font-mono font-bold">-</span>
+                                    </div>
+                                    <div class="grid grid-cols-3">
+                                        <span class="text-slate-400 font-semibold">Candidate ID</span>
+                                        <span class="col-span-2 text-slate-500 font-mono text-[10px] truncate">6a30c359ccb303f2...</span>
+                                    </div>
+                                </div>
+
+                                <!-- Right Data Table Column -->
+                                <div class="space-y-2">
+                                    <div class="grid grid-cols-3">
+                                        <span class="text-slate-400 font-semibold">DOB</span>
+                                        <div class="col-span-2 flex items-center gap-1">
+                                            <span id="dob-masked" class="text-slate-700 font-semibold">06/16/XXXX</span>
+                                            <button onclick="toggleMaskValue('dob')" class="text-blue-600 hover:underline font-bold text-[10px]">View</button>
+                                        </div>
+                                    </div>
+                                    <div class="grid grid-cols-3">
+                                        <span class="text-slate-400 font-semibold flex items-center gap-0.5">Address <i class="fa-regular fa-file text-[10px]"></i></span>
+                                        <span class="col-span-2 text-slate-700 font-semibold leading-tight">Hill Road, Los Angeles, CA</span>
+                                    </div>
+                                    <div class="grid grid-cols-3">
+                                        <span class="text-slate-400 font-semibold">Email</span>
+                                        <span id="cand-header-meta-email" class="col-span-2 text-slate-700 font-semibold truncate">-</span>
+                                    </div>
+                                    <div class="grid grid-cols-3">
+                                        <span class="text-slate-400 font-semibold">Phone #</span>
+                                        <span class="col-span-2 text-slate-700 font-semibold">(222) 222-2222</span>
+                                    </div>
+                                    <div class="grid grid-cols-3">
+                                        <span class="text-slate-400 font-semibold">SSN</span>
+                                        <div class="col-span-2 flex items-center gap-1">
+                                            <span id="ssn-masked" class="text-slate-700 font-semibold">XXX-XX-2222</span>
+                                            <button onclick="toggleMaskValue('ssn')" class="text-blue-600 hover:underline font-bold text-[10px]">View</button>
+                                        </div>
+                                    </div>
+                                    <div class="grid grid-cols-3">
+                                        <span class="text-slate-400 font-semibold">Tags</span>
+                                        <div class="col-span-2">
+                                            <select class="bg-slate-50 border border-slate-200 rounded text-[10px] px-1 py-0.5 text-slate-600 font-medium outline-none">
+                                                <option>Screening Tags</option>
+                                                <option>Active Verification</option>
+                                                <option>High Priority</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Health Screening Checks Panel Card -->
+                        <div class="bg-white p-5 rounded-xl border border-[#d4dae4] shadow-sm relative w-full">
                             
                             <!-- Header block styled as image_eb2586.png / image_df48bf.png (actions shifted left) -->
                             <div class="flex justify-between items-start border-b border-slate-100 pb-4 mb-6">
@@ -1943,3 +1943,4 @@
     </script>
 </body>
 </html>
+```
