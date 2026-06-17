@@ -697,10 +697,11 @@
                 let statusText = cand.status;
                 
                 if (cand.status === 'COI Expired' || cand.status === 'Adverse Action') statusStyle = "bg-[#ef4444] text-white";
-                else if (cand.status === 'Review Needed' || cand.status === 'Pending Candidate') statusStyle = "bg-[#f59e0b] text-white";
+                else if (cand.status === 'Review Needed') statusStyle = "bg-[#f59e0b] text-white";
+                else if (cand.status === 'Pending Candidate') statusStyle = "bg-[#9ca3af] text-white";
                 else if (cand.status === 'Ready For Onboarding' || cand.status === 'Clear') statusStyle = "bg-[#5ae07d] text-white";
-                else if (cand.status === 'In Progress') statusStyle = "bg-[#3b82f6] text-white";
-                else statusStyle = "bg-slate-500 text-white";
+                else if (cand.status === 'In Progress') statusStyle = "bg-[#2563eb] text-white";
+                else statusStyle = "bg-slate-400 text-white";
 
                 let alertHtml = cand.alerts !== '—' ? `<span class="text-red-500 max-w-[120px] block whitespace-normal leading-tight">${cand.alerts}</span>` : `<span class="text-slate-400">${cand.alerts}</span>`;
 
@@ -760,15 +761,16 @@
             const statusBanner = document.getElementById('cand-header-status-banner');
             let bannerText = targetCandidate.status === 'Clear' || targetCandidate.status === 'Ready For Onboarding' 
                 ? `Checks Complete - ${targetCandidate.status}` 
-                : `Status - ${targetCandidate.status}`;
+                : targetCandidate.status;
             
             statusBanner.innerText = bannerText;
             
-            const baseBadgeClass = "py-[4px] px-3 text-[11px] font-bold text-white text-center rounded shadow-sm w-full block ";
+            const baseBadgeClass = "py-1 px-3 text-[11px] font-bold text-white text-center rounded shadow-sm w-[180px] block mb-1 ";
             
-            if (targetCandidate.status === 'COI Expired' || targetCandidate.status === 'Adverse Action') statusBanner.className = baseBadgeClass + "bg-[#e11d48]";
-            else if (targetCandidate.status === 'Review Needed' || targetCandidate.status === 'Pending Candidate') statusBanner.className = baseBadgeClass + "bg-[#f59e0b]";
-            else if (targetCandidate.status === 'Ready For Onboarding' || targetCandidate.status === 'Clear') statusBanner.className = baseBadgeClass + "bg-[#5ae07d]"; // Exact Green
+            if (targetCandidate.status === 'COI Expired' || targetCandidate.status === 'Adverse Action') statusBanner.className = baseBadgeClass + "bg-[#ef4444]";
+            else if (targetCandidate.status === 'Review Needed') statusBanner.className = baseBadgeClass + "bg-[#f59e0b]";
+            else if (targetCandidate.status === 'Pending Candidate') statusBanner.className = baseBadgeClass + "bg-[#9ca3af]";
+            else if (targetCandidate.status === 'Ready For Onboarding' || targetCandidate.status === 'Clear') statusBanner.className = baseBadgeClass + "bg-[#5ae07d]";
             else if (targetCandidate.status === 'In Progress') statusBanner.className = baseBadgeClass + "bg-[#2563eb]";
             else statusBanner.className = baseBadgeClass + "bg-slate-400";
 
@@ -832,7 +834,10 @@
                 if (filteredScreens.length === 0) return;
 
                 let catOverallStatus = "Clear", catBadgeColor = "bg-[#5ae07d]";
-                if (filteredScreens.some(s => s.orderStatus === "ReviewNeeded" || s.orderStatus === "InProgress")) { catOverallStatus = "Review Needed"; catBadgeColor = "bg-[#f59e0b]"; }
+                if (filteredScreens.some(s => s.orderStatus === "ReviewNeeded")) { catOverallStatus = "Review Needed"; catBadgeColor = "bg-[#f59e0b]"; }
+                else if (filteredScreens.some(s => s.orderStatus === "InProgress")) { catOverallStatus = "In Progress"; catBadgeColor = "bg-[#2563eb]"; }
+                else if (filteredScreens.some(s => s.orderStatus === "PendingCandidate")) { catOverallStatus = "Pending Candidate"; catBadgeColor = "bg-[#9ca3af]"; }
+                
                 if (filteredScreens.some(s => s.orderStatus === "UnableToVerify")) { catOverallStatus = "Unable to Verify"; catBadgeColor = "bg-[#64748b]"; }
 
                 const isExpanded = categoryCollapseState[cat];
@@ -872,18 +877,24 @@
                         const cChevronClass = isCheckExpanded ? 'fa-chevron-up' : 'fa-chevron-down';
 
                         let sStatusStyle = "bg-[#5ae07d]";
-                        if (screen.orderStatus === "ReviewNeeded" || screen.orderStatus === "InProgress") sStatusStyle = "bg-[#f59e0b]";
-                        if (screen.orderStatus === "UnableToVerify") sStatusStyle = "bg-[#64748b]";
+                        if (screen.orderStatus === "ReviewNeeded") sStatusStyle = "bg-[#f59e0b]";
+                        else if (screen.orderStatus === "InProgress") sStatusStyle = "bg-[#2563eb]";
+                        else if (screen.orderStatus === "UnableToVerify") sStatusStyle = "bg-[#64748b]";
+                        else if (screen.orderStatus === "PendingCandidate") sStatusStyle = "bg-[#9ca3af]";
 
                         const reversedHistory = [...screen.history].reverse();
                         const isReview = screen.orderStatus === "ReviewNeeded";
                         const isClear = screen.orderStatus === "Clear";
                         const isVerifyError = screen.orderStatus === "UnableToVerify";
+                        const isInProgress = screen.orderStatus === "InProgress";
+                        const isPending = screen.orderStatus === "PendingCandidate";
                         
                         let topDotClass = 'bg-blue-600', topRingClass = 'ring-blue-100';
                         if (isReview) { topDotClass = 'bg-[#f59e0b]'; topRingClass = 'ring-orange-100'; } 
                         else if (isClear) { topDotClass = 'bg-[#5ae07d]'; topRingClass = 'ring-green-100'; } 
                         else if (isVerifyError) { topDotClass = 'bg-[#64748b]'; topRingClass = 'ring-slate-200'; }
+                        else if (isInProgress) { topDotClass = 'bg-[#2563eb]'; topRingClass = 'ring-blue-100'; }
+                        else if (isPending) { topDotClass = 'bg-[#9ca3af]'; topRingClass = 'ring-slate-100'; }
 
                         const checkLastHistory = screen.history[screen.history.length - 1];
                         const checkDate = checkLastHistory ? checkLastHistory.date.split(' ')[0] : '—';
@@ -987,14 +998,15 @@
             const badge = document.getElementById('drawer-status-badge');
             let dBannerText = cand.status === 'Clear' || cand.status === 'Ready For Onboarding' 
                 ? `Checks Complete - ${cand.status}` 
-                : `Status - ${cand.status}`;
+                : cand.status;
             badge.innerText = dBannerText;
             
-            if (cand.status === 'COI Expired' || cand.status === 'Adverse Action') badge.className = "px-3 py-[4px] text-[10px] font-bold rounded text-white bg-red-600 shadow-sm";
-            else if (cand.status === 'Review Needed' || cand.status === 'Pending Candidate') badge.className = "px-3 py-[4px] text-[10px] font-bold rounded text-white bg-amber-500 shadow-sm";
-            else if (cand.status === 'Ready For Onboarding' || cand.status === 'Clear') badge.className = "px-3 py-[4px] text-[10px] font-bold rounded text-white bg-[#5ae07d] shadow-sm"; // Exact green
-            else if (cand.status === 'In Progress') badge.className = "px-3 py-[4px] text-[10px] font-bold rounded text-white bg-blue-600 shadow-sm";
-            else badge.className = "px-3 py-[4px] text-[10px] font-bold rounded text-slate-700 bg-slate-200 shadow-sm";
+            if (cand.status === 'COI Expired' || cand.status === 'Adverse Action') badge.className = "px-3 py-1 text-[11px] font-bold rounded text-white bg-[#ef4444] shadow-sm";
+            else if (cand.status === 'Review Needed') badge.className = "px-3 py-1 text-[11px] font-bold rounded text-white bg-[#f59e0b] shadow-sm";
+            else if (cand.status === 'Pending Candidate') badge.className = "px-3 py-1 text-[11px] font-bold rounded text-white bg-[#9ca3af] shadow-sm";
+            else if (cand.status === 'Ready For Onboarding' || cand.status === 'Clear') badge.className = "px-3 py-1 text-[11px] font-bold rounded text-white bg-[#5ae07d] shadow-sm";
+            else if (cand.status === 'In Progress') badge.className = "px-3 py-1 text-[11px] font-bold rounded text-white bg-[#2563eb] shadow-sm";
+            else badge.className = "px-3 py-1 text-[11px] font-bold rounded text-white bg-slate-400 shadow-sm";
 
             renderDrawerListContent();
             
@@ -1032,7 +1044,10 @@
                 if (listItems.length === 0) return;
 
                 let catOverallStatus = "Clear", catBadgeColor = "bg-[#5ae07d]";
-                if (listItems.some(s => s.orderStatus === "ReviewNeeded" || s.orderStatus === "InProgress")) { catOverallStatus = "Review Needed"; catBadgeColor = "bg-[#f59e0b]"; }
+                if (listItems.some(s => s.orderStatus === "ReviewNeeded")) { catOverallStatus = "Review Needed"; catBadgeColor = "bg-[#f59e0b]"; }
+                else if (listItems.some(s => s.orderStatus === "InProgress")) { catOverallStatus = "In Progress"; catBadgeColor = "bg-[#2563eb]"; }
+                else if (listItems.some(s => s.orderStatus === "PendingCandidate")) { catOverallStatus = "Pending Candidate"; catBadgeColor = "bg-[#9ca3af]"; }
+                
                 if (listItems.some(s => s.orderStatus === "UnableToVerify")) { catOverallStatus = "Unable to Verify"; catBadgeColor = "bg-[#64748b]"; }
 
                 const catDiv = document.createElement("div");
@@ -1049,19 +1064,26 @@
 
                 listItems.forEach((screen, sIdx) => {
                     let subStyle = "bg-[#5ae07d]";
-                    if (screen.orderStatus === "ReviewNeeded" || screen.orderStatus === "InProgress") subStyle = "bg-[#f59e0b]";
-                    if (screen.orderStatus === "UnableToVerify") subStyle = "bg-[#64748b]";
+                    if (screen.orderStatus === "ReviewNeeded") subStyle = "bg-[#f59e0b]";
+                    else if (screen.orderStatus === "InProgress") subStyle = "bg-[#2563eb]";
+                    else if (screen.orderStatus === "UnableToVerify") subStyle = "bg-[#64748b]";
+                    else if (screen.orderStatus === "PendingCandidate") subStyle = "bg-[#9ca3af]";
 
                     const rowId = `drawer-screen-${cat.replace(/\s+/g, '')}-${sIdx}`;
                     
                     const isReview = screen.orderStatus === "ReviewNeeded";
                     const isClear = screen.orderStatus === "Clear";
                     const isVerifyError = screen.orderStatus === "UnableToVerify";
+                    const isInProgress = screen.orderStatus === "InProgress";
+                    const isPending = screen.orderStatus === "PendingCandidate";
+                    
                     const reversedHistory = [...screen.history].reverse();
                     let topDotClass = 'bg-blue-600', topRingClass = 'ring-blue-100';
                     if (isReview) { topDotClass = 'bg-[#f59e0b]'; topRingClass = 'ring-orange-100'; } 
                     else if (isClear) { topDotClass = 'bg-[#5ae07d]'; topRingClass = 'ring-green-100'; } 
                     else if (isVerifyError) { topDotClass = 'bg-[#64748b]'; topRingClass = 'ring-slate-200'; }
+                    else if (isInProgress) { topDotClass = 'bg-[#2563eb]'; topRingClass = 'ring-blue-100'; }
+                    else if (isPending) { topDotClass = 'bg-[#9ca3af]'; topRingClass = 'ring-slate-100'; }
 
                     const checkLastHistory = screen.history[screen.history.length - 1];
                     const checkDate = checkLastHistory ? checkLastHistory.date.split(' ')[0] : '—';
