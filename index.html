@@ -116,21 +116,6 @@
                 <span>Advanced Candidates Dashboard</span>
             </a>
         </nav>
-
-        <div class="p-4 border-t border-slate-200">
-            <div class="flex items-center space-x-3 cursor-pointer group">
-                <div class="relative">
-                    <div class="w-8 h-8 rounded-full bg-emerald-500 flex items-center justify-center text-white font-bold text-xs shadow-sm">
-                        <i class="fa-regular fa-comments"></i>
-                    </div>
-                    <div class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full border-2 border-white"></div>
-                </div>
-                <div class="flex-1 min-w-0">
-                    <p class="text-sm font-semibold text-slate-700 truncate group-hover:text-blue-600 transition-colors">Debendu Roy</p>
-                </div>
-                <i class="fa-solid fa-ellipsis text-slate-400 group-hover:text-slate-600"></i>
-            </div>
-        </div>
     </aside>
 
     <!-- Main Content -->
@@ -215,15 +200,15 @@
                         </div>
                     </div>
 
-                    <!-- Tabs Section -->
+                    <!-- Dynamic Interactive Tabs Section -->
                     <div class="flex items-center justify-between mb-2">
                         <div class="flex space-x-8 border-b border-slate-200 w-full">
-                            <button class="pb-3 text-sm font-bold text-blue-600 border-b-2 border-blue-600">All Candidates (5)</button>
-                            <button class="pb-3 text-sm font-semibold text-slate-500 hover:text-slate-700">Pending Candidate (0)</button>
-                            <button class="pb-3 text-sm font-semibold text-slate-500 hover:text-slate-700">Check In Progress (1)</button>
-                            <button class="pb-3 text-sm font-semibold text-slate-500 hover:text-slate-700">Review Needed (0)</button>
-                            <button class="pb-3 text-sm font-semibold text-slate-500 hover:text-slate-700">Ready For Onboarding (0)</button>
-                            <button class="pb-3 text-sm font-semibold text-slate-500 hover:text-slate-700">Alerts (2)</button>
+                            <button onclick="setFilterTab('All Candidates')" id="tab-all" class="pb-3 text-sm font-bold text-blue-600 border-b-2 border-blue-600">All Candidates (0)</button>
+                            <button onclick="setFilterTab('Pending Candidate')" id="tab-pending" class="pb-3 text-sm font-semibold text-slate-500 hover:text-slate-700">Pending Candidate (0)</button>
+                            <button onclick="setFilterTab('Check In Progress')" id="tab-inprogress" class="pb-3 text-sm font-semibold text-slate-500 hover:text-slate-700">Check In Progress (0)</button>
+                            <button onclick="setFilterTab('Review Needed')" id="tab-review" class="pb-3 text-sm font-semibold text-slate-500 hover:text-slate-700">Review Needed (0)</button>
+                            <button onclick="setFilterTab('Ready For Onboarding')" id="tab-ready" class="pb-3 text-sm font-semibold text-slate-500 hover:text-slate-700">Ready For Onboarding (0)</button>
+                            <button onclick="setFilterTab('Alerts')" id="tab-alerts" class="pb-3 text-sm font-semibold text-slate-500 hover:text-slate-700">Alerts (0)</button>
                         </div>
                     </div>
 
@@ -287,17 +272,15 @@
                             </div>
 
                             <div class="flex items-start space-x-5 mb-6 border-b border-slate-100 pb-6 relative">
-                                <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-blue-500 shadow-sm shrink-0">
-                                    <i class="fa-solid fa-user text-xl"></i>
+                                <div class="w-14 h-14 rounded-full bg-blue-100 flex items-center justify-center text-blue-500 shadow-sm shrink-0 overflow-hidden relative">
+                                    <svg class="absolute bottom-0 w-12 h-12 text-blue-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
                                 </div>
-                                <div class="flex flex-col mt-1 space-y-2">
-                                    <div class="flex items-center space-x-3">
-                                        <h3 id="cand-header-name" class="text-lg font-bold text-slate-800 leading-none"></h3>
-                                        <span id="cand-header-status-banner" class="px-2.5 py-0.5 text-[10px] font-bold rounded text-white shadow-sm tracking-wide uppercase"></span>
-                                    </div>
-                                    <div class="inline-flex items-center justify-between border border-slate-300 rounded px-3 py-1.5 bg-white cursor-pointer w-48 shadow-sm">
-                                        <span class="text-xs font-semibold text-slate-600">Screening Tags</span>
-                                        <i class="fa-solid fa-chevron-down text-[10px] text-slate-400"></i>
+                                <div class="flex flex-col space-y-1.5 w-[180px]">
+                                    <h3 id="cand-header-name" class="text-[17px] font-bold text-slate-800 leading-none mb-0.5 mt-1"></h3>
+                                    <span id="cand-header-status-banner" class="py-[3px] text-[11px] font-medium text-white text-center w-full"></span>
+                                    <div class="flex items-center justify-between border-[1.5px] border-slate-700 rounded px-2.5 py-1 bg-white cursor-pointer w-full">
+                                        <span class="text-[11px] font-semibold text-slate-800">Screening Tags</span>
+                                        <i class="fa-solid fa-chevron-down text-[10px] text-slate-800 font-bold"></i>
                                     </div>
                                 </div>
                             </div>
@@ -330,7 +313,7 @@
                             </div>
                         </div>
 
-                        <!-- 2-Column Grid -->
+                        <!-- 2-Column Grid (Fully Aligned) -->
                         <div class="flex gap-6 w-full relative">
                             
                             <!-- Left Column: Actions & Feed (Fixed width 286px) -->
@@ -360,35 +343,36 @@
                                         <a href="#" class="text-[10px] font-medium text-blue-600 hover:underline flex items-center space-x-1"><i class="fa-solid fa-cloud-arrow-down"></i><span>Export Activity Feed</span></a>
                                     </div>
                                     <div class="relative min-h-[300px]">
-                                        <!-- Axis-Centered Activity Vector Track -->
-                                        <div class="absolute left-[13px] w-[2px] bg-slate-200 top-2 bottom-2 z-0"></div>
+                                        
+                                        <!-- Centered Axis Line -->
+                                        <div class="absolute left-[13px] w-[2px] bg-slate-200 top-3 bottom-2 z-0 -translate-x-1/2"></div>
                                         
                                         <div class="space-y-6 relative z-10 w-full">
                                             <div class="relative flex items-center w-full">
-                                                <div class="absolute left-[9px] top-1/2 -translate-y-1/2 w-2.5 h-2.5 bg-slate-400 rounded-full ring-4 ring-[#f8fafc] z-10"></div>
+                                                <div class="absolute left-[13px] top-3 -translate-x-1/2 w-2.5 h-2.5 bg-slate-400 rounded-full ring-4 ring-[#f8fafc] z-10"></div>
                                                 <div class="pl-8 w-full">
                                                     <div class="flex justify-between items-start w-full">
-                                                        <p class="text-[11px] font-bold text-slate-700 leading-tight mb-1">Basic Physical Check Complete</p>
-                                                        <span class="text-[9px] font-semibold text-slate-400">06/15/26</span>
+                                                        <p class="text-[11px] font-bold text-slate-700 leading-tight mb-1 mt-1">Basic Physical Check Complete</p>
+                                                        <span class="text-[9px] font-semibold text-slate-400 mt-1">06/15/26</span>
                                                     </div>
                                                     <p class="text-[10px] font-semibold text-slate-400">Unable to Verify</p>
                                                 </div>
                                             </div>
                                             <div class="relative flex items-center w-full">
-                                                <div class="absolute left-[9px] top-1/2 -translate-y-1/2 w-2.5 h-2.5 bg-emerald-400 rounded-full ring-4 ring-[#f8fafc] z-10"></div>
+                                                <div class="absolute left-[13px] top-3 -translate-x-1/2 w-2.5 h-2.5 bg-emerald-400 rounded-full ring-4 ring-[#f8fafc] z-10"></div>
                                                 <div class="pl-8 w-full">
                                                     <div class="flex justify-between items-start w-full">
-                                                        <p class="text-[11px] font-bold text-slate-700 leading-tight mb-1">The Screening Is Complete. No Issues<br>Were Found.</p>
-                                                        <span class="text-[9px] font-semibold text-slate-400 mt-0.5">06/15/26</span>
+                                                        <p class="text-[11px] font-bold text-slate-700 leading-tight mb-1 mt-1">The Screening Is Complete. No Issues<br>Were Found.</p>
+                                                        <span class="text-[9px] font-semibold text-slate-400 mt-1">06/15/26</span>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="relative flex items-center w-full">
-                                                <div class="absolute left-[9px] top-1/2 -translate-y-1/2 w-2.5 h-2.5 bg-emerald-400 rounded-full ring-4 ring-[#f8fafc] z-10"></div>
+                                                <div class="absolute left-[13px] top-3 -translate-x-1/2 w-2.5 h-2.5 bg-emerald-400 rounded-full ring-4 ring-[#f8fafc] z-10"></div>
                                                 <div class="pl-8 w-full">
                                                     <div class="flex justify-between items-start w-full">
-                                                        <p class="text-[11px] font-bold text-slate-700 leading-tight mb-1">Basic Physical Check Complete</p>
-                                                        <span class="text-[9px] font-semibold text-slate-400">06/15/26</span>
+                                                        <p class="text-[11px] font-bold text-slate-700 leading-tight mb-1 mt-1">Basic Physical Check Complete</p>
+                                                        <span class="text-[9px] font-semibold text-slate-400 mt-1">06/15/26</span>
                                                     </div>
                                                     <p class="text-[10px] font-semibold text-emerald-500">Clear</p>
                                                 </div>
@@ -398,15 +382,15 @@
                                 </div>
                             </div>
 
-                            <!-- Right Column: Health Screening Checks -->
+                            <!-- Right Column: Health Screening Checks (Responsive Width, Perfect Alignment) -->
                             <div class="flex-1 shrink-0 flex flex-col">
                                 <div class="flex justify-between items-center mb-2 px-1">
                                     <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wide">Verified Profile</h3>
                                 </div>
                                 
-                                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 flex flex-col h-full relative">
+                                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 flex flex-col h-full relative w-full">
                                     
-                                    <!-- Header Controls Stack perfectly aligned right -->
+                                    <!-- Header Controls Aligned Vertically Over Statuses -->
                                     <div class="flex justify-between items-start mb-6">
                                         <div>
                                             <h2 class="text-base font-bold text-slate-800 leading-tight">Health Screening Checks</h2>
@@ -416,6 +400,7 @@
                                             <div class="flex items-center space-x-2">
                                                 <span class="text-[11px] font-bold text-slate-600">Expand All</span>
                                                 <button id="expandAllToggle" onclick="toggleExpandAll()" class="w-8 h-4 bg-slate-200 rounded-full relative focus:outline-none shrink-0 shadow-inner">
+                                                    <!-- Dynamic toggle dot -->
                                                     <div class="dot absolute left-0.5 top-0.5 bg-white w-3 h-3 rounded-full transition-transform duration-300 shadow-sm"></div>
                                                 </button>
                                             </div>
@@ -426,7 +411,7 @@
 
                                     <!-- Full Width Category Tiles Wrapper -->
                                     <div class="flex-1 relative w-full">
-                                        <div id="accordion-checks-container" class="space-y-4 relative w-full overall-screening-scroll overflow-y-visible pr-2">
+                                        <div id="accordion-checks-container" class="space-y-4 relative w-full overall-screening-scroll overflow-y-auto pr-2" style="max-height: 800px;">
                                             <!-- Category Checks populated by JS -->
                                         </div>
                                     </div>
@@ -480,7 +465,7 @@
     </div>
 
     <script>
-        // Expanded Database Definition Including New Candidates and Rich Fields
+        // Expanded Database Definition
         const candidateDb = [
             {
                 name: "Debendu Roy",
@@ -642,18 +627,70 @@
         ];
 
         let currentSelectedCandidate = candidateDb[0];
+        let currentFilterTab = 'All Candidates';
         let drawerScreeningsData = [];
         let categoryCollapseState = { "Drug Check": false, "Titers": false, "Basic Physical": false, "Vaccine": false, "Background Check": false };
         let checksCollapseState = {};
         let allDeepdiveExpanded = false;
 
+        function updateTabCounts() {
+            const counts = {
+                'All Candidates': candidateDb.length,
+                'Pending Candidate': candidateDb.filter(c => c.status === 'Pending Candidate').length,
+                'Check In Progress': candidateDb.filter(c => c.status === 'In Progress').length,
+                'Review Needed': candidateDb.filter(c => c.status === 'Review Needed').length,
+                'Ready For Onboarding': candidateDb.filter(c => c.status === 'Ready For Onboarding').length,
+                'Alerts': candidateDb.filter(c => c.alerts !== '—').length
+            };
+
+            document.getElementById('tab-all').innerText = `All Candidates (${counts['All Candidates']})`;
+            document.getElementById('tab-pending').innerText = `Pending Candidate (${counts['Pending Candidate']})`;
+            document.getElementById('tab-inprogress').innerText = `Check In Progress (${counts['Check In Progress']})`;
+            document.getElementById('tab-review').innerText = `Review Needed (${counts['Review Needed']})`;
+            document.getElementById('tab-ready').innerText = `Ready For Onboarding (${counts['Ready For Onboarding']})`;
+            document.getElementById('tab-alerts').innerText = `Alerts (${counts['Alerts']})`;
+        }
+
+        function setFilterTab(tabName) {
+            currentFilterTab = tabName;
+            
+            const tabs = [
+                {id: 'tab-all', name: 'All Candidates'},
+                {id: 'tab-pending', name: 'Pending Candidate'},
+                {id: 'tab-inprogress', name: 'Check In Progress'},
+                {id: 'tab-review', name: 'Review Needed'},
+                {id: 'tab-ready', name: 'Ready For Onboarding'},
+                {id: 'tab-alerts', name: 'Alerts'}
+            ];
+
+            tabs.forEach(t => {
+                const el = document.getElementById(t.id);
+                if (t.name === tabName) {
+                    el.className = "pb-3 text-sm font-bold text-blue-600 border-b-2 border-blue-600";
+                } else {
+                    el.className = "pb-3 text-sm font-semibold text-slate-500 hover:text-slate-700";
+                }
+            });
+
+            renderTable();
+        }
+
         function renderTable() {
             const tbody = document.getElementById('candidates-table-body');
             tbody.innerHTML = "";
             
-            candidateDb.forEach((cand, index) => {
+            let filteredDb = candidateDb;
+            if (currentFilterTab === 'Pending Candidate') filteredDb = candidateDb.filter(c => c.status === 'Pending Candidate');
+            else if (currentFilterTab === 'Check In Progress') filteredDb = candidateDb.filter(c => c.status === 'In Progress');
+            else if (currentFilterTab === 'Review Needed') filteredDb = candidateDb.filter(c => c.status === 'Review Needed');
+            else if (currentFilterTab === 'Ready For Onboarding') filteredDb = candidateDb.filter(c => c.status === 'Ready For Onboarding');
+            else if (currentFilterTab === 'Alerts') filteredDb = candidateDb.filter(c => c.alerts !== '—');
+            
+            filteredDb.forEach((cand) => {
+                const originalIndex = candidateDb.indexOf(cand);
                 let statusStyle = "";
                 let statusText = cand.status.toUpperCase();
+                
                 if (cand.status === 'COI Expired' || cand.status === 'Adverse Action') statusStyle = "bg-red-600 text-white";
                 else if (cand.status === 'Review Needed' || cand.status === 'Pending Candidate') statusStyle = "bg-amber-500 text-white";
                 else if (cand.status === 'Ready For Onboarding' || cand.status === 'Clear') statusStyle = "bg-emerald-500 text-white";
@@ -667,7 +704,7 @@
                 tr.innerHTML = `
                     <td class="p-4 border-b border-slate-100"><input type="checkbox" class="rounded border-slate-300 text-blue-600 focus:ring-blue-500"></td>
                     <td class="p-4 border-b border-slate-100">
-                        <div class="font-bold text-blue-600 hover:text-blue-800 cursor-pointer transition-colors" onclick="openProfile(${index})">${cand.name}</div>
+                        <div class="font-bold text-blue-600 hover:text-blue-800 cursor-pointer transition-colors" onclick="openProfile(${originalIndex})">${cand.name}</div>
                     </td>
                     <td class="p-4 border-b border-slate-100 text-[11px] font-semibold text-slate-500 uppercase tracking-wider">${cand.orderId}</td>
                     <td class="p-4 border-b border-slate-100 text-xs font-medium text-slate-600">${cand.lastRun}</td>
@@ -677,13 +714,15 @@
                     <td class="p-4 border-b border-slate-100 text-xs font-medium text-slate-600">${cand.package}</td>
                     <td class="p-4 border-b border-slate-100"><span class="px-2.5 py-1 rounded text-[10px] font-bold uppercase tracking-wider ${statusStyle} shadow-sm">${statusText}</span></td>
                     <td class="p-4 border-b border-slate-100 text-center">
-                        <button onclick="openDrawerWithData(${index})" class="w-8 h-8 rounded-full border border-blue-200 bg-white hover:bg-blue-50 text-blue-600 flex items-center justify-center transition-colors mx-auto shadow-sm"><i class="fa-solid fa-info text-xs"></i></button>
+                        <button onclick="openDrawerWithData(${originalIndex})" class="w-8 h-8 rounded-full border border-blue-200 bg-white hover:bg-blue-50 text-blue-600 flex items-center justify-center transition-colors mx-auto shadow-sm"><i class="fa-solid fa-info text-xs"></i></button>
                     </td>
                     <td class="p-4 border-b border-slate-100 text-xs font-medium text-slate-600">${cand.stagedCheck}</td>
                     <td class="p-4 border-b border-slate-100 text-[10px] font-medium">${alertHtml}</td>
                 `;
                 tbody.appendChild(tr);
             });
+            
+            updateTabCounts();
         }
 
         function showHomeView() {
@@ -693,6 +732,7 @@
             
             document.getElementById('nav-candidates').classList.add('bg-blue-50', 'text-blue-700');
             document.getElementById('nav-candidates').querySelector('div').classList.remove('hidden');
+            renderTable();
         }
 
         function openProfile(index) {
@@ -712,7 +752,6 @@
             document.getElementById('action-comp-date').innerText = targetCandidate.dateAdded;
             document.getElementById('cand-meta-email').innerText = targetCandidate.name.toLowerCase().replace(' ', '.') + "@vetty.co";
 
-            // Next-Line Status Logic inside Profile with "Checks Complete" conversion
             const statusBanner = document.getElementById('cand-header-status-banner');
             let bannerText = targetCandidate.status === 'Clear' || targetCandidate.status === 'Ready For Onboarding' 
                 ? `Checks Complete - ${targetCandidate.status}` 
@@ -720,11 +759,13 @@
             
             statusBanner.innerText = bannerText;
             
-            if (targetCandidate.status === 'COI Expired' || targetCandidate.status === 'Adverse Action') statusBanner.className = "px-2.5 py-0.5 text-[10px] font-bold rounded text-white bg-red-600 shadow-sm tracking-wide uppercase";
-            else if (targetCandidate.status === 'Review Needed' || targetCandidate.status === 'Pending Candidate') statusBanner.className = "px-2.5 py-0.5 text-[10px] font-bold rounded text-white bg-amber-500 shadow-sm tracking-wide uppercase";
-            else if (targetCandidate.status === 'Ready For Onboarding' || targetCandidate.status === 'Clear') statusBanner.className = "px-2.5 py-0.5 text-[10px] font-bold rounded text-white bg-emerald-500 shadow-sm tracking-wide uppercase";
-            else if (targetCandidate.status === 'In Progress') statusBanner.className = "px-2.5 py-0.5 text-[10px] font-bold rounded text-white bg-blue-600 shadow-sm tracking-wide uppercase";
-            else statusBanner.className = "px-2.5 py-0.5 text-[10px] font-bold rounded text-slate-700 bg-slate-200 shadow-sm tracking-wide uppercase";
+            const baseBadgeClass = "py-[3px] text-[11px] font-medium text-white text-center w-full block ";
+            
+            if (targetCandidate.status === 'COI Expired' || targetCandidate.status === 'Adverse Action') statusBanner.className = baseBadgeClass + "bg-[#e11d48]";
+            else if (targetCandidate.status === 'Review Needed' || targetCandidate.status === 'Pending Candidate') statusBanner.className = baseBadgeClass + "bg-[#f59e0b]";
+            else if (targetCandidate.status === 'Ready For Onboarding' || targetCandidate.status === 'Clear') statusBanner.className = baseBadgeClass + "bg-[#5ae07d]";
+            else if (targetCandidate.status === 'In Progress') statusBanner.className = baseBadgeClass + "bg-[#2563eb]";
+            else statusBanner.className = baseBadgeClass + "bg-slate-400";
 
             categoryCollapseState = { "Drug Check": false, "Titers": false, "Basic Physical": false, "Vaccine": false, "Background Check": false };
             checksCollapseState = {};
@@ -875,27 +916,27 @@
                                 </div>
                         `;
 
-                        // Single-Row Timeline Structure
+                        // Single-Row Timeline Structure aligned left
                         if (isCheckExpanded) {
                             innerHtmlStr += `
                                 <div class="p-4 bg-slate-50/50 border-t border-slate-100">
                                     ${resultsTableHtml}
                                     
-                                    <div class="relative py-4 pl-4 w-full">
-                                        <div class="absolute left-[20px] w-[2px] bg-slate-200 top-6 bottom-6 z-0"></div>
+                                    <div class="relative py-4 pl-2 w-full">
+                                        <div class="absolute left-[13px] w-[2px] bg-slate-200 top-6 bottom-6 z-0 -translate-x-1/2"></div>
                                         
                                         <div class="space-y-6 relative z-10">
                                             ${reversedHistory.map((step, stepIdx) => {
                                                 const isTop = stepIdx === 0;
-                                                const dotColor = isTop ? topDotClass : 'bg-slate-300';
-                                                const ringColor = isTop ? topRingClass : 'ring-white';
+                                                const dotColor = isTop ? topDotClass : 'bg-blue-500';
+                                                const ringColor = isTop ? topRingClass : 'ring-[#f8fafc]';
                                                 const textColor = isTop ? 'text-slate-800' : 'text-slate-500';
                                                 const dateColor = isTop ? 'text-slate-500' : 'text-slate-400';
                                                 
                                                 return `
                                                     <div class="relative flex items-center w-full">
-                                                        <div class="absolute left-[1.5px] top-1/2 -translate-y-1/2 w-2.5 h-2.5 ${dotColor} rounded-full ring-[3px] ${ringColor} z-10 shadow-sm"></div>
-                                                        <div class="flex justify-between items-center w-full pl-[25px] pr-2">
+                                                        <div class="absolute left-[13px] top-1/2 -translate-y-1/2 -translate-x-1/2 w-2.5 h-2.5 ${dotColor} rounded-full ring-4 ${ringColor} z-10 shadow-sm"></div>
+                                                        <div class="flex justify-between items-center w-full pl-8 pr-2">
                                                             <p class="text-[11px] font-bold ${textColor}">${step.status}</p>
                                                             <span class="text-[9px] font-semibold ${dateColor}">${step.date}</span>
                                                         </div>
@@ -931,8 +972,8 @@
 
             const badge = document.getElementById('drawer-status-badge');
             let dBannerText = cand.status === 'Clear' || cand.status === 'Ready For Onboarding' 
-                ? `Checks Complete - ${cand.status}` 
-                : `Status - ${cand.status}`;
+                ? `CHECKS COMPLETE - ${cand.status.toUpperCase()}` 
+                : `STATUS - ${cand.status.toUpperCase()}`;
             badge.innerText = dBannerText;
             
             if (cand.status === 'COI Expired' || cand.status === 'Adverse Action') badge.className = "px-2.5 py-0.5 text-[10px] font-bold rounded text-white bg-red-600 shadow-sm uppercase";
@@ -960,8 +1001,8 @@
 
         function openCandidateProfile() {
             closeDrawer();
-            const index = candidateDb.findIndex(c => c.orderId === currentSelectedCandidate.orderId);
-            setTimeout(() => { openProfile(index); }, 300);
+            const originalIndex = candidateDb.indexOf(currentSelectedCandidate);
+            setTimeout(() => { openProfile(originalIndex); }, 300);
         }
 
         function renderDrawerListContent() {
@@ -1043,21 +1084,21 @@
                             <div class="text-center py-2.5 text-slate-700 font-bold text-xs bg-white border border-slate-200 rounded-lg shadow-sm">This check is ${screen.suborderStatus}</div>
                             ${resultsTableHtml}
                             
-                            <div class="relative py-4 pl-4 w-full">
-                                <div class="absolute left-[20px] w-[2px] bg-slate-200 top-6 bottom-6 z-0"></div>
+                            <div class="relative py-4 pl-2 w-full">
+                                <div class="absolute left-[13px] w-[2px] bg-slate-200 top-6 bottom-6 z-0 -translate-x-1/2"></div>
                                 
                                 <div class="space-y-6 relative z-10">
                                     ${reversedHistory.map((step, stepIdx) => {
                                         const isTop = stepIdx === 0;
-                                        const dotColor = isTop ? topDotClass : 'bg-slate-300';
-                                        const ringColor = isTop ? topRingClass : 'ring-white';
+                                        const dotColor = isTop ? topDotClass : 'bg-blue-500';
+                                        const ringColor = isTop ? topRingClass : 'ring-[#f8fafc]';
                                         const textColor = isTop ? 'text-slate-800' : 'text-slate-500';
                                         const dateColor = isTop ? 'text-slate-500' : 'text-slate-400';
                                         
                                         return `
                                             <div class="relative flex items-center w-full">
-                                                <div class="absolute left-[1.5px] top-1/2 -translate-y-1/2 w-2.5 h-2.5 ${dotColor} rounded-full ring-[3px] ${ringColor} z-10 shadow-sm"></div>
-                                                <div class="flex justify-between items-center w-full pl-[25px] pr-2">
+                                                <div class="absolute left-[13px] top-1/2 -translate-y-1/2 -translate-x-1/2 w-2.5 h-2.5 ${dotColor} rounded-full ring-4 ${ringColor} z-10 shadow-sm"></div>
+                                                <div class="flex justify-between items-center w-full pl-8 pr-2">
                                                     <p class="text-[11px] font-bold ${textColor}">${step.status}</p>
                                                     <span class="text-[9px] font-semibold ${dateColor}">${step.date}</span>
                                                 </div>
