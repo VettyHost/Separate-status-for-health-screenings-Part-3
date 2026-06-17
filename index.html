@@ -3,590 +3,484 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LaSalle Network - Vetty Premium Client Dashboard</title>
-    <!-- Tailwind CSS CDN -->
+    <title>Premium Client Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- FontAwesome for precise SVG icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        body {
-            font-family: 'Inter', -apple-system, sans-serif;
-            box-sizing: border-box;
-        }
+        body { font-family: 'Inter', sans-serif; }
         
-        /* Custom scrollbar styling to ensure high visibility */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #f1f5f9;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #94a3b8;
-        }
-        
-        /* Drawer animation transitions */
-        .drawer-transition {
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease-in-out;
-        }
-
-        /* Specific scrollable inner timeline containers */
-        .inner-scroll-timeline {
-            max-height: 240px;
-            overflow-y: auto;
-            padding-right: 4px;
-        }
-        .inner-scroll-timeline::-webkit-scrollbar {
-            width: 5px;
-        }
-        .inner-scroll-timeline::-webkit-scrollbar-track {
-            background: #f8fafc;
-        }
-        .inner-scroll-timeline::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 9999px;
-        }
-
-        /* Overall Health Screening Checks Container - FORCED PROMINENT SCROLLER */
-        .overall-screening-scroll {
-            max-height: 540px;
-            overflow-y: scroll !important; /* Force scrollbar visibility by default */
-            padding-right: 8px;
-        }
-        
-        .overall-screening-scroll::-webkit-scrollbar {
-            width: 10px !important;
-            display: block !important;
-        }
-        .overall-screening-scroll::-webkit-scrollbar-track {
-            background: #f8fafc !important;
-            border-radius: 9999px !important;
-            border: 1px solid #e2e8f0 !important;
-        }
-        .overall-screening-scroll::-webkit-scrollbar-thumb {
-            background: #475569 !important; /* Bold Slate-600 color for maximum visibility */
-            border-radius: 9999px !important;
-            border: 2px solid #f8fafc !important;
-        }
-        .overall-screening-scroll::-webkit-scrollbar-thumb:hover {
-            background: #1e293b !important;
-        }
-
-        /* Force prominent scrollbar on the main details content page */
-        .main-page-scrollbar {
-            overflow-y: scroll !important;
-        }
         .main-page-scrollbar::-webkit-scrollbar {
-            width: 12px !important;
-            display: block !important;
+            width: 8px;
         }
         .main-page-scrollbar::-webkit-scrollbar-track {
-            background: #f1f5f9 !important;
-            border-radius: 4px !important;
+            background: #f1f5f9; 
+            border-radius: 4px;
         }
         .main-page-scrollbar::-webkit-scrollbar-thumb {
-            background: #475569 !important;
-            border-radius: 9999px !important;
-            border: 2px solid #f1f5f9 !important;
+            background: #475569;
+            border-radius: 4px;
         }
         .main-page-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: #1e293b !important;
+            background: #334155;
         }
 
-        /* Sleek Rectangular Category Card matching screenshot specifications */
-        .category-tile-sleek {
-            padding-top: 14px;
-            padding-bottom: 14px;
-            padding-left: 20px;
-            padding-right: 20px;
-            border-radius: 16px;
-            background-color: #ffffff;
-            border: 1px solid #d4dae4 !important;
-            margin-bottom: 16px;
-            transition: all 0.2s ease-in-out;
+        .overall-screening-scroll::-webkit-scrollbar {
+            width: 6px;
         }
-        .category-tile-sleek:hover {
-            border-color: #cbd5e1 !important;
-            background-color: #f8fafc;
+        .overall-screening-scroll::-webkit-scrollbar-track {
+            background: #f8fafc;
+        }
+        .overall-screening-scroll::-webkit-scrollbar-thumb {
+            background: #64748b;
+            border-radius: 4px;
+        }
+
+        .profile-max-width {
+            max-width: 810px;
+        }
+
+        #candidateDrawer {
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .drawer-open {
+            transform: translateX(0) !important;
         }
     </style>
 </head>
-<body class="bg-[#f3f4f6] text-[#1e293b] min-h-screen flex overflow-hidden">
+<body class="bg-[#f8fafc] text-slate-800 h-screen flex overflow-hidden">
 
-    <aside class="w-[260px] bg-white text-slate-500 flex flex-col flex-shrink-0 z-20 shadow-sm border-r border-slate-200">
-        <!-- LaSalle Network Brand Header -->
-        <div class="h-20 flex flex-col justify-center px-6 border-b border-slate-100">
-            <div class="flex items-center gap-2.5">
-                <div class="flex items-center justify-center w-8 h-8 rounded bg-emerald-50 border border-slate-200 text-emerald-600">
-                    <i class="fa-solid fa-network-wired text-sm"></i>
-                </div>
-                <div class="flex flex-col">
-                    <span class="font-black text-slate-800 tracking-tight leading-none text-base">LaSalle</span>
-                    <span class="font-medium text-blue-600 tracking-wider text-xs uppercase leading-none">Network</span>
+    <!-- Sidebar -->
+    <aside class="w-64 bg-white border-r border-slate-200 flex flex-col z-20 shrink-0 shadow-sm relative">
+        <div class="h-16 flex items-center px-6 border-b border-slate-200">
+            <div class="flex items-center space-x-3 text-emerald-600 font-bold text-lg tracking-tight">
+                <i class="fa-solid fa-layer-group text-xl text-emerald-500"></i>
+                <div class="leading-tight">
+                    <div class="text-sm text-slate-800">LaSalle</div>
+                    <div class="text-[10px] text-blue-600 font-semibold tracking-wider uppercase">Network</div>
                 </div>
             </div>
         </div>
 
-        <!-- Create New Candidate CTA -->
-        <div class="p-4">
-            <button onclick="openFormModal('new-candidate')" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg flex items-center justify-center gap-2.5 transition-colors shadow-lg active:scale-95">
-                <i class="fa-solid fa-plus text-sm"></i> New Candidate
+        <div class="p-4 border-b border-slate-100">
+            <button class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 px-4 rounded-lg flex justify-center items-center space-x-2 transition-colors shadow-sm">
+                <i class="fa-solid fa-plus text-sm"></i>
+                <span>New Candidate</span>
             </button>
         </div>
 
-        <!-- Navigation Links -->
-        <nav class="flex-1 px-3 space-y-1 overflow-y-auto">
-            <a href="#" id="nav-candidates" onclick="showScreen('home-screen', 'nav-candidates')" class="flex items-center gap-3.5 px-4 py-3 rounded-lg bg-blue-50/70 text-blue-600 font-semibold transition-all">
-                <i class="fa-solid fa-users text-blue-600 w-5 text-center text-base"></i>
-                <span class="text-sm">Candidates</span>
+        <nav class="flex-1 overflow-y-auto px-3 py-4 space-y-1 text-sm font-semibold">
+            <a href="#" onclick="showHomeView()" id="nav-candidates" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg bg-blue-50 text-blue-700 relative">
+                <div class="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 bg-blue-600 rounded-r-full"></div>
+                <i class="fa-solid fa-user-group w-5 text-center text-blue-600"></i>
+                <span>Candidates</span>
             </a>
-            <a href="#" id="nav-packages" onclick="showPlaceholderScreen('Packages Configuration Panel', 'nav-packages')" class="flex items-center gap-3.5 px-4 py-3 rounded-lg hover:bg-slate-50 hover:text-slate-800 transition-all text-slate-500 font-medium">
-                <i class="fa-solid fa-box text-center w-5 text-base"></i>
-                <span class="text-sm">Packages</span>
+            <a href="#" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg text-slate-500 hover:bg-slate-50 hover:text-slate-700 transition-colors">
+                <i class="fa-solid fa-box w-5 text-center"></i>
+                <span>Packages</span>
             </a>
-            <a href="#" id="nav-comply" onclick="showPlaceholderScreen('Vetty Comply Compliance Center', 'nav-comply')" class="flex items-center gap-3.5 px-4 py-3 rounded-lg hover:bg-slate-50 hover:text-slate-800 transition-all text-slate-500 font-medium">
-                <i class="fa-solid fa-shield-halved text-center w-5 text-base"></i>
-                <span class="text-sm">Vetty Comply</span>
+            <a href="#" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg text-slate-500 hover:bg-slate-50 hover:text-slate-700 transition-colors">
+                <i class="fa-solid fa-shield-halved w-5 text-center"></i>
+                <span>Vetty Comply</span>
             </a>
-            <a href="#" id="nav-customizations" onclick="showPlaceholderScreen('Customizations Settings Profile', 'nav-customizations')" class="flex items-center gap-3.5 px-4 py-3 rounded-lg hover:bg-slate-50 hover:text-slate-800 transition-all text-slate-500 font-medium">
-                <i class="fa-solid fa-sliders text-center w-5 text-base"></i>
-                <span class="text-sm">Customizations</span>
+            <a href="#" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg text-slate-500 hover:bg-slate-50 hover:text-slate-700 transition-colors">
+                <i class="fa-solid fa-sliders w-5 text-center"></i>
+                <span>Customizations</span>
             </a>
-            <a href="#" id="nav-settings" onclick="showPlaceholderScreen('Global Client Settings Configurations', 'nav-settings')" class="flex items-center gap-3.5 px-4 py-3 rounded-lg hover:bg-slate-50 hover:text-slate-800 transition-all text-slate-500 font-medium">
-                <i class="fa-solid fa-gear text-center w-5 text-base"></i>
-                <span class="text-sm">Settings</span>
+            <a href="#" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg text-slate-500 hover:bg-slate-50 hover:text-slate-700 transition-colors">
+                <i class="fa-solid fa-gear w-5 text-center"></i>
+                <span>Settings</span>
             </a>
-            <a href="#" id="nav-formi9" onclick="showPlaceholderScreen('Form I-9 Integrated Dashboard', 'nav-formi9')" class="flex items-center gap-3.5 px-4 py-3 rounded-lg hover:bg-slate-50 hover:text-slate-800 transition-all text-slate-500 font-medium">
-                <i class="fa-solid fa-fingerprint text-center w-5 text-base"></i>
-                <span class="text-sm">Form I-9 Dashboard</span>
+            
+            <div class="pt-4 pb-2 px-3 text-[10px] font-bold text-slate-400 uppercase tracking-wider">Features</div>
+            
+            <a href="#" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg text-slate-500 hover:bg-slate-50 hover:text-slate-700 transition-colors">
+                <i class="fa-solid fa-file-signature w-5 text-center"></i>
+                <span>Form I-9 Dashboard</span>
             </a>
-            <a href="#" id="nav-reports" onclick="showPlaceholderScreen('Analytics & Auditing Reports Generation', 'nav-reports')" class="flex items-center gap-3.5 px-4 py-3 rounded-lg hover:bg-slate-50 hover:text-slate-800 transition-all text-slate-500 font-medium">
-                <i class="fa-solid fa-chart-pie text-center w-5 text-base"></i>
-                <span class="text-sm">Reports</span>
+            <a href="#" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg text-slate-500 hover:bg-slate-50 hover:text-slate-700 transition-colors">
+                <i class="fa-solid fa-chart-pie w-5 text-center"></i>
+                <span>Reports</span>
             </a>
-            <a href="#" id="nav-bulk" onclick="showPlaceholderScreen('CSV / XLSX Bulk Candidate Upload Tool', 'nav-bulk')" class="flex items-center gap-3.5 px-4 py-3 rounded-lg hover:bg-slate-50 hover:text-slate-800 transition-all text-slate-500 font-medium">
-                <i class="fa-solid fa-cloud-arrow-up text-center w-5 text-base"></i>
-                <span class="text-sm">Bulk Upload</span>
+            <a href="#" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg text-slate-500 hover:bg-slate-50 hover:text-slate-700 transition-colors">
+                <i class="fa-solid fa-cloud-arrow-up w-5 text-center"></i>
+                <span>Bulk Upload</span>
             </a>
-            <a href="#" id="nav-supplies" onclick="showPlaceholderScreen('Supplies & Shipping Physical Order Dispatch', 'nav-supplies')" class="flex items-center gap-3.5 px-4 py-3 rounded-lg hover:bg-slate-50 hover:text-slate-800 transition-all text-slate-500 font-medium">
-                <i class="fa-solid fa-cart-shopping text-center w-5 text-base"></i>
-                <span class="text-sm">Supplies & Shipping</span>
+             <a href="#" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg text-slate-500 hover:bg-slate-50 hover:text-slate-700 transition-colors">
+                <i class="fa-solid fa-cart-flatbed w-5 text-center"></i>
+                <span>Supplies & Shipping</span>
             </a>
-            <a href="#" id="nav-advanced" onclick="showScreen('home-screen', 'nav-advanced')" class="flex items-center gap-3.5 px-4 py-3 rounded-lg hover:bg-slate-50 hover:text-slate-800 transition-all text-slate-500 font-medium">
-                <i class="fa-solid fa-chart-line text-center w-5 text-base"></i>
-                <span class="text-sm">Advanced Candidates Dashboard</span>
+             <a href="#" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg text-slate-500 hover:bg-slate-50 hover:text-slate-700 transition-colors">
+                <i class="fa-solid fa-chart-line w-5 text-center"></i>
+                <span>Advanced Candidates Dashboard</span>
             </a>
         </nav>
 
-        <!-- Floating Chat Support Badge -->
-        <div class="p-4 border-t border-slate-100 flex items-center justify-between bg-slate-50/50">
-            <div class="flex items-center gap-3">
-                <button onclick="openChatSupport()" class="w-11 h-11 rounded-full bg-emerald-500 hover:bg-emerald-600 flex items-center justify-center text-white shadow-lg relative group transition-transform hover:scale-105">
-                    <i class="fa-regular fa-comments text-lg"></i>
-                    <span class="absolute top-0 right-0 w-3 h-3 bg-red-500 rounded-full border-2 border-emerald-500 animate-pulse"></span>
-                </button>
-                <div class="overflow-hidden">
-                    <p class="text-xs font-bold text-slate-700 truncate">Debendu Roy</p>
-                    <p class="text-[10px] text-slate-400 truncate">Client Admin</p>
+        <div class="p-4 border-t border-slate-200">
+            <div class="flex items-center space-x-3 cursor-pointer group">
+                <div class="relative">
+                    <div class="w-8 h-8 rounded-full bg-emerald-500 flex items-center justify-center text-white font-bold text-xs shadow-sm">
+                        <i class="fa-regular fa-comments"></i>
+                    </div>
+                    <div class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full border-2 border-white"></div>
                 </div>
-            </div>
-            <div class="flex gap-1 text-slate-300">
-                <span class="w-1.5 h-1.5 bg-slate-400 rounded-full"></span>
-                <span class="w-1.5 h-1.5 bg-slate-400 rounded-full"></span>
-                <span class="w-1.5 h-1.5 bg-slate-400 rounded-full"></span>
+                <div class="flex-1 min-w-0">
+                    <p class="text-sm font-semibold text-slate-700 truncate group-hover:text-blue-600 transition-colors">Debendu Roy</p>
+                </div>
+                <i class="fa-solid fa-ellipsis text-slate-400 group-hover:text-slate-600"></i>
             </div>
         </div>
     </aside>
 
-    <main class="flex-1 flex flex-col overflow-hidden relative">
-        <!-- Dashboard Header -->
-        <header class="h-16 bg-white border-b border-slate-200 flex items-center justify-between px-8 z-10 flex-shrink-0">
-            <div class="flex items-center gap-2">
-                <h1 id="page-title" class="text-lg font-bold text-slate-800">Candidates Directory</h1>
-            </div>
-            <div class="flex items-center gap-4">
-                <button class="p-2 text-slate-400 hover:text-slate-600 relative">
-                    <span class="absolute top-1 right-1 w-2.5 h-2.5 bg-red-500 rounded-full ring-2 ring-white"></span>
-                    <i class="fa-regular fa-bell text-lg"></i>
-                </button>
-                <div class="h-8 w-px bg-slate-200"></div>
-                <div class="flex items-center gap-2.5">
-                    <span class="text-sm font-semibold text-slate-600">Debendu Roy</span>
-                    <span class="bg-blue-100 text-blue-700 text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase">Client Admin</span>
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col min-w-0 bg-[#f8fafc]">
+        
+        <!-- Top Header -->
+        <header class="h-16 bg-white border-b border-slate-200 flex items-center justify-between px-8 z-10 shrink-0 shadow-sm">
+            <h1 id="page-title" class="text-lg font-bold text-slate-800 tracking-tight">Candidates Directory</h1>
+            <div class="flex items-center space-x-6">
+                <div class="relative cursor-pointer group">
+                    <i class="fa-regular fa-bell text-slate-400 text-lg group-hover:text-slate-600 transition-colors"></i>
+                    <span class="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/4 w-2 h-2 bg-red-500 rounded-full border border-white"></span>
+                </div>
+                <div class="flex items-center space-x-3 border-l border-slate-200 pl-6">
+                    <span class="text-sm font-semibold text-slate-700">Debendu Roy</span>
                 </div>
             </div>
         </header>
 
-        <!-- Parent scrollable frame for all pages -->
-        <div class="flex-1 overflow-y-auto main-page-scrollbar relative bg-[#f8fafc]">
-
-            <!-- HOME DIRECTORY SCREEN -->
-            <section id="home-screen" class="p-6 space-y-6 max-w-[1200px] mx-auto w-full">
+        <!-- Prominent Full Page Scrollable Workspace -->
+        <div id="main-scroll-area" class="flex-1 overflow-y-auto main-page-scrollbar relative bg-[#f8fafc]">
+            
+            <!-- Views Container -->
+            <div id="views-container" class="p-8 w-full pb-20">
                 
-                <!-- Filters Panel -->
-                <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-4">
-                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                        <div>
-                            <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Package Filter</label>
-                            <select id="home-filter-package" onchange="applyHomeFilters()" class="w-full bg-[#f8fafc] border border-slate-200 text-xs rounded-lg px-3 py-2.5 outline-none focus:border-blue-500 text-slate-700 font-semibold">
-                                <option value="all">All Packages</option>
-                                <option value="Executive Clinical Core">Executive Clinical Core</option>
-                                <option value="Standard Care Package">Standard Care Package</option>
-                                <option value="General Screening Pack">General Screening Pack</option>
-                                <option value="Basic Physical Verification">Basic Physical Verification</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Assignee / User</label>
-                            <select id="home-filter-user" onchange="applyHomeFilters()" class="w-full bg-[#f8fafc] border border-slate-200 text-xs rounded-lg px-3 py-2.5 outline-none focus:border-blue-500 text-slate-700 font-semibold">
-                                <option value="all">All Users</option>
-                                <option value="mrunali Stage...">mrunali Stage...</option>
-                                <option value="debendu Roy">debendu Roy</option>
-                                <option value="testing Covid">testing Covid</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Department</label>
-                            <input type="text" placeholder="Search Department name" class="w-full bg-[#f8fafc] border border-slate-200 text-xs rounded-lg px-3 py-2.5 outline-none focus:border-blue-500 text-slate-700 font-medium">
-                        </div>
-                        <div>
-                            <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Location</label>
-                            <select class="w-full bg-[#f8fafc] border border-slate-200 text-xs rounded-lg px-3 py-2.5 outline-none focus:border-blue-500 text-slate-700 font-semibold">
-                                <option>Select Location</option>
-                                <option>New York Clinic Hub</option>
-                                <option>California Testing Lab</option>
-                                <option>Texas Diagnostic Lab</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                        <input id="home-search-candidate" onkeyup="applyHomeFilters()" type="text" placeholder="Search Candidates" class="w-full bg-[#f8fafc] border border-slate-200 text-xs rounded-lg px-3 py-2.5 outline-none focus:border-blue-500 text-slate-700 font-medium">
-                        <input type="text" placeholder="Search Order ID" class="w-full bg-[#f8fafc] border border-slate-200 text-xs rounded-lg px-3 py-2.5 outline-none focus:border-blue-500 text-slate-700 font-medium">
-                        <input type="text" placeholder="Search Email" class="w-full bg-[#f8fafc] border border-slate-200 text-xs rounded-lg px-3 py-2.5 outline-none focus:border-blue-500 text-slate-700 font-medium">
-                        <select class="w-full bg-[#f8fafc] border border-slate-200 text-xs rounded-lg px-3 py-2.5 outline-none focus:border-blue-500 text-slate-700 font-semibold">
-                            <option>Covid 19 Vaccination Status</option>
-                            <option>Fully Vaccinated</option>
-                            <option>Exempted</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- SCREENING TABS -->
-                <div class="flex items-center gap-1 overflow-x-auto border-b border-slate-200 pb-0.5">
-                    <button onclick="filterStatusTab('all')" id="tab-all" class="px-4 py-2.5 text-xs font-bold border-b-2 border-blue-600 text-blue-600 whitespace-nowrap tab-btn">All Candidates (<span id="count-all">0</span>)</button>
-                    <button onclick="filterStatusTab('Pending Candidate')" id="tab-pending" class="px-4 py-2.5 text-xs font-semibold text-slate-500 hover:text-slate-800 border-b-2 border-transparent hover:border-slate-300 whitespace-nowrap tab-btn">Pending Candidate (<span id="count-pending">0</span>)</button>
-                    <button onclick="filterStatusTab('In Progress')" id="tab-progress" class="px-4 py-2.5 text-xs font-semibold text-slate-500 hover:text-slate-800 border-b-2 border-transparent hover:border-slate-300 whitespace-nowrap tab-btn">Check In Progress (<span id="count-progress">0</span>)</button>
-                    <button onclick="filterStatusTab('Review Needed')" id="tab-review" class="px-4 py-2.5 text-xs font-semibold text-slate-500 hover:text-slate-800 border-b-2 border-transparent hover:border-slate-300 whitespace-nowrap tab-btn">Review Needed (<span id="count-review">0</span>)</button>
-                    <button onclick="filterStatusTab('Ready For Onboarding')" id="tab-onboarding" class="px-4 py-2.5 text-xs font-semibold text-slate-500 hover:text-slate-800 border-b-2 border-transparent hover:border-slate-300 whitespace-nowrap tab-btn">Ready For Onboarding (<span id="count-onboarding">0</span>)</button>
-                    <button onclick="filterStatusTab('COI Expired')" id="tab-alerts" class="px-4 py-2.5 text-xs font-semibold text-slate-500 hover:text-slate-800 border-b-2 border-transparent hover:border-slate-300 whitespace-nowrap tab-btn">Alerts (<span id="count-alerts">0</span>)</button>
-                </div>
-
-                <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left border-collapse">
-                            <thead>
-                                <tr class="bg-slate-50 text-slate-500 text-[10px] uppercase tracking-wider font-bold border-b border-slate-200">
-                                    <th class="p-4 w-10"><input type="checkbox" class="rounded border-slate-300 text-blue-600"></th>
-                                    <th class="p-4">Candidate</th>
-                                    <th class="p-4">Order ID</th>
-                                    <th class="p-4">Last Run</th>
-                                    <th class="p-4">Date Added</th>
-                                    <th class="p-4">Expected End Date</th>
-                                    <th class="p-4">Created By</th>
-                                    <th class="p-4">Package</th>
-                                    <th class="p-4 text-center">Status</th>
-                                    <th class="p-4 text-center text-blue-600 bg-blue-50/50 border-x border-blue-100/50 font-extrabold shadow-sm">Health Screening</th>
-                                    <th class="p-4 text-center">Staged Check</th>
-                                    <th class="p-4">Alerts</th>
-                                </tr>
-                            </thead>
-                            <tbody id="candidate-table-body" class="divide-y divide-slate-100 text-xs text-slate-700">
-                                <!-- Loaded dynamically -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </section>
-
-            <section id="details-screen" class="hidden p-6 space-y-6 mx-auto w-full max-w-[810px]">
-                
-                <!-- Header Back Action -->
-                <div class="flex items-center justify-between border-b border-slate-200 pb-4 flex-wrap gap-4">
-                    <div class="flex items-center gap-4">
-                        <button onclick="showScreen('home-screen')" class="flex items-center gap-2 text-slate-500 hover:text-slate-800 text-xs font-bold bg-white px-3.5 py-2 border border-slate-200 rounded-lg shadow-sm transition-all active:scale-95">
-                            <i class="fa-solid fa-arrow-left"></i> Back to Directory
-                        </button>
-                        <div>
-                            <h2 class="text-lg font-bold text-slate-800">Candidate Profile</h2>
-                            <p class="text-[11px] text-slate-500 font-semibold mt-0.5">Order ID: <span id="cand-detail-id" class="font-mono text-slate-700">-</span> | Package: <span id="cand-detail-pkg" class="text-slate-700">-</span></p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- TOP Profile summary card -->
-                <div class="bg-white rounded-2xl border border-[#d4dae4] p-5 shadow-sm w-full relative z-10">
-                    <div class="flex justify-between items-start flex-wrap gap-4 border-b border-slate-100 pb-4 mb-4">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 text-lg font-bold">
-                                <i class="fa-solid fa-user"></i>
-                            </div>
-                            <div>
-                                <div class="flex items-center gap-2">
-                                    <h3 id="cand-header-fullname" class="text-base font-bold text-slate-800">-</h3>
-                                    <span id="cand-header-status-banner" class="px-2.5 py-0.5 text-[10px] font-semibold rounded bg-emerald-500 text-white">Checks Complete - Clear</span>
-                                </div>
-                                <div class="mt-1 flex items-center gap-2">
-                                    <select class="bg-white border border-slate-200 rounded text-[10px] px-2 py-0.5 text-slate-600 font-semibold outline-none">
-                                        <option>Screening Tags</option>
-                                        <option>Active Verification</option>
-                                        <option>High Priority</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Top right action links perfectly placed above DOB -->
-                        <div class="flex items-center gap-4 text-[11px] font-semibold text-slate-500">
-                            <button class="hover:text-slate-800 flex items-center gap-1"><i class="fa-solid fa-plus-circle text-blue-600 text-[10px]"></i> Add New Checks</button>
-                            <button class="hover:text-slate-800 flex items-center gap-1"><i class="fa-regular fa-file-alt text-[10px]"></i> Documents and Disclosures</button>
-                            <button class="hover:text-slate-800 flex items-center gap-1"><i class="fa-solid fa-calculator text-[10px]"></i> Cost Summary</button>
-                        </div>
-                    </div>
-
-                    <!-- Meta details grid -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-2.5 text-[11px]">
-                        <!-- Left Column -->
-                        <div class="space-y-2">
-                            <div class="grid grid-cols-3">
-                                <span class="text-slate-400 font-semibold">Added By</span>
-                                <span class="col-span-2 text-slate-700 font-semibold">Work Validater</span>
-                            </div>
-                            <div class="grid grid-cols-3 items-center">
-                                <span class="text-slate-400 font-semibold flex items-center gap-1">Assignee <i class="fa-solid fa-circle-info text-[9px] text-blue-500"></i></span>
-                                <div class="col-span-2">
-                                    <select class="bg-white border border-slate-200 rounded text-[10px] px-1.5 py-0.5 text-slate-700 font-semibold outline-none focus:border-blue-500">
-                                        <option>Assignee Added (1)</option>
-                                        <option>debendu Roy</option>
-                                        <option>mrunali Stage</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="grid grid-cols-3">
-                                <span class="text-slate-400 font-semibold">Package</span>
-                                <span id="cand-header-meta-package" class="col-span-2 text-slate-700 font-semibold truncate">-</span>
-                            </div>
-                            <div class="grid grid-cols-3">
-                                <span class="text-slate-400 font-semibold">Department</span>
-                                <span class="col-span-2 text-slate-700 font-semibold">Talent Acquisition</span>
-                            </div>
-                            <div class="grid grid-cols-3">
-                                <span class="text-slate-400 font-semibold">Location</span>
-                                <span class="col-span-2 text-slate-700 font-semibold">New York Clinic Hub</span>
-                            </div>
-                            <div class="grid grid-cols-3">
-                                <span class="text-slate-400 font-semibold">Order ID</span>
-                                <span id="cand-header-meta-orderid" class="col-span-2 text-slate-700 font-mono font-bold">-</span>
-                            </div>
-                            <div class="grid grid-cols-3">
-                                <span class="text-slate-400 font-semibold">Candidate ID</span>
-                                <span class="col-span-2 text-slate-500 font-mono text-[10px] truncate">6a30c359ccb303f2...</span>
-                            </div>
-                        </div>
-
-                        <!-- Right Column -->
-                        <div class="space-y-2">
-                            <div class="grid grid-cols-3">
-                                <span class="text-slate-400 font-semibold">Date Of Birth</span>
-                                <div class="col-span-2 flex items-center gap-1">
-                                    <span id="dob-masked" class="text-slate-700 font-semibold">06/16/XXXX</span>
-                                    <button onclick="toggleMaskValue('dob')" class="text-blue-600 hover:underline font-bold text-[10px]">View</button>
-                                </div>
-                            </div>
-                            <div class="grid grid-cols-3">
-                                <span class="text-slate-400 font-semibold flex items-center gap-0.5">Address <i class="fa-regular fa-file text-[10px]"></i></span>
-                                <span class="col-span-2 text-slate-700 font-semibold leading-tight">Hill Road, Los Angeles, CA</span>
-                            </div>
-                            <div class="grid grid-cols-3">
-                                <span class="text-slate-400 font-semibold">Email Address</span>
-                                <span id="cand-header-meta-email" class="col-span-2 text-slate-700 font-semibold truncate">-</span>
-                            </div>
-                            <div class="grid grid-cols-3">
-                                <span class="text-slate-400 font-semibold">Phone #</span>
-                                <span class="col-span-2 text-slate-700 font-semibold">(222) 222-2222</span>
-                            </div>
-                            <div class="grid grid-cols-3">
-                                <span class="text-slate-400 font-semibold">Social Security #</span>
-                                <div class="col-span-2 flex items-center gap-1">
-                                    <span id="ssn-masked" class="text-slate-700 font-semibold">XXX-XX-2222</span>
-                                    <button onclick="toggleMaskValue('ssn')" class="text-blue-600 hover:underline font-bold text-[10px]">View</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="flex flex-col lg:flex-row gap-6 w-full">
+                <!-- HOME VIEW (Candidates Directory) -->
+                <div id="home-view" class="max-w-[1400px] mx-auto space-y-6 block">
                     
-                    <!-- Left Column: Actions and Activity Feed -->
-                    <div class="w-full lg:w-[286px] flex-shrink-0 space-y-6">
-                        <!-- Actions Card -->
-                        <div class="bg-white p-5 rounded-xl border border-[#d4dae4] shadow-sm space-y-4">
-                            <div class="flex justify-between items-center pb-2 border-b border-slate-100">
-                                <h3 class="text-xs font-bold text-slate-700 uppercase tracking-wider">Actions</h3>
-                                <span class="text-[10px] text-slate-400 font-semibold cursor-pointer hover:underline">More Actions...</span>
+                    <!-- Advanced Filter Card -->
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                        <div class="grid grid-cols-4 gap-6">
+                            <!-- Row 1 -->
+                            <div class="flex flex-col space-y-1">
+                                <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Package Filter</label>
+                                <div class="relative">
+                                    <select class="w-full appearance-none border border-slate-200 rounded-lg py-2 pl-3 pr-8 text-sm text-slate-700 focus:outline-none focus:border-blue-500 bg-white">
+                                        <option>All Packages</option>
+                                    </select>
+                                    <i class="fa-solid fa-chevron-down absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs pointer-events-none"></i>
+                                </div>
                             </div>
-                            <div class="border border-emerald-200 bg-emerald-50/50 p-4 rounded-xl space-y-2">
-                                <span class="inline-block px-2.5 py-0.5 text-[10px] font-bold bg-emerald-500 text-white rounded uppercase tracking-wider">Clear</span>
-                                <p class="text-xs font-bold text-slate-800">No Issues Were Found</p>
-                                <p class="text-[11px] text-slate-500 leading-relaxed">The screening was completed on 06/15/2026. No issues were found.</p>
+                            <div class="flex flex-col space-y-1">
+                                <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Assignee / User</label>
+                                <div class="relative">
+                                    <select class="w-full appearance-none border border-slate-200 rounded-lg py-2 pl-3 pr-8 text-sm text-slate-700 focus:outline-none focus:border-blue-500 bg-white">
+                                        <option>All Users</option>
+                                    </select>
+                                    <i class="fa-solid fa-chevron-down absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs pointer-events-none"></i>
+                                </div>
                             </div>
-                        </div>
-
-                        <!-- Activity Feed -->
-                        <div class="bg-white p-5 rounded-xl border border-[#d4dae4] shadow-sm space-y-4">
-                            <div class="flex justify-between items-center pb-2 border-b border-slate-100">
-                                <h3 class="text-xs font-bold text-slate-700 uppercase tracking-wider">Activity Feed</h3>
-                                <span class="text-[10px] text-blue-500 font-bold hover:underline cursor-pointer"><i class="fa-solid fa-cloud-arrow-down mr-1"></i> Export Activity Feed</span>
+                            <div class="flex flex-col space-y-1">
+                                <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Department</label>
+                                <input type="text" placeholder="Search Department name" class="w-full border border-slate-200 rounded-lg py-2 px-3 text-sm text-slate-700 focus:outline-none focus:border-blue-500 placeholder-slate-400">
                             </div>
-                            <div class="pr-2 relative">
-                                <div id="activity-timeline-feed" class="space-y-6 text-[11px] relative pb-4 z-10">
-                                    <!-- Populated dynamically -->
+                            <div class="flex flex-col space-y-1">
+                                <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Location</label>
+                                <div class="relative">
+                                    <select class="w-full appearance-none border border-slate-200 rounded-lg py-2 pl-3 pr-8 text-sm text-slate-700 focus:outline-none focus:border-blue-500 bg-white">
+                                        <option>Select Location</option>
+                                    </select>
+                                    <i class="fa-solid fa-chevron-down absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs pointer-events-none"></i>
+                                </div>
+                            </div>
+                            <!-- Row 2 -->
+                            <div class="flex flex-col space-y-1">
+                                <input type="text" placeholder="Search Candidates" class="w-full border border-slate-200 rounded-lg py-2 px-3 text-sm text-slate-700 focus:outline-none focus:border-blue-500 placeholder-slate-400 mt-5">
+                            </div>
+                            <div class="flex flex-col space-y-1">
+                                <input type="text" placeholder="Search Order ID" class="w-full border border-slate-200 rounded-lg py-2 px-3 text-sm text-slate-700 focus:outline-none focus:border-blue-500 placeholder-slate-400 mt-5">
+                            </div>
+                            <div class="flex flex-col space-y-1">
+                                <input type="text" placeholder="Search Email" class="w-full border border-slate-200 rounded-lg py-2 px-3 text-sm text-slate-700 focus:outline-none focus:border-blue-500 placeholder-slate-400 mt-5">
+                            </div>
+                            <div class="flex flex-col space-y-1">
+                                <div class="relative mt-5">
+                                    <select class="w-full appearance-none border border-slate-200 rounded-lg py-2 pl-3 pr-8 text-sm text-slate-700 focus:outline-none focus:border-blue-500 bg-white">
+                                        <option>Covid 19 Vaccination Status</option>
+                                    </select>
+                                    <i class="fa-solid fa-chevron-down absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs pointer-events-none"></i>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Right Column: Screening Checks Card (Flex-1 ensures it fills exactly to the right edge) -->
-                    <div class="w-full lg:flex-1 min-w-0 space-y-6">
+                    <!-- Tabs Section -->
+                    <div class="flex items-center justify-between mb-2">
+                        <div class="flex space-x-8 border-b border-slate-200 w-full">
+                            <button class="pb-3 text-sm font-bold text-blue-600 border-b-2 border-blue-600">All Candidates (5)</button>
+                            <button class="pb-3 text-sm font-semibold text-slate-500 hover:text-slate-700">Pending Candidate (0)</button>
+                            <button class="pb-3 text-sm font-semibold text-slate-500 hover:text-slate-700">Check In Progress (1)</button>
+                            <button class="pb-3 text-sm font-semibold text-slate-500 hover:text-slate-700">Review Needed (0)</button>
+                            <button class="pb-3 text-sm font-semibold text-slate-500 hover:text-slate-700">Ready For Onboarding (0)</button>
+                            <button class="pb-3 text-sm font-semibold text-slate-500 hover:text-slate-700">Alerts (2)</button>
+                        </div>
+                    </div>
+
+                    <!-- Table -->
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse whitespace-nowrap">
+                                <thead>
+                                    <tr class="bg-white text-[10px] font-bold text-blue-800 uppercase tracking-wider border-b border-slate-200">
+                                        <th class="p-4 w-10">
+                                            <input type="checkbox" class="rounded border-slate-300 text-blue-600 focus:ring-blue-500">
+                                        </th>
+                                        <th class="p-4">Candidate</th>
+                                        <th class="p-4">Order<br>ID</th>
+                                        <th class="p-4">Last Run</th>
+                                        <th class="p-4">Date<br>Added</th>
+                                        <th class="p-4">Expected<br>End Date</th>
+                                        <th class="p-4">Created<br>By</th>
+                                        <th class="p-4">Package</th>
+                                        <th class="p-4">Status</th>
+                                        <th class="p-4 text-center">Health<br>Screening</th>
+                                        <th class="p-4">Staged<br>Check</th>
+                                        <th class="p-4">Alerts</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="candidates-table-body" class="divide-y divide-slate-100 text-sm">
+                                    <!-- Table Rows Populated by JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CANDIDATE PROFILE VIEW -->
+                <div id="profile-view" class="hidden flex flex-col items-center w-full">
+                    
+                    <div class="profile-max-width w-full mx-auto space-y-6">
                         
-                        <div class="bg-white p-5 rounded-xl border border-[#d4dae4] shadow-sm relative w-full h-auto">
-                            
-                            <!-- Header block with stacked actions on the extreme right -->
-                            <div class="flex justify-between items-start border-b border-slate-100 pb-4 mb-6">
+                        <!-- Back & Header Row -->
+                        <div class="flex items-center justify-between mb-2">
+                            <div class="flex items-center space-x-4">
+                                <button onclick="showHomeView()" class="px-3 py-1.5 bg-white border border-slate-200 rounded text-xs font-semibold text-slate-600 hover:bg-slate-50 shadow-sm transition-colors flex items-center space-x-2">
+                                    <i class="fa-solid fa-arrow-left"></i>
+                                    <span>Back to Directory</span>
+                                </button>
                                 <div>
-                                    <h3 class="text-base font-bold text-[#1b1b2a]">Health Screening Checks</h3>
-                                    <p class="text-[11px] text-slate-400 font-semibold">Verified Profile</p>
+                                    <h2 class="text-xl font-bold text-slate-800 leading-tight">Candidate Profile</h2>
+                                    <p class="text-[11px] text-slate-500 font-medium">Order ID: <span id="cand-header-orderid" class="text-slate-700 font-bold"></span> | Package: <span id="cand-header-pkg"></span></p>
                                 </div>
-                                <div class="flex flex-col items-end gap-2 text-xs text-right select-none">
-                                    <div class="flex items-center gap-2">
-                                        <span class="text-xs font-bold text-slate-500">Expand All</span>
-                                        <button id="expandAllToggle" onclick="toggleExpandAll()" class="w-11 h-6 bg-slate-200 rounded-full relative transition-colors focus:outline-none">
-                                            <span class="dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform shadow-sm"></span>
-                                        </button>
-                                    </div>
-                                    <button onclick="openFormModal('modify-order')" class="text-blue-600 hover:underline font-bold text-xs">Modify Order</button>
-                                    <button onclick="openFormModal('change-location')" class="text-blue-600 hover:underline font-bold text-xs">Change Location for All</button>
-                                </div>
-                            </div>
-
-                            <!-- Screenings Nested Categories list container with FORCED SCROLLER -->
-                            <div id="accordion-checks-container" class="overall-screening-scroll space-y-4 pb-10 w-full">
-                                <!-- Populated dynamically based on nested models -->
                             </div>
                         </div>
-                    </div>
 
-                </div>
-            </section>
+                        <!-- Top Full-Width Profile Metadata Card -->
+                        <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 relative w-full">
+                            
+                            <!-- Actions Aligned Top Right above DOB column -->
+                            <div class="absolute top-6 right-6 flex items-center space-x-4 text-[11px] font-bold text-slate-500">
+                                <a href="#" class="flex items-center space-x-1.5 hover:text-blue-600 transition-colors"><i class="fa-solid fa-plus-circle text-blue-600"></i><span>Add New Checks</span></a>
+                                <a href="#" class="flex items-center space-x-1.5 hover:text-slate-800 transition-colors"><i class="fa-regular fa-file-lines"></i><span>Documents and Disclosures</span></a>
+                                <a href="#" class="flex items-center space-x-1.5 hover:text-slate-800 transition-colors"><i class="fa-solid fa-receipt"></i><span>Cost Summary</span></a>
+                            </div>
 
-            <section id="placeholder-screen" class="hidden p-8 space-y-6">
-                <div class="bg-white p-10 rounded-xl border border-slate-200 shadow-sm text-center max-w-xl mx-auto my-12 space-y-4">
-                    <div class="w-16 h-16 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center text-2xl mx-auto">
-                        <i id="placeholder-icon" class="fa-solid fa-cube"></i>
+                            <div class="flex items-start space-x-5 mb-6 border-b border-slate-100 pb-6 relative">
+                                <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-blue-500 shadow-sm shrink-0">
+                                    <i class="fa-solid fa-user text-xl"></i>
+                                </div>
+                                <div class="flex flex-col mt-1 space-y-2">
+                                    <div class="flex items-center space-x-3">
+                                        <h3 id="cand-header-name" class="text-lg font-bold text-slate-800 leading-none"></h3>
+                                        <span id="cand-header-status-banner" class="px-2.5 py-0.5 text-[10px] font-bold rounded text-white shadow-sm tracking-wide uppercase"></span>
+                                    </div>
+                                    <div class="inline-flex items-center justify-between border border-slate-300 rounded px-3 py-1.5 bg-white cursor-pointer w-48 shadow-sm">
+                                        <span class="text-xs font-semibold text-slate-600">Screening Tags</span>
+                                        <i class="fa-solid fa-chevron-down text-[10px] text-slate-400"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Metadata Split Grid -->
+                            <div class="grid grid-cols-2 gap-x-12 text-xs">
+                                <div class="space-y-3">
+                                    <div class="grid grid-cols-3"><span class="text-slate-400 font-medium">Added By</span><span class="col-span-2 font-bold text-slate-700" id="cand-meta-addedby"></span></div>
+                                    <div class="grid grid-cols-3 items-center"><span class="text-slate-400 font-medium flex items-center space-x-1"><span>Assignee</span><i class="fa-solid fa-circle-info text-[9px] text-blue-500"></i></span>
+                                        <div class="col-span-2 border border-slate-300 rounded px-2 py-1 flex items-center justify-between cursor-pointer w-48 shadow-sm bg-white">
+                                            <span class="font-bold text-slate-700">Assignee Added (1)</span><i class="fa-solid fa-chevron-down text-[10px] text-slate-400"></i>
+                                        </div>
+                                    </div>
+                                    <div class="grid grid-cols-3"><span class="text-slate-400 font-medium">Package</span><span class="col-span-2 font-bold text-slate-700" id="cand-meta-pkg"></span></div>
+                                    <div class="grid grid-cols-3"><span class="text-slate-400 font-medium">Department</span><span class="col-span-2 font-bold text-slate-700">Talent Acquisition</span></div>
+                                    <div class="grid grid-cols-3"><span class="text-slate-400 font-medium">Location</span><span class="col-span-2 font-bold text-slate-700">New York Clinic Hub</span></div>
+                                    <div class="grid grid-cols-3"><span class="text-slate-400 font-medium">Order ID</span><span class="col-span-2 font-bold text-slate-700 uppercase" id="cand-meta-orderid"></span></div>
+                                    <div class="grid grid-cols-3"><span class="text-slate-400 font-medium">Candidate ID</span><span class="col-span-2 font-bold text-slate-500 text-[10px]">6a30c359ccb303f20a14a568</span></div>
+                                    <div class="grid grid-cols-3"><span class="text-slate-400 font-medium">ID</span><a href="#" class="col-span-2 font-bold text-blue-600 hover:underline">Add</a></div>
+                                    <div class="grid grid-cols-3"><span class="text-slate-400 font-medium">Expected Employment</span><a href="#" class="col-span-2 font-bold text-blue-600 hover:underline">Add</a></div>
+                                    <div class="grid grid-cols-3"><span class="text-slate-400 font-medium">Start Date</span><a href="#" class="col-span-2 font-bold text-blue-600 hover:underline">Add</a></div>
+                                </div>
+                                <div class="space-y-3 pl-4">
+                                    <div class="grid grid-cols-3"><span class="text-slate-400 font-medium">Date Of Birth</span><span class="col-span-2 font-bold text-slate-700">06/16/XXXX <a href="#" class="text-blue-600 ml-1 hover:underline">View</a></span></div>
+                                    <div class="grid grid-cols-3"><span class="text-slate-400 font-medium flex items-center space-x-1"><span>Address</span><i class="fa-regular fa-copy text-slate-300 cursor-pointer"></i></span><span class="col-span-2 font-bold text-slate-700">Hill Road, Los Angeles, CA, 90003</span></div>
+                                    <div class="grid grid-cols-3"><span class="text-slate-400 font-medium">Email Address</span><span class="col-span-2 font-bold text-slate-700" id="cand-meta-email"></span></div>
+                                    <div class="grid grid-cols-3"><span class="text-slate-400 font-medium">Phone #</span><span class="col-span-2 font-bold text-slate-700">(222) 222-2222</span></div>
+                                    <div class="grid grid-cols-3"><span class="text-slate-400 font-medium">Social Security #</span><span class="col-span-2 font-bold text-slate-700">XXX-XX-2222 <a href="#" class="text-blue-600 ml-1 hover:underline">View</a></span></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 2-Column Grid -->
+                        <div class="flex gap-6 w-full relative">
+                            
+                            <!-- Left Column: Actions & Feed (Fixed width 286px) -->
+                            <div class="w-[286px] shrink-0 flex flex-col space-y-6">
+                                
+                                <!-- Actions Box -->
+                                <div>
+                                    <div class="flex justify-between items-center mb-2 px-1">
+                                        <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wide">Actions</h3>
+                                        <a href="#" class="text-[10px] font-medium text-slate-400 hover:text-slate-600 transition-colors">More Actions...</a>
+                                    </div>
+                                    <div class="bg-white rounded-xl shadow-sm border border-emerald-400 overflow-hidden relative">
+                                        <div class="absolute top-0 left-0 w-full h-8 bg-emerald-400 px-4 flex items-center">
+                                            <span class="text-white font-bold text-[10px] tracking-wider uppercase">Clear</span>
+                                        </div>
+                                        <div class="pt-10 p-5">
+                                            <p class="font-bold text-slate-800 text-sm mb-2">No Issues Were Found</p>
+                                            <p class="text-xs text-slate-500 leading-relaxed">The screening was completed on <span id="action-comp-date"></span>. No issues were found.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Activity Feed -->
+                                <div>
+                                    <div class="flex justify-between items-center mb-2 px-1">
+                                        <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wide">Activity Feed</h3>
+                                        <a href="#" class="text-[10px] font-medium text-blue-600 hover:underline flex items-center space-x-1"><i class="fa-solid fa-cloud-arrow-down"></i><span>Export Activity Feed</span></a>
+                                    </div>
+                                    <div class="relative min-h-[300px]">
+                                        <!-- Axis-Centered Activity Vector Track -->
+                                        <div class="absolute left-[13px] w-[2px] bg-slate-200 top-2 bottom-2 z-0"></div>
+                                        
+                                        <div class="space-y-6 relative z-10 w-full">
+                                            <div class="relative flex items-center w-full">
+                                                <div class="absolute left-[9px] top-1/2 -translate-y-1/2 w-2.5 h-2.5 bg-slate-400 rounded-full ring-4 ring-[#f8fafc] z-10"></div>
+                                                <div class="pl-8 w-full">
+                                                    <div class="flex justify-between items-start w-full">
+                                                        <p class="text-[11px] font-bold text-slate-700 leading-tight mb-1">Basic Physical Check Complete</p>
+                                                        <span class="text-[9px] font-semibold text-slate-400">06/15/26</span>
+                                                    </div>
+                                                    <p class="text-[10px] font-semibold text-slate-400">Unable to Verify</p>
+                                                </div>
+                                            </div>
+                                            <div class="relative flex items-center w-full">
+                                                <div class="absolute left-[9px] top-1/2 -translate-y-1/2 w-2.5 h-2.5 bg-emerald-400 rounded-full ring-4 ring-[#f8fafc] z-10"></div>
+                                                <div class="pl-8 w-full">
+                                                    <div class="flex justify-between items-start w-full">
+                                                        <p class="text-[11px] font-bold text-slate-700 leading-tight mb-1">The Screening Is Complete. No Issues<br>Were Found.</p>
+                                                        <span class="text-[9px] font-semibold text-slate-400 mt-0.5">06/15/26</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="relative flex items-center w-full">
+                                                <div class="absolute left-[9px] top-1/2 -translate-y-1/2 w-2.5 h-2.5 bg-emerald-400 rounded-full ring-4 ring-[#f8fafc] z-10"></div>
+                                                <div class="pl-8 w-full">
+                                                    <div class="flex justify-between items-start w-full">
+                                                        <p class="text-[11px] font-bold text-slate-700 leading-tight mb-1">Basic Physical Check Complete</p>
+                                                        <span class="text-[9px] font-semibold text-slate-400">06/15/26</span>
+                                                    </div>
+                                                    <p class="text-[10px] font-semibold text-emerald-500">Clear</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Right Column: Health Screening Checks -->
+                            <div class="flex-1 shrink-0 flex flex-col">
+                                <div class="flex justify-between items-center mb-2 px-1">
+                                    <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wide">Verified Profile</h3>
+                                </div>
+                                
+                                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 flex flex-col h-full relative">
+                                    
+                                    <!-- Header Controls Stack perfectly aligned right -->
+                                    <div class="flex justify-between items-start mb-6">
+                                        <div>
+                                            <h2 class="text-base font-bold text-slate-800 leading-tight">Health Screening Checks</h2>
+                                            <p class="text-[10px] font-medium text-slate-400 mt-0.5">Verified Profile</p>
+                                        </div>
+                                        <div class="flex flex-col items-end space-y-2">
+                                            <div class="flex items-center space-x-2">
+                                                <span class="text-[11px] font-bold text-slate-600">Expand All</span>
+                                                <button id="expandAllToggle" onclick="toggleExpandAll()" class="w-8 h-4 bg-slate-200 rounded-full relative focus:outline-none shrink-0 shadow-inner">
+                                                    <div class="dot absolute left-0.5 top-0.5 bg-white w-3 h-3 rounded-full transition-transform duration-300 shadow-sm"></div>
+                                                </button>
+                                            </div>
+                                            <a href="#" class="text-[11px] font-bold text-blue-600 hover:underline">Modify Order</a>
+                                            <a href="#" class="text-[11px] font-bold text-blue-600 hover:underline">Change Location for All</a>
+                                        </div>
+                                    </div>
+
+                                    <!-- Full Width Category Tiles Wrapper -->
+                                    <div class="flex-1 relative w-full">
+                                        <div id="accordion-checks-container" class="space-y-4 relative w-full overall-screening-scroll overflow-y-visible pr-2">
+                                            <!-- Category Checks populated by JS -->
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
-                    <h3 id="placeholder-title" class="text-lg font-bold text-slate-800">Module Panel</h3>
-                    <p class="text-xs text-slate-500 leading-relaxed">
-                        You have successfully loaded this menu module. In this fully integrated environment, all secondary layouts adapt directly according to your configured candidate settings.
-                    </p>
-                    <button onclick="showScreen('home-screen', 'nav-candidates')" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg text-xs font-bold active:scale-95 transition-all">
-                        Return to Candidates Directory
-                    </button>
                 </div>
-            </section>
+
+            </div>
         </div>
+
     </main>
 
-    <!-- Side Drawer -->
-    <div id="drawer-backdrop" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 z-40" onclick="closeDrawer()"></div>
-    
-    <div id="quick-drawer" class="fixed right-0 top-0 bottom-0 w-[640px] bg-white shadow-2xl z-50 transform translate-x-full drawer-transition flex flex-col">
-        <div class="p-6 border-b border-slate-200 flex justify-between items-center bg-slate-50">
-            <div>
-                <h3 id="drawer-candidate" class="text-lg font-bold text-slate-800">-</h3>
-                <p class="text-[11px] text-slate-500 mt-0.5">Order ID: <span id="drawer-orderid" class="font-mono text-slate-700">-</span></p>
-            </div>
-            <button onclick="closeDrawer()" class="text-slate-400 hover:text-slate-600 text-2xl font-bold p-1 transition-colors">&times;</button>
-        </div>
+    <!-- Drawer Overlay -->
+    <div id="drawerOverlay" onclick="closeDrawer()" class="fixed inset-0 bg-slate-900/20 backdrop-blur-sm z-40 hidden transition-opacity opacity-0"></div>
 
-        <div class="p-6 border-b border-slate-100 bg-slate-50/50 grid grid-cols-3 gap-3">
+    <!-- Sliding Drawer Panel -->
+    <div id="candidateDrawer" class="fixed top-0 right-0 h-full w-[460px] bg-white shadow-2xl border-l border-slate-200 z-50 transform translate-x-full flex flex-col">
+        <div class="h-16 px-6 border-b border-slate-200 bg-slate-50 flex items-center justify-between shrink-0">
             <div>
-                <label class="block text-[9px] font-extrabold text-slate-500 uppercase tracking-wider mb-1">Search Screening</label>
-                <div class="relative">
-                    <input id="drawer-search-screening" onkeyup="filterDrawerScreenings()" type="text" placeholder="e.g. 5 Panel, Hep B..." class="w-full text-xs border border-slate-200 rounded pl-7 pr-2 py-2 outline-none focus:border-blue-500">
-                    <i class="fa-solid fa-magnifying-glass text-slate-400 text-[10px] absolute left-2.5 top-3"></i>
-                </div>
+                <h3 id="drawer-title" class="font-bold text-slate-800 text-base leading-tight">Screening Details</h3>
+                <p id="drawer-subtitle" class="text-[10px] text-slate-500 font-medium"></p>
             </div>
-            <div>
-                <label class="block text-[9px] font-extrabold text-slate-500 uppercase tracking-wider mb-1">Overall Status</label>
-                <select id="drawer-filter-order-status" onchange="filterDrawerScreenings()" class="w-full text-xs border border-slate-200 rounded p-2 outline-none focus:border-blue-500 text-slate-600 bg-white font-semibold">
-                    <option value="all">All Overall Statuses</option>
-                    <option value="InProgress">InProgress</option>
-                    <option value="Clear">Clear</option>
-                </select>
-            </div>
-            <div>
-                <label class="block text-[9px] font-extrabold text-slate-500 uppercase tracking-wider mb-1">Suborder Status</label>
-                <select id="drawer-filter-suborder-status" onchange="filterDrawerScreenings()" class="w-full text-xs border border-slate-200 rounded p-2 outline-none focus:border-blue-500 text-slate-600 bg-white font-semibold">
-                    <option value="all">All Suborder Statuses</option>
-                    <option value="Review Needed">Review Needed</option>
-                    <option value="Canceled">Canceled</option>
-                    <option value="Unable to Verify">Unable to Verify</option>
-                    <option value="Clear">Clear</option>
-                </select>
-            </div>
-        </div>
-
-        <div id="drawer-body-list" class="flex-1 overflow-y-auto p-6 space-y-6 max-h-[calc(100vh-210px)] pb-10" style="overflow-y: scroll !important;">
-            <!-- Rendered dynamically -->
-        </div>
-
-        <div class="p-4 border-t border-slate-200 bg-slate-50 flex justify-end">
-            <button onclick="closeDrawer()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold py-2.5 px-6 rounded-lg text-xs transition-all shadow-sm active:scale-95">
-                Close Details
+            <button onclick="closeDrawer()" class="w-8 h-8 rounded hover:bg-slate-200 flex items-center justify-center text-slate-500 transition-colors">
+                <i class="fa-solid fa-xmark"></i>
             </button>
         </div>
-    </div>
-
-    <!-- Actions modal overlays -->
-    <div id="form-modal-overlay" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-xl shadow-2xl border border-slate-200 w-full max-w-md overflow-hidden transform scale-95 transition-all">
-            <div class="p-5 border-b border-slate-100 flex justify-between items-center bg-slate-50">
-                <h3 id="modal-form-title" class="text-sm font-bold text-slate-800">Action Panel</h3>
-                <button onclick="closeFormModal()" class="text-slate-400 hover:text-slate-600 text-xl font-bold">&times;</button>
+        <div class="p-6 bg-white border-b border-slate-100 shrink-0">
+            <div class="flex items-center justify-between mb-4">
+                <h4 id="drawer-package" class="font-bold text-sm text-slate-700"></h4>
+                <span id="drawer-status-badge" class="px-2.5 py-0.5 text-[10px] font-bold rounded text-white shadow-sm uppercase"></span>
             </div>
-            <div class="p-6 space-y-4">
-                <div id="modal-form-fields" class="space-y-3">
-                    <!-- Loaded dynamically -->
-                </div>
-                <div class="flex justify-end gap-2.5 pt-4 border-t border-slate-100">
-                    <button onclick="closeFormModal()" class="bg-slate-100 hover:bg-slate-200 text-slate-600 px-4 py-2 rounded-lg text-xs font-bold">Cancel</button>
-                    <button onclick="submitFormAction()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-xs font-bold shadow-sm">Confirm Action</button>
-                </div>
+            <div class="grid grid-cols-2 gap-4 text-xs">
+                <div><span class="text-slate-400 block mb-1">Order ID</span><span id="drawer-orderid" class="font-bold text-slate-700"></span></div>
+                <div><span class="text-slate-400 block mb-1">Added On</span><span id="drawer-dateadded" class="font-bold text-slate-700"></span></div>
             </div>
+        </div>
+        
+        <div class="flex-1 overflow-y-auto overall-screening-scroll bg-slate-50 p-6 relative">
+            <div id="drawer-body-list" class="space-y-4 relative z-10 w-full pl-0.5 pr-2">
+                <!-- Checks list generated via JS -->
+            </div>
+        </div>
+        
+        <div class="p-4 border-t border-slate-200 bg-white flex justify-end shrink-0">
+            <button onclick="openCandidateProfile()" class="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-lg shadow-sm transition-colors">View Full Profile</button>
         </div>
     </div>
 
     <script>
+        // Expanded Database Definition Including New Candidates and Rich Fields
         const candidateDb = [
             {
                 name: "Debendu Roy",
@@ -603,142 +497,71 @@
                     {
                         category: "Drug Check",
                         name: "5 Panel Drug",
-                        orderStatus: "InProgress",
+                        orderStatus: "ReviewNeeded",
                         suborderStatus: "Review Needed",
                         hasResults: true,
                         history: [
-                            { status: "Order Created", date: "06/13/2026 09:12 AM" },
-                            { status: "Donor Pass Creation Pending", date: "06/13/2026 11:00 AM" },
-                            { status: "Donor Pass Created", date: "06/13/2026 01:25 PM" },
-                            { status: "Scheduled", date: "06/14/2026 10:00 AM" },
-                            { status: "Collection/Testing Pending", date: "06/15/2026 08:30 AM" },
-                            { status: "Collection Completed", date: "06/16/2026 04:45 PM" },
+                            { status: "Order Created", date: "06/15/2026 09:00 AM" },
+                            { status: "Collection Completed", date: "06/15/2026 03:30 PM" },
                             { status: "Received at Lab", date: "06/16/2026 11:15 AM" },
                             { status: "Pending MRO Review", date: "06/16/2026 02:00 PM" },
-                            { status: "MRO Review - In Progress", date: "06/16/2026 03:30 PM" },
-                            { status: "Review Needed", date: "06/16/2026 04:50 PM" }
+                            { status: "MRO Review - In Progress", date: "06/16/2026 02:30 PM" },
+                            { status: "Review Needed", date: "06/16/2026 07:50 PM" }
                         ]
                     },
                     {
                         category: "Titers",
-                        name: "Hep B Surface Antigen (HBsAG)",
+                        name: "MMR Titer",
                         orderStatus: "Clear",
                         suborderStatus: "Clear",
+                        hasResults: false,
                         history: [
-                            { status: "Order Created", date: "06/13/2026 09:35 AM" },
-                            { status: "Donor Pass Creation Pending", date: "06/13/2026 12:05 PM" },
-                            { status: "Donor Pass Created", date: "06/13/2026 02:30 PM" },
-                            { status: "Scheduled", date: "06/15/2026 01:00 PM" },
-                            { status: "Collection/Testing Pending", date: "06/15/2026 04:00 PM" },
-                            { status: "Collection Completed", date: "06/16/2026 04:30 PM" },
-                            { status: "Received at Lab", date: "06/16/2026 11:00 AM" },
-                            { status: "Clear", date: "06/16/2026 02:00 PM" }
-                        ]
-                    },
-                    {
-                        category: "Titers",
-                        name: "QuantiFERON-TB Gold",
-                        orderStatus: "Clear",
-                        suborderStatus: "Clear",
-                        history: [
-                            { status: "Order Created", date: "06/13/2026 09:30 AM" },
-                            { status: "Donor Pass Creation Pending", date: "06/13/2026 11:55 AM" },
-                            { status: "Donor Pass Created", date: "06/13/2026 02:15 PM" },
-                            { status: "Scheduled", date: "06/15/2026 11:00 AM" },
-                            { status: "Collection Completed", date: "06/16/2026 02:30 PM" },
-                            { status: "Received at Lab", date: "06/16/2026 09:15 AM" },
-                            { status: "Clear", date: "06/16/2026 11:15 AM" }
+                            { status: "Lab Results Received", date: "06/16/2026 08:30 AM" },
+                            { status: "Clear", date: "06/16/2026 09:15 AM" }
                         ]
                     },
                     {
                         category: "Basic Physical",
-                        name: "Pre-Employment Physical Assessment",
-                        orderStatus: "InProgress",
+                        name: "Standard Physical Assessment",
+                        orderStatus: "UnableToVerify",
                         suborderStatus: "Unable to Verify",
+                        hasResults: false,
                         history: [
-                            { status: "Order Created", date: "06/13/2026 09:25 AM" },
-                            { status: "Donor Pass Creation Pending", date: "06/13/2026 11:45 AM" },
-                            { status: "Unable to Verify", date: "06/14/2026 04:10 PM" }
+                            { status: "Provider Issue - Unable to Verify", date: "06/16/2026 02:20 PM" }
                         ]
                     },
                     {
                         category: "Vaccine",
-                        name: "MMR Vaccine",
-                        orderStatus: "InProgress",
+                        name: "Influenza Vaccine Validation",
+                        orderStatus: "ReviewNeeded",
                         suborderStatus: "Review Needed",
+                        hasResults: false,
                         history: [
-                            { status: "Order Created", date: "06/12/2026 01:00 PM" },
-                            { status: "Review Needed", date: "06/16/2026 02:00 PM" }
+                            { status: "Document Unclear - Review Needed", date: "06/16/2026 10:05 AM" }
                         ]
                     }
                 ]
             },
             {
                 name: "Mark Lewis",
-                orderId: "K1MOC",
+                orderId: "K1MDC",
                 lastRun: "06/16/2026",
                 dateAdded: "02/13/2026",
                 expectedEndDate: "—",
                 createdBy: "mrunali Stage...",
-                package: "Executive Clinical Core",
+                package: "Executive Clinical ...",
                 status: "COI Expired",
                 stagedCheck: "—",
                 alerts: "Insurance document expired",
                 screenings: [
                     {
-                        category: "Drug Check",
-                        name: "5 Panel Drug",
-                        orderStatus: "InProgress",
-                        suborderStatus: "Review Needed",
-                        hasResults: true,
-                        history: [
-                            { status: "Order Created", date: "06/13/2026 09:12 AM" },
-                            { status: "Donor Pass Creation Pending", date: "06/13/2026 11:00 AM" },
-                            { status: "Donor Pass Created", date: "06/13/2026 01:25 PM" },
-                            { status: "Scheduled", date: "06/14/2026 10:00 AM" },
-                            { status: "Collection/Testing Pending", date: "06/15/2026 08:30 AM" },
-                            { status: "Collection Completed", date: "06/16/2026 04:45 PM" },
-                            { status: "Received at Lab", date: "06/16/2026 11:15 AM" },
-                            { status: "Pending MRO Review", date: "06/16/2026 02:00 PM" },
-                            { status: "MRO Review - In Progress", date: "06/16/2026 03:30 PM" },
-                            { status: "Review Needed", date: "06/16/2026 04:50 PM" }
-                        ]
-                    },
-                    {
-                        category: "Titers",
-                        name: "Hep B Surface Antigen (HBsAG)",
-                        orderStatus: "Clear",
-                        suborderStatus: "Clear",
-                        history: [
-                            { status: "Order Created", date: "06/13/2026 09:35 AM" },
-                            { status: "Donor Pass Creation Pending", date: "06/13/2026 12:05 PM" },
-                            { status: "Donor Pass Created", date: "06/13/2026 02:30 PM" },
-                            { status: "Scheduled", date: "06/15/2026 01:00 PM" },
-                            { status: "Collection/Testing Pending", date: "06/15/2026 04:00 PM" },
-                            { status: "Collection Completed", date: "06/16/2026 04:30 PM" },
-                            { status: "Received at Lab", date: "06/16/2026 11:00 AM" },
-                            { status: "Clear", date: "06/16/2026 02:00 PM" }
-                        ]
-                    },
-                    {
                         category: "Basic Physical",
-                        name: "Pre-Employment Physical Assessment",
-                        orderStatus: "InProgress",
+                        name: "Standard Physical Assessment",
+                        orderStatus: "UnableToVerify",
                         suborderStatus: "Unable to Verify",
+                        hasResults: false,
                         history: [
-                            { status: "Order Created", date: "06/13/2026 09:25 AM" },
-                            { status: "Donor Pass Creation Pending", date: "06/13/2026 11:45 AM" },
-                            { status: "Unable to Verify", date: "06/14/2026 04:10 PM" }
-                        ]
-                    },
-                    {
-                        category: "Vaccine",
-                        name: "MMR Vaccine",
-                        orderStatus: "InProgress",
-                        suborderStatus: "Review Needed",
-                        history: [
-                            { status: "Order Created", date: "06/12/2026 01:00 PM" },
-                            { status: "Review Needed", date: "06/16/2026 02:00 PM" }
+                            { status: "Provider Issue - Unable to Verify", date: "06/16/2026 02:20 PM" }
                         ]
                     }
                 ]
@@ -750,23 +573,68 @@
                 dateAdded: "02/12/2026",
                 expectedEndDate: "—",
                 createdBy: "mrunali Stage...",
-                package: "Standard Care Package",
+                package: "Standard Care Pa...",
                 status: "In Progress",
                 stagedCheck: "Stage1",
                 alerts: "Donor Pass Expired",
                 screenings: [
                     {
-                        category: "Drug Check",
-                        name: "9 Panel Instant Drug Screen",
+                        category: "Background Check",
+                        name: "County Criminal",
                         orderStatus: "InProgress",
-                        suborderStatus: "Review Needed",
+                        suborderStatus: "In Progress",
+                        hasResults: false,
                         history: [
-                            { status: "Order Created", date: "06/12/2026 10:00 AM" },
-                            { status: "Donor Pass Creation Pending", date: "06/12/2026 11:30 AM" },
-                            { status: "Donor Pass Created", date: "06/12/2026 03:00 PM" },
-                            { status: "Scheduled", date: "06/14/2026 09:00 AM" },
-                            { status: "Collection Completed", date: "06/16/2026 04:30 PM" },
-                            { status: "Review Needed", date: "06/16/2026 03:45 PM" }
+                            { status: "Search Initiated", date: "06/15/2026 09:00 AM" },
+                            { status: "In Progress", date: "06/16/2026 10:30 AM" }
+                        ]
+                    }
+                ]
+            },
+            {
+                name: "Jessica Taylor",
+                orderId: "B7V9P",
+                lastRun: "06/17/2026",
+                dateAdded: "06/10/2026",
+                expectedEndDate: "06/20/2026",
+                createdBy: "System Auto",
+                package: "Standard Driver Validation",
+                status: "Pending Candidate",
+                stagedCheck: "Stage2",
+                alerts: "—",
+                screenings: [
+                    {
+                        category: "Background Check",
+                        name: "National Criminal Search",
+                        orderStatus: "ReviewNeeded",
+                        suborderStatus: "Review Needed",
+                        hasResults: false,
+                        history: [
+                            { status: "Results Found - Review Needed", date: "06/16/2026 02:45 PM" }
+                        ]
+                    }
+                ]
+            },
+            {
+                name: "David Miller",
+                orderId: "M2QXC",
+                lastRun: "06/17/2026",
+                dateAdded: "05/28/2026",
+                expectedEndDate: "—",
+                createdBy: "Work Validater",
+                package: "Clinical Specialist Pack",
+                status: "Clear",
+                stagedCheck: "—",
+                alerts: "—",
+                screenings: [
+                    {
+                        category: "Drug Check",
+                        name: "10 Panel Drug Screen",
+                        orderStatus: "Clear",
+                        suborderStatus: "Clear",
+                        hasResults: true,
+                        history: [
+                            { status: "Clear", date: "06/01/2026 11:45 AM" }
                         ]
                     }
                 ]
@@ -774,214 +642,133 @@
         ];
 
         let currentSelectedCandidate = candidateDb[0];
-        let homeActiveTabStatus = "all";
-        let activeSidebarId = "nav-candidates";
-
-        // Dynamic State Masks for DOB / SSN
-        let maskStates = { dob: true, ssn: true };
-
-        // Collapsed states
-        let categoryCollapseState = { "Drug Check": false, "Titers": false, "Basic Physical": false, "Vaccine": false };
+        let drawerScreeningsData = [];
+        let categoryCollapseState = { "Drug Check": false, "Titers": false, "Basic Physical": false, "Vaccine": false, "Background Check": false };
         let checksCollapseState = {};
+        let allDeepdiveExpanded = false;
 
-        function toggleMaskValue(type) {
-            maskStates[type] = !maskStates[type];
-            if (type === 'dob') {
-                document.getElementById('dob-masked').innerText = maskStates.dob ? "06/16/XXXX" : "06/16/1994";
-            } else if (type === 'ssn') {
-                document.getElementById('ssn-masked').innerText = maskStates.ssn ? "XXX-XX-2222" : "222-22-2222";
-            }
-        }
-
-        function updateTabCounters() {
-            document.getElementById("count-all").innerText = candidateDb.length;
-            document.getElementById("count-pending").innerText = candidateDb.filter(c => c.status === "Pending Candidate").length;
-            document.getElementById("count-progress").innerText = candidateDb.filter(c => c.status === "In Progress").length;
-            document.getElementById("count-review").innerText = candidateDb.filter(c => c.status === "Review Needed").length;
-            document.getElementById("count-onboarding").innerText = candidateDb.filter(c => c.status === "Ready For Onboarding").length;
-            document.getElementById("count-alerts").innerText = candidateDb.filter(c => c.status === "COI Expired" || c.status === "Adverse Action").length;
-        }
-
-        function showScreen(screenId, sidebarId) {
-            if (activeSidebarId) {
-                const prevLink = document.getElementById(activeSidebarId);
-                if (prevLink) {
-                    prevLink.className = "flex items-center gap-3.5 px-4 py-3 rounded-lg hover:bg-slate-50 hover:text-slate-800 transition-all text-slate-500 font-medium";
-                    const prevIcon = prevLink.querySelector('i');
-                    if (prevIcon) prevIcon.className = prevIcon.className.replace('text-blue-600', 'text-slate-400');
-                }
-            }
-
-            const currLink = document.getElementById(sidebarId);
-            if (currLink) {
-                currLink.className = "flex items-center gap-3.5 px-4 py-3 rounded-lg bg-blue-50/70 text-blue-600 font-semibold transition-all";
-                const currIcon = currLink.querySelector('i');
-                if (currIcon) currIcon.className = currIcon.className.replace('text-slate-400', 'text-blue-600');
-            }
-            activeSidebarId = sidebarId;
-
-            document.getElementById('home-screen').classList.add('hidden');
-            document.getElementById('details-screen').classList.add('hidden');
-            document.getElementById('placeholder-screen').classList.add('hidden');
-            document.getElementById(screenId).classList.remove('hidden');
-
-            const pageTitle = document.getElementById('page-title');
-            if (screenId === 'home-screen') pageTitle.innerText = sidebarId === 'nav-advanced' ? "Advanced Candidates Directory" : "Candidates Directory";
-            else if (screenId === 'details-screen') pageTitle.innerText = "Candidate Profile";
-        }
-
-        function showPlaceholderScreen(title, sidebarId) {
-            showScreen('placeholder-screen', sidebarId);
-            document.getElementById('placeholder-title').innerText = title;
-            const iconMap = { 'nav-packages': 'fa-box', 'nav-comply': 'fa-shield-halved', 'nav-customizations': 'fa-sliders', 'nav-settings': 'fa-gear', 'nav-formi9': 'fa-fingerprint', 'nav-reports': 'fa-chart-pie', 'nav-bulk': 'fa-cloud-arrow-up', 'nav-supplies': 'fa-cart-shopping' };
-            document.getElementById('placeholder-icon').className = `fa-solid ${iconMap[sidebarId] || 'fa-cube'}`;
-        }
-
-        function generateCandidateTable(dataList) {
-            const tbody = document.getElementById("candidate-table-body");
+        function renderTable() {
+            const tbody = document.getElementById('candidates-table-body');
             tbody.innerHTML = "";
-            dataList.forEach(cand => {
-                const tr = document.createElement("tr");
-                tr.className = "hover:bg-slate-50/80 transition-colors border-b border-slate-100";
+            
+            candidateDb.forEach((cand, index) => {
+                let statusStyle = "";
+                let statusText = cand.status.toUpperCase();
+                if (cand.status === 'COI Expired' || cand.status === 'Adverse Action') statusStyle = "bg-red-600 text-white";
+                else if (cand.status === 'Review Needed' || cand.status === 'Pending Candidate') statusStyle = "bg-amber-500 text-white";
+                else if (cand.status === 'Ready For Onboarding' || cand.status === 'Clear') statusStyle = "bg-emerald-500 text-white";
+                else if (cand.status === 'In Progress') statusStyle = "bg-blue-600 text-white";
+                else statusStyle = "bg-slate-200 text-slate-700";
 
-                let badgeStyle = "bg-blue-600 text-white";
-                if (cand.status === "COI Expired" || cand.status === "Adverse Action") badgeStyle = "bg-red-500 text-white";
-                else if (cand.status === "Reviewed" || cand.status === "Ready For Onboarding" || cand.status === "Clear") badgeStyle = "bg-emerald-500 text-white";
-                else if (cand.status === "Review Needed") badgeStyle = "bg-amber-500 text-white font-bold";
-                else if (cand.status === "Pending Candidate") badgeStyle = "bg-amber-100 text-amber-800 border border-amber-200 font-bold";
+                let alertHtml = cand.alerts !== '—' ? `<span class="text-red-500 max-w-[120px] block whitespace-normal leading-tight">${cand.alerts}</span>` : `<span class="text-slate-400">${cand.alerts}</span>`;
 
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-50 transition-colors group";
                 tr.innerHTML = `
-                    <td class="p-4"><input type="checkbox" class="rounded border-slate-300 text-blue-600"></td>
-                    <td class="p-4"><button onclick="goToCandidateDetails('${cand.name}')" class="font-bold text-blue-600 hover:underline text-left">${cand.name}</button></td>
-                    <td class="p-4 font-mono text-[11px] text-slate-500">${cand.orderId}</td>
-                    <td class="p-4">${cand.lastRun}</td>
-                    <td class="p-4">${cand.dateAdded}</td>
-                    <td class="p-4 text-slate-400">${cand.expectedEndDate}</td>
-                    <td class="p-4 text-slate-500 font-medium">${cand.createdBy}</td>
-                    <td class="p-4 text-slate-500 max-w-[150px] truncate font-semibold">${cand.package}</td>
-                    <td class="p-4 text-center"><span class="inline-block px-2.5 py-1 text-[10px] font-bold rounded ${badgeStyle} uppercase tracking-wider">${cand.status}</span></td>
-                    <td class="p-4 text-center bg-blue-50/30 border-x border-blue-100/50"><button onclick="openDrawer('${cand.name}')" class="inline-flex items-center justify-center w-7 h-7 rounded-full border border-blue-400 text-blue-600 hover:bg-blue-100/70 transition-all text-xs font-bold shadow-sm">i</button></td>
-                    <td class="p-4 text-center text-slate-500 font-semibold">${cand.stagedCheck}</td>
-                    <td class="p-4 text-[11px] font-medium ${cand.alerts !== '—' ? 'text-red-500 font-bold' : 'text-slate-400'}">${cand.alerts}</td>
+                    <td class="p-4 border-b border-slate-100"><input type="checkbox" class="rounded border-slate-300 text-blue-600 focus:ring-blue-500"></td>
+                    <td class="p-4 border-b border-slate-100">
+                        <div class="font-bold text-blue-600 hover:text-blue-800 cursor-pointer transition-colors" onclick="openProfile(${index})">${cand.name}</div>
+                    </td>
+                    <td class="p-4 border-b border-slate-100 text-[11px] font-semibold text-slate-500 uppercase tracking-wider">${cand.orderId}</td>
+                    <td class="p-4 border-b border-slate-100 text-xs font-medium text-slate-600">${cand.lastRun}</td>
+                    <td class="p-4 border-b border-slate-100 text-xs font-medium text-slate-600">${cand.dateAdded}</td>
+                    <td class="p-4 border-b border-slate-100 text-xs font-medium text-slate-600">${cand.expectedEndDate}</td>
+                    <td class="p-4 border-b border-slate-100 text-xs font-medium text-slate-600">${cand.createdBy}</td>
+                    <td class="p-4 border-b border-slate-100 text-xs font-medium text-slate-600">${cand.package}</td>
+                    <td class="p-4 border-b border-slate-100"><span class="px-2.5 py-1 rounded text-[10px] font-bold uppercase tracking-wider ${statusStyle} shadow-sm">${statusText}</span></td>
+                    <td class="p-4 border-b border-slate-100 text-center">
+                        <button onclick="openDrawerWithData(${index})" class="w-8 h-8 rounded-full border border-blue-200 bg-white hover:bg-blue-50 text-blue-600 flex items-center justify-center transition-colors mx-auto shadow-sm"><i class="fa-solid fa-info text-xs"></i></button>
+                    </td>
+                    <td class="p-4 border-b border-slate-100 text-xs font-medium text-slate-600">${cand.stagedCheck}</td>
+                    <td class="p-4 border-b border-slate-100 text-[10px] font-medium">${alertHtml}</td>
                 `;
                 tbody.appendChild(tr);
             });
-            updateTabCounters();
         }
 
-        function applyHomeFilters() {
-            const query = document.getElementById("home-search-candidate").value.toLowerCase();
-            const pkg = document.getElementById("home-filter-package").value;
-            const usr = document.getElementById("home-filter-user").value;
-
-            let filteredList = candidateDb.filter(cand => {
-                if (homeActiveTabStatus !== "all") {
-                    if (homeActiveTabStatus === "COI Expired" && cand.status !== "COI Expired" && cand.status !== "Adverse Action") return false;
-                    if (homeActiveTabStatus === "In Progress" && cand.status !== "In Progress") return false;
-                    if (homeActiveTabStatus === "Review Needed" && cand.status !== "Review Needed") return false;
-                    if (homeActiveTabStatus === "Ready For Onboarding" && cand.status !== "Ready For Onboarding") return false;
-                    if (homeActiveTabStatus === "Pending Candidate" && cand.status !== "Pending Candidate") return false;
-                }
-                if (query && !cand.name.toLowerCase().includes(query)) return false;
-                if (pkg !== "all" && cand.package !== pkg) return false;
-                if (usr !== "all" && cand.createdBy !== usr) return false;
-                return true;
-            });
-            generateCandidateTable(filteredList);
+        function showHomeView() {
+            document.getElementById('home-view').classList.remove('hidden');
+            document.getElementById('profile-view').classList.add('hidden');
+            document.getElementById('page-title').innerText = "Candidates Directory";
+            
+            document.getElementById('nav-candidates').classList.add('bg-blue-50', 'text-blue-700');
+            document.getElementById('nav-candidates').querySelector('div').classList.remove('hidden');
         }
 
-        function filterStatusTab(statusKey) {
-            homeActiveTabStatus = statusKey;
-            document.querySelectorAll(".tab-btn").forEach(btn => btn.className = "px-4 py-2.5 text-xs font-semibold text-slate-500 hover:text-slate-800 border-b-2 border-transparent hover:border-slate-300 whitespace-nowrap tab-btn");
-            const matchingTabs = { "all": "tab-all", "Pending Candidate": "tab-pending", "In Progress": "tab-progress", "Review Needed": "tab-review", "Ready For Onboarding": "tab-onboarding", "COI Expired": "tab-alerts" };
-            const activeBtn = document.getElementById(matchingTabs[statusKey]);
-            if (activeBtn) {
-                if (statusKey === 'Review Needed') activeBtn.className = "px-4 py-2.5 text-xs font-bold border-b-2 border-amber-500 text-amber-600 whitespace-nowrap tab-btn";
-                else activeBtn.className = "px-4 py-2.5 text-xs font-bold border-b-2 border-blue-600 text-blue-600 whitespace-nowrap tab-btn";
-            }
-            applyHomeFilters();
-        }
-
-        function goToCandidateDetails(name) {
-            const targetCandidate = candidateDb.find(c => c.name === name);
-            if (!targetCandidate) return;
-
+        function openProfile(index) {
+            const targetCandidate = candidateDb[index];
             currentSelectedCandidate = targetCandidate;
-            document.getElementById('cand-header-fullname').innerText = targetCandidate.name;
-            document.getElementById('cand-detail-id').innerText = targetCandidate.orderId;
-            document.getElementById('cand-header-meta-orderid').innerText = targetCandidate.orderId;
-            document.getElementById('cand-detail-pkg').innerText = targetCandidate.package;
-            document.getElementById('cand-header-meta-package').innerText = targetCandidate.package;
-            document.getElementById('cand-header-meta-email').innerText = `${targetCandidate.name.toLowerCase().replace(/ /g, '.')}@vetty.co`;
 
+            document.getElementById('home-view').classList.add('hidden');
+            document.getElementById('profile-view').classList.remove('hidden');
+            document.getElementById('page-title').innerText = "Candidate Profile";
+
+            document.getElementById('cand-header-name').innerText = targetCandidate.name;
+            document.getElementById('cand-header-orderid').innerText = targetCandidate.orderId;
+            document.getElementById('cand-meta-orderid').innerText = targetCandidate.orderId;
+            document.getElementById('cand-header-pkg').innerText = targetCandidate.package;
+            document.getElementById('cand-meta-pkg').innerText = targetCandidate.package;
+            document.getElementById('cand-meta-addedby').innerText = targetCandidate.createdBy;
+            document.getElementById('action-comp-date').innerText = targetCandidate.dateAdded;
+            document.getElementById('cand-meta-email').innerText = targetCandidate.name.toLowerCase().replace(' ', '.') + "@vetty.co";
+
+            // Next-Line Status Logic inside Profile with "Checks Complete" conversion
             const statusBanner = document.getElementById('cand-header-status-banner');
-            statusBanner.innerText = `Status - ${targetCandidate.status}`;
-            if (targetCandidate.status === 'COI Expired' || targetCandidate.status === 'Adverse Action') statusBanner.className = "px-3 py-0.5 text-xs font-semibold rounded bg-red-500 text-white";
-            else if (targetCandidate.status === 'Review Needed') statusBanner.className = "px-3 py-0.5 text-xs font-semibold rounded bg-amber-500 text-white";
-            else if (targetCandidate.status === 'Ready For Onboarding' || targetCandidate.status === 'Clear') statusBanner.className = "px-3 py-0.5 text-xs font-semibold rounded bg-emerald-500 text-white";
-            else statusBanner.className = "px-3 py-0.5 text-xs font-semibold rounded bg-blue-600 text-white";
+            let bannerText = targetCandidate.status === 'Clear' || targetCandidate.status === 'Ready For Onboarding' 
+                ? `Checks Complete - ${targetCandidate.status}` 
+                : `Status - ${targetCandidate.status}`;
+            
+            statusBanner.innerText = bannerText;
+            
+            if (targetCandidate.status === 'COI Expired' || targetCandidate.status === 'Adverse Action') statusBanner.className = "px-2.5 py-0.5 text-[10px] font-bold rounded text-white bg-red-600 shadow-sm tracking-wide uppercase";
+            else if (targetCandidate.status === 'Review Needed' || targetCandidate.status === 'Pending Candidate') statusBanner.className = "px-2.5 py-0.5 text-[10px] font-bold rounded text-white bg-amber-500 shadow-sm tracking-wide uppercase";
+            else if (targetCandidate.status === 'Ready For Onboarding' || targetCandidate.status === 'Clear') statusBanner.className = "px-2.5 py-0.5 text-[10px] font-bold rounded text-white bg-emerald-500 shadow-sm tracking-wide uppercase";
+            else if (targetCandidate.status === 'In Progress') statusBanner.className = "px-2.5 py-0.5 text-[10px] font-bold rounded text-white bg-blue-600 shadow-sm tracking-wide uppercase";
+            else statusBanner.className = "px-2.5 py-0.5 text-[10px] font-bold rounded text-slate-700 bg-slate-200 shadow-sm tracking-wide uppercase";
 
-            categoryCollapseState = { "Drug Check": false, "Titers": false, "Basic Physical": false, "Vaccine": false };
+            categoryCollapseState = { "Drug Check": false, "Titers": false, "Basic Physical": false, "Vaccine": false, "Background Check": false };
             checksCollapseState = {};
             if (targetCandidate.screenings) {
                 targetCandidate.screenings.forEach(s => checksCollapseState[`${s.category}-${s.name}`] = false);
             }
-
             allDeepdiveExpanded = false;
-            const toggleBtn = document.getElementById('expandAllToggle');
-            toggleBtn.className = "w-11 h-6 bg-slate-200 rounded-full relative transition-colors focus:outline-none";
-            toggleBtn.querySelector('.dot').className = "dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform shadow-sm";
+            updateExpandAllToggleVisuals();
 
             generateDeepDiveAccordionContent(targetCandidate);
-            generateActivityFeed(targetCandidate);
-            showScreen('details-screen', activeSidebarId);
         }
 
-        function generateActivityFeed(candidate) {
-            const container = document.getElementById('activity-timeline-feed');
-            container.innerHTML = "";
-            const feeds = [
-                { title: "Note From Client User", desc: "send from client dash", date: "06/16/2026" },
-                { title: "Note from Vetty (Researcher)", desc: "test kromfox notes", date: "06/15/2026" },
-                { title: "Assigned order to Mrunali, Kajal and Nikhil", desc: "", date: "06/15/2026" },
-                { title: "Donor Pass Created for 5 Panel Drug + Physical Assessment", desc: "", date: "06/15/2026" }
-            ];
-
-            feeds.forEach((feed, fIdx) => {
-                const item = document.createElement('div');
-                item.className = "flex gap-4 relative text-[11px] pb-4";
-                
-                let lineHtml = '';
-                if (feeds.length > 1) {
-                    if (fIdx === 0) lineHtml = `<div class="absolute left-1/2 -translate-x-1/2 top-[12px] bottom-0 w-[2px] bg-blue-500/30 z-0"></div>`;
-                    else if (fIdx === feeds.length - 1) lineHtml = `<div class="absolute left-1/2 -translate-x-1/2 top-0 h-[12px] w-[2px] bg-blue-500/30 z-0"></div>`;
-                    else lineHtml = `<div class="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-[2px] bg-blue-500/30 z-0"></div>`;
-                }
-
-                item.innerHTML = `
-                    <div class="w-8 flex justify-center items-start flex-shrink-0 relative -ml-8">
-                        ${lineHtml}
-                        <div class="w-4 h-4 rounded-full bg-white border-2 border-blue-500 ring-4 ring-blue-100 flex-shrink-0 aspect-square z-20 mt-1.5"></div>
-                    </div>
-                    <div class="flex-1">
-                        <div class="flex justify-between items-start flex-wrap gap-2">
-                            <span class="font-bold text-slate-800">${feed.title}</span>
-                            <span class="text-[9px] text-slate-400 font-mono">${feed.date}</span>
-                        </div>
-                        ${feed.desc ? `<p class="text-slate-500 text-[10px] mt-1 bg-slate-50 p-2 rounded border border-slate-100 italic">"${feed.desc}"</p>` : ''}
-                    </div>
-                `;
-                container.appendChild(item);
-            });
+        function updateExpandAllToggleVisuals() {
+            const toggleBtn = document.getElementById('expandAllToggle');
+            const dot = toggleBtn.querySelector('.dot');
+            if (allDeepdiveExpanded) {
+                toggleBtn.classList.remove('bg-slate-200');
+                toggleBtn.classList.add('bg-blue-600');
+                dot.classList.add('translate-x-5');
+            } else {
+                toggleBtn.classList.remove('bg-blue-600');
+                toggleBtn.classList.add('bg-slate-200');
+                dot.classList.remove('translate-x-5');
+            }
         }
 
-        function toggleCategoryCollapse(category) {
-            categoryCollapseState[category] = !categoryCollapseState[category];
+        function toggleExpandAll() {
+            allDeepdiveExpanded = !allDeepdiveExpanded;
+            updateExpandAllToggleVisuals();
+            
+            ["Drug Check", "Titers", "Basic Physical", "Vaccine", "Background Check"].forEach(cat => categoryCollapseState[cat] = allDeepdiveExpanded);
+            if (currentSelectedCandidate.screenings) {
+                currentSelectedCandidate.screenings.forEach(s => checksCollapseState[`${s.category}-${s.name}`] = allDeepdiveExpanded);
+            }
             generateDeepDiveAccordionContent(currentSelectedCandidate);
         }
 
-        function toggleCheckCollapse(category, checkName) {
-            checksCollapseState[`${category}-${checkName}`] = !checksCollapseState[`${category}-${checkName}`];
+        function toggleCategoryNode(catName) {
+            categoryCollapseState[catName] = !categoryCollapseState[catName];
+            generateDeepDiveAccordionContent(currentSelectedCandidate);
+        }
+
+        function toggleCheckNode(checkId) {
+            checksCollapseState[checkId] = !checksCollapseState[checkId];
             generateDeepDiveAccordionContent(currentSelectedCandidate);
         }
 
@@ -990,78 +777,239 @@
             container.innerHTML = "";
 
             if (!candidate.screenings || candidate.screenings.length === 0) {
-                container.innerHTML = `<p class="text-slate-400 text-xs py-4 text-center">No checks assigned to this package.</p>`;
+                container.innerHTML = `<p class="text-slate-400 text-xs py-4 text-center border border-dashed border-slate-200 rounded-lg">No checks assigned to this package.</p>`;
                 return;
             }
 
-            ["Drug Check", "Titers", "Basic Physical", "Vaccine"].forEach(cat => {
+            ["Drug Check", "Titers", "Basic Physical", "Vaccine", "Background Check"].forEach(cat => {
                 const filteredScreens = candidate.screenings.filter(s => s.category === cat);
                 if (filteredScreens.length === 0) return;
 
-                const isCatExpanded = categoryCollapseState[cat] === true;
-                const catHeader = document.createElement("div");
-                catHeader.className = "category-tile-sleek flex items-center justify-between cursor-pointer select-none";
-                catHeader.onclick = () => toggleCategoryCollapse(cat);
+                let catOverallStatus = "Clear", catBadgeColor = "bg-emerald-500 text-white";
+                if (filteredScreens.some(s => s.orderStatus === "ReviewNeeded" || s.orderStatus === "InProgress")) { catOverallStatus = "Review Needed"; catBadgeColor = "bg-amber-500 text-white"; }
+                if (filteredScreens.some(s => s.orderStatus === "UnableToVerify")) { catOverallStatus = "Unable to Verify"; catBadgeColor = "bg-purple-500 text-white"; }
 
-                let catStatus = "Clear";
-                if (filteredScreens.some(s => s.suborderStatus === "Review Needed")) catStatus = "Review Needed";
-                else if (filteredScreens.some(s => s.suborderStatus === "Unable to Verify")) catStatus = "Unable to Verify";
-                else if (filteredScreens.some(s => s.suborderStatus === "Canceled")) catStatus = "Canceled";
-                else if (filteredScreens.some(s => s.orderStatus === "InProgress")) catStatus = "In Progress";
+                const isExpanded = categoryCollapseState[cat];
+                const catDate = filteredScreens[0].history.length > 0 ? filteredScreens[0].history[filteredScreens[0].history.length - 1].date.split(' ')[0] : '—';
+                const chevronClass = isExpanded ? 'fa-chevron-up' : 'fa-chevron-down';
 
-                let catBadgeColor = "bg-blue-600 text-white";
-                if (catStatus === "Review Needed") catBadgeColor = "bg-amber-500 text-white font-bold";
-                else if (catStatus === "Clear") catBadgeColor = "bg-emerald-500 text-white";
-                else if (catStatus === "Canceled") catBadgeColor = "bg-red-500 text-white";
-                else if (catStatus === "Unable to Verify") catBadgeColor = "bg-purple-500 text-white";
-
-                catHeader.innerHTML = `
-                    <div class="flex items-center gap-2">
-                        <span class="text-xs font-bold text-slate-800 tracking-wide uppercase">${cat}</span>
-                        <i class="fa-solid ${isCatExpanded ? 'fa-chevron-up' : 'fa-chevron-down'} text-[10px] text-slate-500"></i>
-                    </div>
-                    <div class="flex items-center gap-3">
-                        <div class="text-right flex flex-col items-end">
-                            <span class="inline-block px-2.5 py-0.5 text-[9px] font-bold rounded ${catBadgeColor} uppercase tracking-wider">${catStatus}</span>
-                            <span class="block text-[9px] text-slate-400 mt-0.5">06/16/2026</span>
+                const catHeaderDiv = document.createElement('div');
+                catHeaderDiv.className = "bg-white border border-[#d4dae4] rounded-[16px] overflow-hidden transition-all shadow-sm group w-full";
+                
+                let innerHtmlStr = `
+                    <div onclick="toggleCategoryNode('${cat}')" class="flex items-center justify-between py-3 px-5 cursor-pointer hover:bg-slate-50/50 select-none">
+                        <div class="flex items-center space-x-2">
+                            <span class="font-bold text-slate-700 text-[11px] uppercase tracking-wider">${cat}</span>
+                            <i class="fa-solid ${chevronClass} text-slate-300 text-[10px] transition-transform"></i>
                         </div>
-                        <button class="text-slate-400 hover:text-slate-600" title="Download Document" onclick="event.stopPropagation()">
-                            <i class="fa-solid fa-cloud-arrow-down text-base"></i>
-                        </button>
+                        <div class="flex items-center space-x-3">
+                            <div class="flex flex-col items-end">
+                                <span class="px-2 py-0.5 rounded text-[10px] font-bold tracking-wider uppercase ${catBadgeColor} shadow-sm">${catOverallStatus}</span>
+                                <span class="text-[9px] font-semibold text-slate-400 mt-0.5">${catDate}</span>
+                            </div>
+                            <i class="fa-solid fa-cloud-arrow-down text-slate-300 text-sm hover:text-blue-500 transition-colors ml-2"></i>
+                        </div>
                     </div>
                 `;
-                container.appendChild(catHeader);
 
-                const catChildrenWrapper = document.createElement("div");
-                catChildrenWrapper.className = `space-y-4 mt-2 pl-2 transition-all duration-300 ${isCatExpanded ? 'block' : 'hidden'}`;
-                container.appendChild(catChildrenWrapper);
+                if (isExpanded) {
+                    innerHtmlStr += `<div class="p-4 bg-slate-50/50 border-t border-slate-100 space-y-4">`;
+                    innerHtmlStr += `<div class="text-center py-2.5 text-slate-600 font-bold text-xs bg-white border border-slate-200 rounded-lg shadow-sm">This check is ${catOverallStatus}</div>`;
 
-                const statusSentenceDiv = document.createElement("div");
-                statusSentenceDiv.className = "text-center py-2.5 text-slate-700 font-bold text-xs select-text bg-white border border-slate-200/60 rounded-lg shadow-sm";
-                statusSentenceDiv.innerText = `This check is ${catStatus}`;
-                catChildrenWrapper.appendChild(statusSentenceDiv);
+                    filteredScreens.forEach(screen => {
+                        const checkId = `${screen.category}-${screen.name}`;
+                        const isCheckExpanded = checksCollapseState[checkId];
+                        const cChevronClass = isCheckExpanded ? 'fa-chevron-up' : 'fa-chevron-down';
 
-                filteredScreens.forEach(screen => {
-                    let suborderColor = "bg-blue-600 text-white";
-                    if (screen.suborderStatus === "Review Needed") suborderColor = "bg-amber-500 text-white font-bold";
-                    else if (screen.suborderStatus === "Clear") suborderColor = "bg-emerald-500 text-white";
-                    else if (screen.suborderStatus === "Canceled") suborderColor = "bg-red-500 text-white";
-                    else if (screen.suborderStatus === "Unable to Verify") suborderColor = "bg-purple-500 text-white";
+                        let sStatusStyle = "bg-emerald-500 text-white";
+                        if (screen.orderStatus === "ReviewNeeded" || screen.orderStatus === "InProgress") sStatusStyle = "bg-amber-500 text-white";
+                        if (screen.orderStatus === "UnableToVerify") sStatusStyle = "bg-purple-500 text-white";
 
-                    const isCheckExpanded = checksCollapseState[`${cat}-${screen.name}`] === true;
-                    const checkBlock = document.createElement("div");
-                    checkBlock.className = "border border-slate-200 rounded-lg overflow-hidden bg-white shadow-sm mb-2";
+                        const reversedHistory = [...screen.history].reverse();
+                        const isReview = screen.orderStatus === "ReviewNeeded";
+                        const isClear = screen.orderStatus === "Clear";
+                        const isVerifyError = screen.orderStatus === "UnableToVerify";
+                        
+                        let topDotClass = 'bg-blue-600', topRingClass = 'ring-blue-100';
+                        if (isReview) { topDotClass = 'bg-amber-500'; topRingClass = 'ring-amber-100'; } else if (isClear) { topDotClass = 'bg-emerald-500'; topRingClass = 'ring-emerald-100'; } else if (isVerifyError) { topDotClass = 'bg-purple-500'; topRingClass = 'ring-purple-100'; }
 
+                        let resultsTableHtml = "";
+                        if (screen.hasResults) {
+                            resultsTableHtml = `
+                                <div class="mt-4 mb-4 border border-slate-200 rounded-lg overflow-hidden bg-white shadow-sm">
+                                    <div class="bg-slate-50 px-4 py-2 text-[11px] font-bold text-slate-500 border-b border-slate-200">Results</div>
+                                    <div class="divide-y divide-slate-100 text-xs">
+                                        <div class="flex justify-between px-4 py-2.5"><span class="text-slate-500 font-semibold">Amphetamines :</span><span class="font-bold text-slate-800">Negative</span></div>
+                                        <div class="flex justify-between px-4 py-2.5"><span class="text-slate-500 font-semibold">Cocaine :</span><span class="font-bold text-slate-800">Negative</span></div>
+                                        <div class="flex justify-between px-4 py-2.5"><span class="text-slate-500 font-semibold">Marijuana :</span><span class="font-bold text-slate-800">Negative</span></div>
+                                        <div class="flex justify-between px-4 py-2.5"><span class="text-slate-500 font-semibold">Opiates :</span><span class="font-bold text-slate-800">Negative</span></div>
+                                        <div class="flex justify-between px-4 py-2.5"><span class="text-slate-500 font-semibold">Phencyclidine :</span><span class="font-bold text-slate-800">Negative</span></div>
+                                    </div>
+                                </div>
+                                <div class="mb-4 border border-slate-200 rounded-lg overflow-hidden bg-white shadow-sm">
+                                    <div class="bg-slate-50 px-4 py-2 text-[11px] font-bold text-slate-500 border-b border-slate-200">Details 1</div>
+                                    <div class="divide-y divide-slate-100 text-xs">
+                                        <div class="flex justify-between px-4 py-2.5"><span class="text-slate-500 font-semibold">Specimen ID :</span><span class="font-bold text-slate-800">7959817598</span></div>
+                                        <div class="flex justify-between px-4 py-2.5"><span class="text-slate-500 font-semibold">Date Collected :</span><span class="font-bold text-slate-800">06/03/2026</span></div>
+                                        <div class="flex justify-between px-4 py-2.5"><span class="text-slate-500 font-semibold">Medical Review Officer :</span><span class="font-bold text-slate-800">Kirk A Roberts, MD</span></div>
+                                        <div class="flex justify-between px-4 py-2.5"><span class="text-slate-500 font-semibold">Report :</span><a href="#" class="font-bold text-blue-600 hover:underline">DAVID FAIRNAK - Drug Report.pdf</a></div>
+                                        <div class="flex justify-between px-4 py-2.5"><span class="text-slate-500 font-semibold">Comment :</span><span class="font-bold text-slate-800">Negative</span></div>
+                                    </div>
+                                </div>
+                            `;
+                        }
+
+                        innerHtmlStr += `
+                            <div class="bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden text-xs w-full">
+                                <div onclick="toggleCheckNode('${checkId}')" class="flex items-center justify-between p-3 cursor-pointer hover:bg-slate-50/50 select-none">
+                                    <div class="flex items-center space-x-2">
+                                        <span class="font-bold text-slate-700">${screen.name}</span>
+                                        <i class="fa-solid ${cChevronClass} text-slate-300 text-[10px]"></i>
+                                    </div>
+                                    <div class="flex items-center space-x-3">
+                                        <div class="flex flex-col items-end">
+                                            <span class="px-2 py-0.5 rounded text-[9px] font-bold tracking-wider uppercase ${sStatusStyle} shadow-sm">${screen.suborderStatus}</span>
+                                            <span class="text-[8px] font-semibold text-slate-400 mt-0.5">${catDate}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                        `;
+
+                        // Single-Row Timeline Structure
+                        if (isCheckExpanded) {
+                            innerHtmlStr += `
+                                <div class="p-4 bg-slate-50/50 border-t border-slate-100">
+                                    ${resultsTableHtml}
+                                    
+                                    <div class="relative py-4 pl-4 w-full">
+                                        <div class="absolute left-[20px] w-[2px] bg-slate-200 top-6 bottom-6 z-0"></div>
+                                        
+                                        <div class="space-y-6 relative z-10">
+                                            ${reversedHistory.map((step, stepIdx) => {
+                                                const isTop = stepIdx === 0;
+                                                const dotColor = isTop ? topDotClass : 'bg-slate-300';
+                                                const ringColor = isTop ? topRingClass : 'ring-white';
+                                                const textColor = isTop ? 'text-slate-800' : 'text-slate-500';
+                                                const dateColor = isTop ? 'text-slate-500' : 'text-slate-400';
+                                                
+                                                return `
+                                                    <div class="relative flex items-center w-full">
+                                                        <div class="absolute left-[1.5px] top-1/2 -translate-y-1/2 w-2.5 h-2.5 ${dotColor} rounded-full ring-[3px] ${ringColor} z-10 shadow-sm"></div>
+                                                        <div class="flex justify-between items-center w-full pl-[25px] pr-2">
+                                                            <p class="text-[11px] font-bold ${textColor}">${step.status}</p>
+                                                            <span class="text-[9px] font-semibold ${dateColor}">${step.date}</span>
+                                                        </div>
+                                                    </div>
+                                                `;
+                                            }).join('')}
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                        }
+                        innerHtmlStr += `</div>`;
+                    });
+                    
+                    innerHtmlStr += `</div>`;
+                }
+
+                catHeaderDiv.innerHTML = innerHtmlStr;
+                container.appendChild(catHeaderDiv);
+            });
+        }
+
+        function openDrawerWithData(index) {
+            const cand = candidateDb[index];
+            currentSelectedCandidate = cand;
+            drawerScreeningsData = cand.screenings || [];
+            
+            document.getElementById('drawer-title').innerText = cand.name;
+            document.getElementById('drawer-subtitle').innerText = cand.package;
+            document.getElementById('drawer-package').innerText = cand.package;
+            document.getElementById('drawer-orderid').innerText = cand.orderId;
+            document.getElementById('drawer-dateadded').innerText = cand.dateAdded;
+
+            const badge = document.getElementById('drawer-status-badge');
+            let dBannerText = cand.status === 'Clear' || cand.status === 'Ready For Onboarding' 
+                ? `Checks Complete - ${cand.status}` 
+                : `Status - ${cand.status}`;
+            badge.innerText = dBannerText;
+            
+            if (cand.status === 'COI Expired' || cand.status === 'Adverse Action') badge.className = "px-2.5 py-0.5 text-[10px] font-bold rounded text-white bg-red-600 shadow-sm uppercase";
+            else if (cand.status === 'Review Needed' || cand.status === 'Pending Candidate') badge.className = "px-2.5 py-0.5 text-[10px] font-bold rounded text-white bg-amber-500 shadow-sm uppercase";
+            else if (cand.status === 'Ready For Onboarding' || cand.status === 'Clear') badge.className = "px-2.5 py-0.5 text-[10px] font-bold rounded text-white bg-emerald-500 shadow-sm uppercase";
+            else if (cand.status === 'In Progress') badge.className = "px-2.5 py-0.5 text-[10px] font-bold rounded text-white bg-blue-600 shadow-sm uppercase";
+            else badge.className = "px-2.5 py-0.5 text-[10px] font-bold rounded text-slate-700 bg-slate-200 shadow-sm uppercase";
+
+            renderDrawerListContent();
+            
+            document.getElementById('drawerOverlay').classList.remove('hidden');
+            setTimeout(() => {
+                document.getElementById('drawerOverlay').classList.remove('opacity-0');
+                document.getElementById('candidateDrawer').classList.add('drawer-open');
+            }, 10);
+        }
+
+        function closeDrawer() {
+            document.getElementById('candidateDrawer').classList.remove('drawer-open');
+            document.getElementById('drawerOverlay').classList.add('opacity-0');
+            setTimeout(() => {
+                document.getElementById('drawerOverlay').classList.add('hidden');
+            }, 300);
+        }
+
+        function openCandidateProfile() {
+            closeDrawer();
+            const index = candidateDb.findIndex(c => c.orderId === currentSelectedCandidate.orderId);
+            setTimeout(() => { openProfile(index); }, 300);
+        }
+
+        function renderDrawerListContent() {
+            const container = document.getElementById('drawer-body-list');
+            container.innerHTML = "";
+            if (drawerScreeningsData.length === 0) {
+                container.innerHTML = `<div class="text-center p-8 border border-dashed border-slate-200 rounded-lg"><p class="text-slate-400 text-xs">No screening matching constraints.</p></div>`;
+                return;
+            }
+
+            ["Drug Check", "Titers", "Basic Physical", "Vaccine", "Background Check"].forEach(cat => {
+                const listItems = drawerScreeningsData.filter(s => s.category === cat);
+                if (listItems.length === 0) return;
+
+                let catOverallStatus = "Clear", catBadgeColor = "bg-emerald-500 text-white";
+                if (listItems.some(s => s.orderStatus === "ReviewNeeded" || s.orderStatus === "InProgress")) { catOverallStatus = "Review Needed"; catBadgeColor = "bg-amber-500 text-white"; }
+                if (listItems.some(s => s.orderStatus === "UnableToVerify")) { catOverallStatus = "Unable to Verify"; catBadgeColor = "bg-purple-500 text-white"; }
+
+                const catDiv = document.createElement("div");
+                catDiv.className = "mb-6 last:mb-0 relative z-10 w-full";
+                
+                let html = `
+                    <div class="flex items-center space-x-3 mb-3 bg-slate-50 py-1">
+                        <div class="w-6 h-6 rounded bg-white border border-slate-200 flex items-center justify-center shrink-0 shadow-sm z-10"><i class="fa-solid fa-folder text-slate-400 text-xs"></i></div>
+                        <h5 class="font-bold text-slate-700 text-xs uppercase tracking-wide flex-1">${cat}</h5>
+                        <span class="px-2 py-0.5 rounded text-[9px] font-bold tracking-wider uppercase ${catBadgeColor} shadow-sm">${catOverallStatus}</span>
+                    </div>
+                    <div class="space-y-3 pl-[11px] w-full">
+                `;
+
+                listItems.forEach((screen, sIdx) => {
+                    let subStyle = "text-emerald-600 bg-emerald-50";
+                    if (screen.orderStatus === "ReviewNeeded" || screen.orderStatus === "InProgress") subStyle = "text-amber-600 bg-amber-50";
+                    if (screen.orderStatus === "UnableToVerify") subStyle = "text-purple-600 bg-purple-50";
+
+                    const rowId = `drawer-screen-${cat.replace(/\s+/g, '')}-${sIdx}`;
+                    
+                    const isReview = screen.orderStatus === "ReviewNeeded";
+                    const isClear = screen.orderStatus === "Clear";
+                    const isVerifyError = screen.orderStatus === "UnableToVerify";
                     const reversedHistory = [...screen.history].reverse();
                     let topDotClass = 'bg-blue-600', topRingClass = 'ring-blue-100';
-                    if (screen.suborderStatus === 'Review Needed') { topDotClass = 'bg-amber-500'; topRingClass = 'ring-amber-100'; }
-                    else if (screen.suborderStatus === 'Clear') { topDotClass = 'bg-emerald-500'; topRingClass = 'ring-emerald-100'; }
-                    else if (screen.suborderStatus === 'Unable to Verify') { topDotClass = 'bg-purple-500'; topRingClass = 'ring-purple-100'; }
+                    if (isReview) { topDotClass = 'bg-amber-500'; topRingClass = 'ring-amber-100'; } else if (isClear) { topDotClass = 'bg-emerald-500'; topRingClass = 'ring-emerald-100'; } else if (isVerifyError) { topDotClass = 'bg-purple-500'; topRingClass = 'ring-purple-100'; }
 
                     let resultsTableHtml = "";
-                    if (isCheckExpanded && screen.hasResults) {
+                    if (screen.hasResults) {
                         resultsTableHtml = `
-                            <div class="mt-4 mb-4 border border-slate-200 rounded-lg overflow-hidden bg-white">
+                            <div class="mt-4 mb-4 border border-slate-200 rounded-lg overflow-hidden bg-white shadow-sm">
                                 <div class="bg-slate-50 px-4 py-2 text-[11px] font-bold text-slate-500 border-b border-slate-200">Results</div>
                                 <div class="divide-y divide-slate-100 text-xs">
                                     <div class="flex justify-between px-4 py-2.5"><span class="text-slate-500 font-semibold">Amphetamines :</span><span class="font-bold text-slate-800">Negative</span></div>
@@ -1071,7 +1019,7 @@
                                     <div class="flex justify-between px-4 py-2.5"><span class="text-slate-500 font-semibold">Phencyclidine :</span><span class="font-bold text-slate-800">Negative</span></div>
                                 </div>
                             </div>
-                            <div class="mb-4 border border-slate-200 rounded-lg overflow-hidden bg-white">
+                            <div class="mb-4 border border-slate-200 rounded-lg overflow-hidden bg-white shadow-sm">
                                 <div class="bg-slate-50 px-4 py-2 text-[11px] font-bold text-slate-500 border-b border-slate-200">Details 1</div>
                                 <div class="divide-y divide-slate-100 text-xs">
                                     <div class="flex justify-between px-4 py-2.5"><span class="text-slate-500 font-semibold">Specimen ID :</span><span class="font-bold text-slate-800">7959817598</span></div>
@@ -1084,182 +1032,34 @@
                         `;
                     }
 
-                    checkBlock.innerHTML = `
-                        <div class="w-full bg-white hover:bg-slate-50/50 p-4 flex justify-between items-center transition-colors cursor-pointer text-xs select-none" onclick="toggleCheckCollapse('${cat}', '${screen.name}')">
-                            <div class="flex items-center gap-2">
-                                <span class="font-bold text-slate-700">${screen.name}</span>
-                                <i class="fa-solid ${isCheckExpanded ? 'fa-chevron-up' : 'fa-chevron-down'} text-slate-400"></i>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <div class="text-right flex flex-col items-end">
-                                    <span class="inline-block px-2.5 py-1 text-[10px] font-bold rounded ${suborderColor} uppercase tracking-wider">${screen.suborderStatus}</span>
-                                    <span class="block text-[9px] text-slate-400 mt-0.5">06/16/2026</span>
-                                </div>
-                                <span class="text-slate-400 hover:text-slate-600 cursor-pointer p-1 inline-flex items-center" onclick="event.stopPropagation()"><i class="fa-solid fa-cloud-arrow-down text-base"></i></span>
-                            </div>
-                        </div>
-                        <div class="${isCheckExpanded ? 'block' : 'hidden'} p-5 border-t border-slate-100 bg-slate-50/30">
-                            ${resultsTableHtml}
-                            <div class="mt-2 bg-white p-4 rounded-lg border border-slate-200/60 relative">
-                                <div class="relative py-2 pr-1 pl-8">
-                                    <div class="space-y-0 relative z-10">
-                                        ${reversedHistory.map((step, sIdx) => {
-                                            const isNewest = sIdx === 0, isOldest = sIdx === reversedHistory.length - 1;
-                                            let lineHtml = '';
-                                            if (reversedHistory.length > 1) {
-                                                if (isNewest) lineHtml = `<div class="absolute left-1/2 -translate-x-1/2 top-[12px] bottom-0 w-[2px] bg-blue-500/30 z-0"></div>`;
-                                                else if (isOldest) lineHtml = `<div class="absolute left-1/2 -translate-x-1/2 top-0 h-[13px] w-[2px] bg-blue-500/30 z-0"></div>`;
-                                                else lineHtml = `<div class="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-[2px] bg-blue-500/30 z-0"></div>`;
-                                            }
-                                            return `
-                                                <div class="flex items-stretch gap-4 text-[11px] relative">
-                                                    <div class="w-8 flex justify-center items-start flex-shrink-0 relative -ml-8">
-                                                        ${lineHtml}
-                                                        <div class="w-3.5 h-3.5 rounded-full ${isNewest ? topDotClass : 'bg-blue-600'} border border-white ring-4 ${isNewest ? topRingClass : 'ring-blue-100'} flex-shrink-0 z-20 mt-1.5"></div>
-                                                    </div>
-                                                    <div class="flex-1 pb-4">
-                                                        <div class="flex justify-between items-center py-1 flex-wrap gap-2">
-                                                            <span class="${isNewest ? 'font-bold text-slate-900' : 'font-semibold text-slate-600'}">${step.status}</span>
-                                                            <span class="text-slate-500 font-mono text-[10px] font-medium">${step.date}</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            `;
-                                        }).join('')}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                    catChildrenWrapper.appendChild(checkBlock);
-                });
-            });
-        }
-
-        let allDeepdiveExpanded = false;
-        function toggleExpandAll() {
-            allDeepdiveExpanded = !allDeepdiveExpanded;
-            const toggleBtn = document.getElementById('expandAllToggle');
-            const dot = toggleBtn.querySelector('.dot');
-
-            if (allDeepdiveExpanded) {
-                toggleBtn.classList.remove('bg-slate-200');
-                toggleBtn.classList.add('bg-blue-600');
-                dot.classList.add('translate-x-5');
-            } else {
-                toggleBtn.classList.remove('bg-blue-600');
-                toggleBtn.classList.add('bg-slate-200');
-                dot.classList.remove('translate-x-5');
-            }
-            ["Drug Check", "Titers", "Basic Physical", "Vaccine"].forEach(cat => categoryCollapseState[cat] = allDeepdiveExpanded);
-            if (currentSelectedCandidate.screenings) {
-                currentSelectedCandidate.screenings.forEach(s => checksCollapseState[`${s.category}-${s.name}`] = allDeepdiveExpanded);
-            }
-            generateDeepDiveAccordionContent(currentSelectedCandidate);
-        }
-
-        let drawerScreeningsData = [];
-        function openDrawer(candidateName) {
-            const candidate = candidateDb.find(c => c.name === candidateName);
-            if (!candidate) return;
-            currentSelectedCandidate = candidate;
-            drawerScreeningsData = [...candidate.screenings];
-            document.getElementById('drawer-candidate').innerText = candidate.name;
-            document.getElementById('drawer-orderid').innerText = candidate.orderId;
-            document.getElementById('drawer-search-screening').value = "";
-            document.getElementById('drawer-filter-order-status').value = "all";
-            document.getElementById('drawer-filter-suborder-status').value = "all";
-            renderDrawerListContent();
-            document.getElementById('drawer-backdrop').classList.replace('opacity-0', 'opacity-100');
-            document.getElementById('drawer-backdrop').classList.remove('pointer-events-none');
-            document.getElementById('quick-drawer').classList.remove('translate-x-full');
-        }
-
-        function closeDrawer() {
-            document.getElementById('drawer-backdrop').classList.replace('opacity-100', 'opacity-0');
-            document.getElementById('drawer-backdrop').classList.add('pointer-events-none');
-            document.getElementById('quick-drawer').classList.add('translate-x-full');
-        }
-
-        function filterDrawerScreenings() {
-            const query = document.getElementById('drawer-search-screening').value.toLowerCase();
-            const orderStatusFilter = document.getElementById('drawer-filter-order-status').value;
-            const suborderStatusFilter = document.getElementById('drawer-filter-suborder-status').value;
-            drawerScreeningsData = currentSelectedCandidate.screenings.filter(screen => {
-                if (query && !screen.name.toLowerCase().includes(query)) return false;
-                if (orderStatusFilter !== "all" && screen.orderStatus !== orderStatusFilter) return false;
-                if (suborderStatusFilter !== "all" && screen.suborderStatus !== suborderStatusFilter) return false;
-                return true;
-            });
-            renderDrawerListContent();
-        }
-
-        function renderDrawerListContent() {
-            const container = document.getElementById('drawer-body-list');
-            container.innerHTML = "";
-            if (drawerScreeningsData.length === 0) {
-                container.innerHTML = `<div class="text-center p-8 border border-dashed border-slate-200 rounded-lg"><p class="text-slate-400 text-xs">No screening matching constraints.</p></div>`;
-                return;
-            }
-
-            ["Drug Check", "Titers", "Basic Physical", "Vaccine"].forEach(cat => {
-                const listItems = drawerScreeningsData.filter(s => s.category === cat);
-                if (listItems.length === 0) return;
-
-                let catOverallStatus = "Clear", catBadgeColor = "bg-emerald-500 text-white";
-                if (listItems.some(item => item.suborderStatus === "Review Needed")) { catOverallStatus = "Review Needed"; catBadgeColor = "bg-amber-500 text-white font-bold"; }
-                else if (listItems.some(item => item.suborderStatus === "Unable to Verify")) { catOverallStatus = "Unable to Verify"; catBadgeColor = "bg-purple-500 text-white"; }
-                else if (listItems.some(item => item.orderStatus === "InProgress")) { catOverallStatus = "In Progress"; catBadgeColor = "bg-blue-600 text-white"; }
-
-                const catHeaderDiv = document.createElement("div");
-                catHeaderDiv.className = "text-xs font-bold text-slate-500 bg-slate-50 px-4 py-2.5 rounded-t-lg border border-slate-200 border-b-0 uppercase tracking-wider mt-4 flex justify-between items-center";
-                catHeaderDiv.innerHTML = `<span>${cat} (${listItems.length})</span><span class="inline-block px-2.5 py-0.5 text-[9px] font-bold rounded ${catBadgeColor} uppercase tracking-wider">${catOverallStatus}</span>`;
-                container.appendChild(catHeaderDiv);
-
-                const tableWrapper = document.createElement("div");
-                tableWrapper.className = "border border-slate-200 rounded-b-lg overflow-hidden divide-y divide-slate-200 bg-white shadow-sm mb-4";
-                tableWrapper.innerHTML = `<div class="grid grid-cols-12 bg-slate-50/50 p-3 text-[10px] uppercase font-bold text-slate-400 border-b border-slate-200"><div class="col-span-8">Health Screening</div><div class="col-span-4 text-center">Suborder Status</div></div>`;
-
-                listItems.forEach((screen, sIdx) => {
-                    const rowId = `drawer-check-${cat}-${sIdx}`;
-                    const isReview = screen.suborderStatus === "Review Needed", isClear = screen.suborderStatus === "Clear", isVerifyError = screen.suborderStatus === "Unable to Verify";
-                    let subStyle = "text-blue-600";
-                    if (isClear) subStyle = "text-emerald-500 font-bold"; else if (isReview) subStyle = "text-amber-500 font-extrabold"; else if (isVerifyError) subStyle = "text-purple-500 font-bold";
-
-                    const reversedHistory = [...screen.history].reverse();
-                    let topDotClass = 'bg-blue-600', topRingClass = 'ring-blue-100';
-                    if (isReview) { topDotClass = 'bg-amber-500'; topRingClass = 'ring-amber-100'; } else if (isClear) { topDotClass = 'bg-emerald-500'; topRingClass = 'ring-emerald-100'; }
-
                     const rowContainer = document.createElement("div");
-                    rowContainer.className = "bg-white text-xs";
+                    rowContainer.className = "bg-white text-xs border border-slate-200 rounded-lg shadow-sm overflow-hidden ml-4 relative z-10 w-full";
                     rowContainer.innerHTML = `
-                        <div onclick="document.getElementById('${rowId}').classList.toggle('hidden')" class="w-full grid grid-cols-12 p-3 items-center hover:bg-slate-50/50 cursor-pointer font-medium select-none">
-                            <div class="col-span-8 font-bold text-slate-700">${screen.name}</div>
-                            <div class="col-span-4 text-center ${subStyle}">${screen.suborderStatus}</div>
+                        <div onclick="document.getElementById('${rowId}').classList.toggle('hidden')" class="w-full flex justify-between p-3 items-center hover:bg-slate-50/50 cursor-pointer font-medium select-none transition-colors border-b border-slate-50">
+                            <div class="font-bold text-slate-700">${screen.name} <i class="fa-solid fa-chevron-down text-slate-300 text-[10px] ml-1"></i></div>
+                            <div class="px-2 py-0.5 rounded text-[9px] font-bold tracking-wider uppercase shadow-sm ${subStyle}">${screen.suborderStatus}</div>
                         </div>
-                        <div id="${rowId}" class="hidden p-4 bg-slate-50/50 border-t border-slate-200/60 space-y-4">
-                            <div class="text-center py-2.5 text-slate-700 font-bold text-xs bg-white border border-slate-100 rounded-lg shadow-sm">This check is ${screen.suborderStatus}</div>
-                            <div class="relative py-2 max-h-[220px] overflow-y-auto pr-1 pl-8">
-                                <div class="space-y-0 relative z-10">
+                        <div id="${rowId}" class="hidden p-4 bg-slate-50/50 border-t border-slate-100 space-y-4">
+                            <div class="text-center py-2.5 text-slate-700 font-bold text-xs bg-white border border-slate-200 rounded-lg shadow-sm">This check is ${screen.suborderStatus}</div>
+                            ${resultsTableHtml}
+                            
+                            <div class="relative py-4 pl-4 w-full">
+                                <div class="absolute left-[20px] w-[2px] bg-slate-200 top-6 bottom-6 z-0"></div>
+                                
+                                <div class="space-y-6 relative z-10">
                                     ${reversedHistory.map((step, stepIdx) => {
-                                        const isCurrent = stepIdx === 0, isOldest = stepIdx === reversedHistory.length - 1;
-                                        let lineHtml = '';
-                                        if (reversedHistory.length > 1) {
-                                            if (isCurrent) lineHtml = `<div class="absolute left-1/2 -translate-x-1/2 top-[12px] bottom-0 w-[2px] bg-blue-500/30 z-0"></div>`;
-                                            else if (isOldest) lineHtml = `<div class="absolute left-1/2 -translate-x-1/2 top-0 h-[12px] w-[2px] bg-blue-500/30 z-0"></div>`;
-                                            else lineHtml = `<div class="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-[2px] bg-blue-500/30 z-0"></div>`;
-                                        }
+                                        const isTop = stepIdx === 0;
+                                        const dotColor = isTop ? topDotClass : 'bg-slate-300';
+                                        const ringColor = isTop ? topRingClass : 'ring-white';
+                                        const textColor = isTop ? 'text-slate-800' : 'text-slate-500';
+                                        const dateColor = isTop ? 'text-slate-500' : 'text-slate-400';
+                                        
                                         return `
-                                            <div class="flex items-stretch gap-4 text-[11px] relative">
-                                                <div class="w-8 flex justify-center items-start flex-shrink-0 relative -ml-8">
-                                                    ${lineHtml}
-                                                    <div class="w-3 h-3 rounded-full ${isCurrent ? topDotClass : 'bg-blue-600'} border border-white ring-2 ${isCurrent ? topRingClass : 'ring-blue-100'} flex-shrink-0 z-20 mt-1"></div>
-                                                </div>
-                                                <div class="flex-1 pb-4">
-                                                    <div class="flex justify-between items-center py-1 flex-wrap gap-1.5">
-                                                        <span class="${isCurrent ? 'font-bold text-slate-900' : 'font-medium text-slate-500'}">${step.status}</span>
-                                                        <span class="text-slate-400 font-mono text-[9px]">${step.date}</span>
-                                                    </div>
+                                            <div class="relative flex items-center w-full">
+                                                <div class="absolute left-[1.5px] top-1/2 -translate-y-1/2 w-2.5 h-2.5 ${dotColor} rounded-full ring-[3px] ${ringColor} z-10 shadow-sm"></div>
+                                                <div class="flex justify-between items-center w-full pl-[25px] pr-2">
+                                                    <p class="text-[11px] font-bold ${textColor}">${step.status}</p>
+                                                    <span class="text-[9px] font-semibold ${dateColor}">${step.date}</span>
                                                 </div>
                                             </div>
                                         `;
@@ -1268,67 +1068,19 @@
                             </div>
                         </div>
                     `;
-                    tableWrapper.appendChild(rowContainer);
+                    
+                    html += rowContainer.outerHTML;
                 });
-                container.appendChild(tableWrapper);
+
+                html += `</div>`;
+                catDiv.innerHTML = html;
+                container.appendChild(catDiv);
             });
         }
 
-        function openFormModal(actionType) {
-            const overlay = document.getElementById('form-modal-overlay');
-            const title = document.getElementById('modal-form-title');
-            const fieldsContainer = document.getElementById('modal-form-fields');
-            overlay.classList.remove('hidden');
-            setTimeout(() => { overlay.firstElementChild.classList.replace('scale-95', 'scale-100'); }, 50);
+        // Initialize App Main Loop
+        renderTable();
 
-            if (actionType === 'new-candidate') {
-                title.innerText = "Register New Candidate";
-                fieldsContainer.innerHTML = `
-                    <div><label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Full Name</label><input type="text" id="form-cand-name" placeholder="John Doe" class="w-full text-xs border border-slate-200 rounded p-2.5 outline-none focus:border-blue-500 font-semibold text-slate-700"></div>
-                    <div><label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Package</label><select id="form-cand-package" class="w-full text-xs border border-slate-200 rounded p-2.5 outline-none focus:border-blue-500 font-semibold text-slate-700"><option>Executive Clinical Core</option><option>Standard Care Package</option></select></div>
-                `;
-            } else if (actionType === 'modify-order') {
-                title.innerText = "Modify Order Parameters";
-                fieldsContainer.innerHTML = `
-                    <div><label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Candidate Selected</label><input type="text" value="${currentSelectedCandidate.name}" class="w-full text-xs border border-slate-200 rounded p-2.5 outline-none bg-slate-50 font-semibold text-slate-500" readonly></div>
-                    <div><label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Change Order Status</label><select id="form-order-status" class="w-full text-xs border border-slate-200 rounded p-2.5 outline-none focus:border-blue-500 font-semibold text-slate-700"><option value="In Progress">In Progress</option><option value="Reviewed">Reviewed</option><option value="COI Expired">COI Expired</option></select></div>
-                `;
-            } else if (actionType === 'change-location') {
-                title.innerText = "Change Dispatch Location";
-                fieldsContainer.innerHTML = `<div><label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Select Dispatch State</label><select id="form-dispatch-loc" class="w-full text-xs border border-slate-200 rounded p-2.5 outline-none focus:border-blue-500 font-semibold text-slate-700"><option>New York Clinic Hub</option><option>California Testing Lab</option></select></div>`;
-            }
-        }
-
-        function closeFormModal() {
-            const overlay = document.getElementById('form-modal-overlay');
-            overlay.firstElementChild.classList.replace('scale-100', 'scale-95');
-            setTimeout(() => overlay.classList.add('hidden'), 150);
-        }
-
-        function submitFormAction() {
-            const nameField = document.getElementById('form-cand-name');
-            const statusField = document.getElementById('form-order-status');
-            if (nameField && nameField.value.trim() !== "") {
-                candidateDb.unshift({ name: nameField.value.trim(), orderId: "NEW" + Math.floor(Math.random()*1000), lastRun: "Today", dateAdded: "Today", expectedEndDate: "—", createdBy: "Client", package: document.getElementById('form-cand-package').value, status: "In Progress", stagedCheck: "—", alerts: "—", screenings: [] });
-            } else if (statusField) {
-                currentSelectedCandidate.status = statusField.value;
-                goToCandidateDetails(currentSelectedCandidate.name);
-            }
-            generateCandidateTable(candidateDb);
-            closeFormModal();
-        }
-
-        function openChatSupport() {
-            const notification = document.createElement("div");
-            notification.className = "fixed bottom-5 right-5 bg-slate-900 text-white rounded-xl shadow-2xl p-5 border border-slate-700 flex flex-col gap-3 z-50 animate-bounce max-w-xs text-xs";
-            notification.innerHTML = `<div class="flex items-center gap-2 justify-between"><span class="flex items-center gap-1.5 font-bold"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> Vetty Concierge</span><button onclick="this.parentElement.parentElement.remove()" class="text-slate-400 hover:white font-bold text-sm">&times;</button></div><p class="text-slate-300 leading-relaxed">Hello! We are here to help. Live candidate screenings chat log support has been successfully initialized.</p>`;
-            document.body.appendChild(notification);
-            setTimeout(() => notification.classList.remove('animate-bounce'), 2000);
-        }
-
-        window.onload = function () {
-            generateCandidateTable(candidateDb);
-        };
     </script>
 </body>
 </html>
