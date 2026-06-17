@@ -17,7 +17,7 @@
             box-sizing: border-box;
         }
         
-        /* Custom scrollbar styling to ensure high visibility matching image_3ce564.png */
+        /* Custom scrollbar styling to ensure high visibility */
         ::-webkit-scrollbar {
             width: 8px;
             height: 8px;
@@ -56,14 +56,13 @@
             border-radius: 9999px;
         }
 
-        /* Overall Health Screening Checks Container - FORCED PROMINENT SCROLLER as per image_3ce564.png */
+        /* Overall Health Screening Checks Container - FORCED PROMINENT SCROLLER */
         .overall-screening-scroll {
             max-height: 540px;
             overflow-y: scroll !important; /* Force scrollbar visibility by default */
             padding-right: 8px;
         }
         
-        /* Custom styling specifically targeting the Forced screening checks scrollbar for maximum prominence */
         .overall-screening-scroll::-webkit-scrollbar {
             width: 10px !important;
             display: block !important;
@@ -74,15 +73,15 @@
             border: 1px solid #e2e8f0 !important;
         }
         .overall-screening-scroll::-webkit-scrollbar-thumb {
-            background: #475569 !important; /* Bold Slate-600 color for maximum visibility matching image_3ce564.png */
+            background: #475569 !important; /* Bold Slate-600 color for maximum visibility */
             border-radius: 9999px !important;
             border: 2px solid #f8fafc !important;
         }
         .overall-screening-scroll::-webkit-scrollbar-thumb:hover {
-            background: #1e293b !important; /* Dark Slate-800 on hover */
+            background: #1e293b !important;
         }
 
-        /* Force prominent scrollbar on the main details content page as requested in image_df48bf.png */
+        /* Force prominent scrollbar on the main details content page */
         .main-page-scrollbar {
             overflow-y: scroll !important;
         }
@@ -95,7 +94,7 @@
             border-radius: 4px !important;
         }
         .main-page-scrollbar::-webkit-scrollbar-thumb {
-            background: #475569 !important; /* Bold Slate-600 color */
+            background: #475569 !important;
             border-radius: 9999px !important;
             border: 2px solid #f1f5f9 !important;
         }
@@ -103,7 +102,7 @@
             background: #1e293b !important;
         }
 
-        /* Sleek Rectangular Category Card matching image_eab983.png and image_ea5444.png */
+        /* Sleek Rectangular Category Card matching screenshot specifications */
         .category-tile-sleek {
             padding-top: 14px;
             padding-bottom: 14px;
@@ -119,12 +118,6 @@
             border-color: #cbd5e1 !important;
             background-color: #f8fafc;
         }
-
-        /* Perfect mathematical vertical alignment configuration */
-        .profile-max-width {
-            max-width: 810px !important;
-            width: 100%;
-        }
     </style>
 </head>
 <body class="bg-[#f3f4f6] text-[#1e293b] min-h-screen flex overflow-hidden">
@@ -133,7 +126,6 @@
         <!-- LaSalle Network Brand Header -->
         <div class="h-20 flex flex-col justify-center px-6 border-b border-slate-100">
             <div class="flex items-center gap-2.5">
-                <!-- LaSalle Network Logo -->
                 <div class="flex items-center justify-center w-8 h-8 rounded bg-emerald-50 border border-slate-200 text-emerald-600">
                     <i class="fa-solid fa-network-wired text-sm"></i>
                 </div>
@@ -151,7 +143,7 @@
             </button>
         </div>
 
-        <!-- Navigation Links matching image_ea5444.png light theme -->
+        <!-- Navigation Links -->
         <nav class="flex-1 px-3 space-y-1 overflow-y-auto">
             <a href="#" id="nav-candidates" onclick="showScreen('home-screen', 'nav-candidates')" class="flex items-center gap-3.5 px-4 py-3 rounded-lg bg-blue-50/70 text-blue-600 font-semibold transition-all">
                 <i class="fa-solid fa-users text-blue-600 w-5 text-center text-base"></i>
@@ -195,7 +187,7 @@
             </a>
         </nav>
 
-        <!-- Floating Chat Support Badge from image_ea5444.png -->
+        <!-- Floating Chat Support Badge -->
         <div class="p-4 border-t border-slate-100 flex items-center justify-between bg-slate-50/50">
             <div class="flex items-center gap-3">
                 <button onclick="openChatSupport()" class="w-11 h-11 rounded-full bg-emerald-500 hover:bg-emerald-600 flex items-center justify-center text-white shadow-lg relative group transition-transform hover:scale-105">
@@ -234,12 +226,13 @@
             </div>
         </header>
 
+        <!-- Parent scrollable frame for all pages -->
         <div class="flex-1 overflow-y-auto main-page-scrollbar relative bg-[#f8fafc]">
 
-            <!-- HOME DIRECTORY SCREEN (Restricted to a premium max width of 1200px to prevent layout bloat) -->
+            <!-- HOME DIRECTORY SCREEN -->
             <section id="home-screen" class="p-6 space-y-6 max-w-[1200px] mx-auto w-full">
                 
-                <!-- Filters Panel Configured exactly like image_f42881.png -->
+                <!-- Filters Panel -->
                 <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-4">
                     <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
                         <div>
@@ -325,7 +318,8 @@
                 </div>
             </section>
 
-            <section id="details-screen" class="hidden p-6 space-y-6 mx-auto w-full profile-max-width">
+            <section id="details-screen" class="hidden p-6 space-y-6 mx-auto w-full max-w-[810px]">
+                
                 <!-- Header Back Action -->
                 <div class="flex items-center justify-between border-b border-slate-200 pb-4 flex-wrap gap-4">
                     <div class="flex items-center gap-4">
@@ -339,11 +333,10 @@
                     </div>
                 </div>
 
-                <!-- TOP Profile summary card from image_ea5444.png & image_d06b23.png spanning full profile-max-width -->
-                <div class="bg-white rounded-2xl border border-[#d4dae4] p-5 shadow-sm space-y-5">
-                    <div class="flex justify-between items-start flex-wrap gap-4 border-b border-slate-100 pb-3">
+                <!-- TOP Profile summary card -->
+                <div class="bg-white rounded-2xl border border-[#d4dae4] p-5 shadow-sm w-full relative z-10">
+                    <div class="flex justify-between items-start flex-wrap gap-4 border-b border-slate-100 pb-4 mb-4">
                         <div class="flex items-center gap-3">
-                            <!-- Blue Avatar Silhouette -->
                             <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 text-lg font-bold">
                                 <i class="fa-solid fa-user"></i>
                             </div>
@@ -362,15 +355,15 @@
                             </div>
                         </div>
 
-                        <!-- Lined-up top right action links -->
-                        <div class="flex items-center gap-4 text-[11px] font-semibold text-slate-500 pt-1">
+                        <!-- Top right action links perfectly placed above DOB -->
+                        <div class="flex items-center gap-4 text-[11px] font-semibold text-slate-500">
                             <button class="hover:text-slate-800 flex items-center gap-1"><i class="fa-solid fa-plus-circle text-blue-600 text-[10px]"></i> Add New Checks</button>
                             <button class="hover:text-slate-800 flex items-center gap-1"><i class="fa-regular fa-file-alt text-[10px]"></i> Documents and Disclosures</button>
                             <button class="hover:text-slate-800 flex items-center gap-1"><i class="fa-solid fa-calculator text-[10px]"></i> Cost Summary</button>
                         </div>
                     </div>
 
-                    <!-- Meta details layout matching image_ea5444.png & image_d06b23.png -->
+                    <!-- Meta details grid -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-2.5 text-[11px]">
                         <!-- Left Column -->
                         <div class="space-y-2">
@@ -442,11 +435,10 @@
                     </div>
                 </div>
 
-                <!-- Multi-column grid matching image_ea5444.png & image_d06b23.png layout -->
-                <div class="flex flex-col lg:flex-row gap-6 items-start w-full">
+                <div class="flex flex-col lg:flex-row gap-6 w-full">
                     
-                    <!-- Left Column: Actions and Activity Feed (Strictly 286px wide for straight-line desktop alignment) -->
-                    <div class="w-full lg:w-[286px] lg:flex-shrink-0 space-y-6">
+                    <!-- Left Column: Actions and Activity Feed -->
+                    <div class="w-full lg:w-[286px] flex-shrink-0 space-y-6">
                         <!-- Actions Card -->
                         <div class="bg-white p-5 rounded-xl border border-[#d4dae4] shadow-sm space-y-4">
                             <div class="flex justify-between items-center pb-2 border-b border-slate-100">
@@ -460,7 +452,7 @@
                             </div>
                         </div>
 
-                        <!-- Activity Feed timeline exactly as in image_eb2586.png & image_d06b23.png -->
+                        <!-- Activity Feed -->
                         <div class="bg-white p-5 rounded-xl border border-[#d4dae4] shadow-sm space-y-4">
                             <div class="flex justify-between items-center pb-2 border-b border-slate-100">
                                 <h3 class="text-xs font-bold text-slate-700 uppercase tracking-wider">Activity Feed</h3>
@@ -468,39 +460,37 @@
                             </div>
                             <div class="pr-2 relative">
                                 <div id="activity-timeline-feed" class="space-y-6 text-[11px] relative pb-4 z-10">
-                                    <!-- Populated dynamically with segment connectors -->
+                                    <!-- Populated dynamically -->
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Right Column: Screening Checks Card (Capped at exactly 500px to achieve perfect straight-line vertical borders) -->
-                    <div class="w-full lg:w-[500px] lg:flex-shrink-0 space-y-6">
+                    <!-- Right Column: Screening Checks Card (Flex-1 ensures it fills exactly to the right edge) -->
+                    <div class="w-full lg:flex-1 min-w-0 space-y-6">
                         
-                        <!-- Health Screening Checks Panel Card -->
-                        <div class="bg-white p-5 rounded-xl border border-[#d4dae4] shadow-sm relative w-full">
+                        <div class="bg-white p-5 rounded-xl border border-[#d4dae4] shadow-sm relative w-full h-auto">
                             
-                            <!-- Header block styled as image_eb2586.png / image_df48bf.png -->
+                            <!-- Header block with stacked actions on the extreme right -->
                             <div class="flex justify-between items-start border-b border-slate-100 pb-4 mb-6">
                                 <div>
                                     <h3 class="text-base font-bold text-[#1b1b2a]">Health Screening Checks</h3>
                                     <p class="text-[11px] text-slate-400 font-semibold">Verified Profile</p>
                                 </div>
-                                <div class="flex flex-col items-end gap-1.5 text-xs text-right select-none">
+                                <div class="flex flex-col items-end gap-2 text-xs text-right select-none">
                                     <div class="flex items-center gap-2">
                                         <span class="text-xs font-bold text-slate-500">Expand All</span>
-                                        <!-- Expand All Toggle Switch -->
                                         <button id="expandAllToggle" onclick="toggleExpandAll()" class="w-11 h-6 bg-slate-200 rounded-full relative transition-colors focus:outline-none">
                                             <span class="dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform shadow-sm"></span>
                                         </button>
                                     </div>
-                                    <button onclick="openFormModal('modify-order')" class="text-blue-600 hover:underline font-bold text-xs mt-1">Modify Order</button>
+                                    <button onclick="openFormModal('modify-order')" class="text-blue-600 hover:underline font-bold text-xs">Modify Order</button>
                                     <button onclick="openFormModal('change-location')" class="text-blue-600 hover:underline font-bold text-xs">Change Location for All</button>
                                 </div>
                             </div>
 
-                            <!-- Screenings Nested Categories list container with explicit outer scroller -->
-                            <div id="accordion-checks-container" class="overall-screening-scroll space-y-4 pb-10" style="width: 100%; max-width: 100%;">
+                            <!-- Screenings Nested Categories list container with FORCED SCROLLER -->
+                            <div id="accordion-checks-container" class="overall-screening-scroll space-y-4 pb-10 w-full">
                                 <!-- Populated dynamically based on nested models -->
                             </div>
                         </div>
@@ -509,7 +499,6 @@
                 </div>
             </section>
 
-            <!-- PLACEHOLDER MODULAR SCREEN -->
             <section id="placeholder-screen" class="hidden p-8 space-y-6">
                 <div class="bg-white p-10 rounded-xl border border-slate-200 shadow-sm text-center max-w-xl mx-auto my-12 space-y-4">
                     <div class="w-16 h-16 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center text-2xl mx-auto">
@@ -527,10 +516,10 @@
         </div>
     </main>
 
+    <!-- Side Drawer -->
     <div id="drawer-backdrop" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 z-40" onclick="closeDrawer()"></div>
     
     <div id="quick-drawer" class="fixed right-0 top-0 bottom-0 w-[640px] bg-white shadow-2xl z-50 transform translate-x-full drawer-transition flex flex-col">
-        <!-- Drawer Header -->
         <div class="p-6 border-b border-slate-200 flex justify-between items-center bg-slate-50">
             <div>
                 <h3 id="drawer-candidate" class="text-lg font-bold text-slate-800">-</h3>
@@ -539,7 +528,6 @@
             <button onclick="closeDrawer()" class="text-slate-400 hover:text-slate-600 text-2xl font-bold p-1 transition-colors">&times;</button>
         </div>
 
-        <!-- Filter Inputs configured like image_f49d7b.png and image_fb8e62.png with "Overall Status" rename -->
         <div class="p-6 border-b border-slate-100 bg-slate-50/50 grid grid-cols-3 gap-3">
             <div>
                 <label class="block text-[9px] font-extrabold text-slate-500 uppercase tracking-wider mb-1">Search Screening</label>
@@ -568,12 +556,10 @@
             </div>
         </div>
 
-        <!-- Drawer Content listing container - FORCED PROMINENT SCROLLER -->
         <div id="drawer-body-list" class="flex-1 overflow-y-auto p-6 space-y-6 max-h-[calc(100vh-210px)] pb-10" style="overflow-y: scroll !important;">
             <!-- Rendered dynamically -->
         </div>
 
-        <!-- Drawer Footer -->
         <div class="p-4 border-t border-slate-200 bg-slate-50 flex justify-end">
             <button onclick="closeDrawer()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold py-2.5 px-6 rounded-lg text-xs transition-all shadow-sm active:scale-95">
                 Close Details
@@ -601,7 +587,6 @@
     </div>
 
     <script>
-        // Database containing realistic sequences matching image_4cc6bc.png and image_4b6e5a.png
         const candidateDb = [
             {
                 name: "Debendu Roy",
@@ -620,7 +605,7 @@
                         name: "5 Panel Drug",
                         orderStatus: "InProgress",
                         suborderStatus: "Review Needed",
-                        hasResults: true, // For rendering the Results/Details 1 tables
+                        hasResults: true,
                         history: [
                             { status: "Order Created", date: "06/13/2026 09:12 AM" },
                             { status: "Donor Pass Creation Pending", date: "06/13/2026 11:00 AM" },
@@ -689,7 +674,7 @@
                 ]
             },
             {
-                name: "Mark Lewis", // Renamed from Autopaatest Done as per user requests
+                name: "Mark Lewis",
                 orderId: "K1MOC",
                 lastRun: "06/16/2026",
                 dateAdded: "02/13/2026",
@@ -705,7 +690,7 @@
                         name: "5 Panel Drug",
                         orderStatus: "InProgress",
                         suborderStatus: "Review Needed",
-                        hasResults: true, // For rendering the Results/Details 1 tables
+                        hasResults: true,
                         history: [
                             { status: "Order Created", date: "06/13/2026 09:12 AM" },
                             { status: "Donor Pass Creation Pending", date: "06/13/2026 11:00 AM" },
@@ -733,21 +718,6 @@
                             { status: "Collection Completed", date: "06/16/2026 04:30 PM" },
                             { status: "Received at Lab", date: "06/16/2026 11:00 AM" },
                             { status: "Clear", date: "06/16/2026 02:00 PM" }
-                        ]
-                    },
-                    {
-                        category: "Titers",
-                        name: "QuantiFERON-TB Gold",
-                        orderStatus: "Clear",
-                        suborderStatus: "Clear",
-                        history: [
-                            { status: "Order Created", date: "06/13/2026 09:30 AM" },
-                            { status: "Donor Pass Creation Pending", date: "06/13/2026 11:55 AM" },
-                            { status: "Donor Pass Created", date: "06/13/2026 02:15 PM" },
-                            { status: "Scheduled", date: "06/15/2026 11:00 AM" },
-                            { status: "Collection Completed", date: "06/16/2026 02:30 PM" },
-                            { status: "Received at Lab", date: "06/16/2026 09:15 AM" },
-                            { status: "Clear", date: "06/16/2026 11:15 AM" }
                         ]
                     },
                     {
@@ -800,312 +770,6 @@
                         ]
                     }
                 ]
-            },
-            {
-                name: "Stagecheck Test",
-                orderId: "JM755",
-                lastRun: "06/16/2026",
-                dateAdded: "02/12/2026",
-                expectedEndDate: "06/31/2026",
-                createdBy: "mrunali Stage...",
-                package: "General Screening Pack",
-                status: "In Progress",
-                stagedCheck: "Stage1",
-                alerts: "Donor Pass Expired",
-                screenings: [
-                    {
-                        category: "Vaccine",
-                        name: "MMR Vaccine",
-                        orderStatus: "InProgress",
-                        suborderStatus: "Review Needed",
-                        history: [
-                            { status: "Order Created", date: "06/12/2026 01:00 PM" },
-                            { status: "Review Needed", date: "06/16/2026 02:00 PM" }
-                        ]
-                    }
-                ]
-            },
-            {
-                name: "Rodrigo Joseph",
-                orderId: "UTMUZ",
-                lastRun: "06/16/2026",
-                dateAdded: "02/18/2026",
-                expectedEndDate: "02/26/2026",
-                createdBy: "debendu Roy",
-                package: "Basic Physical Verification",
-                status: "In Progress",
-                stagedCheck: "—",
-                alerts: "—",
-                screenings: [
-                    {
-                        category: "Basic Physical",
-                        name: "Basic Physical Evaluation",
-                        orderStatus: "InProgress",
-                        suborderStatus: "Canceled",
-                        history: [
-                            { status: "Order Created", date: "06/15/2026 09:00 AM" },
-                            { status: "Canceled", date: "06/16/2026 04:30 PM" }
-                        ]
-                    }
-                ]
-            },
-            {
-                name: "Anup3 Kumar",
-                orderId: "ZVZO9",
-                lastRun: "06/15/2026",
-                dateAdded: "02/18/2026",
-                expectedEndDate: "—",
-                createdBy: "testing Covid",
-                package: "Basic Physical Verification",
-                status: "In Progress",
-                stagedCheck: "—",
-                alerts: "—",
-                screenings: [
-                    {
-                        category: "Drug Check",
-                        name: "9 Panel Instant Drug Screen",
-                        orderStatus: "InProgress",
-                        suborderStatus: "Unable to Verify",
-                        history: [
-                            { status: "Order Created", date: "06/15/2026 10:00 AM" },
-                            { status: "Unable to Verify", date: "06/15/2026 06:00 PM" }
-                        ]
-                    }
-                ]
-            },
-            {
-                name: "Criminalhistory Test",
-                orderId: "JS1FP",
-                lastRun: "06/13/2026",
-                dateAdded: "02/13/2026",
-                expectedEndDate: "—",
-                createdBy: "mrunali Stage...",
-                package: "Standard Care Package",
-                status: "Ready For Onboarding",
-                stagedCheck: "—",
-                alerts: "—",
-                screenings: [
-                    {
-                        category: "Drug Check",
-                        name: "5 Panel Drug Screen",
-                        orderStatus: "Clear",
-                        suborderStatus: "Clear",
-                        history: [
-                            { status: "Order Created", date: "06/13/2026 08:00 AM" },
-                            { status: "Clear", date: "06/13/2026 06:30 PM" }
-                        ]
-                    }
-                ]
-            },
-            {
-                name: "Samson Inite",
-                orderId: "7KAIP",
-                lastRun: "06/16/2026",
-                dateAdded: "02/07/2026",
-                expectedEndDate: "—",
-                createdBy: "mrunali Stage...",
-                package: "Standard Care Package",
-                status: "Review Needed",
-                stagedCheck: "—",
-                alerts: "—",
-                screenings: [
-                    {
-                        category: "Drug Check",
-                        name: "5 Panel Drug Screen",
-                        orderStatus: "InProgress",
-                        suborderStatus: "Review Needed",
-                        history: [
-                            { status: "Order Created", date: "06/07/2026 09:00 AM" },
-                            { status: "Review Needed", date: "06/16/2026 11:00 AM" }
-                        ]
-                    }
-                ]
-            },
-            {
-                name: "Autopaanno Test",
-                orderId: "OPYRQ",
-                lastRun: "06/13/2026",
-                dateAdded: "02/13/2026",
-                expectedEndDate: "—",
-                createdBy: "mrunali Stage...",
-                package: "Standard Care Package",
-                status: "Review Needed",
-                stagedCheck: "—",
-                alerts: "—",
-                screenings: [
-                    {
-                        category: "Vaccine",
-                        name: "Varicella Vaccine",
-                        orderStatus: "InProgress",
-                        suborderStatus: "Review Needed",
-                        history: [
-                            { status: "Order Created", date: "06/13/2026 10:00 AM" },
-                            { status: "Review Needed", date: "06/13/2026 04:15 PM" }
-                        ]
-                    }
-                ]
-            },
-            {
-                name: "Paaemall Test",
-                orderId: "YUGH4",
-                lastRun: "06/13/2026",
-                dateAdded: "02/13/2026",
-                expectedEndDate: "—",
-                createdBy: "mrunali Stage...",
-                package: "Standard Care Package",
-                status: "COI Expired",
-                stagedCheck: "—",
-                alerts: "Dispute was not changed",
-                screenings: [
-                    {
-                        category: "Drug Check",
-                        name: "5 Panel Drug Screen",
-                        orderStatus: "InProgress",
-                        suborderStatus: "Canceled",
-                        history: [
-                            { status: "Order Created", date: "06/13/2026 09:00 AM" },
-                            { status: "Canceled", date: "06/13/2026 02:00 PM" }
-                        ]
-                    }
-                ]
-            },
-            {
-                name: "Fill On Behaf Gmap",
-                orderId: "HRXMK",
-                lastRun: "06/16/2026",
-                dateAdded: "01/07/2026",
-                expectedEndDate: "—",
-                createdBy: "testing Covid",
-                package: "Executive Clinical Core",
-                status: "In Progress",
-                stagedCheck: "—",
-                alerts: "—",
-                screenings: [
-                    {
-                        category: "Drug Check",
-                        name: "5 Panel Drug Screen",
-                        orderStatus: "InProgress",
-                        suborderStatus: "Review Needed",
-                        history: [
-                            { status: "Order Created", date: "06/07/2026 10:00 AM" },
-                            { status: "Review Needed", date: "06/16/2026 03:00 PM" }
-                        ]
-                    }
-                ]
-            },
-            {
-                name: "Stacy Peter",
-                orderId: "QJ4WA",
-                lastRun: "06/16/2026",
-                dateAdded: "01/07/2026",
-                expectedEndDate: "—",
-                createdBy: "testing Covid",
-                package: "Executive Clinical Core",
-                status: "Pending Candidate",
-                stagedCheck: "—",
-                alerts: "Donor Pass Created",
-                screenings: [
-                    {
-                        category: "Drug Check",
-                        name: "5 Panel Drug Screen",
-                        orderStatus: "InProgress",
-                        suborderStatus: "Review Needed",
-                        history: [
-                            { status: "Order Created", date: "06/07/2026 10:00 AM" }
-                        ]
-                    }
-                ]
-            },
-            {
-                name: "Nhhhh Tests",
-                orderId: "GUIEL",
-                lastRun: "06/16/2026",
-                dateAdded: "01/07/2026",
-                expectedEndDate: "—",
-                createdBy: "testing Covid",
-                package: "Executive Clinical Core",
-                status: "Pending Candidate",
-                stagedCheck: "—",
-                alerts: "—",
-                screenings: []
-            },
-            {
-                name: "Hollis Davis",
-                orderId: "ZJK4K",
-                lastRun: "06/16/2026",
-                dateAdded: "01/07/2026",
-                expectedEndDate: "11/12/2048",
-                createdBy: "testing Covid",
-                package: "Basic Physical Verification",
-                status: "Pending Candidate",
-                stagedCheck: "—",
-                alerts: "—",
-                screenings: []
-            },
-            {
-                name: "Stanley House",
-                orderId: "6A6CG",
-                lastRun: "06/16/2026",
-                dateAdded: "01/07/2026",
-                expectedEndDate: "11/12/2048",
-                createdBy: "testing Covid",
-                package: "Executive Clinical Core",
-                status: "Pending Candidate",
-                stagedCheck: "—",
-                alerts: "—",
-                screenings: []
-            },
-            {
-                name: "Tina Jain",
-                orderId: "5BQTG",
-                lastRun: "06/16/2026",
-                dateAdded: "01/07/2026",
-                expectedEndDate: "—",
-                createdBy: "testing Covid",
-                package: "Executive Clinical Core",
-                status: "Pending Candidate",
-                stagedCheck: "—",
-                alerts: "—",
-                screenings: []
-            },
-            {
-                name: "Test Prepod",
-                orderId: "HFG72",
-                lastRun: "06/07/2026",
-                dateAdded: "01/07/2026",
-                expectedEndDate: "—",
-                createdBy: "testing Covid",
-                package: "Executive Clinical Core",
-                status: "Pending Candidate",
-                stagedCheck: "—",
-                alerts: "—",
-                screenings: []
-            },
-            {
-                name: "Ttgg Hh",
-                orderId: "LUJCK",
-                lastRun: "06/06/2026",
-                dateAdded: "01/06/2026",
-                expectedEndDate: "—",
-                createdBy: "testing Covid",
-                package: "Executive Clinical Core",
-                status: "Pending Candidate",
-                stagedCheck: "—",
-                alerts: "—",
-                screenings: []
-            },
-            {
-                name: "Dfssf Sfs",
-                orderId: "S6HM6",
-                lastRun: "06/05/2026",
-                dateAdded: "01/05/2026",
-                expectedEndDate: "—",
-                createdBy: "testing Covid",
-                package: "Executive Clinical Core",
-                status: "Pending Candidate",
-                stagedCheck: "—",
-                alerts: "—",
-                screenings: []
             }
         ];
 
@@ -1114,20 +778,10 @@
         let activeSidebarId = "nav-candidates";
 
         // Dynamic State Masks for DOB / SSN
-        let maskStates = {
-            dob: true,
-            ssn: true
-        };
+        let maskStates = { dob: true, ssn: true };
 
-        // Keep track of collapsed states of the Categories in the Deep Dive page (Default collapsed)
-        let categoryCollapseState = {
-            "Drug Check": false,
-            "Titers": false,
-            "Basic Physical": false,
-            "Vaccine": false
-        };
-
-        // Keep track of collapsed states for individual checks (Default collapsed)
+        // Collapsed states
+        let categoryCollapseState = { "Drug Check": false, "Titers": false, "Basic Physical": false, "Vaccine": false };
         let checksCollapseState = {};
 
         function toggleMaskValue(type) {
@@ -1142,7 +796,7 @@
         function updateTabCounters() {
             document.getElementById("count-all").innerText = candidateDb.length;
             document.getElementById("count-pending").innerText = candidateDb.filter(c => c.status === "Pending Candidate").length;
-            document.getElementById("count-progress").innerText = candidateDb.filter(c => c.status === "In Progress" || c.status === "In Progress").length;
+            document.getElementById("count-progress").innerText = candidateDb.filter(c => c.status === "In Progress").length;
             document.getElementById("count-review").innerText = candidateDb.filter(c => c.status === "Review Needed").length;
             document.getElementById("count-onboarding").innerText = candidateDb.filter(c => c.status === "Ready For Onboarding").length;
             document.getElementById("count-alerts").innerText = candidateDb.filter(c => c.status === "COI Expired" || c.status === "Adverse Action").length;
@@ -1162,9 +816,7 @@
             if (currLink) {
                 currLink.className = "flex items-center gap-3.5 px-4 py-3 rounded-lg bg-blue-50/70 text-blue-600 font-semibold transition-all";
                 const currIcon = currLink.querySelector('i');
-                if (currIcon) {
-                    currIcon.className = currIcon.className.replace('text-slate-400', 'text-blue-600');
-                }
+                if (currIcon) currIcon.className = currIcon.className.replace('text-slate-400', 'text-blue-600');
             }
             activeSidebarId = sidebarId;
 
@@ -1174,73 +826,41 @@
             document.getElementById(screenId).classList.remove('hidden');
 
             const pageTitle = document.getElementById('page-title');
-            if (screenId === 'home-screen') {
-                pageTitle.innerText = sidebarId === 'nav-advanced' ? "Advanced Candidates Directory" : "Candidates Directory";
-            } else if (screenId === 'details-screen') {
-                pageTitle.innerText = "Candidate Profile";
-            }
+            if (screenId === 'home-screen') pageTitle.innerText = sidebarId === 'nav-advanced' ? "Advanced Candidates Directory" : "Candidates Directory";
+            else if (screenId === 'details-screen') pageTitle.innerText = "Candidate Profile";
         }
 
         function showPlaceholderScreen(title, sidebarId) {
             showScreen('placeholder-screen', sidebarId);
             document.getElementById('placeholder-title').innerText = title;
-            
-            const iconMap = {
-                'nav-packages': 'fa-box',
-                'nav-comply': 'fa-shield-halved',
-                'nav-customizations': 'fa-sliders',
-                'nav-settings': 'fa-gear',
-                'nav-formi9': 'fa-fingerprint',
-                'nav-reports': 'fa-chart-pie',
-                'nav-bulk': 'fa-cloud-arrow-up',
-                'nav-supplies': 'fa-cart-shopping'
-            };
-            const iconClass = iconMap[sidebarId] || 'fa-cube';
-            document.getElementById('placeholder-icon').className = `fa-solid ${iconClass}`;
+            const iconMap = { 'nav-packages': 'fa-box', 'nav-comply': 'fa-shield-halved', 'nav-customizations': 'fa-sliders', 'nav-settings': 'fa-gear', 'nav-formi9': 'fa-fingerprint', 'nav-reports': 'fa-chart-pie', 'nav-bulk': 'fa-cloud-arrow-up', 'nav-supplies': 'fa-cart-shopping' };
+            document.getElementById('placeholder-icon').className = `fa-solid ${iconMap[sidebarId] || 'fa-cube'}`;
         }
 
         function generateCandidateTable(dataList) {
             const tbody = document.getElementById("candidate-table-body");
             tbody.innerHTML = "";
-
             dataList.forEach(cand => {
                 const tr = document.createElement("tr");
                 tr.className = "hover:bg-slate-50/80 transition-colors border-b border-slate-100";
 
                 let badgeStyle = "bg-blue-600 text-white";
-                if (cand.status === "COI Expired" || cand.status === "Adverse Action") {
-                    badgeStyle = "bg-red-500 text-white";
-                } else if (cand.status === "Reviewed" || cand.status === "Ready For Onboarding") {
-                    badgeStyle = "bg-emerald-500 text-white";
-                } else if (cand.status === "Review Needed") {
-                    badgeStyle = "bg-amber-500 text-white font-bold";
-                } else if (cand.status === "Pending Candidate") {
-                    badgeStyle = "bg-amber-100 text-amber-800 border border-amber-200 font-bold";
-                } else if (cand.status === "Clear") {
-                    badgeStyle = "bg-emerald-500 text-white";
-                }
+                if (cand.status === "COI Expired" || cand.status === "Adverse Action") badgeStyle = "bg-red-500 text-white";
+                else if (cand.status === "Reviewed" || cand.status === "Ready For Onboarding" || cand.status === "Clear") badgeStyle = "bg-emerald-500 text-white";
+                else if (cand.status === "Review Needed") badgeStyle = "bg-amber-500 text-white font-bold";
+                else if (cand.status === "Pending Candidate") badgeStyle = "bg-amber-100 text-amber-800 border border-amber-200 font-bold";
 
                 tr.innerHTML = `
                     <td class="p-4"><input type="checkbox" class="rounded border-slate-300 text-blue-600"></td>
-                    <td class="p-4">
-                        <button onclick="goToCandidateDetails('${cand.name}')" class="font-bold text-blue-600 hover:underline text-left">
-                            ${cand.name}
-                        </button>
-                    </td>
+                    <td class="p-4"><button onclick="goToCandidateDetails('${cand.name}')" class="font-bold text-blue-600 hover:underline text-left">${cand.name}</button></td>
                     <td class="p-4 font-mono text-[11px] text-slate-500">${cand.orderId}</td>
                     <td class="p-4">${cand.lastRun}</td>
                     <td class="p-4">${cand.dateAdded}</td>
                     <td class="p-4 text-slate-400">${cand.expectedEndDate}</td>
                     <td class="p-4 text-slate-500 font-medium">${cand.createdBy}</td>
                     <td class="p-4 text-slate-500 max-w-[150px] truncate font-semibold">${cand.package}</td>
-                    <td class="p-4 text-center">
-                        <span class="inline-block px-2.5 py-1 text-[10px] font-bold rounded ${badgeStyle} uppercase tracking-wider">${cand.status}</span>
-                    </td>
-                    <td class="p-4 text-center bg-blue-50/30 border-x border-blue-100/50">
-                        <button onclick="openDrawer('${cand.name}')" class="inline-flex items-center justify-center w-7 h-7 rounded-full border border-blue-400 text-blue-600 hover:bg-blue-100/70 transition-all text-xs font-bold shadow-sm" title="Open Health Screening Panel">
-                            i
-                        </button>
-                    </td>
+                    <td class="p-4 text-center"><span class="inline-block px-2.5 py-1 text-[10px] font-bold rounded ${badgeStyle} uppercase tracking-wider">${cand.status}</span></td>
+                    <td class="p-4 text-center bg-blue-50/30 border-x border-blue-100/50"><button onclick="openDrawer('${cand.name}')" class="inline-flex items-center justify-center w-7 h-7 rounded-full border border-blue-400 text-blue-600 hover:bg-blue-100/70 transition-all text-xs font-bold shadow-sm">i</button></td>
                     <td class="p-4 text-center text-slate-500 font-semibold">${cand.stagedCheck}</td>
                     <td class="p-4 text-[11px] font-medium ${cand.alerts !== '—' ? 'text-red-500 font-bold' : 'text-slate-400'}">${cand.alerts}</td>
                 `;
@@ -1250,54 +870,35 @@
         }
 
         function applyHomeFilters() {
-            const candidateSearchQuery = document.getElementById("home-search-candidate").value.toLowerCase();
-            const selectedPackage = document.getElementById("home-filter-package").value;
-            const selectedUser = document.getElementById("home-filter-user").value;
+            const query = document.getElementById("home-search-candidate").value.toLowerCase();
+            const pkg = document.getElementById("home-filter-package").value;
+            const usr = document.getElementById("home-filter-user").value;
 
             let filteredList = candidateDb.filter(cand => {
                 if (homeActiveTabStatus !== "all") {
                     if (homeActiveTabStatus === "COI Expired" && cand.status !== "COI Expired" && cand.status !== "Adverse Action") return false;
-                    if (homeActiveTabStatus === "In Progress" && cand.status !== "In Progress" && cand.status !== "In Progress") return false;
+                    if (homeActiveTabStatus === "In Progress" && cand.status !== "In Progress") return false;
                     if (homeActiveTabStatus === "Review Needed" && cand.status !== "Review Needed") return false;
                     if (homeActiveTabStatus === "Ready For Onboarding" && cand.status !== "Ready For Onboarding") return false;
                     if (homeActiveTabStatus === "Pending Candidate" && cand.status !== "Pending Candidate") return false;
                 }
-
-                if (candidateSearchQuery && !cand.name.toLowerCase().includes(candidateSearchQuery)) return false;
-                if (selectedPackage !== "all" && cand.package !== selectedPackage) return false;
-                if (selectedUser !== "all" && cand.createdBy !== selectedUser) return false;
-
+                if (query && !cand.name.toLowerCase().includes(query)) return false;
+                if (pkg !== "all" && cand.package !== pkg) return false;
+                if (usr !== "all" && cand.createdBy !== usr) return false;
                 return true;
             });
-
             generateCandidateTable(filteredList);
         }
 
         function filterStatusTab(statusKey) {
             homeActiveTabStatus = statusKey;
-            
-            document.querySelectorAll(".tab-btn").forEach(btn => {
-                btn.className = "px-4 py-2.5 text-xs font-semibold text-slate-500 hover:text-slate-800 border-b-2 border-transparent hover:border-slate-300 whitespace-nowrap tab-btn";
-            });
-
-            const matchingTabs = {
-                "all": "tab-all",
-                "Pending Candidate": "tab-pending",
-                "In Progress": "tab-progress",
-                "Review Needed": "tab-review",
-                "Ready For Onboarding": "tab-onboarding",
-                "COI Expired": "tab-alerts"
-            };
-
+            document.querySelectorAll(".tab-btn").forEach(btn => btn.className = "px-4 py-2.5 text-xs font-semibold text-slate-500 hover:text-slate-800 border-b-2 border-transparent hover:border-slate-300 whitespace-nowrap tab-btn");
+            const matchingTabs = { "all": "tab-all", "Pending Candidate": "tab-pending", "In Progress": "tab-progress", "Review Needed": "tab-review", "Ready For Onboarding": "tab-onboarding", "COI Expired": "tab-alerts" };
             const activeBtn = document.getElementById(matchingTabs[statusKey]);
             if (activeBtn) {
-                if (statusKey === 'Review Needed') {
-                    activeBtn.className = "px-4 py-2.5 text-xs font-bold border-b-2 border-amber-500 text-amber-600 whitespace-nowrap tab-btn";
-                } else {
-                    activeBtn.className = "px-4 py-2.5 text-xs font-bold border-b-2 border-blue-600 text-blue-600 whitespace-nowrap tab-btn";
-                }
+                if (statusKey === 'Review Needed') activeBtn.className = "px-4 py-2.5 text-xs font-bold border-b-2 border-amber-500 text-amber-600 whitespace-nowrap tab-btn";
+                else activeBtn.className = "px-4 py-2.5 text-xs font-bold border-b-2 border-blue-600 text-blue-600 whitespace-nowrap tab-btn";
             }
-
             applyHomeFilters();
         }
 
@@ -1315,36 +916,21 @@
 
             const statusBanner = document.getElementById('cand-header-status-banner');
             statusBanner.innerText = `Status - ${targetCandidate.status}`;
-            if (targetCandidate.status === 'COI Expired' || targetCandidate.status === 'Adverse Action') {
-                statusBanner.className = "px-3 py-0.5 text-xs font-semibold rounded bg-red-500 text-white";
-            } else if (targetCandidate.status === 'Review Needed') {
-                statusBanner.className = "px-3 py-0.5 text-xs font-semibold rounded bg-amber-500 text-white";
-            } else if (targetCandidate.status === 'Ready For Onboarding' || targetCandidate.status === 'Reviewed' || targetCandidate.status === 'Clear') {
-                statusBanner.className = "px-3 py-0.5 text-xs font-semibold rounded bg-emerald-500 text-white";
-            } else {
-                statusBanner.className = "px-3 py-0.5 text-xs font-semibold rounded bg-blue-600 text-white";
-            }
+            if (targetCandidate.status === 'COI Expired' || targetCandidate.status === 'Adverse Action') statusBanner.className = "px-3 py-0.5 text-xs font-semibold rounded bg-red-500 text-white";
+            else if (targetCandidate.status === 'Review Needed') statusBanner.className = "px-3 py-0.5 text-xs font-semibold rounded bg-amber-500 text-white";
+            else if (targetCandidate.status === 'Ready For Onboarding' || targetCandidate.status === 'Clear') statusBanner.className = "px-3 py-0.5 text-xs font-semibold rounded bg-emerald-500 text-white";
+            else statusBanner.className = "px-3 py-0.5 text-xs font-semibold rounded bg-blue-600 text-white";
 
-            // Reset collapsible states to closed (false) by default so they start collapsed
-            categoryCollapseState = {
-                "Drug Check": false,
-                "Titers": false,
-                "Basic Physical": false,
-                "Vaccine": false
-            };
-
+            categoryCollapseState = { "Drug Check": false, "Titers": false, "Basic Physical": false, "Vaccine": false };
             checksCollapseState = {};
             if (targetCandidate.screenings) {
-                targetCandidate.screenings.forEach(s => {
-                    checksCollapseState[`${s.category}-${s.name}`] = false;
-                });
+                targetCandidate.screenings.forEach(s => checksCollapseState[`${s.category}-${s.name}`] = false);
             }
 
             allDeepdiveExpanded = false;
             const toggleBtn = document.getElementById('expandAllToggle');
-            const dot = toggleBtn.querySelector('.dot');
             toggleBtn.className = "w-11 h-6 bg-slate-200 rounded-full relative transition-colors focus:outline-none";
-            dot.className = "dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform shadow-sm";
+            toggleBtn.querySelector('.dot').className = "dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform shadow-sm";
 
             generateDeepDiveAccordionContent(targetCandidate);
             generateActivityFeed(targetCandidate);
@@ -1354,8 +940,6 @@
         function generateActivityFeed(candidate) {
             const container = document.getElementById('activity-timeline-feed');
             container.innerHTML = "";
-            container.className = "relative pl-8 pr-2";
-
             const feeds = [
                 { title: "Note From Client User", desc: "send from client dash", date: "06/16/2026" },
                 { title: "Note from Vetty (Researcher)", desc: "test kromfox notes", date: "06/15/2026" },
@@ -1366,24 +950,17 @@
             feeds.forEach((feed, fIdx) => {
                 const item = document.createElement('div');
                 item.className = "flex gap-4 relative text-[11px] pb-4";
-
-                const isFirst = fIdx === 0;
-                const isLast = fIdx === feeds.length - 1;
                 
-                let lineSegmentHtml = '';
+                let lineHtml = '';
                 if (feeds.length > 1) {
-                    if (isFirst) {
-                        lineSegmentHtml = `<div class="absolute left-1/2 -translate-x-1/2 top-[12px] bottom-0 w-[2px] bg-blue-500/30 z-0"></div>`;
-                    } else if (isLast) {
-                        lineSegmentHtml = `<div class="absolute left-1/2 -translate-x-1/2 top-0 h-[12px] w-[2px] bg-blue-500/30 z-0"></div>`;
-                    } else {
-                        lineSegmentHtml = `<div class="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-[2px] bg-blue-500/30 z-0"></div>`;
-                    }
+                    if (fIdx === 0) lineHtml = `<div class="absolute left-1/2 -translate-x-1/2 top-[12px] bottom-0 w-[2px] bg-blue-500/30 z-0"></div>`;
+                    else if (fIdx === feeds.length - 1) lineHtml = `<div class="absolute left-1/2 -translate-x-1/2 top-0 h-[12px] w-[2px] bg-blue-500/30 z-0"></div>`;
+                    else lineHtml = `<div class="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-[2px] bg-blue-500/30 z-0"></div>`;
                 }
 
                 item.innerHTML = `
                     <div class="w-8 flex justify-center items-start flex-shrink-0 relative -ml-8">
-                        ${lineSegmentHtml}
+                        ${lineHtml}
                         <div class="w-4 h-4 rounded-full bg-white border-2 border-blue-500 ring-4 ring-blue-100 flex-shrink-0 aspect-square z-20 mt-1.5"></div>
                     </div>
                     <div class="flex-1">
@@ -1404,8 +981,7 @@
         }
 
         function toggleCheckCollapse(category, checkName) {
-            const key = `${category}-${checkName}`;
-            checksCollapseState[key] = !checksCollapseState[key];
+            checksCollapseState[`${category}-${checkName}`] = !checksCollapseState[`${category}-${checkName}`];
             generateDeepDiveAccordionContent(currentSelectedCandidate);
         }
 
@@ -1418,30 +994,20 @@
                 return;
             }
 
-            const categories = ["Drug Check", "Titers", "Basic Physical", "Vaccine"];
-            
-            categories.forEach(cat => {
+            ["Drug Check", "Titers", "Basic Physical", "Vaccine"].forEach(cat => {
                 const filteredScreens = candidate.screenings.filter(s => s.category === cat);
                 if (filteredScreens.length === 0) return;
 
                 const isCatExpanded = categoryCollapseState[cat] === true;
-
-                // Category Dropdown Header - Sleek Rectangular Layout styled as image_eab983.png
                 const catHeader = document.createElement("div");
                 catHeader.className = "category-tile-sleek flex items-center justify-between cursor-pointer select-none";
                 catHeader.onclick = () => toggleCategoryCollapse(cat);
 
                 let catStatus = "Clear";
-                let catDate = "06/16/2026";
-                if (filteredScreens.some(s => s.suborderStatus === "Review Needed")) {
-                    catStatus = "Review Needed";
-                } else if (filteredScreens.some(s => s.suborderStatus === "Unable to Verify")) {
-                    catStatus = "Unable to Verify";
-                } else if (filteredScreens.some(s => s.suborderStatus === "Canceled")) {
-                    catStatus = "Canceled";
-                } else if (filteredScreens.some(s => s.orderStatus === "InProgress")) {
-                    catStatus = "In Progress";
-                }
+                if (filteredScreens.some(s => s.suborderStatus === "Review Needed")) catStatus = "Review Needed";
+                else if (filteredScreens.some(s => s.suborderStatus === "Unable to Verify")) catStatus = "Unable to Verify";
+                else if (filteredScreens.some(s => s.suborderStatus === "Canceled")) catStatus = "Canceled";
+                else if (filteredScreens.some(s => s.orderStatus === "InProgress")) catStatus = "In Progress";
 
                 let catBadgeColor = "bg-blue-600 text-white";
                 if (catStatus === "Review Needed") catBadgeColor = "bg-amber-500 text-white font-bold";
@@ -1457,7 +1023,7 @@
                     <div class="flex items-center gap-3">
                         <div class="text-right flex flex-col items-end">
                             <span class="inline-block px-2.5 py-0.5 text-[9px] font-bold rounded ${catBadgeColor} uppercase tracking-wider">${catStatus}</span>
-                            <span class="block text-[9px] text-slate-400 mt-0.5">${catDate}</span>
+                            <span class="block text-[9px] text-slate-400 mt-0.5">06/16/2026</span>
                         </div>
                         <button class="text-slate-400 hover:text-slate-600" title="Download Document" onclick="event.stopPropagation()">
                             <i class="fa-solid fa-cloud-arrow-down text-base"></i>
@@ -1466,103 +1032,47 @@
                 `;
                 container.appendChild(catHeader);
 
-                // Child list container wrapper
                 const catChildrenWrapper = document.createElement("div");
                 catChildrenWrapper.className = `space-y-4 mt-2 pl-2 transition-all duration-300 ${isCatExpanded ? 'block' : 'hidden'}`;
                 container.appendChild(catChildrenWrapper);
 
-                // Center-aligned sentence display directly under the expanded Category title
                 const statusSentenceDiv = document.createElement("div");
                 statusSentenceDiv.className = "text-center py-2.5 text-slate-700 font-bold text-xs select-text bg-white border border-slate-200/60 rounded-lg shadow-sm";
                 statusSentenceDiv.innerText = `This check is ${catStatus}`;
                 catChildrenWrapper.appendChild(statusSentenceDiv);
 
-                filteredScreens.forEach((screen, index) => {
-                    const isReviewNeeded = screen.suborderStatus === "Review Needed";
-                    const isClear = screen.suborderStatus === "Clear";
-                    const isCanceled = screen.suborderStatus === "Canceled";
-                    const isVerifyError = screen.suborderStatus === "Unable to Verify";
-
+                filteredScreens.forEach(screen => {
                     let suborderColor = "bg-blue-600 text-white";
-                    if (isReviewNeeded) suborderColor = "bg-amber-500 text-white font-bold";
-                    else if (isClear) suborderColor = "bg-emerald-500 text-white";
-                    else if (isCanceled) suborderColor = "bg-red-500 text-white";
-                    else if (isVerifyError) suborderColor = "bg-purple-500 text-white";
+                    if (screen.suborderStatus === "Review Needed") suborderColor = "bg-amber-500 text-white font-bold";
+                    else if (screen.suborderStatus === "Clear") suborderColor = "bg-emerald-500 text-white";
+                    else if (screen.suborderStatus === "Canceled") suborderColor = "bg-red-500 text-white";
+                    else if (screen.suborderStatus === "Unable to Verify") suborderColor = "bg-purple-500 text-white";
 
-                    const checkKey = `${cat}-${screen.name}`;
-                    const isCheckExpanded = checksCollapseState[checkKey] === true;
-
+                    const isCheckExpanded = checksCollapseState[`${cat}-${screen.name}`] === true;
                     const checkBlock = document.createElement("div");
-                    checkBlock.className = "border border-slate-200 rounded-lg overflow-hidden bg-white shadow-sm flex-shrink-0 mb-2";
+                    checkBlock.className = "border border-slate-200 rounded-lg overflow-hidden bg-white shadow-sm mb-2";
 
                     const reversedHistory = [...screen.history].reverse();
-
-                    let topDotColorClass = 'bg-blue-600';
-                    let topRingColorClass = 'ring-blue-100';
-                    if (screen.suborderStatus === 'Review Needed') {
-                        topDotColorClass = 'bg-amber-500';
-                        topRingColorClass = 'ring-amber-100';
-                    } else if (screen.suborderStatus === 'Clear') {
-                        topDotColorClass = 'bg-emerald-500';
-                        topRingColorClass = 'ring-emerald-100';
-                    } else if (screen.suborderStatus === 'Canceled') {
-                        topDotColorClass = 'bg-red-500';
-                        topRingColorClass = 'ring-red-100';
-                    } else if (screen.suborderStatus === 'Unable to Verify') {
-                        topDotColorClass = 'bg-purple-500';
-                        topRingColorClass = 'ring-purple-100';
-                    }
+                    let topDotClass = 'bg-blue-600', topRingClass = 'ring-blue-100';
+                    if (screen.suborderStatus === 'Review Needed') { topDotClass = 'bg-amber-500'; topRingClass = 'ring-amber-100'; }
+                    else if (screen.suborderStatus === 'Clear') { topDotClass = 'bg-emerald-500'; topRingClass = 'ring-emerald-100'; }
+                    else if (screen.suborderStatus === 'Unable to Verify') { topDotClass = 'bg-purple-500'; topRingClass = 'ring-purple-100'; }
 
                     let resultsTableHtml = "";
                     if (isCheckExpanded && screen.hasResults) {
                         resultsTableHtml = `
-                            <!-- Results Panel from image_eba186.png -->
                             <div class="mt-4 mb-4 border border-slate-200 rounded-lg overflow-hidden bg-white">
-                                <div class="bg-slate-50 px-4 py-2 text-[11px] font-bold text-slate-500 border-b border-slate-200">
-                                    Results
-                                </div>
+                                <div class="bg-slate-50 px-4 py-2 text-[11px] font-bold text-slate-500 border-b border-slate-200">Results</div>
                                 <div class="divide-y divide-slate-100 text-xs">
-                                    <div class="flex justify-between px-4 py-2.5">
-                                        <span class="text-slate-500 font-semibold">Amphetamines :</span>
-                                        <span class="font-bold text-slate-800">Negative</span>
-                                    </div>
-                                    <div class="flex justify-between px-4 py-2.5">
-                                        <span class="text-slate-500 font-semibold">Opiates :</span>
-                                        <span class="font-bold text-slate-800">Negative</span>
-                                    </div>
-                                    <div class="flex justify-between px-4 py-2.5">
-                                        <span class="text-slate-500 font-semibold">Amphet :</span>
-                                        <span class="font-bold text-slate-800">Negative</span>
-                                    </div>
+                                    <div class="flex justify-between px-4 py-2.5"><span class="text-slate-500 font-semibold">Amphetamines :</span><span class="font-bold text-slate-800">Negative</span></div>
+                                    <div class="flex justify-between px-4 py-2.5"><span class="text-slate-500 font-semibold">Opiates :</span><span class="font-bold text-slate-800">Negative</span></div>
                                 </div>
                             </div>
-
-                            <!-- Details 1 Panel from image_eba186.png -->
                             <div class="mb-4 border border-slate-200 rounded-lg overflow-hidden bg-white">
-                                <div class="bg-slate-50 px-4 py-2 text-[11px] font-bold text-slate-500 border-b border-slate-200">
-                                    Details 1
-                                </div>
+                                <div class="bg-slate-50 px-4 py-2 text-[11px] font-bold text-slate-500 border-b border-slate-200">Details 1</div>
                                 <div class="divide-y divide-slate-100 text-xs">
-                                    <div class="flex justify-between px-4 py-2.5">
-                                        <span class="text-slate-500 font-semibold">Specimen ID :</span>
-                                        <span class="font-bold text-slate-800">7959817598</span>
-                                    </div>
-                                    <div class="flex justify-between px-4 py-2.5">
-                                        <span class="text-slate-500 font-semibold">Date Collected :</span>
-                                        <span class="font-bold text-slate-800">06/03/2026</span>
-                                    </div>
-                                    <div class="flex justify-between px-4 py-2.5">
-                                        <span class="text-slate-500 font-semibold">Medical Review Officer :</span>
-                                        <span class="font-bold text-slate-800">Kirk A. Roberts, MD</span>
-                                    </div>
-                                    <div class="flex justify-between px-4 py-2.5">
-                                        <span class="text-slate-500 font-semibold">Report :</span>
-                                        <a href="#" class="font-bold text-blue-600 hover:underline">DAVID FAIRNAK - Drug Report.pdf</a>
-                                    </div>
-                                    <div class="flex justify-between px-4 py-2.5">
-                                        <span class="text-slate-500 font-semibold">Comment :</span>
-                                        <span class="font-bold text-slate-800">Negative</span>
-                                    </div>
+                                    <div class="flex justify-between px-4 py-2.5"><span class="text-slate-500 font-semibold">Specimen ID :</span><span class="font-bold text-slate-800">7959817598</span></div>
+                                    <div class="flex justify-between px-4 py-2.5"><span class="text-slate-500 font-semibold">Report :</span><a href="#" class="font-bold text-blue-600 hover:underline">Drug Report.pdf</a></div>
                                 </div>
                             </div>
                         `;
@@ -1579,47 +1089,31 @@
                                     <span class="inline-block px-2.5 py-1 text-[10px] font-bold rounded ${suborderColor} uppercase tracking-wider">${screen.suborderStatus}</span>
                                     <span class="block text-[9px] text-slate-400 mt-0.5">06/16/2026</span>
                                 </div>
-                                <span class="text-slate-400 hover:text-slate-600 cursor-pointer p-1 inline-flex items-center" title="Download Document" onclick="event.stopPropagation()">
-                                    <i class="fa-solid fa-cloud-arrow-down text-base"></i>
-                                </span>
+                                <span class="text-slate-400 hover:text-slate-600 cursor-pointer p-1 inline-flex items-center" onclick="event.stopPropagation()"><i class="fa-solid fa-cloud-arrow-down text-base"></i></span>
                             </div>
                         </div>
-
-                        <div class="${isCheckExpanded ? 'block' : 'hidden'} p-5 space-y-5 border-t border-slate-100 bg-slate-50/30">
-                            
+                        <div class="${isCheckExpanded ? 'block' : 'hidden'} p-5 border-t border-slate-100 bg-slate-50/30">
                             ${resultsTableHtml}
-
-                            <!-- Progress timelines with dates and sequential status parameters -->
                             <div class="mt-2 bg-white p-4 rounded-lg border border-slate-200/60 relative">
                                 <div class="relative py-2 pr-1 pl-8">
                                     <div class="space-y-0 relative z-10">
                                         ${reversedHistory.map((step, sIdx) => {
-                                            const isNewest = sIdx === 0;
-                                            const isOldest = sIdx === reversedHistory.length - 1;
-                                            
-                                            let lineSegmentHtml = '';
+                                            const isNewest = sIdx === 0, isOldest = sIdx === reversedHistory.length - 1;
+                                            let lineHtml = '';
                                             if (reversedHistory.length > 1) {
-                                                if (isNewest) {
-                                                    lineSegmentHtml = `<div class="absolute left-1/2 -translate-x-1/2 top-[12px] bottom-0 w-[2px] bg-blue-500/30 z-0"></div>`;
-                                                } else if (isOldest) {
-                                                    lineSegmentHtml = `<div class="absolute left-1/2 -translate-x-1/2 top-0 h-[13px] w-[2px] bg-blue-500/30 z-0"></div>`;
-                                                } else {
-                                                    lineSegmentHtml = `<div class="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-[2px] bg-blue-500/30 z-0"></div>`;
-                                                }
+                                                if (isNewest) lineHtml = `<div class="absolute left-1/2 -translate-x-1/2 top-[12px] bottom-0 w-[2px] bg-blue-500/30 z-0"></div>`;
+                                                else if (isOldest) lineHtml = `<div class="absolute left-1/2 -translate-x-1/2 top-0 h-[13px] w-[2px] bg-blue-500/30 z-0"></div>`;
+                                                else lineHtml = `<div class="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-[2px] bg-blue-500/30 z-0"></div>`;
                                             }
-
-                                            const dotColor = isNewest ? topDotColorClass : 'bg-blue-600';
-                                            const ringColor = isNewest ? topRingColorClass : 'ring-blue-100';
-                                            const fontStyle = isNewest ? 'font-bold text-slate-900' : 'font-semibold text-slate-600';
                                             return `
                                                 <div class="flex items-stretch gap-4 text-[11px] relative">
                                                     <div class="w-8 flex justify-center items-start flex-shrink-0 relative -ml-8">
-                                                        ${lineSegmentHtml}
-                                                        <div class="w-3.5 h-3.5 rounded-full ${dotColor} border border-white ring-4 ${ringColor} flex-shrink-0 aspect-square z-20 mt-1.5"></div>
+                                                        ${lineHtml}
+                                                        <div class="w-3.5 h-3.5 rounded-full ${isNewest ? topDotClass : 'bg-blue-600'} border border-white ring-4 ${isNewest ? topRingClass : 'ring-blue-100'} flex-shrink-0 z-20 mt-1.5"></div>
                                                     </div>
                                                     <div class="flex-1 pb-4">
                                                         <div class="flex justify-between items-center py-1 flex-wrap gap-2">
-                                                            <span class="${fontStyle}">${step.status}</span>
+                                                            <span class="${isNewest ? 'font-bold text-slate-900' : 'font-semibold text-slate-600'}">${step.status}</span>
                                                             <span class="text-slate-500 font-mono text-[10px] font-medium">${step.date}</span>
                                                         </div>
                                                     </div>
@@ -1643,216 +1137,119 @@
             const dot = toggleBtn.querySelector('.dot');
 
             if (allDeepdiveExpanded) {
-                toggleBtn.classList.remove('bg-slate-200');
-                toggleBtn.classList.add('bg-blue-600');
-                dot.classList.remove('translate-x-1');
-                dot.classList.add('translate-x-5');
+                toggleBtn.classList.replace('bg-slate-200', 'bg-blue-600');
+                dot.classList.replace('translate-x-1', 'translate-x-5');
             } else {
-                toggleBtn.classList.add('bg-slate-200');
-                toggleBtn.classList.remove('bg-blue-600');
-                dot.classList.remove('translate-x-5');
-                dot.classList.add('translate-x-1');
+                toggleBtn.classList.replace('bg-blue-600', 'bg-slate-200');
+                dot.classList.replace('translate-x-5', 'translate-x-1');
             }
-
-            // Set all category and individual dropdown expansions to match
-            const categories = ["Drug Check", "Titers", "Basic Physical", "Vaccine"];
-            categories.forEach(cat => {
-                categoryCollapseState[cat] = allDeepdiveExpanded;
-            });
-
+            ["Drug Check", "Titers", "Basic Physical", "Vaccine"].forEach(cat => categoryCollapseState[cat] = allDeepdiveExpanded);
             if (currentSelectedCandidate.screenings) {
-                currentSelectedCandidate.screenings.forEach(s => {
-                    checksCollapseState[`${s.category}-${s.name}`] = allDeepdiveExpanded;
-                });
+                currentSelectedCandidate.screenings.forEach(s => checksCollapseState[`${s.category}-${s.name}`] = allDeepdiveExpanded);
             }
-
             generateDeepDiveAccordionContent(currentSelectedCandidate);
         }
 
         let drawerScreeningsData = [];
-
         function openDrawer(candidateName) {
             const candidate = candidateDb.find(c => c.name === candidateName);
             if (!candidate) return;
-
             currentSelectedCandidate = candidate;
             drawerScreeningsData = [...candidate.screenings];
-
             document.getElementById('drawer-candidate').innerText = candidate.name;
             document.getElementById('drawer-orderid').innerText = candidate.orderId;
-
             document.getElementById('drawer-search-screening').value = "";
             document.getElementById('drawer-filter-order-status').value = "all";
             document.getElementById('drawer-filter-suborder-status').value = "all";
-
             renderDrawerListContent();
-
-            const backdrop = document.getElementById('drawer-backdrop');
-            const drawer = document.getElementById('quick-drawer');
-
-            backdrop.classList.remove('pointer-events-none', 'opacity-0');
-            backdrop.classList.add('opacity-100');
-            drawer.classList.remove('translate-x-full');
+            document.getElementById('drawer-backdrop').classList.replace('opacity-0', 'opacity-100');
+            document.getElementById('drawer-backdrop').classList.remove('pointer-events-none');
+            document.getElementById('quick-drawer').classList.remove('translate-x-full');
         }
 
         function closeDrawer() {
-            const backdrop = document.getElementById('drawer-backdrop');
-            const drawer = document.getElementById('quick-drawer');
-
-            backdrop.classList.add('pointer-events-none', 'opacity-0');
-            backdrop.classList.remove('opacity-100');
-            drawer.classList.add('translate-x-full');
+            document.getElementById('drawer-backdrop').classList.replace('opacity-100', 'opacity-0');
+            document.getElementById('drawer-backdrop').classList.add('pointer-events-none');
+            document.getElementById('quick-drawer').classList.add('translate-x-full');
         }
 
         function filterDrawerScreenings() {
             const query = document.getElementById('drawer-search-screening').value.toLowerCase();
             const orderStatusFilter = document.getElementById('drawer-filter-order-status').value;
             const suborderStatusFilter = document.getElementById('drawer-filter-suborder-status').value;
-
             drawerScreeningsData = currentSelectedCandidate.screenings.filter(screen => {
                 if (query && !screen.name.toLowerCase().includes(query)) return false;
                 if (orderStatusFilter !== "all" && screen.orderStatus !== orderStatusFilter) return false;
                 if (suborderStatusFilter !== "all" && screen.suborderStatus !== suborderStatusFilter) return false;
                 return true;
             });
-
             renderDrawerListContent();
         }
 
         function renderDrawerListContent() {
             const container = document.getElementById('drawer-body-list');
             container.innerHTML = "";
-
             if (drawerScreeningsData.length === 0) {
-                container.innerHTML = `
-                    <div class="text-center p-8 border border-dashed border-slate-200 rounded-lg">
-                        <p class="text-slate-400 text-xs">No screening matching search constraints.</p>
-                    </div>
-                `;
+                container.innerHTML = `<div class="text-center p-8 border border-dashed border-slate-200 rounded-lg"><p class="text-slate-400 text-xs">No screening matching constraints.</p></div>`;
                 return;
             }
 
-            const categories = ["Drug Check", "Titers", "Basic Physical", "Vaccine"];
-            
-            categories.forEach(cat => {
+            ["Drug Check", "Titers", "Basic Physical", "Vaccine"].forEach(cat => {
                 const listItems = drawerScreeningsData.filter(s => s.category === cat);
                 if (listItems.length === 0) return;
 
-                // Calculate Category level overall status dynamically for display on the right side of Category header block as image_fb8e62.png
-                let catOverallStatus = "Clear";
-                if (listItems.some(item => item.suborderStatus === "Review Needed")) {
-                    catOverallStatus = "Review Needed";
-                } else if (listItems.some(item => item.suborderStatus === "Unable to Verify")) {
-                    catOverallStatus = "Unable to Verify";
-                } else if (listItems.some(item => item.suborderStatus === "Canceled")) {
-                    catOverallStatus = "Canceled";
-                } else if (listItems.some(item => item.orderStatus === "InProgress")) {
-                    catOverallStatus = "In Progress";
-                }
-
-                let catBadgeColor = "bg-blue-600 text-white";
-                if (catOverallStatus === "Review Needed") catBadgeColor = "bg-amber-500 text-white font-bold";
-                else if (catOverallStatus === "Clear") catBadgeColor = "bg-emerald-500 text-white";
-                else if (catOverallStatus === "Canceled") catBadgeColor = "bg-red-500 text-white";
-                else if (catOverallStatus === "Unable to Verify") catBadgeColor = "bg-purple-500 text-white";
+                let catOverallStatus = "Clear", catBadgeColor = "bg-emerald-500 text-white";
+                if (listItems.some(item => item.suborderStatus === "Review Needed")) { catOverallStatus = "Review Needed"; catBadgeColor = "bg-amber-500 text-white font-bold"; }
+                else if (listItems.some(item => item.suborderStatus === "Unable to Verify")) { catOverallStatus = "Unable to Verify"; catBadgeColor = "bg-purple-500 text-white"; }
+                else if (listItems.some(item => item.orderStatus === "InProgress")) { catOverallStatus = "In Progress"; catBadgeColor = "bg-blue-600 text-white"; }
 
                 const catHeaderDiv = document.createElement("div");
                 catHeaderDiv.className = "text-xs font-bold text-slate-500 bg-slate-50 px-4 py-2.5 rounded-t-lg border border-slate-200 border-b-0 uppercase tracking-wider mt-4 flex justify-between items-center";
-                catHeaderDiv.innerHTML = `
-                    <span>${cat} (${listItems.length})</span>
-                    <span class="inline-block px-2.5 py-0.5 text-[9px] font-bold rounded ${catBadgeColor} uppercase tracking-wider">${catOverallStatus}</span>
-                `;
+                catHeaderDiv.innerHTML = `<span>${cat} (${listItems.length})</span><span class="inline-block px-2.5 py-0.5 text-[9px] font-bold rounded ${catBadgeColor} uppercase tracking-wider">${catOverallStatus}</span>`;
                 container.appendChild(catHeaderDiv);
 
                 const tableWrapper = document.createElement("div");
                 tableWrapper.className = "border border-slate-200 rounded-b-lg overflow-hidden divide-y divide-slate-200 bg-white shadow-sm mb-4";
-
-                // Re-aligned headers inside categories to completely remove ORDER STATUS column as requested in image_fb8e62.png
-                const tableHeader = document.createElement("div");
-                tableHeader.className = "grid grid-cols-12 bg-slate-50/50 p-3 text-[10px] uppercase font-bold text-slate-400 border-b border-slate-200";
-                tableHeader.innerHTML = `
-                    <div class="col-span-8">Health Screening</div>
-                    <div class="col-span-4 text-center">Suborder Status</div>
-                `;
-                tableWrapper.appendChild(tableHeader);
+                tableWrapper.innerHTML = `<div class="grid grid-cols-12 bg-slate-50/50 p-3 text-[10px] uppercase font-bold text-slate-400 border-b border-slate-200"><div class="col-span-8">Health Screening</div><div class="col-span-4 text-center">Suborder Status</div></div>`;
 
                 listItems.forEach((screen, sIdx) => {
                     const rowId = `drawer-check-${cat}-${sIdx}`;
-                    const rowContainer = document.createElement("div");
-                    rowContainer.className = "bg-white text-xs";
-
-                    const isClear = screen.suborderStatus === "Clear";
-                    const isReview = screen.suborderStatus === "Review Needed";
-                    const isCanceled = screen.suborderStatus === "Canceled";
-                    const isVerifyError = screen.suborderStatus === "Unable to Verify";
-
-                    let suborderTextStyle = "text-blue-600";
-                    if (isClear) suborderTextStyle = "text-emerald-500 font-bold";
-                    else if (isReview) suborderTextStyle = "text-amber-500 font-extrabold";
-                    else if (isCanceled) suborderTextStyle = "text-red-500 font-bold";
-                    else if (isVerifyError) suborderTextStyle = "text-purple-500 font-bold";
+                    const isReview = screen.suborderStatus === "Review Needed", isClear = screen.suborderStatus === "Clear", isVerifyError = screen.suborderStatus === "Unable to Verify";
+                    let subStyle = "text-blue-600";
+                    if (isClear) subStyle = "text-emerald-500 font-bold"; else if (isReview) subStyle = "text-amber-500 font-extrabold"; else if (isVerifyError) subStyle = "text-purple-500 font-bold";
 
                     const reversedHistory = [...screen.history].reverse();
+                    let topDotClass = 'bg-blue-600', topRingClass = 'ring-blue-100';
+                    if (isReview) { topDotClass = 'bg-amber-500'; topRingClass = 'ring-amber-100'; } else if (isClear) { topDotClass = 'bg-emerald-500'; topRingClass = 'ring-emerald-100'; }
 
-                    let topDotColorClass = 'bg-blue-600';
-                    let topRingColorClass = 'ring-blue-100';
-                    if (screen.suborderStatus === 'Review Needed') {
-                        topDotColorClass = 'bg-amber-500';
-                        topRingColorClass = 'ring-amber-100';
-                    } else if (screen.suborderStatus === 'Clear') {
-                        topDotColorClass = 'bg-emerald-500';
-                        topRingColorClass = 'ring-emerald-100';
-                    } else if (screen.suborderStatus === 'Canceled') {
-                        topDotColorClass = 'bg-red-500';
-                        topRingColorClass = 'ring-red-100';
-                    } else if (screen.suborderStatus === 'Unable to Verify') {
-                        topDotColorClass = 'bg-purple-500';
-                        topRingColorClass = 'ring-purple-100';
-                    }
-
+                    const rowContainer = document.createElement("div");
+                    rowContainer.className = "bg-white text-xs";
                     rowContainer.innerHTML = `
-                        <div onclick="toggleDrawerInlineTracker('${rowId}')" class="w-full grid grid-cols-12 p-3 items-center hover:bg-slate-50/50 cursor-pointer text-left transition-colors font-medium select-none">
-                            <div class="col-span-8 flex items-center gap-1.5 font-bold text-slate-700 flex-wrap">
-                                <span>${screen.name}</span>
-                            </div>
-                            <div class="col-span-4 text-center ${suborderTextStyle}">${screen.suborderStatus}</div>
+                        <div onclick="document.getElementById('${rowId}').classList.toggle('hidden')" class="w-full grid grid-cols-12 p-3 items-center hover:bg-slate-50/50 cursor-pointer font-medium select-none">
+                            <div class="col-span-8 font-bold text-slate-700">${screen.name}</div>
+                            <div class="col-span-4 text-center ${subStyle}">${screen.suborderStatus}</div>
                         </div>
-                        
                         <div id="${rowId}" class="hidden p-4 bg-slate-50/50 border-t border-slate-200/60 space-y-4">
-                            
-                            <div class="text-center py-2.5 text-slate-700 font-bold text-xs bg-white border border-slate-100 rounded-lg shadow-sm">
-                                This check is ${screen.suborderStatus}
-                            </div>
-
+                            <div class="text-center py-2.5 text-slate-700 font-bold text-xs bg-white border border-slate-100 rounded-lg shadow-sm">This check is ${screen.suborderStatus}</div>
                             <div class="relative py-2 max-h-[220px] overflow-y-auto pr-1 pl-8">
                                 <div class="space-y-0 relative z-10">
                                     ${reversedHistory.map((step, stepIdx) => {
-                                        const isCurrent = stepIdx === 0;
-                                        const isOldest = stepIdx === reversedHistory.length - 1;
-
-                                        let lineSegmentHtml = '';
+                                        const isCurrent = stepIdx === 0, isOldest = stepIdx === reversedHistory.length - 1;
+                                        let lineHtml = '';
                                         if (reversedHistory.length > 1) {
-                                            if (isCurrent) {
-                                                lineSegmentHtml = `<div class="absolute left-1/2 -translate-x-1/2 top-[12px] bottom-0 w-[2px] bg-blue-500/30 z-0"></div>`;
-                                            } else if (isOldest) {
-                                                lineSegmentHtml = `<div class="absolute left-1/2 -translate-x-1/2 top-0 h-[12px] w-[2px] bg-blue-500/30 z-0"></div>`;
-                                            } else {
-                                                lineSegmentHtml = `<div class="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-[2px] bg-blue-500/30 z-0"></div>`;
-                                            }
+                                            if (isCurrent) lineHtml = `<div class="absolute left-1/2 -translate-x-1/2 top-[12px] bottom-0 w-[2px] bg-blue-500/30 z-0"></div>`;
+                                            else if (isOldest) lineHtml = `<div class="absolute left-1/2 -translate-x-1/2 top-0 h-[12px] w-[2px] bg-blue-500/30 z-0"></div>`;
+                                            else lineHtml = `<div class="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-[2px] bg-blue-500/30 z-0"></div>`;
                                         }
-
-                                        const dotBg = isCurrent ? topDotColorClass : 'bg-blue-600';
-                                        const ringBg = isCurrent ? topRingColorClass : 'ring-blue-100';
-                                        const txtStyle = isCurrent ? 'font-bold text-slate-900' : 'font-medium text-slate-500';
                                         return `
                                             <div class="flex items-stretch gap-4 text-[11px] relative">
                                                 <div class="w-8 flex justify-center items-start flex-shrink-0 relative -ml-8">
-                                                    ${lineSegmentHtml}
-                                                    <div class="w-3 h-3 rounded-full ${dotBg} border border-white ring-2 ${ringBg} flex-shrink-0 aspect-square z-20 mt-1"></div>
+                                                    ${lineHtml}
+                                                    <div class="w-3 h-3 rounded-full ${isCurrent ? topDotClass : 'bg-blue-600'} border border-white ring-2 ${isCurrent ? topRingClass : 'ring-blue-100'} flex-shrink-0 z-20 mt-1"></div>
                                                 </div>
                                                 <div class="flex-1 pb-4">
                                                     <div class="flex justify-between items-center py-1 flex-wrap gap-1.5">
-                                                        <span class="${txtStyle}">${step.status}</span>
+                                                        <span class="${isCurrent ? 'font-bold text-slate-900' : 'font-medium text-slate-500'}">${step.status}</span>
                                                         <span class="text-slate-400 font-mono text-[9px]">${step.date}</span>
                                                     </div>
                                                 </div>
@@ -1865,157 +1262,65 @@
                     `;
                     tableWrapper.appendChild(rowContainer);
                 });
-
                 container.appendChild(tableWrapper);
             });
-        }
-
-        function toggleDrawerInlineTracker(targetId) {
-            const el = document.getElementById(targetId);
-            if (el.classList.contains('hidden')) {
-                el.classList.remove('hidden');
-            } else {
-                el.classList.add('hidden');
-            }
         }
 
         function openFormModal(actionType) {
             const overlay = document.getElementById('form-modal-overlay');
             const title = document.getElementById('modal-form-title');
             const fieldsContainer = document.getElementById('modal-form-fields');
-            
             overlay.classList.remove('hidden');
-            setTimeout(() => {
-                overlay.firstElementChild.classList.remove('scale-95');
-                overlay.firstElementChild.classList.add('scale-100');
-            }, 50);
+            setTimeout(() => { overlay.firstElementChild.classList.replace('scale-95', 'scale-100'); }, 50);
 
             if (actionType === 'new-candidate') {
                 title.innerText = "Register New Candidate";
                 fieldsContainer.innerHTML = `
-                    <div>
-                        <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Full Name</label>
-                        <input type="text" id="form-cand-name" placeholder="John Doe" class="w-full text-xs border border-slate-200 rounded p-2.5 outline-none focus:border-blue-500 font-semibold text-slate-700">
-                    </div>
-                    <div>
-                        <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Package</label>
-                        <select id="form-cand-package" class="w-full text-xs border border-slate-200 rounded p-2.5 outline-none focus:border-blue-500 font-semibold text-slate-700">
-                            <option>Executive Clinical Core</option>
-                            <option>Standard Care Package</option>
-                            <option>General Screening Pack</option>
-                            <option>Basic Physical Verification</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Assignee</label>
-                        <input type="text" id="form-cand-assignee" value="debendu Roy" class="w-full text-xs border border-slate-200 rounded p-2.5 outline-none bg-slate-50 font-semibold text-slate-500" readonly>
-                    </div>
+                    <div><label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Full Name</label><input type="text" id="form-cand-name" placeholder="John Doe" class="w-full text-xs border border-slate-200 rounded p-2.5 outline-none focus:border-blue-500 font-semibold text-slate-700"></div>
+                    <div><label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Package</label><select id="form-cand-package" class="w-full text-xs border border-slate-200 rounded p-2.5 outline-none focus:border-blue-500 font-semibold text-slate-700"><option>Executive Clinical Core</option><option>Standard Care Package</option></select></div>
                 `;
             } else if (actionType === 'modify-order') {
                 title.innerText = "Modify Order Parameters";
                 fieldsContainer.innerHTML = `
-                    <div>
-                        <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Candidate Selected</label>
-                        <input type="text" value="${currentSelectedCandidate.name}" class="w-full text-xs border border-slate-200 rounded p-2.5 outline-none bg-slate-50 font-semibold text-slate-500" readonly>
-                    </div>
-                    <div>
-                        <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Change Order Status</label>
-                        <select id="form-order-status" class="w-full text-xs border border-slate-200 rounded p-2.5 outline-none focus:border-blue-500 font-semibold text-slate-700">
-                            <option value="In Progress">In Progress</option>
-                            <option value="Reviewed">Reviewed</option>
-                            <option value="COI Expired">COI Expired</option>
-                        </select>
-                    </div>
+                    <div><label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Candidate Selected</label><input type="text" value="${currentSelectedCandidate.name}" class="w-full text-xs border border-slate-200 rounded p-2.5 outline-none bg-slate-50 font-semibold text-slate-500" readonly></div>
+                    <div><label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Change Order Status</label><select id="form-order-status" class="w-full text-xs border border-slate-200 rounded p-2.5 outline-none focus:border-blue-500 font-semibold text-slate-700"><option value="In Progress">In Progress</option><option value="Reviewed">Reviewed</option><option value="COI Expired">COI Expired</option></select></div>
                 `;
             } else if (actionType === 'change-location') {
                 title.innerText = "Change Dispatch Location";
-                fieldsContainer.innerHTML = `
-                    <div>
-                        <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Select Dispatch State</label>
-                        <select id="form-dispatch-loc" class="w-full text-xs border border-slate-200 rounded p-2.5 outline-none focus:border-blue-500 font-semibold text-slate-700">
-                            <option>New York Clinic Hub</option>
-                            <option>California Testing Lab</option>
-                            <option>Texas Diagnostic Lab</option>
-                        </select>
-                    </div>
-                `;
+                fieldsContainer.innerHTML = `<div><label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Select Dispatch State</label><select id="form-dispatch-loc" class="w-full text-xs border border-slate-200 rounded p-2.5 outline-none focus:border-blue-500 font-semibold text-slate-700"><option>New York Clinic Hub</option><option>California Testing Lab</option></select></div>`;
             }
         }
 
         function closeFormModal() {
             const overlay = document.getElementById('form-modal-overlay');
-            overlay.firstElementChild.classList.remove('scale-100');
-            overlay.firstElementChild.classList.add('scale-95');
-            setTimeout(() => {
-                overlay.classList.add('hidden');
-            }, 150);
+            overlay.firstElementChild.classList.replace('scale-100', 'scale-95');
+            setTimeout(() => overlay.classList.add('hidden'), 150);
         }
 
         function submitFormAction() {
             const nameField = document.getElementById('form-cand-name');
-            const pkgField = document.getElementById('form-cand-package');
             const statusField = document.getElementById('form-order-status');
-
             if (nameField && nameField.value.trim() !== "") {
-                const newCandObj = {
-                    name: nameField.value.trim(),
-                    orderId: Math.random().toString(36).substring(2, 7).toUpperCase(),
-                    lastRun: "06/16/2026",
-                    dateAdded: "06/16/2026",
-                    expectedEndDate: "—",
-                    createdBy: "debendu Roy",
-                    package: pkgField.value,
-                    status: "In Progress",
-                    stagedCheck: "—",
-                    alerts: "—",
-                    screenings: [
-                        {
-                            category: "Drug Check",
-                            name: "5 Panel Drug",
-                            orderStatus: "InProgress",
-                            suborderStatus: "Review Needed",
-                            hasResults: true,
-                            history: [
-                                { status: "Order Created", date: "06/16/2026 10:00 AM" },
-                                { status: "Review Needed", date: "06/16/2026 02:00 PM" }
-                            ]
-                        }
-                    ]
-                };
-                candidateDb.unshift(newCandObj);
-                generateCandidateTable(candidateDb);
+                candidateDb.unshift({ name: nameField.value.trim(), orderId: "NEW" + Math.floor(Math.random()*1000), lastRun: "Today", dateAdded: "Today", expectedEndDate: "—", createdBy: "Client", package: document.getElementById('form-cand-package').value, status: "In Progress", stagedCheck: "—", alerts: "—", screenings: [] });
             } else if (statusField) {
                 currentSelectedCandidate.status = statusField.value;
-                generateCandidateTable(candidateDb);
                 goToCandidateDetails(currentSelectedCandidate.name);
             }
-
+            generateCandidateTable(candidateDb);
             closeFormModal();
         }
 
         function openChatSupport() {
             const notification = document.createElement("div");
             notification.className = "fixed bottom-5 right-5 bg-slate-900 text-white rounded-xl shadow-2xl p-5 border border-slate-700 flex flex-col gap-3 z-50 animate-bounce max-w-xs text-xs";
-            notification.innerHTML = `
-                <div class="flex items-center gap-2 justify-between">
-                    <span class="flex items-center gap-1.5 font-bold"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> Vetty Concierge</span>
-                    <button onclick="this.parentElement.parentElement.remove()" class="text-slate-400 hover:white font-bold text-sm">&times;</button>
-                </div>
-                <p class="text-slate-300 leading-relaxed">
-                    Hello! We are here to help. Live candidate screenings chat log support has been successfully initialized.
-                </p>
-            `;
+            notification.innerHTML = `<div class="flex items-center gap-2 justify-between"><span class="flex items-center gap-1.5 font-bold"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> Vetty Concierge</span><button onclick="this.parentElement.parentElement.remove()" class="text-slate-400 hover:white font-bold text-sm">&times;</button></div><p class="text-slate-300 leading-relaxed">Hello! We are here to help. Live candidate screenings chat log support has been successfully initialized.</p>`;
             document.body.appendChild(notification);
-            setTimeout(() => {
-                notification.classList.remove('animate-bounce');
-            }, 2000);
+            setTimeout(() => notification.classList.remove('animate-bounce'), 2000);
         }
 
         window.onload = function () {
             generateCandidateTable(candidateDb);
-            updateTabCounters();
         };
     </script>
 </body>
 </html>
-```
