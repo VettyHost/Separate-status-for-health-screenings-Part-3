@@ -1065,14 +1065,20 @@
                                 <div class="bg-slate-50 px-4 py-2 text-[11px] font-bold text-slate-500 border-b border-slate-200">Results</div>
                                 <div class="divide-y divide-slate-100 text-xs">
                                     <div class="flex justify-between px-4 py-2.5"><span class="text-slate-500 font-semibold">Amphetamines :</span><span class="font-bold text-slate-800">Negative</span></div>
+                                    <div class="flex justify-between px-4 py-2.5"><span class="text-slate-500 font-semibold">Cocaine :</span><span class="font-bold text-slate-800">Negative</span></div>
+                                    <div class="flex justify-between px-4 py-2.5"><span class="text-slate-500 font-semibold">Marijuana :</span><span class="font-bold text-slate-800">Negative</span></div>
                                     <div class="flex justify-between px-4 py-2.5"><span class="text-slate-500 font-semibold">Opiates :</span><span class="font-bold text-slate-800">Negative</span></div>
+                                    <div class="flex justify-between px-4 py-2.5"><span class="text-slate-500 font-semibold">Phencyclidine :</span><span class="font-bold text-slate-800">Negative</span></div>
                                 </div>
                             </div>
                             <div class="mb-4 border border-slate-200 rounded-lg overflow-hidden bg-white">
                                 <div class="bg-slate-50 px-4 py-2 text-[11px] font-bold text-slate-500 border-b border-slate-200">Details 1</div>
                                 <div class="divide-y divide-slate-100 text-xs">
                                     <div class="flex justify-between px-4 py-2.5"><span class="text-slate-500 font-semibold">Specimen ID :</span><span class="font-bold text-slate-800">7959817598</span></div>
-                                    <div class="flex justify-between px-4 py-2.5"><span class="text-slate-500 font-semibold">Report :</span><a href="#" class="font-bold text-blue-600 hover:underline">Drug Report.pdf</a></div>
+                                    <div class="flex justify-between px-4 py-2.5"><span class="text-slate-500 font-semibold">Date Collected :</span><span class="font-bold text-slate-800">06/03/2026</span></div>
+                                    <div class="flex justify-between px-4 py-2.5"><span class="text-slate-500 font-semibold">Medical Review Officer :</span><span class="font-bold text-slate-800">Kirk A Roberts, MD</span></div>
+                                    <div class="flex justify-between px-4 py-2.5"><span class="text-slate-500 font-semibold">Report :</span><a href="#" class="font-bold text-blue-600 hover:underline">DAVID FAIRNAK - Drug Report.pdf</a></div>
+                                    <div class="flex justify-between px-4 py-2.5"><span class="text-slate-500 font-semibold">Comment :</span><span class="font-bold text-slate-800">Negative</span></div>
                                 </div>
                             </div>
                         `;
@@ -1137,11 +1143,13 @@
             const dot = toggleBtn.querySelector('.dot');
 
             if (allDeepdiveExpanded) {
-                toggleBtn.classList.replace('bg-slate-200', 'bg-blue-600');
-                dot.classList.replace('translate-x-1', 'translate-x-5');
+                toggleBtn.classList.remove('bg-slate-200');
+                toggleBtn.classList.add('bg-blue-600');
+                dot.classList.add('translate-x-5');
             } else {
-                toggleBtn.classList.replace('bg-blue-600', 'bg-slate-200');
-                dot.classList.replace('translate-x-5', 'translate-x-1');
+                toggleBtn.classList.remove('bg-blue-600');
+                toggleBtn.classList.add('bg-slate-200');
+                dot.classList.remove('translate-x-5');
             }
             ["Drug Check", "Titers", "Basic Physical", "Vaccine"].forEach(cat => categoryCollapseState[cat] = allDeepdiveExpanded);
             if (currentSelectedCandidate.screenings) {
